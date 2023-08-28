@@ -1,0 +1,75 @@
+---
+title: GC—基础知识
+date: 2023-08-28 23:31:37
+categories: 
+- 基本功
+- 编程基础
+- Java
+- JVM
+tags:
+- Java
+- JVM
+- 基础知识
+---
+
+&ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样
+的，首先抛出第一个问题，什么样的对象会是 JVM 回收的目标？
+
+#### __1、可达性分析算法（GC Roots）__
+
+&ensp;&ensp;&ensp;&ensp; 有一种引用计数法，可以用来判断对象被引用的次数，如果引用次数为0，则代表可以被回收。这种实现
+方式比较简单，但对于循环引用的情况束手无策，所以 Java 采用了可达性分析算法。即判断某个对象是否与 GC Roots 的这类对象之
+间的路径可达，若不可达，则有可能成为回收对象，被判定为不可达的对象要成为可回收对象必须至少经历两次标记过程，如果在这两次标
+记过程中仍然没有逃脱成为可回收对象的可能性，则基本上就真的成为可回收对象了。在 Java 中，可作为 GC Roots 的对象包括以下
+几种：
+* 虚拟机栈（本地变量表）中引用的对象
+* 方法区中类静态属性引用的对象
+* 方法区中常量引用的对象
+* 本地方法栈中引用的对象
+
+#### __2、JVM中的堆结构__
+&ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：
+![JVM 分代比例](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/%E5%A0%86%E5%8C%BA%E7%9A%84%E5%88%92%E5%88%86%E6%AF%94%E4%BE%8B.png?raw=true)
+
+&ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to
+区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：
+![JVM 内存模型全景](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/JVM%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true)
+
+#### __2.1、为何新生代要分为三个区__
+&ensp;&ensp;&ensp;&ensp; 这里需要介绍新生代的垃圾回收算法——复制算法。该算法的核心是将可用内存按容量划分为大小
+相等的两块，每次回收周期只用其中一块，当这一块的内存用完，就将还存活的对象复制到另一块上面，然后把已使用过的内存空间清理掉。
+
+&ensp;&ensp;&ensp;&ensp; 优点：不必考虑内存碎片问题；效率高。
+
+&ensp;&ensp;&ensp;&ensp; 缺点：可用容量减少为原来的一半，比较浪费。
+
+&ensp;&ensp;&ensp;&ensp; 最优设置：根据权威数据分析，90%的对象都是朝生夕死的，所以采用10%的空间用作交换区，因为交换区必须要有等量的两个，所以采用复制算法中新生代中三个区默认分配比例为8:1:1。
+
+#### __2.2、新生代对象的分配和回收__
+&ensp;&ensp;&ensp;&ensp; 基本上新的对象优先在 Eden 区分配；
+
+&ensp;&ensp;&ensp;&ensp; 当 Eden 区没有足够空间时，会发起一次 Minor GC；
+
+&ensp;&ensp;&ensp;&ensp; Minor GC 回收新生代采用复制回收算法的改进版本。即：
+from 区和 to 区的两个交换区，这两个区只有一个区有数据。采用8:1:1的默认分配比例（-XX:SurvivorRatio默认为8，代表 Eden 区与 Survivor 区的大小比例）
+
+#### __2.3、老年代对象的分配和回收__
+&ensp;&ensp;&ensp;&ensp; 老年代的对象一般来自于新生代中的长期存活对象。这里有一概念叫做年龄阈值，每个对象定义了年龄计数器，经
+过一次 Minor GC （在交换区）后年龄加1，对象年龄达到15次后将会晋升到老年代，老年代空间不够时进行 Full GC。当然这个参数仍是可以通过 JVM 参数（-XX:MaxTenuringThreshold，默认15）来调整。
+
+&ensp;&ensp;&ensp;&ensp; 大对象直接进入老年代。即超过 Eden 区空间，或超过一个参数值（-
+XX:PretenureSizeThreshold=30m，无默认值）。这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制。
+
+&ensp;&ensp;&ensp;&ensp; 对象提前晋升到老年代（组团）。动态年龄判定：如果在 Survivor 区中相同年龄所有对象大小总和
+大于 Survivor 区大小的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，而无须等到自己
+的晋升年龄。
+
+#### __3、JVM完整的GC流程__
+&ensp;&ensp;&ensp;&ensp; 对象的正常流程：Eden 区 -> Survivor 区 -> 老年代。
+
+&ensp;&ensp;&ensp;&ensp; 新生代GC：Minor GC；老年代GC：Full GC，比 Minor GC 慢10倍，JVM 会“stop the world”，严重
+影响性能。
+
+&ensp;&ensp;&ensp;&ensp; 总结：内存区域不够用了，就会引发GC。Minor GC 避免不了，Full GC 尽量避免。
+处理方式：保存堆栈快照日志、分析内存泄漏、调整内存设置控制垃圾回收频率，选择合适的垃圾
+回收器等。
