@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C++程序内存分区</title>
+    <url>/2023/08/29/C-%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>编程基础</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>Java</tag>
+        <tag>回调</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>GC-全流程</title>
     <url>/2023/08/29/GC%E2%80%94%E5%85%A8%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、minorGC-和-Full-GC-区别"><a href="#1、minorGC-和-Full-GC-区别" class="headerlink" title="1、minorGC 和 Full GC 区别"></a><strong>1、minorGC 和 Full GC 区别</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 新生代 GC（Minor GC）：指发生新生代的的垃圾收集动作，Minor GC 非常频繁，回收速度一般也比较快。</p>
@@ -54,45 +69,42 @@
       </tags>
   </entry>
   <entry>
-    <title>K8S架构图</title>
-    <url>/2023/08/29/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true" alt="K8S架构图"></p>
+    <title>GC—基础知识</title>
+    <url>/2023/08/28/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样<br>的，首先抛出第一个问题，什么样的对象会是 JVM 回收的目标？</p>
+<h4 id="1、可达性分析算法（GC-Roots）"><a href="#1、可达性分析算法（GC-Roots）" class="headerlink" title="1、可达性分析算法（GC Roots）"></a><strong>1、可达性分析算法（GC Roots）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 有一种引用计数法，可以用来判断对象被引用的次数，如果引用次数为0，则代表可以被回收。这种实现<br>方式比较简单，但对于循环引用的情况束手无策，所以 Java 采用了可达性分析算法。即判断某个对象是否与 GC Roots 的这类对象之<br>间的路径可达，若不可达，则有可能成为回收对象，被判定为不可达的对象要成为可回收对象必须至少经历两次标记过程，如果在这两次标<br>记过程中仍然没有逃脱成为可回收对象的可能性，则基本上就真的成为可回收对象了。在 Java 中，可作为 GC Roots 的对象包括以下<br>几种：</p>
+<ul>
+<li>虚拟机栈（本地变量表）中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中引用的对象</li>
+</ul>
+<h4 id="2、JVM中的堆结构"><a href="#2、JVM中的堆结构" class="headerlink" title="2、JVM中的堆结构"></a><strong>2、JVM中的堆结构</strong></h4><p>&ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：<br><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%A0%86%E5%8C%BA%E7%9A%84%E5%88%92%E5%88%86%E6%AF%94%E4%BE%8B.png?raw=true" alt="JVM 分代比例"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to<br>区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：<br><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/JVM%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true" alt="JVM 内存模型全景"></p>
+<h4 id="2-1、为何新生代要分为三个区"><a href="#2-1、为何新生代要分为三个区" class="headerlink" title="2.1、为何新生代要分为三个区"></a><strong>2.1、为何新生代要分为三个区</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 这里需要介绍新生代的垃圾回收算法——复制算法。该算法的核心是将可用内存按容量划分为大小<br>相等的两块，每次回收周期只用其中一块，当这一块的内存用完，就将还存活的对象复制到另一块上面，然后把已使用过的内存空间清理掉。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 优点：不必考虑内存碎片问题；效率高。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 缺点：可用容量减少为原来的一半，比较浪费。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 最优设置：根据权威数据分析，90%的对象都是朝生夕死的，所以采用10%的空间用作交换区，因为交换区必须要有等量的两个，所以采用复制算法中新生代中三个区默认分配比例为8:1:1。</p>
+<h4 id="2-2、新生代对象的分配和回收"><a href="#2-2、新生代对象的分配和回收" class="headerlink" title="2.2、新生代对象的分配和回收"></a><strong>2.2、新生代对象的分配和回收</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 基本上新的对象优先在 Eden 区分配；</p>
+<p>&ensp;&ensp;&ensp;&ensp; 当 Eden 区没有足够空间时，会发起一次 Minor GC；</p>
+<p>&ensp;&ensp;&ensp;&ensp; Minor GC 回收新生代采用复制回收算法的改进版本。即：<br>from 区和 to 区的两个交换区，这两个区只有一个区有数据。采用8:1:1的默认分配比例（-XX:SurvivorRatio默认为8，代表 Eden 区与 Survivor 区的大小比例）</p>
+<h4 id="2-3、老年代对象的分配和回收"><a href="#2-3、老年代对象的分配和回收" class="headerlink" title="2.3、老年代对象的分配和回收"></a><strong>2.3、老年代对象的分配和回收</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 老年代的对象一般来自于新生代中的长期存活对象。这里有一概念叫做年龄阈值，每个对象定义了年龄计数器，经<br>过一次 Minor GC （在交换区）后年龄加1，对象年龄达到15次后将会晋升到老年代，老年代空间不够时进行 Full GC。当然这个参数仍是可以通过 JVM 参数（-XX:MaxTenuringThreshold，默认15）来调整。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 大对象直接进入老年代。即超过 Eden 区空间，或超过一个参数值（-<br>XX:PretenureSizeThreshold&#x3D;30m，无默认值）。这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 对象提前晋升到老年代（组团）。动态年龄判定：如果在 Survivor 区中相同年龄所有对象大小总和<br>大于 Survivor 区大小的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，而无须等到自己<br>的晋升年龄。</p>
+<h4 id="3、JVM完整的GC流程"><a href="#3、JVM完整的GC流程" class="headerlink" title="3、JVM完整的GC流程"></a><strong>3、JVM完整的GC流程</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 对象的正常流程：Eden 区 -&gt; Survivor 区 -&gt; 老年代。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 新生代GC：Minor GC；老年代GC：Full GC，比 Minor GC 慢10倍，JVM 会“stop the world”，严重<br>影响性能。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 总结：内存区域不够用了，就会引发GC。Minor GC 避免不了，Full GC 尽量避免。<br>处理方式：保存堆栈快照日志、分析内存泄漏、调整内存设置控制垃圾回收频率，选择合适的垃圾<br>回收器等。</p>
 ]]></content>
       <categories>
-        <category>工程</category>
-        <category>云计算</category>
-        <category>K8S</category>
+        <category>基本功</category>
+        <category>编程基础</category>
+        <category>Java</category>
+        <category>JVM</category>
       </categories>
       <tags>
-        <tag>云计算领域</tag>
-        <tag>K8S</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>本地调试Docker源码</title>
-    <url>/2023/08/29/%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95Docker%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>工程</category>
-        <category>云计算</category>
-        <category>Docker</category>
-      </categories>
-      <tags>
-        <tag>云计算领域</tag>
-        <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Qt简介</title>
-    <url>/2023/08/29/Qt%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>工程</category>
-        <category>Qt</category>
-      </categories>
-      <tags>
-        <tag>Qt</tag>
-        <tag>桌面开发</tag>
+        <tag>Java</tag>
+        <tag>JVM</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -144,6 +156,34 @@
       </tags>
   </entry>
   <entry>
+    <title>K8S架构图</title>
+    <url>/2023/08/29/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true" alt="K8S架构图"></p>
+]]></content>
+      <categories>
+        <category>工程</category>
+        <category>云计算</category>
+        <category>K8S</category>
+      </categories>
+      <tags>
+        <tag>云计算领域</tag>
+        <tag>K8S</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Qt简介</title>
+    <url>/2023/08/29/Qt%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>工程</category>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+        <tag>桌面开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Spring全景</title>
     <url>/2023/08/29/Spring%E5%85%A8%E6%99%AF/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E6%9C%8D%E5%8A%A1%E7%AB%AF/Spring/Spring%E5%85%A8%E6%99%AF/Spring%E5%85%A8%E6%99%AF.png?raw=true" alt="Spring 全景图"></p>
@@ -156,31 +196,6 @@
       <tags>
         <tag>Spring</tag>
         <tag>Java EE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>保持敬畏之心</title>
-    <url>/2023/08/29/%E4%BF%9D%E6%8C%81%E6%95%AC%E7%95%8F%E4%B9%8B%E5%BF%83/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>思考</category>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>C++</tag>
-        <tag>回调</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>命令行常用指令</title>
-    <url>/2023/08/29/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>工具类</tag>
       </tags>
   </entry>
   <entry>
@@ -200,72 +215,17 @@
       </tags>
   </entry>
   <entry>
-    <title>C++程序内存分区</title>
-    <url>/2023/08/29/C-%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</url>
+    <title>保持敬畏之心</title>
+    <url>/2023/08/29/%E4%BF%9D%E6%8C%81%E6%95%AC%E7%95%8F%E4%B9%8B%E5%BF%83/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
       <categories>
-        <category>基本功</category>
-        <category>编程基础</category>
-        <category>C++</category>
+        <category>思考</category>
+        <category>读书笔记</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>C++</tag>
-        <tag>回调</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>回调机制</title>
-    <url>/2023/08/29/%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>基本功</category>
-        <category>编程基础</category>
-        <category>编程理论</category>
-      </categories>
-      <tags>
         <tag>Java</tag>
-        <tag>C++</tag>
         <tag>回调</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>GC—基础知识</title>
-    <url>/2023/08/28/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样<br>的，首先抛出第一个问题，什么样的对象会是 JVM 回收的目标？</p>
-<h4 id="1、可达性分析算法（GC-Roots）"><a href="#1、可达性分析算法（GC-Roots）" class="headerlink" title="1、可达性分析算法（GC Roots）"></a><strong>1、可达性分析算法（GC Roots）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 有一种引用计数法，可以用来判断对象被引用的次数，如果引用次数为0，则代表可以被回收。这种实现<br>方式比较简单，但对于循环引用的情况束手无策，所以 Java 采用了可达性分析算法。即判断某个对象是否与 GC Roots 的这类对象之<br>间的路径可达，若不可达，则有可能成为回收对象，被判定为不可达的对象要成为可回收对象必须至少经历两次标记过程，如果在这两次标<br>记过程中仍然没有逃脱成为可回收对象的可能性，则基本上就真的成为可回收对象了。在 Java 中，可作为 GC Roots 的对象包括以下<br>几种：</p>
-<ul>
-<li>虚拟机栈（本地变量表）中引用的对象</li>
-<li>方法区中类静态属性引用的对象</li>
-<li>方法区中常量引用的对象</li>
-<li>本地方法栈中引用的对象</li>
-</ul>
-<h4 id="2、JVM中的堆结构"><a href="#2、JVM中的堆结构" class="headerlink" title="2、JVM中的堆结构"></a><strong>2、JVM中的堆结构</strong></h4><p>&ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：<br><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%A0%86%E5%8C%BA%E7%9A%84%E5%88%92%E5%88%86%E6%AF%94%E4%BE%8B.png?raw=true" alt="JVM 分代比例"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to<br>区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：<br><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/JVM%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true" alt="JVM 内存模型全景"></p>
-<h4 id="2-1、为何新生代要分为三个区"><a href="#2-1、为何新生代要分为三个区" class="headerlink" title="2.1、为何新生代要分为三个区"></a><strong>2.1、为何新生代要分为三个区</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 这里需要介绍新生代的垃圾回收算法——复制算法。该算法的核心是将可用内存按容量划分为大小<br>相等的两块，每次回收周期只用其中一块，当这一块的内存用完，就将还存活的对象复制到另一块上面，然后把已使用过的内存空间清理掉。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 优点：不必考虑内存碎片问题；效率高。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 缺点：可用容量减少为原来的一半，比较浪费。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 最优设置：根据权威数据分析，90%的对象都是朝生夕死的，所以采用10%的空间用作交换区，因为交换区必须要有等量的两个，所以采用复制算法中新生代中三个区默认分配比例为8:1:1。</p>
-<h4 id="2-2、新生代对象的分配和回收"><a href="#2-2、新生代对象的分配和回收" class="headerlink" title="2.2、新生代对象的分配和回收"></a><strong>2.2、新生代对象的分配和回收</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 基本上新的对象优先在 Eden 区分配；</p>
-<p>&ensp;&ensp;&ensp;&ensp; 当 Eden 区没有足够空间时，会发起一次 Minor GC；</p>
-<p>&ensp;&ensp;&ensp;&ensp; Minor GC 回收新生代采用复制回收算法的改进版本。即：<br>from 区和 to 区的两个交换区，这两个区只有一个区有数据。采用8:1:1的默认分配比例（-XX:SurvivorRatio默认为8，代表 Eden 区与 Survivor 区的大小比例）</p>
-<h4 id="2-3、老年代对象的分配和回收"><a href="#2-3、老年代对象的分配和回收" class="headerlink" title="2.3、老年代对象的分配和回收"></a><strong>2.3、老年代对象的分配和回收</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 老年代的对象一般来自于新生代中的长期存活对象。这里有一概念叫做年龄阈值，每个对象定义了年龄计数器，经<br>过一次 Minor GC （在交换区）后年龄加1，对象年龄达到15次后将会晋升到老年代，老年代空间不够时进行 Full GC。当然这个参数仍是可以通过 JVM 参数（-XX:MaxTenuringThreshold，默认15）来调整。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 大对象直接进入老年代。即超过 Eden 区空间，或超过一个参数值（-<br>XX:PretenureSizeThreshold&#x3D;30m，无默认值）。这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 对象提前晋升到老年代（组团）。动态年龄判定：如果在 Survivor 区中相同年龄所有对象大小总和<br>大于 Survivor 区大小的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，而无须等到自己<br>的晋升年龄。</p>
-<h4 id="3、JVM完整的GC流程"><a href="#3、JVM完整的GC流程" class="headerlink" title="3、JVM完整的GC流程"></a><strong>3、JVM完整的GC流程</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 对象的正常流程：Eden 区 -&gt; Survivor 区 -&gt; 老年代。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 新生代GC：Minor GC；老年代GC：Full GC，比 Minor GC 慢10倍，JVM 会“stop the world”，严重<br>影响性能。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 总结：内存区域不够用了，就会引发GC。Minor GC 避免不了，Full GC 尽量避免。<br>处理方式：保存堆栈快照日志、分析内存泄漏、调整内存设置控制垃圾回收频率，选择合适的垃圾<br>回收器等。</p>
-]]></content>
-      <categories>
-        <category>基本功</category>
-        <category>编程基础</category>
-        <category>Java</category>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>JVM</tag>
-        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -279,6 +239,46 @@
       </categories>
       <tags>
         <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>命令行常用指令</title>
+    <url>/2023/08/29/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>工具类</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>回调机制</title>
+    <url>/2023/08/29/%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>编程基础</category>
+        <category>编程理论</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>Java</tag>
+        <tag>回调</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>本地调试Docker源码</title>
+    <url>/2023/08/29/%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95Docker%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>工程</category>
+        <category>云计算</category>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>云计算领域</tag>
+        <tag>Docker</tag>
       </tags>
   </entry>
 </search>
