@@ -29,11 +29,11 @@ tags:
 
 #### __2、JVM中的堆结构__
 &ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：
-![JVM 分代比例](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/%E5%A0%86%E5%8C%BA%E7%9A%84%E5%88%92%E5%88%86%E6%AF%94%E4%BE%8B.png?raw=true)
+![JVM 分代比例](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%A0%86%E5%8C%BA%E7%9A%84%E5%88%92%E5%88%86%E6%AF%94%E4%BE%8B.png?raw=true)
 
 &ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to
 区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：
-![JVM 内存模型全景](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/JVM%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true)
+![JVM 内存模型全景](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/JVM%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true)
 
 #### __2.1、为何新生代要分为三个区__
 &ensp;&ensp;&ensp;&ensp; 这里需要介绍新生代的垃圾回收算法——复制算法。该算法的核心是将可用内存按容量划分为大小
