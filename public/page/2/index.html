@@ -154,6 +154,59 @@
     
     
     <article
+  id="post-Tomcat启动流程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/08/29/Tomcat%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"
+    >Tomcat启动流程</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/08/29/Tomcat%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" class="article-date">
+  <time datetime="2023-08-28T17:16:02.000Z" itemprop="datePublished">2023-08-29</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a> / <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/%E6%9C%8D%E5%8A%A1%E7%AB%AF/">服务端</a> / <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/%E6%9C%8D%E5%8A%A1%E7%AB%AF/Tomcat/">Tomcat</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+   
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-EE/" rel="tag">Java EE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/" rel="tag">Servlet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-C-程序内存分区"
   class="article article-type-post"
   itemscope
@@ -185,7 +238,17 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p><strong>代码区：</strong> 程序被操作系统加载到内存时，所有可执⾏的代码被加载到代码区，也叫代码段，存储程序的代码指令。程序运⾏时，代码区是共享只读的。</p>
+<p><strong>静态区：</strong> 程序中的静态变量、全局变量存放在此区域（初始化的全局变量和静态变量在⼀块区域）。代码执⾏期间⼀直占⽤内存！</p>
+<p><strong>堆：</strong> 堆是不连续的内存区域，获得的空间⽐较灵活，也⽐较⼤，⼀般速度⽐较慢，⽽且容易产⽣内存碎⽚,不过⽤起来最⽅便。需要程序员申请的内存空间，空间的释放⼀般由程序员控制(⽐如new, delete, malloc, free)。当程序员没有释放该内存空间的时候，程序运⾏完毕时操作系统会对该内存空间进⾏回收。</p>
+<p><strong>栈：</strong> 栈是⼀块连续的内存的区域，⼀般栈的⼤⼩都是预先设置好的，如果申请的空间超过栈的剩余空间时，将提⽰overflow。存放的通常是变量通常是局部变量、函数参数等。</p>
+<p><strong>常量区：</strong> 常量字符串就是放在这⾥的。 程序结束后由系统释放。</p>
+<p><strong>BSS段：</strong> 定义⽽没有赋初值的全局变量和静态变量,放在这个区域，通常只是记录变量名和⼤⼩，相当于⼀个占位符。⼀个程序本质上都是由.bss段、.data段、.text段三个组成的。.data段包含三个部分：heap(堆)、stack(栈)和静态数据区。.text段存放代码区。.bss ⾥⾯装载了未被初始化的数据。如图：</p>
+<p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C++/C++%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/C++%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA.png?raw=true"></p>
+<p>&ensp;&ensp;&ensp;&ensp; ⽰例代码及注释如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span> a = <span class="number">0</span>; <span class="comment">//全局初始化区（静态区）</span></span><br><span class="line"><span class="type">char</span> *p1; <span class="comment">//全局未初始化区 （BSS段）</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> b; <span class="comment">//栈 6 char s[] = &quot;abc&quot;; //栈 7 char *p2; //栈 8 char *p3 = &quot;123456&quot;; //123456/0在常量区，p3在栈上。</span></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> c = <span class="number">0</span>; <span class="comment">//全局（静态）初始化区 （静态区）</span></span><br><span class="line">    p1 = (<span class="type">char</span> *) <span class="built_in">malloc</span>(<span class="number">10</span>); <span class="comment">//分配得10和20字节的区域就在堆区。</span></span><br><span class="line">    <span class="comment">// p2 = (char *) malloc(20);</span></span><br><span class="line">    <span class="built_in">strcpy</span>(p1, <span class="string">&quot;123456&quot;</span>);</span><br><span class="line">    <span class="comment">//123456/0放在常量区，编译器可能会将它与p3所指向的&quot;123456&quot;优化成⼀块。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ 
       <!-- reward -->
       
     </div>
@@ -195,7 +258,7 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E8%B0%83/" rel="tag">回调</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
 
     </footer>
   </div>
