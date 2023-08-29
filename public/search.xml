@@ -1,6 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>K8S架构图</title>
+    <url>/2023/08/29/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true" alt="K8S架构图"></p>
+]]></content>
+      <categories>
+        <category>工程</category>
+        <category>云计算</category>
+        <category>K8S</category>
+      </categories>
+      <tags>
+        <tag>云计算领域</tag>
+        <tag>K8S</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>本地调试Docker源码</title>
+    <url>/2023/08/29/%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95Docker%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>工程</category>
+        <category>云计算</category>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>云计算领域</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Qt简介</title>
+    <url>/2023/08/29/Qt%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>工程</category>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+        <tag>桌面开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IP数据报</title>
+    <url>/2023/08/29/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Innodb中的事务隔离级别和锁实现</title>
+    <url>/2023/08/29/Innodb%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>工程</category>
+        <category>服务端</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring全景</title>
+    <url>/2023/08/29/Spring%E5%85%A8%E6%99%AF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/Spring/Spring%E5%85%A8%E6%99%AF.png?raw=true" alt="Spring 全景图"></p>
+]]></content>
+      <categories>
+        <category>工程</category>
+        <category>服务端</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+        <tag>Java EE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>保持敬畏之心</title>
+    <url>/2023/08/29/%E4%BF%9D%E6%8C%81%E6%95%AC%E7%95%8F%E4%B9%8B%E5%BF%83/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>思考</category>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>Java</tag>
+        <tag>回调</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>命令行常用指令</title>
+    <url>/2023/08/29/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>工具类</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tomcat启动流程</title>
+    <url>/2023/08/29/Tomcat%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>工程</category>
+        <category>服务端</category>
+        <category>Tomcat</category>
+      </categories>
+      <tags>
+        <tag>Java EE</tag>
+        <tag>Tomcat</tag>
+        <tag>Java Web</tag>
+        <tag>Servlet</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++程序内存分区</title>
+    <url>/2023/08/29/C-%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>编程基础</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>Java</tag>
+        <tag>回调</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>回调机制</title>
+    <url>/2023/08/29/%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>编程基础</category>
+        <category>编程理论</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>Java</tag>
+        <tag>回调</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>GC—基础知识</title>
     <url>/2023/08/28/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样<br>的，首先抛出第一个问题，什么样的对象会是 JVM 回收的目标？</p>
@@ -40,104 +193,6 @@
       </tags>
   </entry>
   <entry>
-    <title>IP数据报</title>
-    <url>/2023/08/29/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>基本功</category>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Innodb中的事务隔离级别和锁实现</title>
-    <url>/2023/08/29/Innodb%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>工程</category>
-        <category>服务端</category>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Qt简介</title>
-    <url>/2023/08/29/Qt%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>工程</category>
-        <category>Qt</category>
-      </categories>
-      <tags>
-        <tag>Qt</tag>
-        <tag>桌面开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spring全景</title>
-    <url>/2023/08/29/Spring%E5%85%A8%E6%99%AF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/Spring/Spring%E5%85%A8%E6%99%AF.png?raw=true" alt="Spring 全景图"></p>
-]]></content>
-      <categories>
-        <category>工程</category>
-        <category>服务端</category>
-        <category>Spring</category>
-      </categories>
-      <tags>
-        <tag>Spring</tag>
-        <tag>Java EE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>C++程序内存分区</title>
-    <url>/2023/08/29/C-%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>基本功</category>
-        <category>编程基础</category>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>C++</tag>
-        <tag>回调</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tomcat启动流程</title>
-    <url>/2023/08/29/Tomcat%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>工程</category>
-        <category>服务端</category>
-        <category>Tomcat</category>
-      </categories>
-      <tags>
-        <tag>Java EE</tag>
-        <tag>Tomcat</tag>
-        <tag>Java Web</tag>
-        <tag>Servlet</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>保持敬畏之心</title>
-    <url>/2023/08/29/%E4%BF%9D%E6%8C%81%E6%95%AC%E7%95%8F%E4%B9%8B%E5%BF%83/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>思考</category>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>C++</tag>
-        <tag>回调</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>内核页表设计</title>
     <url>/2023/08/28/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1.png?raw=true" alt="内核页表设计"></p>
@@ -148,45 +203,6 @@
       </categories>
       <tags>
         <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>命令行常用指令</title>
-    <url>/2023/08/29/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>工具类</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>回调机制</title>
-    <url>/2023/08/29/%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>基本功</category>
-        <category>编程基础</category>
-        <category>编程理论</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>C++</tag>
-        <tag>回调</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>本地调试Docker源码</title>
-    <url>/2023/08/29/%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95Docker%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>工程</category>
-        <category>云计算</category>
-      </categories>
-      <tags>
-        <tag>云计算领域</tag>
-        <tag>Docker</tag>
       </tags>
   </entry>
 </search>
