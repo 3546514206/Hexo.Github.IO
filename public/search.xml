@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>本地调试Docker源码</title>
+    <url>/2023/08/29/%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95Docker%E6%BA%90%E7%A0%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>工程</category>
+        <category>云计算</category>
+      </categories>
+      <tags>
+        <tag>云计算领域</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Qt简介</title>
+    <url>/2023/08/29/Qt%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>工程</category>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Qt</tag>
+        <tag>桌面开发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IP数据报</title>
     <url>/2023/08/29/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
@@ -18,6 +44,7 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
       <categories>
         <category>工程</category>
+        <category>服务端</category>
         <category>MySQL</category>
       </categories>
       <tags>
@@ -31,6 +58,7 @@
 ]]></content>
       <categories>
         <category>工程</category>
+        <category>服务端</category>
         <category>Spring</category>
       </categories>
       <tags>
@@ -69,6 +97,7 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
       <categories>
         <category>工程</category>
+        <category>服务端</category>
         <category>Tomcat</category>
       </categories>
       <tags>
