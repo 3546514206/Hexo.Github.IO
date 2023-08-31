@@ -84,7 +84,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">322</span>
         </span>
     </span>
 
@@ -106,7 +106,24 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p>&ensp;&ensp; MySQL 创建数据库并指定字符集：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop schema if exists `test`;</span><br><span class="line">CREATE DATABASE `test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; Brew 相关的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 先卸载Homebrew</span><br><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)&quot;</span><br><span class="line">// 然后在安装</span><br><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br><span class="line">// 搜索包</span><br><span class="line">brew search mysql</span><br><span class="line">// 安装包</span><br><span class="line">brew install mysql</span><br><span class="line">// 查看包信息，比如目前的版本，依赖，安装后注意事项等</span><br><span class="line">brew info mysql</span><br><span class="line">// 卸载包</span><br><span class="line">brew uninstall wget</span><br><span class="line">// 显示已安装的包</span><br><span class="line">brew list</span><br><span class="line">// 查看brew的帮助</span><br><span class="line">brew –help</span><br><span class="line">// 更新， 这会更新 Homebrew 自己</span><br><span class="line">brew update</span><br><span class="line">// 检查过时（是否有新版本），这会列出所有安装的包里，哪些可以升级</span><br><span class="line">brew outdated</span><br><span class="line">brew outdated mysql</span><br><span class="line">// 升级所有可以升级的软件们</span><br><span class="line">brew upgrade</span><br><span class="line">brew upgrade mysql</span><br><span class="line">// 清理不需要的版本极其安装包缓存</span><br><span class="line">brew cleanup</span><br><span class="line">brew cleanup mysql</span><br></pre></td></tr></table></figure>
+<p>&ensp;&ensp; MySQL 源码构建参数(将目录修改为你自己的)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-DCMAKE_BUILD_TYPE=Debug</span><br><span class="line">-DWITH_BOOST=/Users/setsunayang/Documents/learning/mysql/boost_1_77_0</span><br><span class="line">-DCMAKE_INSTALL_PREFIX=/Users/setsunayang/Documents/learning/mysql/build</span><br><span class="line">-DWITH_SSL=system</span><br><span class="line"></span><br><span class="line">./mysqld --basedir=/Users/setsunayang/Documents/learning/mysql/build \</span><br><span class="line">--datadir=/Users/setsunayang/Documents/learning/mysql/build/data \</span><br><span class="line">--initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; Git重新关联远程仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin </span><br><span class="line">git remote add origin [url]</span><br><span class="line">git config --global user.name &quot;杨海波&quot;</span><br><span class="line">git config --global user.email “3546514206@QQ.COM&quot;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; 设置主机名称</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo scutil --set HostName SetsunaYang</span><br></pre></td></tr></table></figure>
+
+
+
+
+ 
       <!-- reward -->
       
       <div id="reword-out">
