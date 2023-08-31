@@ -7,4 +7,5 @@ categories:
 tags:
 - Spring
 - Java EE
+- MyBatis
 ---
