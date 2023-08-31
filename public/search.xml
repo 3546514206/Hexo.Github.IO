@@ -11,9 +11,9 @@
         <category>GPM</category>
       </categories>
       <tags>
+        <tag>基础知识</tag>
         <tag>Go</tag>
         <tag>GPM</tag>
-        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -65,8 +65,8 @@
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>基础知识</tag>
         <tag>JVM</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -171,8 +171,8 @@
         <category>Spring</category>
       </categories>
       <tags>
-        <tag>Java EE</tag>
         <tag>Spring</tag>
+        <tag>Java EE</tag>
       </tags>
   </entry>
   <entry>
@@ -228,10 +228,10 @@
         <category>Tomcat</category>
       </categories>
       <tags>
+        <tag>Java EE</tag>
         <tag>Tomcat</tag>
         <tag>Java Web</tag>
         <tag>Servlet</tag>
-        <tag>Java EE</tag>
       </tags>
   </entry>
   <entry>
@@ -331,8 +331,8 @@
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>基础知识</tag>
         <tag>JVM</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
