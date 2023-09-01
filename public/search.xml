@@ -53,11 +53,11 @@
 <p>&ensp;&ensp;&ensp;&ensp; __如果 v1、v2 任一变量为 null，则进入 if 分支，显然不会进入。else 先判断v1、v2 是否能互转，显然不能，直接跳过。接下来是重中之重：如果 equals 为 true ,跳出 case，否则报错。我们根据结果看，equals 必定为 true，因为我们那种不规范的 mybatis 在这个地方，它每没报错——事实上是应该将该问题抛出来的，从而引导开发者更正 mybatis 脚本__。接下来我们看方法外面这个 equals 的来源：</p>
 <p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/equals.png?raw=true" alt="equals"></p>
 <p>&ensp;&ensp;&ensp;&ensp; 我惊呆了，直接写死传经来的，至于这个 equals 意欲何为，当初作者为什么这么写，也许只有作者自己知道。反正高版本的 OGNL 已经将这部分的代码逻辑全部重构了。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 我们可以得到如下结论：_<em>低版本的 mybatis 依赖了低版本的 OGNL ，低版本的 OGNL 在上述分析的函数中存在一定缺陷，这个缺陷会导致我们在编写 Mybatis 脚本的时候类似于 <em>parameter!&#x3D;’’ 的不规范写法不被发现。当我们升级了 Mybatis 之后，这种不规范的写法反而兜不住暴露出来了，加上组件升级测试不充分，直接上到了生产环境。</em></em></p>
-<p>&ensp;&ensp;&ensp;&ensp; 反思：</p>
+<p>&ensp;&ensp;&ensp;&ensp; 我们可以得到如下结论： _<em>低版本的 mybatis 依赖了低版本的 OGNL ，低版本的 OGNL 在上述分析的函数中存在一定缺陷，这个缺陷会导致我们在编写 Mybatis 脚本的时候类似于 <em>parameter!&#x3D;’’ 的不规范写法不被发现。当我们升级了 Mybatis 之后，这种不规范的写法反而兜不住暴露出来了，加上组件升级测试不充分，直接上到了生产环境。</em></em></p>
+<p>&ensp;&ensp;&ensp;&ensp; <strong>反思：</strong></p>
 <ul>
-<li>日常开发要严格要求自己，追求正规、大气的编程素养，每一行代码，每一个字符，都要过大脑，不要太随便，不要随便复制粘贴能跑就行。</li>
-<li>组件升级要慎之又慎，测试要充分。</li>
+<li><strong>日常开发要严格要求自己，追求正规、大气的编程素养，每一行代码，每一个字符，都要过大脑，不要太随便，不要随便复制粘贴能跑就行。</strong></li>
+<li><strong>组件升级要慎之又慎，测试要充分。</strong></li>
 </ul>
 ]]></content>
       <categories>
@@ -82,9 +82,9 @@
         <category>GPM</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
         <tag>Go</tag>
         <tag>GPM</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -136,8 +136,8 @@
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>JVM</tag>
         <tag>基础知识</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
@@ -243,8 +243,8 @@
         <category>Spring</category>
       </categories>
       <tags>
-        <tag>Spring</tag>
         <tag>Java EE</tag>
+        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
@@ -300,10 +300,10 @@
         <category>Tomcat</category>
       </categories>
       <tags>
-        <tag>Java EE</tag>
         <tag>Tomcat</tag>
         <tag>Java Web</tag>
         <tag>Servlet</tag>
+        <tag>Java EE</tag>
       </tags>
   </entry>
   <entry>
@@ -403,8 +403,8 @@
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>JVM</tag>
         <tag>基础知识</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
