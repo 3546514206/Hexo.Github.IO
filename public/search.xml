@@ -243,8 +243,8 @@
         <category>Spring</category>
       </categories>
       <tags>
-        <tag>Java EE</tag>
         <tag>Spring</tag>
+        <tag>Java EE</tag>
       </tags>
   </entry>
   <entry>
@@ -300,10 +300,10 @@
         <category>Tomcat</category>
       </categories>
       <tags>
+        <tag>Java EE</tag>
         <tag>Tomcat</tag>
         <tag>Java Web</tag>
         <tag>Servlet</tag>
-        <tag>Java EE</tag>
       </tags>
   </entry>
   <entry>
