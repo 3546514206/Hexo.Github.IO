@@ -73,11 +73,11 @@ mybatis-3.4.4  ->  ognl-3.1.14
 
 &ensp;&ensp;&ensp;&ensp; 至此所需信息全部已经准备完毕，我们可以来分析高低版本 OGNL 的源码了。高版本 OGNL 中，我们直接看 case:NONUMBERIC 的分支子句。代码含义为：
 
-&ensp;&ensp;&ensp;&ensp; __如果 V1 是 Comparable 类型的并且 V1 可以强转为 V2 的类型，则进入 if 分支，否则进入 else 分支，而 else 分支直接报错，而且报错信息是我们实际生产环境中遇到的。显然，V1 既不是 Comparable 类型，也无法转换为 V2 的类型（HashMap -> String），所以进入了 else 分支，mybatis 升级之后携带 OGNL 的升级，数据库不规范的写法导致 mybatis 编译 sql 语句报错，阻塞了业务。__
+&ensp;&ensp;&ensp;&ensp; __如果 V1 是 Comparable 类型的并且 V1 可以强转为 V2 的类型，则进入 if 分支，否则进入 else 分支，而 else 分支直接报错，而且报错信息是我们实际生产环境中遇到的。显然，V1 既不是 Comparable 类型，也无法转换为 V2 的类型（HashMap -> String），所以进入了 else 分支，mybatis 升级之后携带 OGNL 的升级，数据库不规范的写法导致 mybatis 编译 sql 语句报错，阻塞了业务__
 
 &ensp;&ensp;&ensp;&ensp; 低版本的 OGNL 的 case:NONUMBERIC 的分支子句的代码逻辑说实话非常拧巴，含义是：
 
-&ensp;&ensp;&ensp;&ensp; __如果 v1、v2 任一变量为 null，则进入 if 分支，显然不会进入。else 先判断v1、v2 是否能互转，显然不能，直接跳过。接下来是重中之重：如果 equals 为 true ,跳出 case，否则报错。我们根据结果看，equals 必定为 true，因为我们那种不规范的 mybatis 在这个地方，它每没报错——事实上是应该将该问题抛出来的，从而引导开发者更正 mybatis 脚本__。接下来我们看方法外面这个 equals 的来源：
+&ensp;&ensp;&ensp;&ensp; __如果 v1、v2 任一变量为 null，则进入 if 分支，显然不会进入。else 先判断v1、v2 是否能互转，显然不能，直接跳过。接下来是重中之重：如果 equals 为 true ,跳出 case，否则报错。我们根据结果看，equals 必定为 true，因为我们那种不规范的 mybatis 在这个地方，它每没报错——事实上是应该将该问题抛出来的，从而引导开发者更正 mybatis 脚本。接下来我们看方法外面这个 equals 的来源：__
 
 ![equals](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/equals.png?raw=true)
 
