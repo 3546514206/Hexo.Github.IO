@@ -14,25 +14,25 @@ tags:
 
 &ensp;&ensp;&ensp;&ensp; 项目中对 Mybatis 做了一次升级。前后版本如下，3.2.5 -> 3.4.4：
 
-![mybatis前后版本升级](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/mybatis%E5%89%8D%E5%90%8E%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7.png?raw=true)
+![mybatis前后版本升级](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/mybatis%E5%89%8D%E5%90%8E%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7.png)
 
 &ensp;&ensp;&ensp;&ensp; 结果第二天巡检发现如下报错，过了两个小时业务高峰期，前台业务人员不断反馈某最核心的业务无法进行：
 
-![报错信息](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF.png?raw=true)
+![报错信息](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF.png)
 
 &ensp;&ensp;&ensp;&ensp; 我们当时定位到错误的地方，根据经验修改之后验证通过，重新上线之后得以解决。可能涉及敏感数据，所以不展示实际的报错与弥补方案。
 
 &ensp;&ensp;&ensp;&ensp; 以下是我在本地的问题复现。在本地的一个标准的 SSM 工程中分别引入以下两个版本的 Mybatis 依赖:
 
-![分别引入两个版本的依赖](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E5%88%86%E5%88%AB%E5%BC%95%E5%85%A5%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E4%BE%9D%E8%B5%96.png?raw=true)
+![分别引入两个版本的依赖](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E5%88%86%E5%88%AB%E5%BC%95%E5%85%A5%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E4%BE%9D%E8%B5%96.png)
 
 &ensp;&ensp;&ensp;&ensp; 编写如下数据库脚本:
 
-![数据库脚本](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%84%9A%E6%9C%AC.png?raw=true)
+![数据库脚本](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%84%9A%E6%9C%AC.png)
 
 &ensp;&ensp;&ensp;&ensp; dao 层调用方法如下：
 
-![dao层方法调用](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/dao%E5%B1%82%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png?raw=true)
+![dao层方法调用](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/dao%E5%B1%82%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png)
 
 &ensp;&ensp;&ensp;&ensp; 当 Mybatis 依赖为 3.2.5 的较低版本时，不会报错；当 Mybatis 依赖版本为 3.4.4 的较高版本时，则会报出上面的错误:
 
@@ -44,7 +44,7 @@ invalid comparision:  java.util.HashMap and java.lang.String
 
 &ensp;&ensp;&ensp;&ensp; 但是问题又来了，__为什么 Mybatis 较低版本的时候没有问题，而较高版本则暴露出这个问题了？__ 我们深入源码分析一下。因为我对 Mybatis 源码比较熟悉，加上实际生产中报错的堆栈信息也很全，所以直接定位到了 Mybatis 的这个类型：
 
-![ifnode](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/ifnode.png?raw=true)
+![ifnode](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/ifnode.png)
 
 &ensp;&ensp;&ensp;&ensp; 上述代码的作用：在我们上述 SQL 脚本中，根据 if 子句的测试语句（就是 ... && _parameter!='' 那一坨）判断，当前 if 子句所包裹的 sql 是否需要动态编译进最终的执行sql中。当我们进一步追踪，就进入到了 OGNL 的源码中，OGNL 是一套表达式解析引擎，一直定位下去就到了具体报错的方法。到这里我们补充一下版本依赖关系：
 
@@ -55,19 +55,19 @@ mybatis-3.4.4  ->  ognl-3.1.14
 
 &ensp;&ensp;&ensp;&ensp; 高版本 OGNL 源码如下：
 
-![高版本 OGNL 代码](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E9%AB%98%E7%89%88%E6%9C%ACOGNL%E4%BB%A3%E7%A0%81.png?raw=true)
+![高版本 OGNL 代码](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E9%AB%98%E7%89%88%E6%9C%ACOGNL%E4%BB%A3%E7%A0%81.png)
 
 &ensp;&ensp;&ensp;&ensp; 低版本 OGNL 源码如下：
 
-![低版本 OGNL 代码](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E4%BD%8E%E7%89%88%E6%9C%ACOGNL%E4%BB%A3%E7%A0%81.png?raw=true)
+![低版本 OGNL 代码](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E4%BD%8E%E7%89%88%E6%9C%ACOGNL%E4%BB%A3%E7%A0%81.png)
 
 &ensp;&ensp;&ensp;&ensp; 类型标识相关的源码如下：
 
-![类型标记](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E7%B1%BB%E5%9E%8B%E6%A0%87%E8%AE%B0.png?raw=true)
+![类型标记](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E7%B1%BB%E5%9E%8B%E6%A0%87%E8%AE%B0.png)
 
 &ensp;&ensp;&ensp;&ensp; case 为 NONUMBERIC 的含义是当比较的值是非数值类型，所以 _parameter!='' 子句的判断自然是走该分支语句的代码。t1、t2，v1、v2 的含义是两个待比值（ _parameter 和 ''）的类型和 value，在这个场景中分别是如下调试面板所示的（不明白的请观察为了复现问题所编写的 SQL 脚本和 dao 层语句）：
 
-![调试信息如下](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E8%B0%83%E8%AF%95%E4%BF%A1%E6%81%AF%E5%A6%82%E4%B8%8B.png?raw=true)
+![调试信息如下](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E8%B0%83%E8%AF%95%E4%BF%A1%E6%81%AF%E5%A6%82%E4%B8%8B.png)
 
 &ensp;&ensp;&ensp;&ensp; 解释一下：t1 = t2 = 10，表示 _parameter 与 '' 都是非数值类型。v1 表明了 _parameter 是个 HashMap 类型的变量，有一个 (blurname,cat) 的键值对，v2 = ''。另外，类的 Class 实例中有一个 isAssignableFrom 方法，这个方法是用来判断两个类的之间的关联关系，也可以说是一个类是否可以被强制转换为另外一个实例对象。
 
@@ -79,7 +79,7 @@ mybatis-3.4.4  ->  ognl-3.1.14
 
 &ensp;&ensp;&ensp;&ensp; __如果 v1、v2 任一变量为 null，则进入 if 分支，显然不会进入。else 先判断v1、v2 是否能互转，显然不能，直接跳过。接下来是重中之重：如果 equals 为 true ,跳出 case，否则报错。我们根据结果看，equals 必定为 true，因为我们那种不规范的 mybatis 在这个地方，它每没报错——事实上是应该将该问题抛出来的，从而引导开发者更正 mybatis 脚本。接下来我们看方法外面这个 equals 的来源：__
 
-![equals](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/equals.png?raw=true)
+![equals](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/equals.png%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/equals.png?raw=true)
 
 &ensp;&ensp;&ensp;&ensp; 我惊呆了，直接写死传经来的，至于这个 equals 意欲何为，当初作者为什么这么写，也许只有作者自己知道。反正高版本的 OGNL 已经将这部分的代码逻辑全部重构了。
 
