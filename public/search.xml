@@ -9524,6 +9524,19 @@ use one vs other -->
       </tags>
   </entry>
   <entry>
+    <title>内核页表设计</title>
+    <url>/2023/08/28/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1.png" alt="内核页表设计"></p>
+]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>GC—基础知识</title>
     <url>/2023/08/28/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样<br>的，首先抛出第一个问题，什么样的对象会是 JVM 回收的目标？</p>
@@ -9560,19 +9573,6 @@ use one vs other -->
         <tag>Java</tag>
         <tag>JVM</tag>
         <tag>基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>内核页表设计</title>
-    <url>/2023/08/28/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1.png" alt="内核页表设计"></p>
-]]></content>
-      <categories>
-        <category>基本功</category>
-        <category>操作系统</category>
-      </categories>
-      <tags>
-        <tag>操作系统</tag>
       </tags>
   </entry>
 </search>
