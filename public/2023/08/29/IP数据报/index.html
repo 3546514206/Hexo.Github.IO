@@ -109,7 +109,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p>&ensp;&ensp;&ensp;&ensp; IP 协议控制传输的协议单元称为 IP 数据报（IP Datagram，IP数据报、IP包或IP分组）。IP协议屏蔽了下层各种物理子网的差异，能够向上层提供统一格式的IP数据报。lP数据报采用数据报分组传输的方式，提供的服务是无连接方式。IP数据报的格式能够说明lP协议具有什么功能。IPv4数据报由报头和数据两部分组成，其中，数据是高层需要传输的数据，报头是为了正确传输高层数据而增加的控制信息。报头的前一部分长度固定，共20字节，是所有IP数据报必须具有。在首部固定部分的后面是可选字段，长度可变。</p>
-<p><img src="https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/IP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84.png" alt="IP报文结构"></p>
+<p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/IP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84.png?raw=true" alt="IP报文结构"></p>
 <h4 id="1、固定部分"><a href="#1、固定部分" class="headerlink" title="1、固定部分"></a><strong>1、固定部分</strong></h4><ul>
 <li>版本：占 4 位，指 IP 协议的版本。通信双方使用的 IP 协议版本必须一致。广泛使用的 IP 协议版本号为 4（即 IPv4）。关于 IPv6，还处于草案阶段。</li>
 <li>首部长度：占 4 位，可表示的最大十进制数值是 15。请注意，这个字段所表示数的单位是 32 位字长（1 个 32 位字长是 4 字节），因此，当 IP 的首部长度为 1111 时（即十进制的 15），首部长度就达到 60 字节。当 IP 分组的首部长度不是 4 字节的整数倍时，必须利用最后的填充字段加以填充。因此数据部分永远在 4 字节的整数倍开始，这样在实现 IP 协议时较为方便。首部长度限制为 60 字节的缺点是有时可能不够用。但这样做是希望用户尽量减少开销。最常用的首部长度就是 20 字节（即首部长度为 0101），这时不使用任何选项。</li>

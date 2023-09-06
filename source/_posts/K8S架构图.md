@@ -11,4 +11,4 @@ tags:
 ---
 
 
-![K8S架构图](https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
+![K8S架构图](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true)

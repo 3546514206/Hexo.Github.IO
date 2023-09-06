@@ -116,8 +116,8 @@
 <li>方法区中常量引用的对象</li>
 <li>本地方法栈中引用的对象</li>
 </ul>
-<h4 id="2、JVM中的堆结构"><a href="#2、JVM中的堆结构" class="headerlink" title="2、JVM中的堆结构"></a><strong>2、JVM中的堆结构</strong></h4><p>&ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：<br><img src="https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%A0%86%E5%8C%BA%E7%9A%84%E5%88%92%E5%88%86%E6%AF%94%E4%BE%8B.png" alt="JVM 分代比例"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to<br>区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：<br><img src="https://gitee.com/setyan/ImageHost.Gitee.IO/raw/master/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/JVM%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="JVM 内存模型全景"></p>
+<h4 id="2、JVM中的堆结构"><a href="#2、JVM中的堆结构" class="headerlink" title="2、JVM中的堆结构"></a><strong>2、JVM中的堆结构</strong></h4><p>&ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：<br><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%A0%86%E5%8C%BA%E7%9A%84%E5%88%92%E5%88%86%E6%AF%94%E4%BE%8B.png?raw=true" alt="JVM 分代比例"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to<br>区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：<br><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Java/JVM/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/JVM%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png?raw=true" alt="JVM 内存模型全景"></p>
 <h4 id="2-1、为何新生代要分为三个区"><a href="#2-1、为何新生代要分为三个区" class="headerlink" title="2.1、为何新生代要分为三个区"></a><strong>2.1、为何新生代要分为三个区</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 这里需要介绍新生代的垃圾回收算法——复制算法。该算法的核心是将可用内存按容量划分为大小<br>相等的两块，每次回收周期只用其中一块，当这一块的内存用完，就将还存活的对象复制到另一块上面，然后把已使用过的内存空间清理掉。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 优点：不必考虑内存碎片问题；效率高。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 缺点：可用容量减少为原来的一半，比较浪费。</p>
@@ -202,15 +202,20 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/08/28/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/" class="article-nav-link">
+      <a href="/2023/08/29/%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            内核页表设计
+            回调机制
           
         </div>
       </a>
     
+    
+      <a href="/2023/08/28/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">内核页表设计</div>
+      </a>
     
   </nav>
 
