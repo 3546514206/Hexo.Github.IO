@@ -84,7 +84,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">322</span>
+            <span class="post-count">361</span>
         </span>
     </span>
 
@@ -120,6 +120,8 @@
 <p>&ensp;&ensp; 设置主机名称</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo scutil --set HostName SetsunaYang</span><br></pre></td></tr></table></figure>
 
+<p>&ensp;&ensp; Macbook Pro 显示被隐藏的文件或文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.finder AppleShowAllFiles -boolean true;killall Finder </span><br><span class="line">defaults write com.apple.finder AppleShowAllFiles -boolean false;killall Finder</span><br><span class="line"></span><br><span class="line">chflags hidden </span><br><span class="line">chflags nohidden</span><br></pre></td></tr></table></figure>
 
 
 
