@@ -34,7 +34,7 @@
         <category>基本功</category>
         <category>编程基础</category>
         <category>设计模式</category>
-        <category>策略模式和模板方法模式</category>
+        <category>策略模式、模板方法</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -759,8 +759,8 @@
         <category>基础</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
         <tag>Go</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -1293,8 +1293,8 @@
         <category>基础</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
         <tag>Go</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -1830,8 +1830,8 @@
         <category>基础</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
         <tag>Go</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -3374,8 +3374,8 @@ use one vs other -->
         <category>基础</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
         <tag>Go</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -3435,8 +3435,8 @@ use one vs other -->
         <category>基础</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
         <tag>Go</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -4102,8 +4102,8 @@ use one vs other -->
         <category>基础</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
         <tag>Go</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -5897,8 +5897,8 @@ use one vs other -->
         <category>基础</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
         <tag>Go</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -9278,9 +9278,9 @@ use one vs other -->
         <category>GPM</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
         <tag>Go</tag>
         <tag>GPM</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -9332,8 +9332,8 @@ use one vs other -->
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>JVM</tag>
         <tag>基础知识</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
@@ -9601,8 +9601,8 @@ use one vs other -->
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>JVM</tag>
         <tag>基础知识</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
