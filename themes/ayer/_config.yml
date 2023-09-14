@@ -38,7 +38,7 @@ progressBar: true
 broadcast:
   enable: true # true开启，false关闭
   type: 1 # 1：自定义输入，2：一言api(https://hitokoto.cn/)
-  text: 第一性原理、时间主义 # type为1时有效
+  text: 第一性原理、长期主义者 # type为1时有效
 
 # 文章配置
 # 文章太长，截断按钮文字(在需要截断的行增加此标记：<!--more-->)
