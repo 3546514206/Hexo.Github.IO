@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>数据链路层</title>
+    <url>/2023/09/14/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a><strong>1、概述</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 数据链路层是TCP&#x2F;IP协议栈的第二层！数据链路层的传输单元：帧（也就是传输单位）。</p>
+<p><img src="https://raw.githubusercontent.com/3546514206/ImageHost.Github.IO/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E6%89%80%E5%A4%84%E4%BD%8D%E7%BD%AE.webp" alt="数据链路层"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 帧的结构如下：</p>
+<ul>
+<li>帧结构的构成：MAC子层 + 上三层数据 + FCS</li>
+</ul>
+<p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/%E5%B8%A7%E7%9A%84%E7%BB%93%E6%9E%84.png?raw=true" alt="帧结构"></p>
+<ul>
+<li>比喻：一个帧我们可以理解为一辆火车，MAC子层是火车头，上三层数据为乘客，FCS为火车尾巴</li>
+<li>MAC子层头部包含（也叫帧头）：目标MAC地址（6字节） 源MAC地址（6字节） 类型（2字节）</li>
+<li>MAC地址：也称为物理地址，是被固化到网卡的全球唯一标识，如下图：</li>
+</ul>
+<p><img src="https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/mac%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84.png?raw=true" alt="Mac 地址结构"></p>
+<p>&ensp;&ensp;&ensp;&ensp; <em>注释：MAC地址&#x3D;厂家标识+内部编号&#x3D;&#x3D;&#x3D;&#x3D;实现了全球唯一！怎么查看自己的MAC地址？开始运行–cmd–ipconfig &#x2F;all</em></p>
+<ul>
+<li>类型字段的作用：区分上层协议，0806代表上层协议是ARP协议，0800代表上层是IP协议</li>
+<li>上三层数据：也就是3层包头+4层包头+5层数据。其中一个帧是有最大承载能力限制的。也就是一个帧中的上三层数据就是乘客，而一辆火车中的乘客是又上限的，一个帧的最大承受能力叫MTU值，目前国际标准为1500字节</li>
+<li>MTU:（最大传输单元）1500字节</li>
+<li>帧尾：FCS&#x3D;帧校验，长度4个字节，作用是校验整个帧在传输过程中是否发生传输错误。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 帧结构最终效果图如下：</p>
+<p><img src="https://raw.githubusercontent.com/3546514206/ImageHost.Github.IO/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/%E5%B8%A7%E7%BB%93%E6%9E%84%E6%95%88%E6%9E%9C%E5%9B%BE.webp" alt="帧结构效果图"></p>
+<p>&ensp;&ensp;&ensp;&ensp; <em>经典问题：请描述一下帧结构?</em></p>
+<p>&ensp;&ensp;&ensp;&ensp; <em>答：帧是由帧头+上三层数据+帧尾，帧头包含目MAC，源MAC，类型，帧尾是FCS，MTU：1500</em></p>
+<h4 id="2、本层设备"><a href="#2、本层设备" class="headerlink" title="2、本层设备"></a><strong>2、本层设备</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 工作在2层的设备：交换机&#x2F;网桥</p>
+<h4 id="3、交换机的工作原理"><a href="#3、交换机的工作原理" class="headerlink" title="3、交换机的工作原理"></a><strong>3、交换机的工作原理</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 经典问题：请描述一下交换机的工作原理。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 答：</p>
+<p>&ensp;&ensp;&ensp;&ensp; 1）当收到一个帧，首先学习帧中的MAC地址来形成自己的MAC地址表！</p>
+<p>&ensp;&ensp;&ensp;&ensp; 2）然后检查帧中的目标MAC地址，并匹配MAC地址表。</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; 如表中匹配成功，则单播转发！</p>
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; 如表中无匹配项，则广播转发！</p>
+<p>&ensp;&ensp;&ensp;&ensp; 3）MAC地址表的老化时间是？300秒！</p>
+<p>&ensp;&ensp;&ensp;&ensp; 效果图如下：</p>
+<p><img src="https://raw.githubusercontent.com/3546514206/ImageHost.Github.IO/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.webp" alt="交换机的工作原理"></p>
+<h4 id="4、如何配置交换机"><a href="#4、如何配置交换机" class="headerlink" title="4、如何配置交换机"></a><strong>4、如何配置交换机</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 傻瓜式交换机一般是不支持管理和配置的！企业级交换机支持配置高级功能及高级配置，价格要高，一般称为管理型交换机！如购买一台华为或者思科交换机，看下图:</p>
+<p><img src="https://raw.githubusercontent.com/3546514206/ImageHost.Github.IO/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/%E4%BA%A4%E6%8D%A2%E6%9C%BA.webp" alt="交换机"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 一般会自带一根console线！看下图:</p>
+<p><img src="https://raw.githubusercontent.com/3546514206/ImageHost.Github.IO/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/console%E7%BA%BF.webp" alt="console线"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 建议再买一根com口转USB线，看下图:</p>
+<p><img src="https://raw.githubusercontent.com/3546514206/ImageHost.Github.IO/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/com%E5%8F%A3%E8%BD%ACUSB%E7%BA%BF.webp" alt="com口转USB线"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 使用console线+转换usb线，来连接交换机的console口与电脑的USB接口，如下图:</p>
+<p><img src="https://raw.githubusercontent.com/3546514206/ImageHost.Github.IO/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%8E%A5%E7%BA%BF.webp" alt="交换机接线"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 然后再电脑上打开超级终端（xp上自带，win7另行下载即可），即可看到配置界面。当然我们可以使用思科的模拟软件来做实验，如cisco packettracer</p>
+]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+        <tag>数据链路层</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谈谈什么是云原生</title>
     <url>/2023/09/13/%E8%B0%88%E8%B0%88%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%91%E5%8E%9F%E7%94%9F/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 之前关于云计算技术底座的部门会谈，我本着程序员实事求是的精神跟领导表示我不懂云原生——其实是不懂那些花里胡哨、似是而非的说法，比如下面的：</p>
