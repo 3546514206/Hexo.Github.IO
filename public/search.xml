@@ -3523,7 +3523,7 @@ use one vs other -->
       <categories>
         <category>基本功</category>
         <category>编程基础</category>
-        <category>基础</category>
+        <category>Go</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -9281,8 +9281,8 @@ use one vs other -->
         <category>C++</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>Java</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -9543,8 +9543,8 @@ use one vs other -->
         <category>读书笔记</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>Java</tag>
+        <tag>C++</tag>
         <tag>回调</tag>
       </tags>
   </entry>
@@ -9614,8 +9614,8 @@ use one vs other -->
         <category>C++</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>Java</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -9651,8 +9651,8 @@ use one vs other -->
         <category>编程理论</category>
       </categories>
       <tags>
-        <tag>C++</tag>
         <tag>Java</tag>
+        <tag>C++</tag>
         <tag>回调</tag>
       </tags>
   </entry>
