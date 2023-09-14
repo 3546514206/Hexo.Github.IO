@@ -1,5 +1,5 @@
 ---
-title: GC-全流程
+title: GC——全流程
 date: 2023-08-29 15:46:59
 categories:
 - 基本功
