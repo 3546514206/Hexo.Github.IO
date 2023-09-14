@@ -12,7 +12,10 @@ tags:
 &ensp;&ensp;&ensp;&ensp; IP 协议控制传输的协议单元称为 IP 数据报（IP Datagram，IP数据报、IP包或IP分组）。IP协议屏蔽了下层各种物理子网的差异，能够向上层提供统一格式的IP数据报。lP数据报采用数据报分组传输的方式，提供的服务是无连接方式。IP数据报的格式能够说明lP协议具有什么功能。IPv4数据报由报头和数据两部分组成，其中，数据是高层需要传输的数据，报头是为了正确传输高层数据而增加的控制信息。报头的前一部分长度固定，共20字节，是所有IP数据报必须具有。在首部固定部分的后面是可选字段，长度可变。
 
 
-![IP报文结构](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/IP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84.png?raw=true)
+<!-- ![IP报文结构](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/IP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84.png?raw=true) -->
+
+
+![IP报文结构](/pic/基本功/计算机网络/IP数据报/IP报文结构.png)
 
 #### __1、固定部分__
 
