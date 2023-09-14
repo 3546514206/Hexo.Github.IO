@@ -5,7 +5,6 @@ categories:
 - 基本功
 - 编程基础
 - Go
-- GPM
 tags:
 - Go
 - GPM
