@@ -108,10 +108,10 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h4 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a><strong>1、简介</strong></h4><p>&ensp;&ensp;&ensp;&ensp; TCP：传输、控制、协议。</p>
+  <h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a><strong>1、简介</strong></h2><p>&ensp;&ensp;&ensp;&ensp; TCP：传输、控制、协议。</p>
 <p>&ensp;&ensp;&ensp;&ensp; TCP 与UDP 最大却别就在那个C上面，它充分实现了数据传输时各种控制功能。可以进行丢包重发控制，还可以对次序乱掉的数据包进行顺序控制，还能控制传输流量，这些是UDP中没有的。即 TCP 提供一种面向连接的、可靠的字节流服务。TCP 是一中面向有链接的协议，只有在确认对端存在的时候，才会发送分数据，从而也可以控制通信流量的浪费。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 什么是可靠的传输：不丢包、不损坏、不乱序、不重复。TCP 通过校验和、序列号、确认应答、重发控制、连接管理以及窗口控制等机制来实现可靠传输。接收端查询就收数据 TCP 首部中的序号和数据长度。将自己下一步应该接受的序列号作为确认应答返送回去。就这样，通过序列号和确认应答，TCP 实现可靠传输。一般使用 TCP 首部用于控制的字段来管理连接。一个连接的建立和断开，正常过程中，至少需要来回共 7 个包才能完成。</p>
-<h4 id="2、TCP首部"><a href="#2、TCP首部" class="headerlink" title="2、TCP首部"></a><strong>2、TCP首部</strong></h4><p>&ensp;&ensp;&ensp;&ensp; TCP首部的数据结构如图所示：</p>
+<h2 id="2、TCP首部"><a href="#2、TCP首部" class="headerlink" title="2、TCP首部"></a><strong>2、TCP首部</strong></h2><p>&ensp;&ensp;&ensp;&ensp; TCP首部的数据结构如图所示：</p>
 <p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD%E7%AE%80%E6%9E%90/TCP%E9%A6%96%E9%83%A8.webp" alt="TCP首部"></p>
 <p>&ensp;&ensp;&ensp;&ensp; 为了便于理解，忽略选项部分，固定首部通常为20个字节，将按作用分类分析。</p>
 <h4 id="2-1、端口号-port"><a href="#2-1、端口号-port" class="headerlink" title="2.1、端口号(port)"></a><strong>2.1、端口号(port)</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 前 4 个字节来标识了发送方的端口号和接收方的端口号，即该数据包由谁发送，由谁接收。前 2 个字节标识源端口号，紧接着 2 个字节标识目的端口号。</p>
