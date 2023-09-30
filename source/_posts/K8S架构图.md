@@ -17,3 +17,7 @@ tags:
 &ensp;&ensp;&ensp;&ensp; K8S 架构图：
 
 ![K8S架构图](/pic/工程/云计算/K8S/K8S架构图/K8S架构图.png)
+
+&ensp;&ensp;&ensp;&ensp; K8S 分层架构：
+
+![K8S分层架构](/pic/工程/云计算/K8S/K8S架构图/K8S分层架构.webp)
