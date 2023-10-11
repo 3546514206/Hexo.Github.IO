@@ -116,7 +116,7 @@
   <entry>
     <title>谈谈云原生</title>
     <url>/2023/09/13/%E8%B0%88%E8%B0%88%E4%BA%91%E5%8E%9F%E7%94%9F/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 之前关于云计算技术底座的部门会谈，我本着程序员实事求是的态度，表示自己其实并不懂云原生。前段时间云技术底座的模型验证，遇到一个测试案例叫做“白屏纳管”，意思是指 CAAS 平台能够对包括云下硬件负载 F5、A10，云上 SLB 等设备进行管理。云原生技术有着太多的这种花里胡哨的名词，将本来很简单的一件事情包装出个能吓住人的词，来提高理解的门槛。作为一个一线开发，我有一种很深切的感受：很多优秀的设计，都是有着简洁优雅的设计原理或者说思想蕴含其中。这种没什么太多内涵的毫无意义的造词运动，对于工程实践，没有任何好处。虽然大家都在说云原生，就好比全世界都知道相对论，但未必参与讨论的所有人都真的体系化地学习过经典物理学，都掌握必要的数学工具；未必所有参与讨论的人都具备共同水平的认知体系，所以每个人都坚定不移的认为自己掌握的就是真理，自己的理解便是全貌事物。我们不应该人云亦云盲目从众，也不应该以偏概全一叶障目。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 之前关于云计算技术底座的部门会谈，我本着程序员实事求是的态度，表示自己其实并不懂云原生。前段时间云技术底座的模型验证，遇到一个测试案例叫做“白屏纳管”，意思是指 CAAS 平台能够对包括云下硬件负载 F5、A10，云上 SLB 等设备进行管理。云原生技术有着太多的这种花里胡哨的名词，将本来很简单的一件事情包装出个能吓住人的词，来提高理解的门槛。作为一个一线开发，我有一种很深切的感受：很多优秀的设计，都是有着简洁优雅的设计原理或者说思想蕴含其中。这种没什么太多内涵的毫无意义的造词运动，对于工程实践，没有任何好处。我们不应该人云亦云盲目从众，也不应该以偏概全一叶障目。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 以下是阿里云公众号某产品经理关于云原生的解释，我截了图如下：</p>
 <p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/%E4%BA%91%E5%8E%9F%E7%94%9F/%E8%B0%88%E8%B0%88%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%91%E5%8E%9F%E7%94%9F/%E9%98%BF%E9%87%8C%E4%BA%91%E4%BA%91%E5%8E%9F%E7%94%9F%E5%85%AC%E4%BC%97%E5%8F%B7%E6%9F%90%E6%96%87%E7%AB%A0.jpg" alt="阿里云云原生公众号某文章"></p>
 <p>&ensp;&ensp;&ensp;&ensp; 这段话讲得没有问题，但是似乎又什么都没讲，对于云原生的定义，这种似是而非的说法显然不是一线开发人员想要的答案。</p>
@@ -6289,8 +6289,8 @@ use one vs other -->
         <category>Spring</category>
       </categories>
       <tags>
-        <tag>Spring</tag>
         <tag>Java EE</tag>
+        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
@@ -6347,10 +6347,10 @@ use one vs other -->
         <category>Tomcat</category>
       </categories>
       <tags>
-        <tag>Java EE</tag>
         <tag>Tomcat</tag>
         <tag>Java Web</tag>
         <tag>Servlet</tag>
+        <tag>Java EE</tag>
       </tags>
   </entry>
   <entry>
