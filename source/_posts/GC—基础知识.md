@@ -4,7 +4,7 @@ date: 2023-08-28 23:31:37
 categories: 
 - 基本功
 - 编程基础
-- Java
+- 编程语言
 tags:
 - Java
 - JVM
