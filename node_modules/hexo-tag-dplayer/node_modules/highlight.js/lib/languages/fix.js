@@ -13,7 +13,7 @@ module.exports = function(hljs) {
         end: /=([^\u2401\u0001=]+)/,
         returnEnd: true,
         returnBegin: false,
-        className: 'attr'
+        className: 'attribute'
       },
       {
         begin: /=/,

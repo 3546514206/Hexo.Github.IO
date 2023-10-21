@@ -25,7 +25,7 @@ module.exports = function(hljs) {
       hljs.C_BLOCK_COMMENT_MODE,
       hljs.C_NUMBER_MODE,
       {
-        className: 'class',
+        className: 'package',
         beginKeywords: 'package', end: '{',
         contains: [hljs.TITLE_MODE]
       },
@@ -40,9 +40,8 @@ module.exports = function(hljs) {
         ]
       },
       {
-        className: 'meta',
-        beginKeywords: 'import include', end: ';',
-        keywords: {'meta-keyword': 'import include'}
+        className: 'preprocessor',
+        beginKeywords: 'import include', end: ';'
       },
       {
         className: 'function',
@@ -62,11 +61,13 @@ module.exports = function(hljs) {
             ]
           },
           {
-            begin: ':\\s*' + IDENT_FUNC_RETURN_TYPE_RE
+            className: 'type',
+            begin: ':',
+            end: IDENT_FUNC_RETURN_TYPE_RE,
+            relevance: 10
           }
         ]
-      },
-      hljs.METHOD_GUARD
+      }
     ],
     illegal: /#/
   };

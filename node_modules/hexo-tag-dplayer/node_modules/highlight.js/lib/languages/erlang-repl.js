@@ -1,15 +1,15 @@
 module.exports = function(hljs) {
   return {
     keywords: {
-      built_in:
+      special_functions:
         'spawn spawn_link self',
-      keyword:
+      reserved:
         'after and andalso|10 band begin bnot bor bsl bsr bxor case catch cond div end fun if ' +
         'let not of or orelse|10 query receive rem try when xor'
     },
     contains: [
       {
-        className: 'meta', begin: '^[0-9]+> ',
+        className: 'prompt', begin: '^[0-9]+> ',
         relevance: 10
       },
       hljs.COMMENT('%', '$'),
@@ -21,22 +21,24 @@ module.exports = function(hljs) {
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE,
       {
-        begin: '\\?(::)?([A-Z]\\w*(::)?)+'
+        className: 'constant', begin: '\\?(::)?([A-Z]\\w*(::)?)+'
       },
       {
-        begin: '->'
+        className: 'arrow', begin: '->'
       },
       {
-        begin: 'ok'
+        className: 'ok', begin: 'ok'
       },
       {
-        begin: '!'
+        className: 'exclamation_mark', begin: '!'
       },
       {
+        className: 'function_or_atom',
         begin: '(\\b[a-z\'][a-zA-Z0-9_\']*:[a-z\'][a-zA-Z0-9_\']*)|(\\b[a-z\'][a-zA-Z0-9_\']*)',
         relevance: 0
       },
       {
+        className: 'variable',
         begin: '[A-Z][a-zA-Z0-9_\']*',
         relevance: 0
       }

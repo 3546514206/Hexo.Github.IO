@@ -40,7 +40,7 @@ module.exports = function(hljs) {
         /* the grammar is ambiguous on how 'a'b should be interpreted but not the compiler */
       },
       { /* polymorphic variant */
-        className: 'type',
+        className: 'tag',
         begin: '`[A-Z][\\w\']*'
       },
       { /* module or constructor */
@@ -49,9 +49,9 @@ module.exports = function(hljs) {
         relevance: 0
       },
       { /* don't color identifiers, but safely catch all identifiers with '*/
-        begin: '[a-z_]\\w*\'[\\w\']*', relevance: 0
+        begin: '[a-z_]\\w*\'[\\w\']*'
       },
-      hljs.inherit(hljs.APOS_STRING_MODE, {className: 'string', relevance: 0}),
+      hljs.inherit(hljs.APOS_STRING_MODE, {className: 'char', relevance: 0}),
       hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null}),
       {
         className: 'number',

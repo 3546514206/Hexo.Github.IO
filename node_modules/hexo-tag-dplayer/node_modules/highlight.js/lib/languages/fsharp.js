@@ -41,12 +41,12 @@ module.exports = function(hljs) {
         ]
       },
       {
-        className: 'meta',
+        className: 'annotation',
         begin: '\\[<', end: '>\\]',
         relevance: 10
       },
       {
-        className: 'symbol',
+        className: 'attribute',
         begin: '\\B(\'[A-Za-z])\\b',
         contains: [hljs.BACKSLASH_ESCAPE]
       },

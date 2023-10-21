@@ -192,7 +192,7 @@ function(hljs) {
    * @type {Object}
    */
   var D_HASHBANG_MODE = {
-    className: 'meta',
+    className: 'shebang',
     begin: '^#!',
     end: '$',
     relevance: 5
@@ -204,7 +204,7 @@ function(hljs) {
    * @type {Object}
    */
   var D_SPECIAL_TOKEN_SEQUENCE_MODE = {
-    className: 'meta',
+    className: 'preprocessor',
     begin: '#(line)',
     end: '$',
     relevance: 5

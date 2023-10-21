@@ -7,53 +7,73 @@
 
 /* Kimbie Comment */
 .hljs-comment,
-.hljs-quote {
+.hljs-title {
   color: #a57a4c;
 }
 
 /* Kimbie Red */
 .hljs-variable,
-.hljs-template-variable,
+.hljs-attribute,
 .hljs-tag,
-.hljs-name,
-.hljs-selector-id,
-.hljs-selector-class,
 .hljs-regexp,
-.hljs-meta {
+.hljs-name,
+.ruby .hljs-constant,
+.xml .hljs-tag .hljs-title,
+.xml .hljs-pi,
+.xml .hljs-doctype,
+.html .hljs-doctype,
+.css .hljs-id,
+.css .hljs-class,
+.css .hljs-pseudo {
   color: #dc3958;
 }
 
 /* Kimbie Orange */
 .hljs-number,
+.hljs-preprocessor,
 .hljs-built_in,
-.hljs-builtin-name,
 .hljs-literal,
-.hljs-type,
 .hljs-params,
-.hljs-deletion,
-.hljs-link {
+.hljs-constant {
   color: #f79a32;
 }
 
 /* Kimbie Yellow */
-.hljs-title,
-.hljs-section,
-.hljs-attribute {
+.ruby .hljs-class .hljs-title,
+.css .hljs-rule .hljs-attribute {
   color: #f06431;
 }
 
 /* Kimbie Green */
 .hljs-string,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-addition {
+.hljs-value,
+.hljs-inheritance,
+.hljs-header,
+.ruby .hljs-symbol,
+.xml .hljs-cdata {
   color: #889b4a;
+}
+
+/* Kimbie Aqua */
+.css .hljs-hexcolor {
+  color: #088649;
+}
+
+/* Kimbie Blue */
+.hljs-function,
+.python .hljs-decorator,
+.python .hljs-title,
+.ruby .hljs-function .hljs-title,
+.ruby .hljs-title .hljs-keyword,
+.perl .hljs-sub,
+.javascript .hljs-title,
+.coffeescript .hljs-title {
+  color: #8ab1b0;
 }
 
 /* Kimbie Purple */
 .hljs-keyword,
-.hljs-selector-tag,
-.hljs-function {
+.javascript .hljs-function {
   color: #98676a;
 }
 
@@ -63,12 +83,15 @@
   background: #fbebd4;
   color: #84613d;
   padding: 0.5em;
+  -webkit-text-size-adjust: none;
 }
 
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: bold;
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
+  opacity: 0.5;
 }

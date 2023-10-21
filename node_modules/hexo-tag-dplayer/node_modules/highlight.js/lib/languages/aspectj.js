@@ -18,16 +18,10 @@ module.exports = function (hljs) {
         '\\*/',
         {
           relevance : 0,
-          contains : [
-            {
-              // eat up @'s in emails to prevent them to be recognized as doctags
-              begin: /\w+@/, relevance: 0
-            },
-            {
-              className : 'doctag',
-              begin : '@[A-Za-z]+'
-            }
-          ]
+          contains : [{
+            className : 'doctag',
+            begin : '@[A-Za-z]+'
+          }]
         }
       ),
       hljs.C_LINE_COMMENT_MODE,
@@ -35,7 +29,7 @@ module.exports = function (hljs) {
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE,
       {
-        className : 'class',
+        className : 'aspect',
         beginKeywords : 'aspect',
         end : /[{;=]/,
         excludeEnd : true,
@@ -91,8 +85,7 @@ module.exports = function (hljs) {
         contains : [
           {
             begin : hljs.UNDERSCORE_IDENT_RE + '\\s*\\(',
-            keywords : KEYWORDS + ' ' + SHORTKEYS,
-            relevance: 0
+            keywords : KEYWORDS + ' ' + SHORTKEYS
           },
           hljs.QUOTE_STRING_MODE
         ]
@@ -136,7 +129,7 @@ module.exports = function (hljs) {
       hljs.C_NUMBER_MODE,
       {
         // annotation is also used in this language
-        className : 'meta',
+        className : 'annotation',
         begin : '@[A-Za-z]+'
       }
     ]

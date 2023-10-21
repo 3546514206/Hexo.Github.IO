@@ -1,11 +1,17 @@
 module.exports = function(hljs) {
     var GCODE_IDENT_RE = '[A-Z_][A-Z0-9_.]*';
     var GCODE_CLOSE_RE = '\\%';
-    var GCODE_KEYWORDS =
-      'IF DO WHILE ENDWHILE CALL ENDIF SUB ENDSUB GOTO REPEAT ENDREPEAT ' +
-      'EQ LT GT NE GE LE OR XOR';
+    var GCODE_KEYWORDS = {
+        literal:
+            '',
+        built_in:
+            '',
+        keyword:
+            'IF DO WHILE ENDWHILE CALL ENDIF SUB ENDSUB GOTO REPEAT ENDREPEAT ' +
+            'EQ LT GT NE GE LE OR XOR'
+    };
     var GCODE_START = {
-        className: 'meta',
+        className: 'preprocessor',
         begin: '([O])([0-9]+)'
     };
     var GCODE_CODE = [
@@ -16,20 +22,20 @@ module.exports = function(hljs) {
         hljs.inherit(hljs.APOS_STRING_MODE, {illegal: null}),
         hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null}),
         {
-            className: 'name',
+            className: 'keyword',
             begin: '([G])([0-9]+\\.?[0-9]?)'
         },
         {
-            className: 'name',
+            className: 'title',
             begin: '([M])([0-9]+\\.?[0-9]?)'
         },
         {
-            className: 'attr',
+            className: 'title',
             begin: '(VC|VS|#)',
             end: '(\\d+)'
         },
         {
-            className: 'attr',
+            className: 'title',
             begin: '(VZOFX|VZOFY|VZOFZ)'
         },
         {
@@ -38,7 +44,7 @@ module.exports = function(hljs) {
             end: '([-+]?([0-9]*\\.?[0-9]+\\.?))(\\])'
         },
         {
-            className: 'symbol',
+            className: 'label',
             variants: [
                 {
                     begin: 'N', end: '\\d+',
@@ -57,7 +63,7 @@ module.exports = function(hljs) {
         keywords: GCODE_KEYWORDS,
         contains: [
             {
-                className: 'meta',
+                className: 'preprocessor',
                 begin: GCODE_CLOSE_RE
             },
             GCODE_START

@@ -29,7 +29,7 @@
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
     "hexo-tag-aplayer": "^3.0.4",
-    "hexo-tag-dplayer": "^0.3.3",
+    "hexo-tag-dplayer": "^0.1.6",
     "hexo-theme-landscape": "^1.0.0"
   }
 }

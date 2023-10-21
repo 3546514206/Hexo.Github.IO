@@ -3,7 +3,7 @@ module.exports = function(hljs) {
   var MEC_RE = '\\|[^]*?\\|';
   var LISP_SIMPLE_NUMBER_RE = '(\\-|\\+)?\\d+(\\.\\d+|\\/\\d+)?((d|e|f|l|s|D|E|F|L|S)(\\+|\\-)?\\d+)?';
   var SHEBANG = {
-    className: 'meta',
+    className: 'shebang',
     begin: '^#!', end: '$'
   };
   var LITERAL = {
@@ -28,10 +28,11 @@ module.exports = function(hljs) {
     }
   );
   var VARIABLE = {
+    className: 'variable',
     begin: '\\*', end: '\\*'
   };
   var KEYWORD = {
-    className: 'symbol',
+    className: 'keyword',
     begin: '[:&]' + LISP_IDENT_RE
   };
   var IDENT = {
@@ -46,6 +47,7 @@ module.exports = function(hljs) {
     contains: ['self', LITERAL, STRING, NUMBER, IDENT]
   };
   var QUOTED = {
+    className: 'quoted',
     contains: [NUMBER, STRING, VARIABLE, KEYWORD, QUOTED_LIST, IDENT],
     variants: [
       {
@@ -53,7 +55,7 @@ module.exports = function(hljs) {
       },
       {
         begin: '\\(quote ', end: '\\)',
-        keywords: {name: 'quote'}
+        keywords: 'quote'
       },
       {
         begin: '\'' + MEC_RE
@@ -61,12 +63,14 @@ module.exports = function(hljs) {
     ]
   };
   var QUOTED_ATOM = {
+    className: 'quoted',
     variants: [
       {begin: '\'' + LISP_IDENT_RE},
       {begin: '#\'' + LISP_IDENT_RE + '(::' + LISP_IDENT_RE + ')*'}
     ]
   };
   var LIST = {
+    className: 'list',
     begin: '\\(\\s*', end: '\\)'
   };
   var BODY = {
@@ -75,7 +79,7 @@ module.exports = function(hljs) {
   };
   LIST.contains = [
     {
-      className: 'name',
+      className: 'keyword',
       variants: [
         {begin: LISP_IDENT_RE},
         {begin: MEC_RE}

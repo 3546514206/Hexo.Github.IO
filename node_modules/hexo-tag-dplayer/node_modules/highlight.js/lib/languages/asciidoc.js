@@ -34,16 +34,18 @@ module.exports = function(hljs) {
       },
       // headings
       {
-        className: 'section',
-        relevance: 10,
-        variants: [
-          {begin: '^(={1,5}) .+?( \\1)?$'},
-          {begin: '^[^\\[\\]\\n]+?\\n[=\\-~\\^\\+]{2,}$'},
-        ]
+        className: 'header',
+        begin: '^(={1,5}) .+?( \\1)?$',
+        relevance: 10
+      },
+      {
+        className: 'header',
+        begin: '^[^\\[\\]\\n]+?\\n[=\\-~\\^\\+]{2,}$',
+        relevance: 10
       },
       // document attributes
       {
-        className: 'meta',
+        className: 'attribute',
         begin: '^:.+?:',
         end: '\\s',
         excludeEnd: true,
@@ -51,13 +53,13 @@ module.exports = function(hljs) {
       },
       // block attributes
       {
-        className: 'meta',
+        className: 'attribute',
         begin: '^\\[.+?\\]$',
         relevance: 0
       },
       // quoteblocks
       {
-        className: 'quote',
+        className: 'blockquote',
         begin: '^_{4,}\\n',
         end: '\\n_{4,}$',
         relevance: 10
@@ -89,7 +91,7 @@ module.exports = function(hljs) {
       },
       // admonition
       {
-        className: 'symbol',
+        className: 'label',
         begin: '^(NOTE|TIP|IMPORTANT|WARNING|CAUTION):\\s+',
         relevance: 10
       },
@@ -132,7 +134,7 @@ module.exports = function(hljs) {
       },
       // inline smart quotes
       {
-        className: 'string',
+        className: 'smartquote',
         variants: [
           {begin: "``.+?''"},
           {begin: "`.+?'"}
@@ -153,6 +155,7 @@ module.exports = function(hljs) {
       },
       // horizontal rules
       {
+        className: 'horizontal_rule',
         begin: '^\'{3,}[ \\t]*$',
         relevance: 10
       },
@@ -162,17 +165,18 @@ module.exports = function(hljs) {
         returnBegin: true,
         contains: [
           {
+            //className: 'macro',
             begin: '(link|image:?):',
             relevance: 0
           },
           {
-            className: 'link',
+            className: 'link_url',
             begin: '\\w',
             end: '[^\\[]+',
             relevance: 0
           },
           {
-            className: 'string',
+            className: 'link_label',
             begin: '\\[',
             end: '\\]',
             excludeBegin: true,

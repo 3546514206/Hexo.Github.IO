@@ -5,7 +5,8 @@ module.exports = function(hljs) {
           'println readln print import module function local return let var ' +
           'while for foreach times in case when match with break continue ' +
           'augment augmentation each find filter reduce ' +
-          'if then else otherwise try catch finally raise throw orIfNull ' +
+          'if then else otherwise try catch finally raise throw orIfNull',
+        typename:
           'DynamicObject|10 DynamicVariable struct Observable map set vector list array',
         literal:
           'true false null'
@@ -15,7 +16,7 @@ module.exports = function(hljs) {
         hljs.QUOTE_STRING_MODE,
         hljs.C_NUMBER_MODE,
         {
-          className: 'meta', begin: '@[A-Za-z]+'
+          className: 'annotation', begin: '@[A-Za-z]+'
         }
       ]
     }

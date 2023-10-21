@@ -5,15 +5,15 @@ module.exports = function(hljs) {
     case_insensitive: true,
     contains: [
       hljs.HASH_COMMENT_MODE,
-      {className: 'section', begin: '</?', end: '>'},
+      {className: 'tag', begin: '</?', end: '>'},
       {
-        className: 'attribute',
+        className: 'keyword',
         begin: /\w+/,
         relevance: 0,
         // keywords aren’t needed for highlighting per se, they only boost relevance
         // for a very generally defined mode (starts with a word, ends with line-end
         keywords: {
-          nomarkup:
+          common:
             'order deny allow setenv rewriterule rewriteengine rewritecond documentroot ' +
             'sethandler errordocument loadmodule options header listen serverroot ' +
             'servername'
@@ -26,11 +26,11 @@ module.exports = function(hljs) {
           },
           contains: [
             {
-              className: 'meta',
+              className: 'sqbracket',
               begin: '\\s\\[', end: '\\]$'
             },
             {
-              className: 'variable',
+              className: 'cbracket',
               begin: '[\\$%]\\{', end: '\\}',
               contains: ['self', NUMBER]
             },

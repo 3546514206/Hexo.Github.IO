@@ -30,7 +30,7 @@ module.exports = function(hljs) {
         ]
       },
       {
-        className: 'section',
+        className: 'title',
         begin: /^(Volume|Book|Part|Chapter|Section|Table)\b/,
         end: '$'
       },
@@ -42,7 +42,8 @@ module.exports = function(hljs) {
         contains: [
           {
             //Rule name
-            begin: '\\(This', end: '\\)'
+            begin: '\\b\\(This',
+            end: '\\)'
           }
         ]
       },

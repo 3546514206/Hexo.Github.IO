@@ -6,25 +6,28 @@ module.exports = function(hljs) {
     subLanguage: 'xml',
     contains: [
       {
-        className: 'template-tag',
-        begin: /\{[#\/]/, end: /\}/, illegal: /;/,
+        className: 'expression',
+        begin: '{', end: '}',
+        relevance: 0,
         contains: [
           {
-            className: 'name',
-            begin: /[a-zA-Z\.-]+/,
-            starts: {
-              endsWithParent: true, relevance: 0,
-              contains: [
-                hljs.QUOTE_STRING_MODE
-              ]
-            }
+            className: 'begin-block', begin: '\#[a-zA-Z\-\ \.]+',
+            keywords: EXPRESSION_KEYWORDS
+          },
+          {
+            className: 'string',
+            begin: '"', end: '"'
+          },
+          {
+            className: 'end-block', begin: '\\\/[a-zA-Z\-\ \.]+',
+            keywords: EXPRESSION_KEYWORDS
+          },
+          {
+            className: 'variable', begin: '[a-zA-Z\-\.]+',
+            keywords: EXPRESSION_KEYWORDS,
+            relevance: 0
           }
         ]
-      },
-      {
-        className: 'template-variable',
-        begin: /\{/, end: /\}/, illegal: /;/,
-        keywords: EXPRESSION_KEYWORDS
       }
     ]
   };

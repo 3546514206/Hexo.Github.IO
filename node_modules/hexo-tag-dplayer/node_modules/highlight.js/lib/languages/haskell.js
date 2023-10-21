@@ -1,24 +1,22 @@
 module.exports = function(hljs) {
-  var COMMENT = {
-    variants: [
-      hljs.COMMENT('--', '$'),
-      hljs.COMMENT(
-        '{-',
-        '-}',
-        {
-          contains: ['self']
-        }
-      )
-    ]
-  };
+  var COMMENT_MODES = [
+    hljs.COMMENT('--', '$'),
+    hljs.COMMENT(
+      '{-',
+      '-}',
+      {
+        contains: ['self']
+      }
+    )
+  ];
 
   var PRAGMA = {
-    className: 'meta',
+    className: 'pragma',
     begin: '{-#', end: '#-}'
   };
 
   var PREPROCESSOR = {
-    className: 'meta',
+    className: 'preprocessor',
     begin: '^#', end: '$'
   };
 
@@ -29,18 +27,19 @@ module.exports = function(hljs) {
   };
 
   var LIST = {
+    className: 'container',
     begin: '\\(', end: '\\)',
     illegal: '"',
     contains: [
       PRAGMA,
       PREPROCESSOR,
       {className: 'type', begin: '\\b[A-Z][\\w]*(\\((\\.\\.|,|\\w+)\\))?'},
-      hljs.inherit(hljs.TITLE_MODE, {begin: '[_a-z][\\w\']*'}),
-      COMMENT
-    ]
+      hljs.inherit(hljs.TITLE_MODE, {begin: '[_a-z][\\w\']*'})
+    ].concat(COMMENT_MODES)
   };
 
   var RECORD = {
+    className: 'container',
     begin: '{', end: '}',
     contains: LIST.contains
   };
@@ -57,15 +56,17 @@ module.exports = function(hljs) {
       // Top-level constructions.
 
       {
-        beginKeywords: 'module', end: 'where',
+        className: 'module',
+        begin: '\\bmodule\\b', end: 'where',
         keywords: 'module where',
-        contains: [LIST, COMMENT],
+        contains: [LIST].concat(COMMENT_MODES),
         illegal: '\\W\\.|;'
       },
       {
+        className: 'import',
         begin: '\\bimport\\b', end: '$',
-        keywords: 'import qualified as hiding',
-        contains: [LIST, COMMENT],
+        keywords: 'import|0 qualified as hiding',
+        contains: [LIST].concat(COMMENT_MODES),
         illegal: '\\W\\.|;'
       },
 
@@ -73,30 +74,33 @@ module.exports = function(hljs) {
         className: 'class',
         begin: '^(\\s*)?(class|instance)\\b', end: 'where',
         keywords: 'class family instance where',
-        contains: [CONSTRUCTOR, LIST, COMMENT]
+        contains: [CONSTRUCTOR, LIST].concat(COMMENT_MODES)
       },
       {
-        className: 'class',
+        className: 'typedef',
         begin: '\\b(data|(new)?type)\\b', end: '$',
         keywords: 'data family type newtype deriving',
-        contains: [PRAGMA, CONSTRUCTOR, LIST, RECORD, COMMENT]
+        contains: [PRAGMA, CONSTRUCTOR, LIST, RECORD].concat(COMMENT_MODES)
       },
       {
+        className: 'default',
         beginKeywords: 'default', end: '$',
-        contains: [CONSTRUCTOR, LIST, COMMENT]
+        contains: [CONSTRUCTOR, LIST].concat(COMMENT_MODES)
       },
       {
+        className: 'infix',
         beginKeywords: 'infix infixl infixr', end: '$',
-        contains: [hljs.C_NUMBER_MODE, COMMENT]
+        contains: [hljs.C_NUMBER_MODE].concat(COMMENT_MODES)
       },
       {
+        className: 'foreign',
         begin: '\\bforeign\\b', end: '$',
         keywords: 'foreign import export ccall stdcall cplusplus jvm ' +
                   'dotnet safe unsafe',
-        contains: [CONSTRUCTOR, hljs.QUOTE_STRING_MODE, COMMENT]
+        contains: [CONSTRUCTOR, hljs.QUOTE_STRING_MODE].concat(COMMENT_MODES)
       },
       {
-        className: 'meta',
+        className: 'shebang',
         begin: '#!\\/usr\\/bin\\/env\ runhaskell', end: '$'
       },
 
@@ -113,9 +117,7 @@ module.exports = function(hljs) {
       CONSTRUCTOR,
       hljs.inherit(hljs.TITLE_MODE, {begin: '^[_a-z][\\w\']*'}),
 
-      COMMENT,
-
       {begin: '->|<-'} // No markup, relevance booster
-    ]
+    ].concat(COMMENT_MODES)
   };
 };

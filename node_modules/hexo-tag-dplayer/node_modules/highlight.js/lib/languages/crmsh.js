@@ -21,7 +21,9 @@ module.exports = function(hljs) {
     aliases: ['crm', 'pcmk'],
     case_insensitive: true,
     keywords: {
-      keyword: KEYWORDS + ' ' + OPERATORS + ' ' + TYPES,
+      keyword: KEYWORDS,
+      operator: OPERATORS,
+      type: TYPES,
       literal: LITERALS
     },
     contains: [
@@ -29,6 +31,7 @@ module.exports = function(hljs) {
       {
         beginKeywords: 'node',
         starts: {
+          className: 'identifier',
           end: '\\s*([\\w_-]+:)?',
           starts: {
             className: 'title',
@@ -42,7 +45,8 @@ module.exports = function(hljs) {
           className: 'title',
           end: '\\s*[\\$\\w_][\\w_-]*',
           starts: {
-            end: '\\s*@?[\\w_][\\w_\\.:-]*'
+            className: 'pragma',
+            end: '\\s*@?[\\w_][\\w_\\.:-]*',
           }
         }
       },
@@ -51,7 +55,7 @@ module.exports = function(hljs) {
         keywords: COMMANDS,
         starts: {
           className: 'title',
-          end: '[\\$\\w_][\\w_-]*'
+          end: '[\\$\\w_][\\w_-]*',
         }
       },
       {
@@ -63,7 +67,7 @@ module.exports = function(hljs) {
       },
       hljs.QUOTE_STRING_MODE,
       {
-        className: 'meta',
+        className: 'pragma',
         begin: '(ocf|systemd|service|lsb):[\\w_:-]+',
         relevance: 0
       },
@@ -73,12 +77,12 @@ module.exports = function(hljs) {
         relevance: 0
       },
       {
-        className: 'literal',
+        className: 'number',
         begin: '[-]?(infinity|inf)',
         relevance: 0
       },
       {
-        className: 'attr',
+        className: 'variable',
         begin: /([A-Za-z\$_\#][\w_-]+)=/,
         relevance: 0
       },

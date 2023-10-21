@@ -15,12 +15,12 @@ module.exports = function(hljs) {
       hljs.NUMBER_MODE,
       hljs.HASH_COMMENT_MODE,
       {
-        className: 'meta',
+        className: 'shebang',
         begin: /@0x[\w\d]{16};/,
         illegal: /\n/
       },
       {
-        className: 'symbol',
+        className: 'number',
         begin: /@\d+\b/
       },
       {

@@ -10,62 +10,88 @@ Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
   padding: 0.5em;
   color: #000;
   background: #fff;
+  -webkit-text-size-adjust: none;
 }
 
 .hljs-subst,
-.hljs-title {
+.hljs-title,
+.json .hljs-value {
   font-weight: normal;
   color: #000;
 }
 
 .hljs-comment,
-.hljs-quote {
+.diff .hljs-header {
   color: #808080;
   font-style: italic;
 }
 
-.hljs-meta {
+.hljs-annotation,
+.hljs-decorator,
+.hljs-preprocessor,
+.hljs-pragma,
+.hljs-doctype,
+.hljs-pi,
+.hljs-chunk,
+.hljs-shebang,
+.apache .hljs-cbracket,
+.hljs-prompt,
+.http .hljs-title {
   color: #808000;
 }
 
-.hljs-tag {
+.hljs-tag,
+.hljs-pi {
   background: #efefef;
 }
 
-.hljs-section,
-.hljs-name,
+.hljs-tag .hljs-title,
+.hljs-id,
+.hljs-attr_selector,
+.hljs-pseudo,
 .hljs-literal,
 .hljs-keyword,
-.hljs-selector-tag,
-.hljs-type,
-.hljs-selector-id,
-.hljs-selector-class {
+.hljs-hexcolor,
+.css .hljs-function,
+.ini .hljs-title,
+.css .hljs-class,
+.hljs-list .hljs-keyword,
+.nginx .hljs-title,
+.tex .hljs-command,
+.hljs-request,
+.hljs-status {
   font-weight: bold;
   color: #000080;
 }
 
 .hljs-attribute,
+.hljs-rule .hljs-keyword,
 .hljs-number,
+.hljs-date,
 .hljs-regexp,
-.hljs-link {
+.tex .hljs-special {
   font-weight: bold;
   color: #0000ff;
 }
 
 .hljs-number,
-.hljs-regexp,
-.hljs-link {
+.hljs-regexp {
   font-weight: normal;
 }
 
-.hljs-string {
+.hljs-string,
+.hljs-value,
+.hljs-filter .hljs-argument,
+.css .hljs-function .hljs-params,
+.apache .hljs-tag {
   color: #008000;
   font-weight: bold;
 }
 
 .hljs-symbol,
-.hljs-bullet,
-.hljs-formula {
+.ruby .hljs-symbol .hljs-string,
+.hljs-char,
+.tex .hljs-formula {
   color: #000;
   background: #d0eded;
   font-style: italic;
@@ -76,7 +102,10 @@ Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .hljs-variable,
-.hljs-template-variable {
+.hljs-envvar,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in,
+.hljs-name {
   color: #660e7a;
 }
 
@@ -88,10 +117,6 @@ Intellij Idea-like styling (c) Vasily Polovnyov <vast@whiteants.net>
   background: #ffc8bd;
 }
 
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: bold;
+.diff .hljs-change {
+  background: #bccff9;
 }

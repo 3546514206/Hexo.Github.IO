@@ -12,6 +12,7 @@ module.exports = function(hljs) {
   // 7.4.2 Documentation
   var DOCUMENTATION =
     'doc by license see throws tagged';
+  var LANGUAGE_ANNOTATIONS = DECLARATION_MODIFIERS + ' ' + DOCUMENTATION;
   var SUBST = {
     className: 'subst', excludeBegin: true, excludeEnd: true,
     begin: /``/, end: /``/,
@@ -49,8 +50,8 @@ module.exports = function(hljs) {
 
   return {
     keywords: {
-      keyword: KEYWORDS + ' ' + DECLARATION_MODIFIERS,
-      meta: DOCUMENTATION
+      keyword: KEYWORDS,
+      annotation: LANGUAGE_ANNOTATIONS
     },
     illegal: '\\$[^01]|#[^0-9a-fA-F]',
     contains: [
@@ -58,7 +59,7 @@ module.exports = function(hljs) {
       hljs.COMMENT('/\\*', '\\*/', {contains: ['self']}),
       {
         // compiler annotation
-        className: 'meta',
+        className: 'annotation',
         begin: '@[a-z]\\w*(?:\\:\"[^\"]*\")?'
       }
     ].concat(EXPRESSIONS)

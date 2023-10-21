@@ -14,8 +14,7 @@ module.exports = function(hljs) {
     keywords: {
       keyword: 'public private property continue exit extern new try catch ' +
         'eachin not abstract final select case default const local global field ' +
-        'end if then else elseif endif while wend repeat until forever for ' +
-        'to step next return module inline throw import',
+        'end if then else elseif endif while wend repeat until forever for to step next return module inline throw',
 
       built_in: 'DebugLog DebugStop Error Print ACos ACosr ASin ASinr ATan ATan2 ATan2r ATanr Abs Abs Ceil ' +
         'Clamp Clamp Cos Cosr Exp Floor Log Max Max Min Min Pow Sgn Sgn Sin Sinr Sqrt Tan Tanr Seed PI HALFPI TWOPI',
@@ -51,16 +50,21 @@ module.exports = function(hljs) {
         ]
       },
       {
-        className: 'built_in',
+        className: 'variable',
         begin: '\\b(self|super)\\b'
       },
       {
-        className: 'meta',
-        begin: '\\s*#', end: '$',
-        keywords: {'meta-keyword': 'if else elseif endif end then'}
+        className: 'preprocessor',
+        beginKeywords: 'import',
+        end: '$'
       },
       {
-        className: 'meta',
+        className: 'preprocessor',
+        begin: '\\s*#', end: '$',
+        keywords: 'if else elseif endif end then'
+      },
+      {
+        className: 'pi',
         begin: '^\\s*strict\\b'
       },
       {

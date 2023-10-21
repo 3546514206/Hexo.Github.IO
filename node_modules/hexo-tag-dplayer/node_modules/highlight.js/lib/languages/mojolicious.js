@@ -3,7 +3,7 @@ module.exports = function(hljs) {
     subLanguage: 'xml',
     contains: [
       {
-        className: 'meta',
+        className: 'preprocessor',
         begin: '^__(END|DATA)__$'
       },
     // mojolicious line

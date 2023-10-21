@@ -21,7 +21,7 @@ module.exports = function(hljs) {
         }
       ),
       {
-        className: 'meta',
+        className: 'preprocessor',
         begin: '^@(?:BASE|USE|CLASS|OPTIONS)$',
         relevance: 10
       },

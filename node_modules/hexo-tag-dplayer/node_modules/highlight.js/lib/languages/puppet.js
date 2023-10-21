@@ -69,7 +69,7 @@ module.exports = function(hljs) {
         beginKeywords: 'define', end: /\{/,
         contains: [
           {
-            className: 'section', begin: hljs.IDENT_RE, endsParent: true
+            className: 'title', begin: hljs.IDENT_RE, endsParent: true
           }
         ]
       },
@@ -78,7 +78,7 @@ module.exports = function(hljs) {
         end: /\S/,
         contains: [
           {
-            className: 'keyword',
+            className: 'name',
             begin: hljs.IDENT_RE
           },
           {
@@ -89,14 +89,7 @@ module.exports = function(hljs) {
               STRING,
               COMMENT,
               {
-                begin:'[a-zA-Z_]+\\s*=>',
-                returnBegin: true, end: '=>',
-                contains: [
-                  {
-                    className: 'attr',
-                    begin: hljs.IDENT_RE,
-                  }
-                ]
+                begin:'[a-zA-Z_]+\\s*=>'
               },
               {
                 className: 'number',

@@ -9,58 +9,45 @@ Author: Pedro Oliveira <kanytu@gmail . com>
   display: block;
   overflow-x: auto;
   padding: 0.5em;
+  -webkit-text-size-adjust: none;
 }
 
-.hljs-number,
-.hljs-literal,
-.hljs-symbol,
-.hljs-bullet {
+.hljs-number {
   color: #6897BB;
 }
 
 .hljs-keyword,
-.hljs-selector-tag,
 .hljs-deletion {
   color: #cc7832;
 }
 
-.hljs-variable,
-.hljs-template-variable,
-.hljs-link {
-  color: #629755;
-}
-
-.hljs-comment,
-.hljs-quote {
+.hljs-comment {
   color: #808080;
 }
 
-.hljs-meta {
+.hljs-annotation {
   color: #bbb529;
 }
 
 .hljs-string,
-.hljs-attribute,
 .hljs-addition {
   color: #6A8759;
 }
 
-.hljs-section,
-.hljs-title,
-.hljs-type {
+.hljs-function .hljs-title,
+.hljs-change {
   color: #ffc66d;
 }
 
-.hljs-name,
-.hljs-selector-id,
-.hljs-selector-class {
+.hljs-tag .hljs-title,
+.hljs-doctype {
   color: #e8bf6a;
 }
 
-.hljs-emphasis {
-  font-style: italic;
+.hljs-tag .hljs-attribute {
+  color: #bababa;
 }
 
-.hljs-strong {
-  font-weight: bold;
+.hljs-tag .hljs-value {
+  color: #a5c261;
 }

@@ -1,18 +1,38 @@
 module.exports = function(hljs) {
   var STEP21_IDENT_RE = '[A-Z_][A-Z0-9_.]*';
+  var STEP21_CLOSE_RE = 'END-ISO-10303-21;';
   var STEP21_KEYWORDS = {
-    keyword: 'HEADER ENDSEC DATA'
+    literal: '',
+    built_in: '',
+    keyword:
+    'HEADER ENDSEC DATA'
   };
   var STEP21_START = {
-    className: 'meta',
+    className: 'preprocessor',
     begin: 'ISO-10303-21;',
     relevance: 10
   };
-  var STEP21_CLOSE = {
-    className: 'meta',
-    begin: 'END-ISO-10303-21;',
-    relevance: 10
-  };
+  var STEP21_CODE = [
+    hljs.C_LINE_COMMENT_MODE,
+    hljs.C_BLOCK_COMMENT_MODE,
+    hljs.COMMENT('/\\*\\*!', '\\*/'),
+    hljs.C_NUMBER_MODE,
+    hljs.inherit(hljs.APOS_STRING_MODE, {illegal: null}),
+    hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null}),
+    {
+      className: 'string',
+      begin: "'", end: "'"
+    },
+    {
+      className: 'label',
+      variants: [
+        {
+          begin: '#', end: '\\d+',
+          illegal: '\\W'
+        }
+      ]
+    }
+  ];
 
   return {
     aliases: ['p21', 'step', 'stp'],
@@ -20,27 +40,12 @@ module.exports = function(hljs) {
     lexemes: STEP21_IDENT_RE,
     keywords: STEP21_KEYWORDS,
     contains: [
-      STEP21_START,
-      STEP21_CLOSE,
-      hljs.C_LINE_COMMENT_MODE,
-      hljs.C_BLOCK_COMMENT_MODE,
-      hljs.COMMENT('/\\*\\*!', '\\*/'),
-      hljs.C_NUMBER_MODE,
-      hljs.inherit(hljs.APOS_STRING_MODE, {illegal: null}),
-      hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null}),
       {
-        className: 'string',
-        begin: "'", end: "'"
+        className: 'preprocessor',
+        begin: STEP21_CLOSE_RE,
+        relevance: 10
       },
-      {
-        className: 'symbol',
-        variants: [
-          {
-            begin: '#', end: '\\d+',
-            illegal: '\\W'
-          }
-        ]
-      }
-    ]
+      STEP21_START
+    ].concat(STEP21_CODE)
   };
 };
