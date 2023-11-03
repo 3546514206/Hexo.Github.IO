@@ -28,11 +28,11 @@ tags:
 
 #### __2、JVM中的堆结构__
 &ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：
-![JVM 分代比例](/pic/基本功/编程基础/Java/JVM/GC—基础知识/堆区的划分比例.png)
+![JVM 分代比例](/pic/基本功/编程基础/编程语言/编程语言/Java/JVM/GC—基础知识/堆区的划分比例.png)
 
 &ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to
 区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：
-![JVM 内存模型全景](/pic/基本功/编程基础/Java/JVM/GC—基础知识/JVM整体架构图.png)
+![JVM 内存模型全景](/pic/基本功/编程基础/编程语言/Java/JVM/GC—基础知识/JVM整体架构图.png)
 
 #### __2.1、为何新生代要分为三个区__
 &ensp;&ensp;&ensp;&ensp; 这里需要介绍新生代的垃圾回收算法——复制算法。该算法的核心是将可用内存按容量划分为大小

@@ -84,7 +84,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">361</span>
+            <span class="post-count">387</span>
         </span>
     </span>
 
@@ -123,6 +123,8 @@
 <p>&ensp;&ensp; Macbook Pro 显示被隐藏的文件或文件夹</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.finder AppleShowAllFiles -boolean true;killall Finder </span><br><span class="line">defaults write com.apple.finder AppleShowAllFiles -boolean false;killall Finder</span><br><span class="line"></span><br><span class="line">chflags hidden </span><br><span class="line">chflags nohidden</span><br></pre></td></tr></table></figure>
 
+<p>&ensp;&ensp; 设置环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;export PATH=&quot;/opt/homebrew/opt/go@1.20/bin:$PATH&quot;&#x27; &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure>
 
 
  
@@ -206,9 +208,9 @@
       </a>
     
     
-      <a href="/2023/08/29/Tomcat%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" class="article-nav-link">
+      <a href="/2023/08/29/%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Tomcat启动流程</div>
+        <div class="article-nav-title">回调机制</div>
       </a>
     
   </nav>
