@@ -12,4 +12,4 @@ tags:
 ---
 
 
-![JVM参数概览(JDK8)](/pic/基本功/编程基础/编程语言/Java/JVM/JVM参数概览(JDK8)/JVM参数概览(JDK8).png)
+![JVM参数概览(JDK8)](/pic/基本功/编程基础/编程语言/JVM参数概览(JDK8)/JVM参数概览(JDK8).png)
