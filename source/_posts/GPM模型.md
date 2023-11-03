@@ -3,7 +3,6 @@ title: GPM模型
 date: 2023-08-29 16:54:42
 categories: 
 - 基本功
-- 编程基础
 - 编程语言
 tags:
 - Go

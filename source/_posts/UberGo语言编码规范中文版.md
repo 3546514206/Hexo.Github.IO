@@ -3,7 +3,6 @@ title: UberGo语言编码规范中文版
 date: 2023-09-04 00:27:35
 categories: 
 - 基本功
-- 编程基础
 - 编程语言
 tags:
 - Go
