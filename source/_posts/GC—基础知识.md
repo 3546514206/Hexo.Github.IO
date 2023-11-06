@@ -26,14 +26,18 @@ tags:
 * 本地方法栈中引用的对象
 
 #### __2、JVM中的堆结构__
+
 &ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：
+
 ![JVM 分代比例](/pic/基本功/编程语言/GC—基础知识/堆区的划分比例.png)
 
 &ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to
 区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：
+
 ![JVM 内存模型全景](/pic/基本功/编程语言/GC—基础知识/JVM整体架构图.png)
 
 #### __2.1、为何新生代要分为三个区__
+
 &ensp;&ensp;&ensp;&ensp; 这里需要介绍新生代的垃圾回收算法——复制算法。该算法的核心是将可用内存按容量划分为大小
 相等的两块，每次回收周期只用其中一块，当这一块的内存用完，就将还存活的对象复制到另一块上面，然后把已使用过的内存空间清理掉。
 
@@ -44,6 +48,7 @@ tags:
 &ensp;&ensp;&ensp;&ensp; 最优设置：根据权威数据分析，90%的对象都是朝生夕死的，所以采用10%的空间用作交换区，因为交换区必须要有等量的两个，所以采用复制算法中新生代中三个区默认分配比例为8:1:1。
 
 #### __2.2、新生代对象的分配和回收__
+
 &ensp;&ensp;&ensp;&ensp; 基本上新的对象优先在 Eden 区分配；
 
 &ensp;&ensp;&ensp;&ensp; 当 Eden 区没有足够空间时，会发起一次 Minor GC；
@@ -52,6 +57,7 @@ tags:
 from 区和 to 区的两个交换区，这两个区只有一个区有数据。采用8:1:1的默认分配比例（-XX:SurvivorRatio默认为8，代表 Eden 区与 Survivor 区的大小比例）
 
 #### __2.3、老年代对象的分配和回收__
+
 &ensp;&ensp;&ensp;&ensp; 老年代的对象一般来自于新生代中的长期存活对象。这里有一概念叫做年龄阈值，每个对象定义了年龄计数器，经
 过一次 Minor GC （在交换区）后年龄加1，对象年龄达到15次后将会晋升到老年代，老年代空间不够时进行 Full GC。当然这个参数仍是可以通过 JVM 参数（-XX:MaxTenuringThreshold，默认15）来调整。
 
@@ -63,6 +69,7 @@ XX:PretenureSizeThreshold=30m，无默认值）。这样做的目的是避免在
 的晋升年龄。
 
 #### __3、JVM完整的GC流程__
+
 &ensp;&ensp;&ensp;&ensp; 对象的正常流程：Eden 区 -> Survivor 区 -> 老年代。
 
 &ensp;&ensp;&ensp;&ensp; 新生代GC：Minor GC；老年代GC：Full GC，比 Minor GC 慢10倍，JVM 会“stop the world”，严重
