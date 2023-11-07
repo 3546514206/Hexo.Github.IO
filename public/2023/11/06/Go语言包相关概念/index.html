@@ -84,7 +84,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4.5k</span>
+            <span class="post-count">5.5k</span>
         </span>
     </span>
 
@@ -93,7 +93,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">16 分钟</span>
+            <span class="post-count">20 分钟</span>
         </span>
     </span>
 </div>
@@ -243,6 +243,41 @@
 <p>&ensp;&ensp;&ensp;&ensp; 程序的初始化和执行都起始于 main 包。如果 main 包还导入了其它的包，那么就会在编译时将它们依次导入。有时一个包会被多个包同时导入，那么它只会被导入一次（例如很多包可能都会用到 fmt 包，但它只会被导入一次，因为没有必要导入多次）。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 当一个包被导入时，如果该包还导入了其它的包，那么会先将其它包导入进来，然后再对这些包中的包级常量和变量进行初始化，接着执行 init 函数（如果有的话），依次类推。等所有被导入的包都加载完毕了，就会开始对 main 包中的包级常量和变量进行初始化，然后执行 main 包中的 init 函数（如果存在的话），最后执行 main 函数。下图详细地解释了整个执行过程：</p>
 <p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/%E5%8C%85%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B.jpg" alt="包的初始化过程"></p>
+<p>&ensp;&ensp;&ensp;&ensp; init 函数特征总结：</p>
+<ul>
+<li>每个源文件都可以定义一个或多个初始化函数，但强烈建议只定义一个。</li>
+<li>编译器不保证多个初始化函数执行次序。</li>
+<li>初始化函数在单一线程被用，仅执行一次。</li>
+<li>初始化函数在包所有全局变量初始化后执行。</li>
+<li>在所有初始化函数结束后才执行 main.main。</li>
+<li>init() 函数不能被其他函数调用。</li>
+</ul>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/init%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.png" alt="init执行过程"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 所以简而言之，你只需要记住这三点就可以了：</p>
+<ul>
+<li>依赖包按“深度优先”的次序进行初始化；</li>
+<li>每个包内按以“常量 -&gt; 变量 -&gt; init 函数”的顺序进行初始化；</li>
+<li>包内的多个 init 函数按出现次序进行自动调用；</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 重点关注 init 函数具备的几种行为特征：</p>
+<ul>
+<li>执行顺位排在包内其他语法元素常量、变量的后面；</li>
+<li>每个 init 函数在整个 Go 程序生命周期内仅会被执行一次；</li>
+<li>init 函数是顺序执行的，只有当一个 init 函数执行完毕后，才会去执行下一个 init 函数。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 这里举出《Go并发编程实战》中的例子，帮助理解上面的包初始化，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main <span class="comment">// 命令源码文件必须在这里声明自己属于main包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ( <span class="comment">// 引入了代码包fmt和runtime</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;runtime&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123; <span class="comment">// 包初始化函数</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;Map: %v\n&quot;</span>, m) <span class="comment">// 先格式化再打印</span></span><br><span class="line">    <span class="comment">// 通过调用runtime包的代码获取当前机器所运行的操作系统以及计算架构</span></span><br><span class="line">    <span class="comment">// 而后通过fmt包的Sprintf方法进行字符串格式化并赋值给变量info</span></span><br><span class="line">    info = fmt.Sprintf(<span class="string">&quot;OS: %s, Arch: %s&quot;</span>, runtime.GOOS, runtime.GOARCH)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 非局部变量，map类型，且已初始化</span></span><br><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span> = <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span>&#123;<span class="number">1</span>: <span class="string">&quot;A&quot;</span>, <span class="number">2</span>: <span class="string">&quot;B&quot;</span>, <span class="number">3</span>: <span class="string">&quot;C&quot;</span>&#125;</span><br><span class="line"><span class="keyword">var</span> info <span class="type">string</span> <span class="comment">// 非局部变量，string类型，未被初始化</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; <span class="comment">// 命令源码文件必须有的入口函数</span></span><br><span class="line">    fmt.Println(info) <span class="comment">// 打印变量info</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 输出：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map: <span class="keyword">map</span>[<span class="number">1</span>:A <span class="number">2</span>:B <span class="number">3</span>:C]</span><br><span class="line">OS: windows, Arch: amd64</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 在同一个代码包中，可以存在多个代码包初始化函数，甚至代码包内的每一个源码文件都可以定义多个代码包初始化函数。Go 语言编译器不能保证同一个代码包中的多个代码包初始化函数的执行顺序。如果要求按特定顺序执行的话，可以考虑使用 Channel 。</p>
+<h4 id="8、编译速度"><a href="#8、编译速度" class="headerlink" title="8、编译速度"></a><strong>8、编译速度</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 当我们修改了一个源文件，我们必须重新编译该源文件对应的包和所有依赖该包的其他包。即使是从头构建， Go 语言编译器的编译速度也明显快于其它编译语言。 Go 语言的闪电般的编译速度主要得益于三个语言特性。</p>
+<ul>
+<li>所有导入的包必须在每个文件的开头显式声明，这样的话编译器就没有必要读取和分析整个源文件来判断包的依赖关系。</li>
+<li>禁止包的环状依赖，因为没有循环依赖，包的依赖关系形成一个有向无环图，每个包可以被独立编译，而且很可能是被并发编译。</li>
+<li>编译后包的目标文件不仅仅记录包本身的导出信息，目标文件同时还记录了包的依赖关系。因此，在编译一个包的时候，编译器只需要读取每个直接导入包的目标文件，而不需要遍历所有依赖的的文件（译注：很多都是重复的间接依赖）。</li>
+</ul>
  
       <!-- reward -->
       

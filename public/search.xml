@@ -3,7 +3,7 @@
   <entry>
     <title>Go语言包相关概念</title>
     <url>/2023/11/06/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、包的相关概念"><a href="#1、包的相关概念" class="headerlink" title="1、包的相关概念"></a><strong>1、包的相关概念</strong></h4><p>&ensp;&ensp;&ensp;&ensp; Go 语言是使用包来组织源代码的，并实现命名空间的管理。任何源代码文件必须属于某个包。源码文件的第一行有效代码必须是 package pacakgeName 语句，通过该语句声明自己所在的包。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、包的相关概念"><a href="#1、包的相关概念" class="headerlink" title="1、包的相关概念"></a><strong>1、包的相关概念</strong></h4><p>&ensp;&ensp;&ensp;&ensp; Go 语言是使用包来组织源代码的，并实现命名空间的管理。任何源代码文件必须属于某个包。源码文件的第一行有效代码必须是 package pacakgeName 语句，通过该语句声明自己所在的包。</p>
 <h4 id="2、包的特征"><a href="#2、包的特征" class="headerlink" title="2、包的特征"></a><strong>2、包的特征</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 所有的 .go 文件，除了空行和注释，都应该在第一行声明自己所属的包。即所有代码都必须组织在 package 中。包的结构特点有：</p>
 <ul>
 <li>源文件头部以 package 声明包名称；</li>
@@ -138,6 +138,41 @@
 <p>&ensp;&ensp;&ensp;&ensp; 程序的初始化和执行都起始于 main 包。如果 main 包还导入了其它的包，那么就会在编译时将它们依次导入。有时一个包会被多个包同时导入，那么它只会被导入一次（例如很多包可能都会用到 fmt 包，但它只会被导入一次，因为没有必要导入多次）。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 当一个包被导入时，如果该包还导入了其它的包，那么会先将其它包导入进来，然后再对这些包中的包级常量和变量进行初始化，接着执行 init 函数（如果有的话），依次类推。等所有被导入的包都加载完毕了，就会开始对 main 包中的包级常量和变量进行初始化，然后执行 main 包中的 init 函数（如果存在的话），最后执行 main 函数。下图详细地解释了整个执行过程：</p>
 <p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/%E5%8C%85%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B.jpg" alt="包的初始化过程"></p>
+<p>&ensp;&ensp;&ensp;&ensp; init 函数特征总结：</p>
+<ul>
+<li>每个源文件都可以定义一个或多个初始化函数，但强烈建议只定义一个。</li>
+<li>编译器不保证多个初始化函数执行次序。</li>
+<li>初始化函数在单一线程被用，仅执行一次。</li>
+<li>初始化函数在包所有全局变量初始化后执行。</li>
+<li>在所有初始化函数结束后才执行 main.main。</li>
+<li>init() 函数不能被其他函数调用。</li>
+</ul>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/init%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.png" alt="init执行过程"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 所以简而言之，你只需要记住这三点就可以了：</p>
+<ul>
+<li>依赖包按“深度优先”的次序进行初始化；</li>
+<li>每个包内按以“常量 -&gt; 变量 -&gt; init 函数”的顺序进行初始化；</li>
+<li>包内的多个 init 函数按出现次序进行自动调用；</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 重点关注 init 函数具备的几种行为特征：</p>
+<ul>
+<li>执行顺位排在包内其他语法元素常量、变量的后面；</li>
+<li>每个 init 函数在整个 Go 程序生命周期内仅会被执行一次；</li>
+<li>init 函数是顺序执行的，只有当一个 init 函数执行完毕后，才会去执行下一个 init 函数。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 这里举出《Go并发编程实战》中的例子，帮助理解上面的包初始化，如下：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main <span class="comment">// 命令源码文件必须在这里声明自己属于main包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ( <span class="comment">// 引入了代码包fmt和runtime</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;runtime&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123; <span class="comment">// 包初始化函数</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;Map: %v\n&quot;</span>, m) <span class="comment">// 先格式化再打印</span></span><br><span class="line">    <span class="comment">// 通过调用runtime包的代码获取当前机器所运行的操作系统以及计算架构</span></span><br><span class="line">    <span class="comment">// 而后通过fmt包的Sprintf方法进行字符串格式化并赋值给变量info</span></span><br><span class="line">    info = fmt.Sprintf(<span class="string">&quot;OS: %s, Arch: %s&quot;</span>, runtime.GOOS, runtime.GOARCH)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 非局部变量，map类型，且已初始化</span></span><br><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span> = <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span>&#123;<span class="number">1</span>: <span class="string">&quot;A&quot;</span>, <span class="number">2</span>: <span class="string">&quot;B&quot;</span>, <span class="number">3</span>: <span class="string">&quot;C&quot;</span>&#125;</span><br><span class="line"><span class="keyword">var</span> info <span class="type">string</span> <span class="comment">// 非局部变量，string类型，未被初始化</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; <span class="comment">// 命令源码文件必须有的入口函数</span></span><br><span class="line">    fmt.Println(info) <span class="comment">// 打印变量info</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 输出：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">Map: <span class="keyword">map</span>[<span class="number">1</span>:A <span class="number">2</span>:B <span class="number">3</span>:C]</span><br><span class="line">OS: windows, Arch: amd64</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 在同一个代码包中，可以存在多个代码包初始化函数，甚至代码包内的每一个源码文件都可以定义多个代码包初始化函数。Go 语言编译器不能保证同一个代码包中的多个代码包初始化函数的执行顺序。如果要求按特定顺序执行的话，可以考虑使用 Channel 。</p>
+<h4 id="8、编译速度"><a href="#8、编译速度" class="headerlink" title="8、编译速度"></a><strong>8、编译速度</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 当我们修改了一个源文件，我们必须重新编译该源文件对应的包和所有依赖该包的其他包。即使是从头构建， Go 语言编译器的编译速度也明显快于其它编译语言。 Go 语言的闪电般的编译速度主要得益于三个语言特性。</p>
+<ul>
+<li>所有导入的包必须在每个文件的开头显式声明，这样的话编译器就没有必要读取和分析整个源文件来判断包的依赖关系。</li>
+<li>禁止包的环状依赖，因为没有循环依赖，包的依赖关系形成一个有向无环图，每个包可以被独立编译，而且很可能是被并发编译。</li>
+<li>编译后包的目标文件不仅仅记录包本身的导出信息，目标文件同时还记录了包的依赖关系。因此，在编译一个包的时候，编译器只需要读取每个直接导入包的目标文件，而不需要遍历所有依赖的的文件（译注：很多都是重复的间接依赖）。</li>
+</ul>
 ]]></content>
       <categories>
         <category>基本功</category>
@@ -151,7 +186,7 @@
   <entry>
     <title>JVM参数概览(JDK8)</title>
     <url>/2023/11/03/JVM%E5%8F%82%E6%95%B0%E6%A6%82%E8%A7%88/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/JVM%E5%8F%82%E6%95%B0%E6%A6%82%E8%A7%88(JDK8)/JVM%E5%8F%82%E6%95%B0%E6%A6%82%E8%A7%88(JDK8).png" alt="JVM参数概览(JDK8)"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/JVM%E5%8F%82%E6%95%B0%E6%A6%82%E8%A7%88(JDK8)/JVM%E5%8F%82%E6%95%B0%E6%A6%82%E8%A7%88(JDK8).png" alt="JVM参数概览(JDK8)"></p>
 ]]></content>
       <categories>
         <category>基本功</category>
@@ -166,7 +201,7 @@
   <entry>
     <title>Linux性能工具</title>
     <url>/2023/10/25/Linux%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="性能工具谱图"><a href="#性能工具谱图" class="headerlink" title="性能工具谱图"></a><strong>性能工具谱图</strong></h4><p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7/Linux%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%85%A8%E5%B1%80%E6%A6%82%E8%A7%88.png" alt="性能工具谱图"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="性能工具谱图"><a href="#性能工具谱图" class="headerlink" title="性能工具谱图"></a><strong>性能工具谱图</strong></h4><p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7/Linux%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%85%A8%E5%B1%80%E6%A6%82%E8%A7%88.png" alt="性能工具谱图"></p>
 ]]></content>
       <categories>
         <category>基本功</category>
@@ -179,7 +214,7 @@
   <entry>
     <title>TCP报文结构和功能简析</title>
     <url>/2023/09/15/TCP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD%E7%AE%80%E6%9E%90/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a><strong>1、简介</strong></h2><p>&ensp;&ensp;&ensp;&ensp; TCP：传输、控制、协议。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a><strong>1、简介</strong></h2><p>&ensp;&ensp;&ensp;&ensp; TCP：传输、控制、协议。</p>
 <p>&ensp;&ensp;&ensp;&ensp; TCP 与UDP 最大却别就在那个C上面，它充分实现了数据传输时各种控制功能。可以进行丢包重发控制，还可以对次序乱掉的数据包进行顺序控制，还能控制传输流量，这些是UDP中没有的。即 TCP 提供一种面向连接的、可靠的字节流服务。TCP 是一中面向有链接的协议，只有在确认对端存在的时候，才会发送分数据，从而也可以控制通信流量的浪费。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 什么是可靠的传输：不丢包、不损坏、不乱序、不重复。TCP 通过校验和、序列号、确认应答、重发控制、连接管理以及窗口控制等机制来实现可靠传输。接收端查询就收数据 TCP 首部中的序号和数据长度。将自己下一步应该接受的序列号作为确认应答返送回去。就这样，通过序列号和确认应答，TCP 实现可靠传输。一般使用 TCP 首部用于控制的字段来管理连接。一个连接的建立和断开，正常过程中，至少需要来回共 7 个包才能完成。</p>
 <h2 id="2、TCP首部"><a href="#2、TCP首部" class="headerlink" title="2、TCP首部"></a><strong>2、TCP首部</strong></h2><p>&ensp;&ensp;&ensp;&ensp; TCP首部的数据结构如图所示：</p>
@@ -236,7 +271,7 @@
   <entry>
     <title>数据链路层</title>
     <url>/2023/09/14/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a><strong>1、概述</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 数据链路层是TCP&#x2F;IP协议栈的第二层！数据链路层的传输单元：帧（也就是传输单位）。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a><strong>1、概述</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 数据链路层是TCP&#x2F;IP协议栈的第二层！数据链路层的传输单元：帧（也就是传输单位）。</p>
 <p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E6%89%80%E5%A4%84%E4%BD%8D%E7%BD%AE.webp" alt="数据链路层"></p>
 <p>&ensp;&ensp;&ensp;&ensp; 帧的结构如下：</p>
 <ul>
@@ -292,7 +327,7 @@
   <entry>
     <title>谈谈云原生</title>
     <url>/2023/09/13/%E8%B0%88%E8%B0%88%E4%BA%91%E5%8E%9F%E7%94%9F/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 之前关于云计算技术底座的部门会谈，我本着程序员实事求是的态度，表示自己其实并不懂云原生。前段时间云技术底座的模型验证，遇到一个测试案例叫做“白屏纳管”，意思是指 CAAS 平台能够对包括云下硬件负载 F5、A10，云上 SLB 等设备进行管理。云原生技术有着太多的这种花里胡哨的名词，将本来很简单的一件事情包装出个能吓住人的词，来提高理解的门槛。作为一个一线开发，我有一种很深切的感受：很多优秀的设计，都是有着简洁优雅的设计原理或者说思想蕴含其中。这种没什么太多内涵的毫无意义的造词运动，对于工程实践，没有任何好处。我们不应该人云亦云盲目从众，也不应该以偏概全一叶障目。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 之前关于云计算技术底座的部门会谈，我本着程序员实事求是的态度，表示自己其实并不懂云原生。前段时间云技术底座的模型验证，遇到一个测试案例叫做“白屏纳管”，意思是指 CAAS 平台能够对包括云下硬件负载 F5、A10，云上 SLB 等设备进行管理。云原生技术有着太多的这种花里胡哨的名词，将本来很简单的一件事情包装出个能吓住人的词，来提高理解的门槛。作为一个一线开发，我有一种很深切的感受：很多优秀的设计，都是有着简洁优雅的设计原理或者说思想蕴含其中。这种没什么太多内涵的毫无意义的造词运动，对于工程实践，没有任何好处。我们不应该人云亦云盲目从众，也不应该以偏概全一叶障目。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 以下是阿里云公众号某产品经理关于云原生的解释，我截了图如下：</p>
 <p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/%E4%BA%91%E5%8E%9F%E7%94%9F/%E8%B0%88%E8%B0%88%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%91%E5%8E%9F%E7%94%9F/%E9%98%BF%E9%87%8C%E4%BA%91%E4%BA%91%E5%8E%9F%E7%94%9F%E5%85%AC%E4%BC%97%E5%8F%B7%E6%9F%90%E6%96%87%E7%AB%A0.jpg" alt="阿里云云原生公众号某文章"></p>
 <p>&ensp;&ensp;&ensp;&ensp; 这段话讲得没有问题，但是似乎又什么都没讲，对于云原生的定义，这种似是而非的说法显然不是一线开发人员想要的答案。</p>
@@ -324,7 +359,7 @@
   <entry>
     <title>一种git分支模型</title>
     <url>/2023/09/10/%E4%B8%80%E7%A7%8Dgit%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E5%B7%A5%E5%85%B7/git/%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B.png" alt="git 分支模型"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E5%B7%A5%E5%85%B7/git/%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B.png" alt="git 分支模型"></p>
 ]]></content>
       <categories>
         <category>工程</category>
@@ -339,7 +374,7 @@
   <entry>
     <title>设计模式之模板方法模式和策略模式</title>
     <url>/2023/09/09/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E5%92%8C%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 这篇博客的设计模式应用案例来自于这个仓库，完整代码可以参考本仓库：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 这篇博客的设计模式应用案例来自于这个仓库，完整代码可以参考本仓库：</p>
 <p>&ensp;&ensp;&ensp;&ensp; <a href="https://github.com/3546514206/WxChatGPT">微信大模型接入</a></p>
 <p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E5%92%8C%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E4%BB%93%E5%BA%93.png" alt="仓库主页"></p>
 <p>&ensp;&ensp;&ensp;&ensp; 简单介绍一下这个仓库：1）实现了微信接入；2）实现了大模型接入；3）将微信的提问发给大模型，将大模型的回答返回给微信（欢迎给个 star）。</p>
@@ -378,7 +413,7 @@
   <entry>
     <title>Go基础语法宝典</title>
     <url>/2023/09/04/Go%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E5%AE%9D%E5%85%B8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h1><p>Go语言设计的关键字，了解这些关键字有助于命名变量的冲突避免</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h1><p>Go语言设计的关键字，了解这些关键字有助于命名变量的冲突避免</p>
 <h3 id="go的二十五个关键字"><a href="#go的二十五个关键字" class="headerlink" title="go的二十五个关键字"></a>go的二十五个关键字</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">break    default      func    interface    select</span><br><span class="line">case     defer        go      map          struct</span><br><span class="line">chan     else         goto    package      switch</span><br><span class="line">const    fallthrough  if      range        type</span><br><span class="line">continue for          import  return       var</span><br></pre></td></tr></table></figure>
 
 <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
@@ -1098,7 +1133,7 @@
   <entry>
     <title>Golang新手可能会踩的50个坑</title>
     <url>/2023/09/04/Golang%E6%96%B0%E6%89%8B%E5%8F%AF%E8%83%BD%E4%BC%9A%E8%B8%A9%E7%9A%8450%E4%B8%AA%E5%9D%91/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Go 是一门简单有趣的编程语言，与其他语言一样，在使用时不免会遇到很多坑，不过它们大多不是 Go 本身的设计缺陷。如果你刚从其他语言转到 Go，那这篇文章里的坑多半会踩到。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Go 是一门简单有趣的编程语言，与其他语言一样，在使用时不免会遇到很多坑，不过它们大多不是 Go 本身的设计缺陷。如果你刚从其他语言转到 Go，那这篇文章里的坑多半会踩到。</p>
 <p>如果花时间学习官方 doc、wiki、<a href="https://groups.google.com/forum/#!forum/golang-nuts">讨论邮件列表</a>、 <a href="https://github.com/robpike">Rob Pike</a> 的大量文章以及 Go 的源码，会发现这篇文章中的坑是很常见的，新手跳过这些坑，能减少大量调试代码的时间。</p>
 <h2 id="初级篇：1-34"><a href="#初级篇：1-34" class="headerlink" title="初级篇：1-34"></a>初级篇：1-34</h2><h3 id="1-左大括号-不能单独放一行"><a href="#1-左大括号-不能单独放一行" class="headerlink" title="1. 左大括号 { 不能单独放一行"></a>1. 左大括号 <code>&#123;</code> 不能单独放一行</h3><p>在其他大多数语言中，<code>&#123;</code> 的位置你自行决定。Go 比较特别，遵守分号注入规则（automatic semicolon injection）：编译器会在每行代码尾部特定分隔符后加 <code>;</code> 来分隔多条语句，比如会在 <code>)</code> 后加分号：</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 错误示例</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等效于</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>;    <span class="comment">// 无函数体</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">println</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1630,7 +1665,7 @@
   <entry>
     <title>Golang精编100题</title>
     <url>/2023/09/04/Golang%E7%B2%BE%E7%BC%96100%E9%A2%98/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="能力模型"><a href="#能力模型" class="headerlink" title="能力模型"></a>能力模型</h2><table>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="能力模型"><a href="#能力模型" class="headerlink" title="能力模型"></a>能力模型</h2><table>
 <thead>
 <tr>
 <th>级别</th>
@@ -2165,7 +2200,7 @@
   <entry>
     <title>UberGo语言编码规范中文版</title>
     <url>/2023/09/04/UberGo%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83%E4%B8%AD%E6%96%87%E7%89%88/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><!--
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><!--
 
 Editing this document:
 
@@ -3707,7 +3742,7 @@ use one vs other -->
   <entry>
     <title>RobPike谈GoogGo</title>
     <url>/2023/09/04/RobPike%E8%B0%88GoogGo/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="1-Rob，你创建了Google-Go这门语言。什么是Google-Go？能简明扼要的介绍一下Google-Go吗？"><a href="#1-Rob，你创建了Google-Go这门语言。什么是Google-Go？能简明扼要的介绍一下Google-Go吗？" class="headerlink" title="1. Rob，你创建了Google Go这门语言。什么是Google Go？能简明扼要的介绍一下Google Go吗？"></a>1. Rob，你创建了Google Go这门语言。什么是Google Go？能简明扼要的介绍一下Google Go吗？</h2><p>我还是讲讲为什么要创建这门语言吧，和你的问题稍有些不同。我在Google做了一个有关编程语言的系列讲座，在Youtube上有，谈及了我早期所写的一个语言，叫做Newsqueak，那是八十年代的事，非常早。在做讲座期间，我开始思考为什么Newsqueak中的一些想法在我现在以C++为主的工作环境中无法使用。而且在Google我们经常要构建非常大的程序，光构建就要花很多时间，对依赖的管理也有问题，由于链接了本来并不需要的东西，二进制程序包变得很大，链接时间很长，编译时间也很长，而且C++的工作方式有点古老，其底层实际上C，C++已经有三十年的历史了，而C则更是有四十年了。用现今的硬件做计算，有很多新东西需要考虑：多核机器、网络化、分布式系统、云计算等等。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="1-Rob，你创建了Google-Go这门语言。什么是Google-Go？能简明扼要的介绍一下Google-Go吗？"><a href="#1-Rob，你创建了Google-Go这门语言。什么是Google-Go？能简明扼要的介绍一下Google-Go吗？" class="headerlink" title="1. Rob，你创建了Google Go这门语言。什么是Google Go？能简明扼要的介绍一下Google Go吗？"></a>1. Rob，你创建了Google Go这门语言。什么是Google Go？能简明扼要的介绍一下Google Go吗？</h2><p>我还是讲讲为什么要创建这门语言吧，和你的问题稍有些不同。我在Google做了一个有关编程语言的系列讲座，在Youtube上有，谈及了我早期所写的一个语言，叫做Newsqueak，那是八十年代的事，非常早。在做讲座期间，我开始思考为什么Newsqueak中的一些想法在我现在以C++为主的工作环境中无法使用。而且在Google我们经常要构建非常大的程序，光构建就要花很多时间，对依赖的管理也有问题，由于链接了本来并不需要的东西，二进制程序包变得很大，链接时间很长，编译时间也很长，而且C++的工作方式有点古老，其底层实际上C，C++已经有三十年的历史了，而C则更是有四十年了。用现今的硬件做计算，有很多新东西需要考虑：多核机器、网络化、分布式系统、云计算等等。</p>
 <h2 id="2-Go的主要特点是什么？有什么重要功能？"><a href="#2-Go的主要特点是什么？有什么重要功能？" class="headerlink" title="2. Go的主要特点是什么？有什么重要功能？"></a>2. Go的主要特点是什么？有什么重要功能？</h2><p>对于大多数人来说，他们对Go的第一印象是该语言将并发性作为语言原语，这对我们处理分布式计算和多核这类东西来说非常好、也非常重要。我猜许多人会认为Go是一门简单无趣的语言，没有什么特别的东西，因为其构想看起来一目了然。但实际上不能用第一印象来判断Go。很多用过Go的人会发现它是一门非常高产而且有表现力的语言，能够解决我们编写这门语言时期望其所能解决的所有问题。</p>
 <p>Go的编译过程很快，二进制程序包又比较小，它管理依赖的方式如同管理语言本身的东西一样。这里还有一个故事呢，但是在这里就不再展开讨论了，但是这门语言的并发性使其能够以非常简单的模式来处理非常复杂的操作及分布式计算环境。我想最重要的功能可能就是并发性了，后面我们可以谈谈该语言的类型系统，其与C++、Java这类传统面向对象类型系统的差异很大。</p>
 <h2 id="3-在我们继续话题之前，能否解释一下为什么Go编译器能达到那么快的编译速度呢？有什么法宝？"><a href="#3-在我们继续话题之前，能否解释一下为什么Go编译器能达到那么快的编译速度呢？有什么法宝？" class="headerlink" title="3. 在我们继续话题之前，能否解释一下为什么Go编译器能达到那么快的编译速度呢？有什么法宝？"></a>3. 在我们继续话题之前，能否解释一下为什么Go编译器能达到那么快的编译速度呢？有什么法宝？</h2><p>它之所以快，有两个原因。首先Go有两个编译器——两个单独的实现。一个是按照Plan 9（<a href="http://plan9.bell-labs.com/wiki/plan9/1/%EF%BC%89">http://plan9.bell-labs.com/wiki/plan9/1/）</a> 风格新写的编译器，它有自己独特的工作方式，是个全新的编译器。另一个编译器叫做GCC Go，它拥有GCC前端，这个编译器是Ian Taylor后来写的。所以Go有两个编译器，速度快是二者的共同特点，但是Plan 9风格编译器的速度是GCC Go的5倍，因为它从头到脚都是全新的，没有GCC后端，那些东西会花很多时间来产生真正的好代码。</p>
@@ -3766,7 +3801,7 @@ use one vs other -->
   <entry>
     <title>Go自带库的使用说明</title>
     <url>/2023/09/04/Go%E8%87%AA%E5%B8%A6%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Go-中的时间操作"><a href="#Go-中的时间操作" class="headerlink" title="Go 中的时间操作"></a>Go 中的时间操作</h1><p>Golang中与时间有关的操作，主要涉及到 time 包，核心数据结构是 <code>time.Time</code>，如下：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Go-中的时间操作"><a href="#Go-中的时间操作" class="headerlink" title="Go 中的时间操作"></a>Go 中的时间操作</h1><p>Golang中与时间有关的操作，主要涉及到 time 包，核心数据结构是 <code>time.Time</code>，如下：</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Time <span class="keyword">struct</span> &#123;</span><br><span class="line">    wall <span class="type">uint64</span></span><br><span class="line">    ext  <span class="type">int64</span></span><br><span class="line">    loc *Location</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="1、获取时间相关函数"><a href="#1、获取时间相关函数" class="headerlink" title="1、获取时间相关函数"></a>1、获取时间相关函数</h3><h4 id="1-1-获取当前时间"><a href="#1-1-获取当前时间" class="headerlink" title="1.1 获取当前时间"></a>1.1 获取当前时间</h4><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 返回当前时间，注意此时返回的是 time.Time 类型</span></span><br><span class="line">now := time.Now()</span><br><span class="line">fmt.Println(now)</span><br><span class="line"><span class="comment">// 当前时间戳</span></span><br><span class="line">fmt.Println(now.Unix())</span><br><span class="line"><span class="comment">// 纳秒级时间戳</span></span><br><span class="line">fmt.Println(now.UnixNano())</span><br><span class="line"><span class="comment">// 时间戳小数部分 单位：纳秒</span></span><br><span class="line">fmt.Println(now.Nanosecond())</span><br></pre></td></tr></table></figure>
@@ -4431,7 +4466,7 @@ use one vs other -->
   <entry>
     <title>Go语言参考手册</title>
     <url>/2023/09/04/Go%E8%AF%AD%E8%A8%80%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>这是一个 Go 语言的参考手册，你也可以访问<a href="https://golang.org/">golang.org</a>获取更多信息和其他文档。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>这是一个 Go 语言的参考手册，你也可以访问<a href="https://golang.org/">golang.org</a>获取更多信息和其他文档。</p>
 <p>Go 是在设计时考虑了系统编程的通用型编程语言。它是强类型，有垃圾回收机制并原生支持并发编程。Go 程序由一个或多个 package 组成，这样可以高效的管理依赖。</p>
 <p>Go 的语法简洁且有规则，这让自动化工具可以很容易的分析代码，例如：集成开发环境。</p>
 <h2 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h2><p>语法采用扩展巴科斯范式。</p>
@@ -6224,7 +6259,7 @@ use one vs other -->
   <entry>
     <title>OSI/ISO七层网络</title>
     <url>/2023/08/31/OSI-ISO%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp; 七层网络的常见设备，如下图所示：<br><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E7%9A%84%E5%B8%B8%E8%A7%81%E8%AE%BE%E5%A4%87.png" alt="七层网络的常见设备"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp; 七层网络的常见设备，如下图所示：<br><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E7%9A%84%E5%B8%B8%E8%A7%81%E8%AE%BE%E5%A4%87.png" alt="七层网络的常见设备"></p>
 <p>&ensp;&ensp; 七层网络的常见协议与功能，如下图所示：<br><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E5%B8%B8%E8%A7%81%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E.gif" alt="七层网络的常见协议与功能"></p>
 ]]></content>
       <categories>
@@ -6239,7 +6274,7 @@ use one vs other -->
   <entry>
     <title>深入 OGNL 与  Mybatis 源代码分析一次 Mybatis 升级引发的线上事故</title>
     <url>/2023/08/31/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 项目中对 Mybatis 做了一次升级。前后版本如下，3.2.5 -&gt; 3.4.4：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 项目中对 Mybatis 做了一次升级。前后版本如下，3.2.5 -&gt; 3.4.4：</p>
 <p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/mybatis%E5%89%8D%E5%90%8E%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7.png" alt="mybatis前后版本升级"></p>
 <p>&ensp;&ensp;&ensp;&ensp; 结果第二天巡检发现如下报错，过了两个小时业务高峰期，前台业务人员不断反馈某最核心的业务无法进行：</p>
 <p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF.png" alt="报错信息"></p>
@@ -6295,7 +6330,7 @@ use one vs other -->
   <entry>
     <title>GPM模型</title>
     <url>/2023/08/29/GPM%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
       <categories>
         <category>基本功</category>
         <category>编程语言</category>
@@ -6309,7 +6344,7 @@ use one vs other -->
   <entry>
     <title>GC——全流程</title>
     <url>/2023/08/29/GC%E2%80%94%E5%85%A8%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、minorGC-和-Full-GC-区别"><a href="#1、minorGC-和-Full-GC-区别" class="headerlink" title="1、minorGC 和 Full GC 区别"></a><strong>1、minorGC 和 Full GC 区别</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 新生代 GC（Minor GC）：指发生新生代的的垃圾收集动作，Minor GC 非常频繁，回收速度一般也比较快。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、minorGC-和-Full-GC-区别"><a href="#1、minorGC-和-Full-GC-区别" class="headerlink" title="1、minorGC 和 Full GC 区别"></a><strong>1、minorGC 和 Full GC 区别</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 新生代 GC（Minor GC）：指发生新生代的的垃圾收集动作，Minor GC 非常频繁，回收速度一般也比较快。</p>
 <p>&ensp;&ensp;&ensp;&ensp; 老年代 GC（Major GC&#x2F;Full GC）：指发生在老年代的 GC，出现了 Major GC 经常会伴随至少一次的 Minor GC（并非绝对），Major GC 的速度一般会比 Minor GC 的慢 10 倍以上。</p>
 <h4 id="2、minorGC-过程详解"><a href="#2、minorGC-过程详解" class="headerlink" title="2、minorGC 过程详解"></a><strong>2、minorGC 过程详解</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 在初始阶段，新创建的对象被分配到 Eden 区，Survivor 的两块空间都为空。</p>
 <p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/GC-%E5%85%A8%E6%B5%81%E7%A8%8B/GC%E5%85%A8%E6%B5%81%E7%A8%8B1.png" alt="图一"></p>
@@ -6360,7 +6395,7 @@ use one vs other -->
   <entry>
     <title>K8S架构图</title>
     <url>/2023/08/29/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 谷歌早期内部 Brog 系统架构图：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 谷歌早期内部 Brog 系统架构图：</p>
 <p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/Brog%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="Brog架构图"></p>
 <p>&ensp;&ensp;&ensp;&ensp; K8S 架构图：</p>
 <p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE/K8S%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="K8S架构图"></p>
@@ -6380,7 +6415,7 @@ use one vs other -->
   <entry>
     <title>本地调试Docker源码</title>
     <url>/2023/08/29/%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95Docker%E6%BA%90%E7%A0%81/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
       <categories>
         <category>工程</category>
         <category>云计算</category>
@@ -6394,7 +6429,7 @@ use one vs other -->
   <entry>
     <title>IP数据报</title>
     <url>/2023/08/29/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; IP 协议控制传输的协议单元称为 IP 数据报（IP Datagram，IP数据报、IP包或IP分组）。IP协议屏蔽了下层各种物理子网的差异，能够向上层提供统一格式的IP数据报。lP数据报采用数据报分组传输的方式，提供的服务是无连接方式。IP数据报的格式能够说明lP协议具有什么功能。IPv4数据报由报头和数据两部分组成，其中，数据是高层需要传输的数据，报头是为了正确传输高层数据而增加的控制信息。报头的前一部分长度固定，共20字节，是所有IP数据报必须具有。在首部固定部分的后面是可选字段，长度可变。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; IP 协议控制传输的协议单元称为 IP 数据报（IP Datagram，IP数据报、IP包或IP分组）。IP协议屏蔽了下层各种物理子网的差异，能够向上层提供统一格式的IP数据报。lP数据报采用数据报分组传输的方式，提供的服务是无连接方式。IP数据报的格式能够说明lP协议具有什么功能。IPv4数据报由报头和数据两部分组成，其中，数据是高层需要传输的数据，报头是为了正确传输高层数据而增加的控制信息。报头的前一部分长度固定，共20字节，是所有IP数据报必须具有。在首部固定部分的后面是可选字段，长度可变。</p>
 <!-- ![IP报文结构](https://github.com/3546514206/ImageHost.Github.IO/blob/main/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/IP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84.png?raw=true) -->
 
 
@@ -6434,7 +6469,7 @@ use one vs other -->
   <entry>
     <title>Innodb中的事务隔离级别和锁实现</title>
     <url>/2023/08/29/Innodb%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%94%81%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
       <categories>
         <category>工程</category>
         <category>服务端</category>
@@ -6447,7 +6482,7 @@ use one vs other -->
   <entry>
     <title>Spring全景</title>
     <url>/2023/08/29/Spring%E5%85%A8%E6%99%AF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E6%9C%8D%E5%8A%A1%E7%AB%AF/Spring/Spring%E5%85%A8%E6%99%AF/Spring%E5%85%A8%E6%99%AF.png" alt="Spring 全景图"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E6%9C%8D%E5%8A%A1%E7%AB%AF/Spring/Spring%E5%85%A8%E6%99%AF/Spring%E5%85%A8%E6%99%AF.png" alt="Spring 全景图"></p>
 ]]></content>
       <categories>
         <category>工程</category>
@@ -6462,7 +6497,7 @@ use one vs other -->
   <entry>
     <title>保持敬畏之心</title>
     <url>/2023/08/29/%E4%BF%9D%E6%8C%81%E6%95%AC%E7%95%8F%E4%B9%8B%E5%BF%83/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 世界何其广大，能人异士很多。 搞清楚自己的能力边界很重要。对未知或者模糊不清的事物保持敬畏之心，不鲁莽下结论， 避免盲目自负也很重要。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 世界何其广大，能人异士很多。 搞清楚自己的能力边界很重要。对未知或者模糊不清的事物保持敬畏之心，不鲁莽下结论， 避免盲目自负也很重要。</p>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -6475,7 +6510,7 @@ use one vs other -->
   <entry>
     <title>命令行常用指令</title>
     <url>/2023/08/29/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp; MySQL 创建数据库并指定字符集：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp; MySQL 创建数据库并指定字符集：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drop schema if exists `test`;</span><br><span class="line">CREATE DATABASE `test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br></pre></td></tr></table></figure>
 
 <p>&ensp;&ensp; Brew 相关的</p>
@@ -6508,7 +6543,7 @@ use one vs other -->
   <entry>
     <title>回调机制</title>
     <url>/2023/08/29/%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、C语言中的回调"><a href="#1、C语言中的回调" class="headerlink" title="1、C语言中的回调"></a><strong>1、C语言中的回调</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 函数指针是指向函数的指针变量。通常我们说的指针变量是指向一个整型、字符型或数 组等变量，而函数指针是指向函数。函数指针可以像一般函数一样，用于调用函数、传递参 数。函数指针变量的声明： typedef int (*fun_ptr)(int,int); &#x2F;&#x2F; 声明一个指向同样参数、返回值的函数指针类型 以下实例声明了函数指针变量 p，指向函数 max：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h4 id="1、C语言中的回调"><a href="#1、C语言中的回调" class="headerlink" title="1、C语言中的回调"></a><strong>1、C语言中的回调</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 函数指针是指向函数的指针变量。通常我们说的指针变量是指向一个整型、字符型或数 组等变量，而函数指针是指向函数。函数指针可以像一般函数一样，用于调用函数、传递参 数。函数指针变量的声明： typedef int (*fun_ptr)(int,int); &#x2F;&#x2F; 声明一个指向同样参数、返回值的函数指针类型 以下实例声明了函数指针变量 p，指向函数 max：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">max</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x &gt; y ? x : y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* p 是函数指针 */</span></span><br><span class="line">    <span class="built_in">int</span> (*p)(<span class="type">int</span>, <span class="type">int</span>) = &amp;max; <span class="comment">// &amp;可以省略 </span></span><br><span class="line">    <span class="type">int</span> a, b, c, d;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入三个数字:&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">    <span class="comment">/* 与直接调用函数等价，d = max(max(a, b), c) */</span></span><br><span class="line">    d = <span class="built_in">p</span>(<span class="built_in">p</span>(a, b), c);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最大的数字是: %d\n&quot;</span>, d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>&ensp;&ensp;&ensp;&ensp; 输出的结果：</p>
@@ -6545,7 +6580,7 @@ use one vs other -->
   <entry>
     <title>GC——基础知识</title>
     <url>/2023/08/28/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样<br>的，首先抛出第一个问题，什么样的对象会是 JVM 回收的目标？</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样<br>的，首先抛出第一个问题，什么样的对象会是 JVM 回收的目标？</p>
 <h4 id="1、可达性分析算法（GC-Roots）"><a href="#1、可达性分析算法（GC-Roots）" class="headerlink" title="1、可达性分析算法（GC Roots）"></a><strong>1、可达性分析算法（GC Roots）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 有一种引用计数法，可以用来判断对象被引用的次数，如果引用次数为0，则代表可以被回收。这种实现<br>方式比较简单，但对于循环引用的情况束手无策，所以 Java 采用了可达性分析算法。即判断某个对象是否与 GC Roots 的这类对象之<br>间的路径可达，若不可达，则有可能成为回收对象，被判定为不可达的对象要成为可回收对象必须至少经历两次标记过程，如果在这两次标<br>记过程中仍然没有逃脱成为可回收对象的可能性，则基本上就真的成为可回收对象了。在 Java 中，可作为 GC Roots 的对象包括以下<br>几种：</p>
 <ul>
 <li>虚拟机栈（本地变量表）中引用的对象</li>
@@ -6584,7 +6619,7 @@ use one vs other -->
   <entry>
     <title>内核页表设计</title>
     <url>/2023/08/28/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1.png" alt="内核页表设计"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1.png" alt="内核页表设计"></p>
 ]]></content>
       <categories>
         <category>基本功</category>
