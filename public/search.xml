@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>前端开发体系</title>
+    <url>/2023/11/29/%E5%89%8D%E6%AE%B5%E5%BC%80%E5%8F%91%E4%BD%93%E7%B3%BB/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E4%BD%93%E7%B3%BB/%E7%8E%B0%E4%BB%A3%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91.jpg" alt="现代前端开发"></p>
+]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>编程语言</category>
+      </categories>
+      <tags>
+        <tag>技术体系</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端量子特效</title>
     <url>/2023/11/29/%E5%89%8D%E7%AB%AF%E9%87%8F%E5%AD%90%E7%89%B9%E6%95%88/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E7%AC%94%E8%AE%B0/%E9%9A%8F%E7%AC%94/%E5%89%8D%E7%AB%AF%E9%87%8F%E5%AD%90%E7%89%B9%E6%95%88/%E9%87%8F%E5%AD%90%E7%BA%A0%E7%BC%A0%E7%89%B9%E6%95%88.gif" alt="前端量子特效"></p>
@@ -939,8 +953,8 @@
         <category>K8S</category>
       </categories>
       <tags>
-        <tag>工程</tag>
         <tag>K8S</tag>
+        <tag>工程</tag>
         <tag>网络</tag>
       </tags>
   </entry>
@@ -7352,8 +7366,8 @@ use one vs other -->
         <category>K8S</category>
       </categories>
       <tags>
-        <tag>K8S</tag>
         <tag>云计算领域</tag>
+        <tag>K8S</tag>
       </tags>
   </entry>
   <entry>
