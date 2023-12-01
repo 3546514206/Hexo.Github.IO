@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>对修饰符final和static的浅析</title>
+    <url>/2023/12/01/%E5%AF%B9%E4%BF%AE%E9%A5%B0%E7%AC%A6final%E5%92%8Cstatic%E7%9A%84%E6%B5%85%E6%9E%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>1、static修饰符</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 被static修饰的变量和方法，被类的所有实例所共享。加载类时只分配一次内存。</p>
+<ul>
+<li>静态变量：可以直接通过类名来访问 Person.a;</li>
+<li>态方法：可以直接通过类名来访问 Person.say();静态方法内，可以访问静态变量，但是不能使用this关键字且不能访问实例变量，因为被所有实例所共有,无法判断属于哪个实例对象；</li>
+<li>静态代码块：java虚拟机在加载类时就执行静态代码块。</li>
+</ul>
+<p><strong>2、final修饰符</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 有final修饰表示最终（不可再修改）的意思：</p>
+<ul>
+<li>final类：不能被继承（即没有子类）；</li>
+<li>final方法：不能被子类的方法覆盖（final不用来修饰构造方法，父类与子类之间的构造方法不存在覆盖关系，final修饰是没有意义的）；</li>
+<li>final修饰的变量：即常量，常量只能被赋值一次，之后不能改变。</li>
+</ul>
+<p><strong>3、静态常量</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 静态常量属于编译时常量（final static int a&#x3D;2*3;）在编译的时就能计算出具体的值)，在编译的时候将这个值就放入到常量池中，a被访问时类是不会被初始化的（这是类的被动使用）。访问类的静态变量或静态方法的时候类会被初始化（这是类的主动使用）。而静态变量只会在类初始化的时候才会被赋值。具体细节请参考“类的生命周期”：加载（堆区、方法区）——连接（验证、准备（静态变量分配内存、设置默认初始值为0）、解析（符号引用替换为直接引用，即指针指向方法区的内存位置））——初始化（程序对类或接口主动使用的时候才会被初始化）。</p>
+<p><strong>4、类的初始化化时机</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 类的初始化阶段java虚拟机会为类的static静态变量赋予初始值(这和准备阶段设置默认初始值为0是不一样的)。只有类的主动使用才会初始化类。</p>
+<p><strong>4.1、类的主动使用</strong></p>
+<ul>
+<li><p>创建类的实例：用new语句创建实例 Person ps&#x3D;new Person()。</p>
+</li>
+<li><p>调用类的静态变量或对静态变量赋值：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Person&#123; </span><br><span class="line">    //这和final static int a=2*3;是有区别的</span><br><span class="line">    static int a=2*3;  </span><br><span class="line">    </span><br><span class="line">    static&#123;  </span><br><span class="line">        //Java在定义一个类的时候里面只能放方法和属性，这是规定死了的。System.out.println()是在调用一个叫println的函数，这里是函数的调用而不是类里面定义一个函数。所以需要用static代码块</span><br><span class="line">        System.out.println(&quot;init Person&quot;); //static声明的静态代码块，使得类在初始化的时候会被调用而不需要创建实例对象。它这时候就不在任何一个方法中。</span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 调用的时候写：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//这样就可以在不new一个Person实例的情况下，来初始化Person类了。调用类的静态方法</span><br><span class="line">System.out.println(&quot;a=&quot;+Person.a);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用java API中的反射方法：Class.forName(“Person”);</li>
+<li>初始化子类的时候会先初始化父类(但”父类”是接口的时候，不会先初始化它所实现的接口的，只有在程序在使用接口的静态变量时才会使静态接口初始化)。</li>
+<li>Java 虚拟机启动时被标明为启动类的类。</li>
+</ul>
+<p><strong>4.2、类的被动使用</strong></p>
+<ul>
+<li>final 类型的静态变量在编译的时候能计算出值（即编译时常量，在编译的时候将这个值就放入到常量池中了）：注： final类型的静态变量在编译的时候不能计算出变量的值(即运行时常量)的时候是会被初始化的</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//变量a是编译时常量</span><br><span class="line">final static int a=2*3;                 </span><br><span class="line">//变量a不是是编译时常量（即运行时常量）</span><br><span class="line">final static int a=(int)Math.random();  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>“父类”是接口的时候，不会先初始化它所实现的接口的，只有在程序在使用接口的静态变量时才会使静态接口初始化。</li>
+<li>ClassLoader类的loadClass(“Person”)方法的时候，只是对类的加载，不是初始Class.forName(“Person”);才会初始化。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>编程语言</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript执行上下文</title>
     <url>/2023/11/30/JavaScript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>1、什么是执行上下文？</strong></p>
