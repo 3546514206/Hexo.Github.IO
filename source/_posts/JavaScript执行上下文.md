@@ -200,6 +200,7 @@ FunctionExectionContext = {
 &ensp;&ensp;&ensp;&ensp; 只有遇到调用函数 multiply 时，函数执行上下文才会被创建。可能你已经注意到 let 和 const 定义的变量并没有关联任何值，但 var 定义的变量被设成了 undefined。这是因为在创建阶段时，引擎检查代码找出变量和函数声明，虽然函数声明完全存储在环境中，但是变量最初设置为 undefined（var 情况下），或者未初始化（let 和 const 情况下）。这就是为什么你可以在声明之前访问 var 定义的变量（虽然是 undefined），但是在声明之前访问 let 和 const 的变量会得到一个引用错误。这就是我们说的变量声明提升。
 
 __4.3、执行上下文的执行阶段__
+
 &ensp;&ensp;&ensp;&ensp; 这是整篇文章中最简单的部分。在此阶段，完成对所有这些变量的分配，最后执行代码。需要注意的是：在执行阶段，如果 JavaScript 引擎不能在源码中声明的实际位置找到 let 变量的值，它会被赋值为 undefined。
 
 
