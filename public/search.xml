@@ -1105,8 +1105,8 @@
         <category>云计算</category>
       </categories>
       <tags>
-        <tag>工程</tag>
         <tag>K8S</tag>
+        <tag>工程</tag>
         <tag>网络</tag>
       </tags>
   </entry>
@@ -7502,8 +7502,8 @@ use one vs other -->
         <category>云计算</category>
       </categories>
       <tags>
-        <tag>K8S</tag>
         <tag>云计算领域</tag>
+        <tag>K8S</tag>
       </tags>
   </entry>
   <entry>
