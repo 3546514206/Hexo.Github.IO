@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
     <entry>
-        <title>Hotspot源码目录结构</title>
-        <url>/2023/12/04/Hotspot%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</url>
-        <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Hotspot%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/Hotspot%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt="Hotspot源码目录结构"></p>
+        <title>三高：高可用、高性能、高扩展</title>
+        <url>
+            /2023/12/04/%E4%B8%89%E9%AB%98%EF%BC%9A%E9%AB%98%E5%8F%AF%E7%94%A8%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%81%E9%AB%98%E6%89%A9%E5%B1%95/
+        </url>
+        <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 我们经常被要求设计高可用性、高可扩展性和高性能。上图包含了针对“三高”的常见解决方案。</p>
+<p><strong>高可用性</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 这意味着我们需要确保系统高水平的正常运行时间。我们经常将设计目标描述为“3个9”或“4个9”。“4个9”，即99.99%的正常运行时间，意味着服务每天只能停机8.64秒。 为了实现高可用性，我们需要在系统中增加冗余节点。 有以下几种方法可以做到这一点：</p>
+<ul>
+<li><p>hot-hot结构：两个实例接收相同的输入并将输出发送到下游服务。如果其中一个实例停机，另一个实例可以立即接管。由于双方都向下游发送输出，下游系统需要进行重复数据删除。</p>
+</li>
+<li><p>hot-warm结构：两个实例接收相同的输入，只有hot实例将输出发送到下游服务。如果hot实例发生故障，warm实例将接管并开始向下游服务发送输出。</p>
+</li>
+<li><p>single-leader Cluster：一个leader实例从上游系统接收数据并复制到其他副本。</p>
+</li>
+<li><p>Leaderless cluster：在这种类型的集群中没有领导者。任何写入操作都会被复制到其他实例。只要写入实例的数量加上读取实例的数量大于实例的总数，我们就会得到有效数据。</p>
+</li>
+</ul>
+<p><strong>高性能</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 这意味着服务需要在一段时间内处理大量请求。常用的指标是QPS（每秒查询数）或TPS（每秒事务数）。为了实现高性能，我们经常在架构中添加缓存，这样请求就可以在不命中数据库或磁盘等较慢的I&#x2F;O设备的情况下返回。我们还可以增加计算密集型任务的线程数量。然而，添加太多线程可能会降低性能。最后，我们需要识别系统中的瓶颈并提高其性能。使用异步处理通常可以有效地隔离繁重的组件。</p>
+<p><strong>高可扩展性</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 这意味着系统可以快速轻松地扩展以容纳更多容量（横向可扩展性）或更多功能（纵向可扩展性）。通常，我们会观察响应时间以决定是否需要扩展系统。为了实现高可扩展性，重要的是将服务的职责分离。为此，微服务被广泛采用。我们还利用服务注册表和负载均衡器将请求路由到适当的实例。</p>
 ]]></content>
         <categories>
-            <category>基本功</category>
-            <category>编程语言</category>
+            <category>工程</category>
+            <category>架构设计</category>
         </categories>
         <tags>
-            <tag>JVM</tag>
-            <tag>源码</tag>
+            <tag>架构设计</tag>
         </tags>
     </entry>
     <entry>
@@ -27,10 +44,10 @@
             <tag>数学</tag>
         </tags>
     </entry>
-  <entry>
+    <entry>
     <title>对修饰符final和static的浅析</title>
     <url>/2023/12/01/%E5%AF%B9%E4%BF%AE%E9%A5%B0%E7%AC%A6final%E5%92%8Cstatic%E7%9A%84%E6%B5%85%E6%9E%90/</url>
-      <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>1、static修饰符</strong></p>
+        <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>1、static修饰符</strong></p>
 <p>&ensp;&ensp;&ensp;&ensp; 被static修饰的变量和方法，被类的所有实例所共享。加载类时只分配一次内存。</p>
 <ul>
 <li>静态变量：可以直接通过类名来访问 Person.a;</li>
@@ -177,8 +194,8 @@
         <category>编程语言</category>
       </categories>
       <tags>
+          <tag>JavaScript</tag>
         <tag>技术体系</tag>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
