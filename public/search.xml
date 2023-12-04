@@ -1517,7 +1517,6 @@
       <categories>
         <category>工程</category>
         <category>工具</category>
-        <category>Git</category>
       </categories>
       <tags>
         <tag>分支模型</tag>
@@ -7471,7 +7470,7 @@ use one vs other -->
 ]]></content>
       <categories>
         <category>工程</category>
-        <category>问题记录与事故复盘</category>
+        <category>服务端</category>
       </categories>
       <tags>
         <tag>工作</tag>
@@ -7597,7 +7596,6 @@ use one vs other -->
       <categories>
         <category>工程</category>
         <category>服务端</category>
-        <category>MySQL</category>
       </categories>
       <tags>
         <tag>数据库</tag>
@@ -7611,7 +7609,6 @@ use one vs other -->
       <categories>
         <category>工程</category>
         <category>服务端</category>
-        <category>Spring</category>
       </categories>
       <tags>
         <tag>Spring</tag>
