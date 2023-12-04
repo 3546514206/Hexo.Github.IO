@@ -163,8 +163,8 @@
         <category>编程语言</category>
       </categories>
       <tags>
-        <tag>技术体系</tag>
           <tag>JavaScript</tag>
+          <tag>技术体系</tag>
       </tags>
   </entry>
   <entry>
@@ -1106,8 +1106,8 @@
         <category>云计算</category>
       </categories>
       <tags>
-          <tag>K8S</tag>
         <tag>工程</tag>
+          <tag>K8S</tag>
         <tag>网络</tag>
       </tags>
   </entry>
@@ -7503,8 +7503,8 @@ use one vs other -->
         <category>云计算</category>
       </categories>
       <tags>
-          <tag>云计算领域</tag>
           <tag>K8S</tag>
+          <tag>云计算领域</tag>
       </tags>
   </entry>
   <entry>
