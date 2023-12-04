@@ -47,7 +47,7 @@
   <entry>
     <title>数学地图</title>
     <url>/2023/12/02/%E6%95%B0%E5%AD%A6%E5%9C%B0%E5%9B%BE/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>![git 分支模型](&#x2F;pic&#x2F;算法&#x2F;数学&#x2F;数学地图&#x2F;The Map of Mathematics.png)</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6/%E6%95%B0%E5%AD%A6%E5%9C%B0%E5%9B%BE/TheMapofMathematics.png" alt="git 分支模型"></p>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -207,8 +207,8 @@
         <category>编程语言</category>
       </categories>
       <tags>
-        <tag>技术体系</tag>
         <tag>JavaScript</tag>
+        <tag>技术体系</tag>
       </tags>
   </entry>
   <entry>
