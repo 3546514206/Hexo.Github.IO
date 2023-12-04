@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8"/>
+
+    <meta
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+            name="viewport"
+    />
+    <title>三高：高可用、高性能、高扩展 | 杨海波</title>
+    <meta content="hexo-theme-ayer" name="generator">
+
+    <link href="/images/SETSUNAYANG.JPG" rel="shortcut icon"/>
+
+    <link href="/dist/main.css" rel="stylesheet">
+
+
+    <link href="/css/fonts/remixicon.css" rel="stylesheet">
+
+
+    <link href="/css/custom.css" rel="stylesheet">
+
+    <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+
+
+    <link
+            href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+            rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+    <!-- mermaid -->
+
+    <style>
+        .swal2-styled.swal2-confirm {
+            font-size: 1.6rem;
+        }
+    </style>
+</head>
+</html>
+</html>
+
+
+<body>
+<div id="app">
+
+
+    <main class="content on">
+        <section class="outer">
+            <article
+                    class="article article-type-post"
+                    data-scroll-reveal
+                    id="post-三高：高可用、高性能、高扩展"
+                    itemprop="blogPost"
+                    itemscope
+            >
+                <div class="article-inner">
+
+                    <header class="article-header">
+
+                        <h1 class="article-title sea-center" itemprop="name" style="border-left:0">
+                            三高：高可用、高性能、高扩展
+                        </h1>
+
+
+                    </header>
+
+                    <div class="article-meta">
+                        <a class="article-date"
+                           href="/2023/12/04/%E4%B8%89%E9%AB%98%EF%BC%9A%E9%AB%98%E5%8F%AF%E7%94%A8%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%81%E9%AB%98%E6%89%A9%E5%B1%95/">
+                            <time datetime="2023-12-04T07:12:24.000Z" itemprop="datePublished">2023-12-04</time>
+                        </a>
+                        <div class="article-category">
+                            <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a> / <a
+                                class="article-category-link"
+                                href="/categories/%E5%B7%A5%E7%A8%8B/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a>
+                        </div>
+
+                        <div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">672</span>
+        </span>
+    </span>
+
+                            <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">2 分钟</span>
+        </span>
+    </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="article-entry" itemprop="articleBody">
+
+                        <p>&ensp;&ensp;&ensp;&ensp; 我们经常被要求设计高可用性、高可扩展性和高性能。上图包含了针对“三高”的常见解决方案。</p>
+                        <p><img alt="git 分支模型"
+                                src="/pic/%E5%B7%A5%E7%A8%8B/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E4%B8%89%E9%AB%98%EF%BC%9A%E9%AB%98%E5%8F%AF%E7%94%A8%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%81%E9%AB%98%E6%89%A9%E5%B1%95/640.gif">
+                        </p>
+                        <p><strong>高可用性</strong></p>
+                        <p>&ensp;&ensp;&ensp;&ensp;
+                            这意味着我们需要确保系统高水平的正常运行时间。我们经常将设计目标描述为“3个9”或“4个9”。“4个9”，即99.99%的正常运行时间，意味着服务每天只能停机8.64秒。<br>为了实现高可用性，我们需要在系统中增加冗余节点。
+                            有以下几种方法可以做到这一点：</p>
+                        <ul>
+                            <li><p>
+                                hot-hot结构：两个实例接收相同的输入并将输出发送到下游服务。如果其中一个实例停机，另一个实例可以立即接管。由于双方都向下游发送输出，下游系统需要进行重复数据删除。</p>
+                            </li>
+                            <li><p>hot-warm结构：两个实例接收相同的输入，只有hot实例将输出发送到下游服务。如果hot实例发生故障，warm实例将接管并开始向下游服务发送输出。</p>
+                            </li>
+                            <li><p>single-leader Cluster：一个leader实例从上游系统接收数据并复制到其他副本。</p>
+                            </li>
+                            <li><p>Leaderless
+                                cluster：在这种类型的集群中没有领导者。任何写入操作都会被复制到其他实例。只要写入实例的数量加上读取实例的数量大于实例的总数，我们就会得到有效数据。</p>
+                            </li>
+                        </ul>
+                        <p><strong>高性能</strong></p>
+                        <p>&ensp;&ensp;&ensp;&ensp;<br>这意味着服务需要在一段时间内处理大量请求。常用的指标是QPS（每秒查询数）或TPS（每秒事务数）。为了实现高性能，我们经常在架构中添加缓存，这样请求就可以在不命中数据库或磁盘等较慢的I&#x2F;O设备的情况下返回。我们还可以增加计算密集型任务的线程数量。然而，添加太多线程可能会降低性能。最后，我们需要识别系统中的瓶颈并提高其性能。使用异步处理通常可以有效地隔离繁重的组件。
+                        </p>
+                        <p><strong>高可扩展性</strong></p>
+                        <p>&ensp;&ensp;&ensp;&ensp;<br>这意味着系统可以快速轻松地扩展以容纳更多容量（横向可扩展性）或更多功能（纵向可扩展性）。通常，我们会观察响应时间以决定是否需要扩展系统。为了实现高可扩展性，重要的是将服务的职责分离。为此，微服务被广泛采用。我们还利用服务注册表和负载均衡器将请求路由到适当的实例。
+                        </p>
+
+                        <!-- reward -->
+
+                        <div id="reword-out">
+                            <div id="reward-btn">
+                                打赏
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- copyright -->
+
+                    <footer class="article-footer">
+
+                        <div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+                            <div class="share-wrap">
+                                <i class="arrow"></i>
+                                <div class="share-icons">
+
+                                    <a class="weibo share-sns" data-type="weibo" href="javascript:;">
+                                        <i class="ri-weibo-fill"></i>
+                                    </a>
+                                    <a class="weixin share-sns wxFab" data-type="weixin" href="javascript:;">
+                                        <i class="ri-wechat-fill"></i>
+                                    </a>
+                                    <a class="qq share-sns" data-type="qq" href="javascript:;">
+                                        <i class="ri-qq-fill"></i>
+                                    </a>
+                                    <a class="douban share-sns" data-type="douban" href="javascript:;">
+                                        <i class="ri-douban-line"></i>
+                                    </a>
+                                    <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+                                      <i class="icon icon-qzone"></i>
+                                    </a> -->
+
+                                    <a class="facebook share-sns" data-type="facebook" href="javascript:;">
+                                        <i class="ri-facebook-circle-fill"></i>
+                                    </a>
+                                    <a class="twitter share-sns" data-type="twitter" href="javascript:;">
+                                        <i class="ri-twitter-fill"></i>
+                                    </a>
+                                    <a class="google share-sns" data-type="google" href="javascript:;">
+                                        <i class="ri-google-fill"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wx-share-modal">
+                            <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+                            <p>扫一扫，分享到微信</p>
+                            <div class="wx-qrcode">
+                                <img alt="微信分享二维码"
+                                     src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://3546514206.github.io/2023/12/04/%E4%B8%89%E9%AB%98%EF%BC%9A%E9%AB%98%E5%8F%AF%E7%94%A8%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%81%E9%AB%98%E6%89%A9%E5%B1%95/">
+                            </div>
+                        </div>
+
+                        <div id="share-mask"></div>
+                        <ul class="article-tag-list" itemprop="keywords">
+                            <li class="article-tag-list-item"><a class="article-tag-list-link"
+                                                                 href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
+                                                                 rel="tag">架构设计</a></li>
+                        </ul>
+
+                    </footer>
+                </div>
+
+
+                <nav class="article-nav">
+
+
+                    <a class="article-nav-link"
+                       href="/2023/12/04/Hotspot%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/">
+                        <strong class="article-nav-caption">下一篇</strong>
+                        <div class="article-nav-title">Hotspot源码目录结构</div>
+                    </a>
+
+                </nav>
+
+
+            </article>
+
+        </section>
+        <footer class="footer">
+            <div class="outer">
+                <ul>
+                    <li>
+                        Copyrights &copy;
+                        2023
+                        <i class="ri-heart-fill heart_icon"></i> 杨海波
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+
+                    </li>
+                </ul>
+                <ul>
+
+                </ul>
+                <ul>
+
+                </ul>
+                <ul>
+                    <li>
+                        <!-- cnzz统计 -->
+
+                        <script src='' type="text/javascript"></script>
+
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </main>
+    <div class="float_btns">
+        <div class="totop" id="totop">
+            <i class="ri-arrow-up-line"></i>
+        </div>
+
+        <div class="todark" id="todark">
+            <i class="ri-moon-line"></i>
+        </div>
+
+    </div>
+    <aside class="sidebar on">
+        <button class="navbar-toggle"></button>
+        <nav class="navbar">
+
+            <div class="logo">
+                <a href="/"><img alt="杨海波" src="/images/SETSUNAYANG.JPG"></a>
+            </div>
+
+            <ul class="nav nav-main">
+
+                <li class="nav-item">
+                    <a class="nav-item-link" href="/">主页</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-item-link" href="/archives">归档</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-item-link" href="/categories">分类</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-item-link" href="/tags">标签</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-item-link" href="https://github.com/3546514206" rel="noopener" target="_blank">关于我</a>
+                </li>
+
+            </ul>
+        </nav>
+        <nav class="navbar navbar-bottom">
+            <ul class="nav">
+                <li class="nav-item">
+
+                    <a class="nav-item-link nav-item-search" title="搜索">
+                        <i class="ri-search-line"></i>
+                    </a>
+
+
+                </li>
+            </ul>
+        </nav>
+        <div class="search-form-wrap">
+            <div class="local-search local-search-plugin">
+                <input class="local-search-input" id="local-search-input" placeholder="Search..." type="search">
+                <div class="local-search-result" id="local-search-result"></div>
+            </div>
+        </div>
+    </aside>
+    <div id="mask"></div>
+
+    <!-- #reward -->
+    <div id="reward">
+        <span class="close"><i class="ri-close-line"></i></span>
+        <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+        <div class="reward-box">
+
+            <div class="reward-item">
+                <img class="reward-img" src="/images/alipay.jpg">
+                <span class="reward-type">支付宝</span>
+            </div>
+
+
+            <div class="reward-item">
+                <img class="reward-img" src="/images/wechat.jpg">
+                <span class="reward-type">微信</span>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+
+    <script src="/js/lazyload.min.js"></script>
+
+    <!-- Tocbot -->
+
+    <script src="/js/tocbot.min.js"></script>
+
+    <script>
+        tocbot.init({
+            tocSelector: ".tocbot",
+            contentSelector: ".article-entry",
+            headingSelector: "h1, h2, h3, h4, h5, h6",
+            hasInnerContainers: true,
+            scrollSmooth: true,
+            scrollContainer: "main",
+            positionFixedSelector: ".tocbot",
+            positionFixedClass: "is-position-fixed",
+            fixedSidebarOffset: "auto",
+        });
+    </script>
+
+    <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+    <link
+            href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+            rel="stylesheet"
+    />
+    <script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+    <script src="/dist/main.js"></script>
+
+    <!-- ImageViewer -->
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+    <div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+        <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg"></div>
+
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
+
+            <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+
+            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+            <div class="pswp__ui pswp__ui--hidden">
+
+                <div class="pswp__top-bar">
+
+                    <!--  Controls are self-explanatory. Order can be changed. -->
+
+                    <div class="pswp__counter"></div>
+
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                    <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                    <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                    <!-- element will get class pswp__preloader--active when preloader is running -->
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <link href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+    <script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+    <script>
+        function viewer_init() {
+            let pswpElement = document.querySelectorAll('.pswp')[0];
+            let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+            $imgArr.forEach(($em, i) => {
+                $em.onclick = () => {
+                    // slider展开状态
+                    // todo: 这样不好，后面改成状态
+                    if (document.querySelector('.left-col.show')) return
+                    let items = []
+                    $imgArr.forEach(($em2, i2) => {
+                        let img = $em2.getAttribute('data-idx', i2)
+                        let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                        let title = $em2.getAttribute('alt')
+                        // 获得原图尺寸
+                        const image = new Image()
+                        image.src = src
+                        items.push({
+                            src: src,
+                            w: image.width || $em2.width,
+                            h: image.height || $em2.height,
+                            title: title
+                        })
+                    })
+                    var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                        index: parseInt(i)
+                    });
+                    gallery.init()
+                }
+            })
+        }
+
+        viewer_init()
+    </script>
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+    <script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+    <script>
+        var ayerConfig = {
+            mathjax: true,
+        };
+    </script>
+
+    <!-- Katex -->
+
+    <!-- busuanzi  -->
+
+    <script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+    <!-- ClickLove -->
+
+    <!-- ClickBoom1 -->
+
+    <!-- ClickBoom2 -->
+
+    <!-- CodeCopy -->
+
+    <link href="/css/clipboard.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+    <script>
+        function wait(callback, seconds) {
+            var timelag = null;
+            timelag = window.setTimeout(callback, seconds);
+        }
+
+        !function (e, t, a) {
+            var initCopyCode = function () {
+                var copyHtml = '';
+                copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+                copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+                copyHtml += '</button>';
+                $(".highlight .code pre").before(copyHtml);
+                $(".article pre code").before(copyHtml);
+                var clipboard = new ClipboardJS('.btn-copy', {
+                    target: function (trigger) {
+                        return trigger.nextElementSibling;
+                    }
+                });
+                clipboard.on('success', function (e) {
+                    let $btn = $(e.trigger);
+                    $btn.addClass('copied');
+                    let $icon = $($btn.find('i'));
+                    $icon.removeClass('ri-file-copy-2-line');
+                    $icon.addClass('ri-checkbox-circle-line');
+                    let $span = $($btn.find('span'));
+                    $span[0].innerText = 'COPIED';
+
+                    wait(function () { // 等待两秒钟后恢复
+                        $icon.removeClass('ri-checkbox-circle-line');
+                        $icon.addClass('ri-file-copy-2-line');
+                        $span[0].innerText = 'COPY';
+                    }, 2000);
+                });
+                clipboard.on('error', function (e) {
+                    e.clearSelection();
+                    let $btn = $(e.trigger);
+                    $btn.addClass('copy-failed');
+                    let $icon = $($btn.find('i'));
+                    $icon.removeClass('ri-file-copy-2-line');
+                    $icon.addClass('ri-time-line');
+                    let $span = $($btn.find('span'));
+                    $span[0].innerText = 'COPY FAILED';
+
+                    wait(function () { // 等待两秒钟后恢复
+                        $icon.removeClass('ri-time-line');
+                        $icon.addClass('ri-file-copy-2-line');
+                        $span[0].innerText = 'COPY';
+                    }, 2000);
+                });
+            }
+            initCopyCode();
+        }(window, document);
+    </script>
+
+    <!-- CanvasBackground -->
+
+    <script>
+        if (window.mermaid) {
+            mermaid.initialize({theme: "forest"});
+        }
+    </script>
+
+
+</div>
+</body>
+
+</html>
