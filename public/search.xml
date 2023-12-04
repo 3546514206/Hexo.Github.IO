@@ -7,7 +7,7 @@
         </url>
         <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 我们经常被要求设计高可用性、高可扩展性和高性能。上图包含了针对“三高”的常见解决方案。</p>
 <p><strong>高可用性</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 这意味着我们需要确保系统高水平的正常运行时间。我们经常将设计目标描述为“3个9”或“4个9”。“4个9”，即99.99%的正常运行时间，意味着服务每天只能停机8.64秒。 为了实现高可用性，我们需要在系统中增加冗余节点。 有以下几种方法可以做到这一点：</p>
+<p>&ensp;&ensp;&ensp;&ensp; 这意味着我们需要确保系统高水平的正常运行时间。我们经常将设计目标描述为“3个9”或“4个9”。“4个9”，即99.99%的正常运行时间，意味着服务每天只能停机8.64秒。<br>为了实现高可用性，我们需要在系统中增加冗余节点。 有以下几种方法可以做到这一点：</p>
 <ul>
 <li><p>hot-hot结构：两个实例接收相同的输入并将输出发送到下游服务。如果其中一个实例停机，另一个实例可以立即接管。由于双方都向下游发送输出，下游系统需要进行重复数据删除。</p>
 </li>
@@ -19,9 +19,9 @@
 </li>
 </ul>
 <p><strong>高性能</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 这意味着服务需要在一段时间内处理大量请求。常用的指标是QPS（每秒查询数）或TPS（每秒事务数）。为了实现高性能，我们经常在架构中添加缓存，这样请求就可以在不命中数据库或磁盘等较慢的I&#x2F;O设备的情况下返回。我们还可以增加计算密集型任务的线程数量。然而，添加太多线程可能会降低性能。最后，我们需要识别系统中的瓶颈并提高其性能。使用异步处理通常可以有效地隔离繁重的组件。</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>这意味着服务需要在一段时间内处理大量请求。常用的指标是QPS（每秒查询数）或TPS（每秒事务数）。为了实现高性能，我们经常在架构中添加缓存，这样请求就可以在不命中数据库或磁盘等较慢的I&#x2F;O设备的情况下返回。我们还可以增加计算密集型任务的线程数量。然而，添加太多线程可能会降低性能。最后，我们需要识别系统中的瓶颈并提高其性能。使用异步处理通常可以有效地隔离繁重的组件。</p>
 <p><strong>高可扩展性</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 这意味着系统可以快速轻松地扩展以容纳更多容量（横向可扩展性）或更多功能（纵向可扩展性）。通常，我们会观察响应时间以决定是否需要扩展系统。为了实现高可扩展性，重要的是将服务的职责分离。为此，微服务被广泛采用。我们还利用服务注册表和负载均衡器将请求路由到适当的实例。</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>这意味着系统可以快速轻松地扩展以容纳更多容量（横向可扩展性）或更多功能（纵向可扩展性）。通常，我们会观察响应时间以决定是否需要扩展系统。为了实现高可扩展性，重要的是将服务的职责分离。为此，微服务被广泛采用。我们还利用服务注册表和负载均衡器将请求路由到适当的实例。</p>
 ]]></content>
         <categories>
             <category>工程</category>
@@ -45,8 +45,8 @@
         </tags>
     </entry>
     <entry>
-    <title>对修饰符final和static的浅析</title>
-    <url>/2023/12/01/%E5%AF%B9%E4%BF%AE%E9%A5%B0%E7%AC%A6final%E5%92%8Cstatic%E7%9A%84%E6%B5%85%E6%9E%90/</url>
+        <title>对修饰符final和static的浅析</title>
+        <url>/2023/12/01/%E5%AF%B9%E4%BF%AE%E9%A5%B0%E7%AC%A6final%E5%92%8Cstatic%E7%9A%84%E6%B5%85%E6%9E%90/</url>
         <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>1、static修饰符</strong></p>
 <p>&ensp;&ensp;&ensp;&ensp; 被static修饰的变量和方法，被类的所有实例所共享。加载类时只分配一次内存。</p>
 <ul>
@@ -1137,8 +1137,8 @@
         <category>云计算</category>
       </categories>
       <tags>
-        <tag>K8S</tag>
         <tag>工程</tag>
+          <tag>K8S</tag>
         <tag>网络</tag>
       </tags>
   </entry>
@@ -7534,8 +7534,8 @@ use one vs other -->
         <category>云计算</category>
       </categories>
       <tags>
-        <tag>云计算领域</tag>
         <tag>K8S</tag>
+          <tag>云计算领域</tag>
       </tags>
   </entry>
   <entry>
