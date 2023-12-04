@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>一键部署单机K8S环境 |  杨海波</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/SETSUNAYANG.JPG" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-一键部署单机K8S环境"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  一键部署单机K8S环境
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/04/%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%8D%95%E6%9C%BAK8S%E7%8E%AF%E5%A2%83/" class="article-date">
+  <time datetime="2023-12-04T10:14:23.000Z" itemprop="datePublished">2023-12-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a> / <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/%E6%9C%8D%E5%8A%A1%E7%AB%AF/">服务端</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">. /etc/init.d/functions</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">IP地址,默认为本机第一块网卡IP地址(不包含lo网卡)</span></span><br><span class="line">ip=</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">主机名称,默认为当前主机名称</span></span><br><span class="line">hostName=master</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Docker版本</span></span><br><span class="line">dockerVersion=20.10.6</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Kubernetes版本</span></span><br><span class="line">k8sVersion=1.23.0</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Pod网段</span></span><br><span class="line">podSubnet=&quot;10.244.0.0/16&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Service网段</span></span><br><span class="line">serviceSubnet=&quot;10.10.0.0/16&quot;</span><br><span class="line"></span><br><span class="line">networkCheck()&#123;</span><br><span class="line">ping -c 1 www.baidu.com &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">if [ $? -eq 0 ];then</span><br><span class="line">	action &quot;外网权限检查:&quot;</span><br><span class="line">else</span><br><span class="line">	action &quot;外网权限检查:&quot;</span><br><span class="line">	echo &quot;此脚本需要访问外网权限才可成功执行,退出脚本&quot;</span><br><span class="line">	exit 5</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line">cpuCheck()&#123;</span><br><span class="line">cpuCores=$(grep -c ^processor /proc/cpuinfo)</span><br><span class="line">if [[ $&#123;cpuCores&#125; -lt 2 ]];then</span><br><span class="line">	action &quot;CPU配置检查:&quot; false</span><br><span class="line">	echo -e &quot;\033[32m# 当前主机CPU $&#123;cpuCores&#125;核 &lt; 2核,不满足安装K8s最低需求,请检查配置\033[0m&quot;</span><br><span class="line">	exit 5</span><br><span class="line">else</span><br><span class="line">	action &quot;CPU配置检查:&quot; </span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">menoryCheck()&#123;</span><br><span class="line">menorySize=$(free -m|grep -i mem|awk &#x27;&#123;print $2&#125;&#x27;)</span><br><span class="line"></span><br><span class="line">if [[ $&#123;menorySize&#125; -lt 1800 ]];then</span><br><span class="line">        action &quot;内存配置检查:&quot; false</span><br><span class="line">        echo -e &quot;\033[32m# 当前主机内存 $&#123;menorySize&#125;M &lt; 1800M(2G),不满足安装K8s最低需求,请检查配置\033[0m&quot;</span><br><span class="line">	exit 5</span><br><span class="line">else</span><br><span class="line">        action &quot;内存配置检查:&quot;</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">stopFirewall()&#123;</span><br><span class="line">systemctl disable firewalld --now &amp;&gt;/dev/null</span><br><span class="line">setenforce 0 &amp;&gt;/dev/null</span><br><span class="line">sed  -i.$(date +%F) -r &#x27;s/SELINUX=[ep].*/SELINUX=disabled/g&#x27; /etc/selinux/config</span><br><span class="line"></span><br><span class="line">if (grep SELINUX=disabled /etc/selinux/config) &amp;&gt;/dev/null;then</span><br><span class="line">	action &quot;关闭防火墙:&quot;</span><br><span class="line">else</span><br><span class="line">	action &quot;关闭防火墙:&quot; false</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hostName()&#123;</span><br><span class="line">if [[ -z $&#123;ip&#125; ]];then</span><br><span class="line">	ip=$(ip addr | grep -oP &#x27;(?&lt;=inet\s)\d+\.\d+\.\d+\.\d+&#x27;|egrep -v &quot;127.0.0.1|172.17.0.1&quot;|awk NR==1)</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [[ -z $&#123;hostName&#125; ]];then</span><br><span class="line">	hostName=&quot;$&#123;HOSTNAME&#125;&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if ! (egrep -w &quot;$&#123;ip&#125; +$&#123;hostName&#125;&quot; /etc/hosts) &amp;&gt;/dev/null;then</span><br><span class="line">	hostnamectl set-hostname $&#123;hostName&#125;</span><br><span class="line">	echo &quot;$&#123;ip&#125; $&#123;hostName&#125;&quot; &gt;&gt; /etc/hosts</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if (egrep -w &quot;$&#123;ip&#125; +$&#123;hostName&#125;&quot; /etc/hosts) &amp;&gt;/dev/null;then</span><br><span class="line">	action &quot;添加本地域名解析:&quot;</span><br><span class="line">else</span><br><span class="line">        action &quot;添加本地域名解析:&quot; false</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">timeSync()&#123;</span><br><span class="line">if ! (which ntpdate &amp;&gt;/dev/null);then</span><br><span class="line">	echo -e &quot;\033[32m# ntpdate未安装,开始进行安装....\033[0m&quot;</span><br><span class="line">	(yum -y install ntpdate) &amp;&gt;/dev/null;sleep 0.3</span><br><span class="line">	if (which ntpdate &amp;&gt;/dev/null);then</span><br><span class="line">		action &quot;ntpdate安装成功:&quot;</span><br><span class="line">	fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if (ntpdate ntp1.aliyun.com &amp;&gt;/dev/null);then</span><br><span class="line">	if ! (egrep &quot;ntpdate +ntp1.aliyun.com&quot; /var/spool/cron/root &amp;&gt;/dev/null);then</span><br><span class="line">		echo &quot;0 1 * * * ntpdate ntp1.aliyun.com&quot; &gt;&gt; /var/spool/cron/root</span><br><span class="line">	fi</span><br><span class="line">		action &quot;时间同步:&quot;</span><br><span class="line">else</span><br><span class="line">	action &quot;时间同步:&quot; false</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">swapOff()&#123;</span><br><span class="line">swapoff --all</span><br><span class="line">sed -i -r &#x27;/swap/ s/^/#/&#x27; /etc/fstab</span><br><span class="line"></span><br><span class="line">if [[ $(free | grep -i swap | awk &#x27;&#123;print $2&#125;&#x27;) -eq 0 ]]; then</span><br><span class="line">    action &quot;关闭交换分区:&quot;</span><br><span class="line">else</span><br><span class="line">    action &quot;关闭交换分区:&quot; false</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addKernelArg()&#123;</span><br><span class="line">KernelArg=(&quot;net.bridge.bridge-nf-call-ip6tables&quot; &quot;net.bridge.bridge-nf-call-iptables&quot; &quot;net.ipv4.ip_forward&quot;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">判断内核参数是否存在,如果不存在则添加</span></span><br><span class="line">for ((i=0;i&lt;$&#123;#KernelArg[@]&#125;;i++))do</span><br><span class="line">	if [[ $(sysctl -n $&#123;KernelArg[i]&#125;) -ne 1 ]];then</span><br><span class="line">		echo &quot;$&#123;KernelArg[i]&#125; = 1&quot; &gt;&gt; /etc/sysctl.d/kubernetes.conf</span><br><span class="line">	fi</span><br><span class="line">done</span><br><span class="line">modprobe br_netfilter &amp;&gt;/dev/null</span><br><span class="line">sysctl -p /etc/sysctl.d/kubernetes.conf &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">if [[ $(sysctl -n $&#123;KernelArg[0]&#125;) -eq 1 &amp;&amp; $(sysctl -n $&#123;KernelArg[1]&#125;) -eq 1 &amp;&amp; $(sysctl -n $&#123;KernelArg[2]&#125;) -eq 1 ]]; then</span><br><span class="line">		action &quot;添加内核参数:&quot;</span><br><span class="line">	else</span><br><span class="line">		action &quot;添加内核参数:&quot; false</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ipvs()&#123;</span><br><span class="line">if (command -v ipset &amp;&gt;/dev/null &amp;&amp; command -v ipvsadm &amp;&gt;/dev/null);then</span><br><span class="line">cat &gt; /etc/sysconfig/modules/ipvs.modules &lt;&lt;EOF</span><br><span class="line">modprobe -- ip_vs</span><br><span class="line">modprobe -- ip_vs_rr</span><br><span class="line">modprobe -- ip_vs_wrr</span><br><span class="line">modprobe -- ip_vs_sh</span><br><span class="line">modprobe -- nf_conntrack_ipv4  </span><br><span class="line">EOF</span><br><span class="line">	chmod +x /etc/sysconfig/modules/ipvs.modules</span><br><span class="line">	/etc/sysconfig/modules/ipvs.modules</span><br><span class="line">else</span><br><span class="line">	echo -e &quot;\033[32m# ipvs未安装,开始进行安装....\033[0m&quot;</span><br><span class="line">	yum -y install ipset ipvsadm &amp;&gt;/dev/null</span><br><span class="line">	if (command -v ipset &amp;&gt;/dev/null &amp;&amp; command -v ipvsadm &amp;&gt;/dev/null);then</span><br><span class="line">		action &quot;ipvs安装成功:&quot;</span><br><span class="line">cat &gt; /etc/sysconfig/modules/ipvs.modules &lt;&lt;EOF</span><br><span class="line">modprobe -- ip_vs</span><br><span class="line">modprobe -- ip_vs_rr</span><br><span class="line">modprobe -- ip_vs_wrr</span><br><span class="line">modprobe -- ip_vs_sh</span><br><span class="line">modprobe -- nf_conntrack_ipv4  </span><br><span class="line">EOF</span><br><span class="line">	        chmod +x /etc/sysconfig/modules/ipvs.modules</span><br><span class="line">        	/etc/sysconfig/modules/ipvs.modules</span><br><span class="line"></span><br><span class="line">	fi</span><br><span class="line">fi</span><br><span class="line">modprobe br_netfilter &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">if (lsmod | grep -q -e ip_vs -e nf_conntrack_ipv4)&amp;&gt;/dev/null; then</span><br><span class="line">	action &quot;启用ipvs模块:&quot; </span><br><span class="line">else</span><br><span class="line">	action &quot;启用ipvs模块:&quot; false</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line">dockerInstall()&#123;</span><br><span class="line">if ! (command -v docker &amp;&gt;/dev/null);then</span><br><span class="line">	echo -e &quot;\033[32m# Docker未安装,开始进行安装....\033[0m&quot;</span><br><span class="line">	(curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo) &amp;&gt;/dev/null</span><br><span class="line">	(wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo) &amp;&gt;/dev/null</span><br><span class="line">	(yum install -y yum-utils) &amp;&gt;/dev/null</span><br><span class="line">	(yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo) &amp;&gt;/dev/null</span><br><span class="line">	(yum install docker-ce-$&#123;dockerVersion&#125; docker-ce-cli-$&#123;dockerVersion&#125; -y) &amp;&gt;/dev/null</span><br><span class="line">	if (command -v docker &amp;&gt;/dev/null);then</span><br><span class="line">		action &quot;Docker安装成功:&quot;</span><br><span class="line">	else</span><br><span class="line">		action &quot;Docker安装成功:&quot; false</span><br><span class="line">	fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mkdir /etc/docker &amp;&gt;/dev/null</span><br><span class="line">if [[ -f /etc/docker/daemon.json ]];then</span><br><span class="line">	mv /etc/docker/daemon.json&#123;,.$(date +%F)&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://aoewjvel.mirror.aliyuncs.com&quot;],</span><br><span class="line">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">(systemctl enable docker --now) &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">if [[ -f /etc/docker/daemon.json ]];then</span><br><span class="line">	action &quot;Docker镜像加速源:&quot;</span><br><span class="line">else</span><br><span class="line">	action &quot;Docker镜像加速源:&quot;</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">k8sInstall()&#123;</span><br><span class="line">k8scommand=(&quot;kubeadm&quot; &quot;kubelet&quot; &quot;kubectl&quot;)</span><br><span class="line"></span><br><span class="line">if [[ -f /etc/yum.repos.d/kubernetes.repo ]];then</span><br><span class="line">	mv /etc/yum.repos.d/kubernetes.repo&#123;,.$(date +%F)&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[32m# 正在安装K8S,请耐心等待......\033[0m&quot;</span><br><span class="line">(yum -y install --setopt=obsoletes=0 kubeadm-$&#123;k8sVersion&#125; kubelet-$&#123;k8sVersion&#125; kubectl-$&#123;k8sVersion&#125;) &amp;&gt;/dev/null</span><br><span class="line">systemctl enable kubelet.service --now  &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">for ((i=0;i&lt;$&#123;#k8scommand[@]&#125;;i++))do</span><br><span class="line">	if (command -v $&#123;k8scommand[i]&#125; &amp;&gt;/dev/null);then</span><br><span class="line">		action &quot;安装$&#123;k8scommand[i]&#125;组件:&quot;</span><br><span class="line">	else</span><br><span class="line">		action &quot;安装$&#123;k8scommand[i]&#125;组件:&quot; false</span><br><span class="line">	fi</span><br><span class="line">done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">k8sInit()&#123;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过hosts文件获取IP地址</span></span><br><span class="line">if [[ -z $&#123;ip&#125; ]];then</span><br><span class="line">	ip=$(grep $&#123;HOSTNAME&#125; /etc/hosts|awk &#x27;&#123;print $1&#125;&#x27;| awk NR==1)</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [[ -f /root/kubeadm-config.yaml ]];then</span><br><span class="line">	mv /root/kubeadm-config.yaml&#123;,.$(date +%F)&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">cat &gt;&gt; /root/kubeadm-config.yaml &lt;&lt; EOF</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1beta3</span><br><span class="line">bootstrapTokens:</span><br><span class="line">- groups:</span><br><span class="line">  - system:bootstrappers:kubeadm:default-node-token</span><br><span class="line">  token: abcdef.0123456789abcdef</span><br><span class="line">  ttl: 24h0m0s</span><br><span class="line">  usages:</span><br><span class="line">  - signing</span><br><span class="line">  - authentication</span><br><span class="line">kind: InitConfiguration</span><br><span class="line">localAPIEndpoint:</span><br><span class="line">  advertiseAddress: $&#123;ip&#125;</span><br><span class="line">  bindPort: 6443</span><br><span class="line">nodeRegistration:</span><br><span class="line">  imagePullPolicy: IfNotPresent</span><br><span class="line">  name: $&#123;hostName&#125;</span><br><span class="line">  taints: null</span><br><span class="line">---</span><br><span class="line">apiServer:</span><br><span class="line">  timeoutForControlPlane: 4m0s</span><br><span class="line">apiVersion: kubeadm.k8s.io/v1beta3</span><br><span class="line">certificatesDir: /etc/kubernetes/pki</span><br><span class="line">clusterName: kubernetes</span><br><span class="line">controllerManager: &#123;&#125;</span><br><span class="line">dns: &#123;&#125;</span><br><span class="line">etcd:</span><br><span class="line">  local:</span><br><span class="line">    dataDir: /var/lib/etcd</span><br><span class="line">imageRepository: registry.aliyuncs.com/google_containers</span><br><span class="line">kind: ClusterConfiguration</span><br><span class="line">kubernetesVersion: $&#123;k8sVersion&#125;</span><br><span class="line">networking:</span><br><span class="line">  dnsDomain: cluster.local</span><br><span class="line">  serviceSubnet: $&#123;serviceSubnet&#125;</span><br><span class="line">  podSubnet: $&#123;podSubnet&#125;</span><br><span class="line">scheduler: &#123;&#125;</span><br><span class="line">---</span><br><span class="line">apiVersion: kubeproxy.config.k8s.io/v1alpha1</span><br><span class="line">kind: KubeProxyConfiguration</span><br><span class="line">mode: ipvs</span><br><span class="line">---</span><br><span class="line">apiVersion: kubelet.config.k8s.io/v1beta1</span><br><span class="line">kind: KubeletConfiguration</span><br><span class="line">cgroupDriver: systemd</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">if [[ -f /root/kubeadm-config.yaml ]];then</span><br><span class="line">        action &quot;生成K8s初始化文件:&quot;</span><br><span class="line">else</span><br><span class="line">        action &quot;生成K8s初始化文件:&quot; false</span><br><span class="line">fi</span><br><span class="line">echo -e &quot;\033[32m# K8s初始化中,时间可能较长,可以使用 tailf k8s_init.log 可追踪整个过程....\033[0m&quot;</span><br><span class="line">echo </span><br><span class="line">kubeadm init --config /root/kubeadm-config.yaml --ignore-preflight-errors=SystemVerification &amp;&gt;k8s_init.log</span><br><span class="line">if [[ $? -eq 0 ]];then</span><br><span class="line">	action &quot;K8s初始化:&quot;</span><br><span class="line">	mkdir -p $HOME/.kube</span><br><span class="line">	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">	sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line">else</span><br><span class="line">	action &quot;K8s初始化:&quot; false</span><br><span class="line">	exit 5</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">k8sNetwork()&#123;</span><br><span class="line">(wget -O /root/calico.yaml https://gitee.com/qinziteng/K8S/raw/master/YMAL/calico.yaml) &amp;&gt;/dev/null</span><br><span class="line">(kubectl apply -f  /root/calico.yaml) &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">if [[ $? -eq 0 ]];then</span><br><span class="line">	action &quot;K8s网络插件:&quot;</span><br><span class="line">else</span><br><span class="line">	action &quot;K8s网络插件:&quot;  false</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">k8sTaint()&#123;</span><br><span class="line">(kubectl taint nodes --all node-role.kubernetes.io/master-) &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">if [[ $? -eq 0 ]];then</span><br><span class="line">        action &quot;设置Master节点可调度:&quot;</span><br><span class="line">else</span><br><span class="line">        action &quot;设置Master节点可调度:&quot; false</span><br><span class="line">fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">confCheck()&#123;</span><br><span class="line">cpuCheck</span><br><span class="line">menoryCheck</span><br><span class="line">networkCheck</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">initEnv()&#123;</span><br><span class="line">clear;echo &quot;一键部署单机版K8S脚本&quot;</span><br><span class="line">hostName</span><br><span class="line">stopFirewall</span><br><span class="line">swapOff</span><br><span class="line">timeSync</span><br><span class="line">ipvs</span><br><span class="line">addKernelArg</span><br><span class="line">dockerInstall</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">k8s()&#123;</span><br><span class="line">clear;k8sInstall</span><br><span class="line">k8sInit</span><br><span class="line">k8sNetwork</span><br><span class="line">k8sTaint</span><br><span class="line"></span><br><span class="line">echo</span><br><span class="line">echo -e &quot;\033[32m# K8s单机版部署完成,等待Pod全部运行成功即可使用 使用 kubectl get pods -n kube-system 关注Pod状态...\033[0m&quot;</span><br><span class="line">bash</span><br><span class="line">&#125;</span><br><span class="line">confCheck</span><br><span class="line">initEnv</span><br><span class="line">k8s</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://3546514206.github.io/2023/12/04/%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%E5%8D%95%E6%9C%BAK8S%E7%8E%AF%E5%A2%83/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/K8S/" rel="tag">K8S</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" rel="tag">安装部署</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/12/04/%E4%B8%89%E9%AB%98%EF%BC%9A%E9%AB%98%E5%8F%AF%E7%94%A8%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%81%E9%AB%98%E6%89%A9%E5%B1%95/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">三高：高可用、高性能、高扩展</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+    
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2023
+        <i class="ri-heart-fill heart_icon"></i> 杨海波
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src=''></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/SETSUNAYANG.JPG" alt="杨海波"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://github.com/3546514206">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/config/TeX-AMS-MML_HTMLorMML-full.js"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
