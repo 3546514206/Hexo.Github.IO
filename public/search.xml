@@ -63,8 +63,8 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6/%E6%95%B0%E5%AD%A6%E5%9C%B0%E5%9B%BE/TheMapofMathematics.png" alt="git 分支模型"></p>
 ]]></content>
       <categories>
-        <category>算法</category>
-        <category>数学</category>
+        <category>基本功</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>数学</tag>
