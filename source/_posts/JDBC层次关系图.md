@@ -3,7 +3,7 @@ title: JDBC层次关系图
 date: 2023-11-30 09:11:25
 categories: 
 - 基本功
-- 编程语言
+- 编程基础
 tags:
 - Java
 - JDBC

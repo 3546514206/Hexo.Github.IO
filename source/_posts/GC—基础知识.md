@@ -3,7 +3,7 @@ title: GC——基础知识
 date: 2023-08-28 23:31:37
 categories: 
 - 基本功
-- 编程语言
+- 编程基础
 tags:
 - Java
 - JVM

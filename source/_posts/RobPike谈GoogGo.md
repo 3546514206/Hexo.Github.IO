@@ -3,7 +3,7 @@ title: RobPike谈GoogGo
 date: 2023-09-04 00:26:46
 categories: 
 - 基本功
-- 编程语言
+- 编程基础
 tags:
 - Go
 - 基础知识

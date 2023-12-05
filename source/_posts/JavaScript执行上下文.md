@@ -3,7 +3,7 @@ title: JavaScript执行上下文
 date: 2023-11-30 15:36:22
 categories: 
 - 基本功
-- 编程语言
+- 编程基础
 tags:
 - JavaScript
 ---

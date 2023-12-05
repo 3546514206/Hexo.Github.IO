@@ -50,7 +50,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>JVM</tag>
@@ -121,7 +121,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -181,7 +181,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
@@ -203,7 +203,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -217,11 +217,11 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>技术体系</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -244,7 +244,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -298,7 +298,7 @@
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="number">10</span> = <span class="number">20</span>;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -1077,7 +1077,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -1091,7 +1091,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -1343,7 +1343,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -1357,7 +1357,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -2288,7 +2288,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -2820,7 +2820,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -3355,7 +3355,7 @@
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -4897,7 +4897,7 @@ use one vs other -->
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -4956,7 +4956,7 @@ use one vs other -->
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -5621,7 +5621,7 @@ use one vs other -->
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -7414,7 +7414,7 @@ use one vs other -->
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>基础知识</tag>
@@ -7535,7 +7535,7 @@ use one vs other -->
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -7703,7 +7703,7 @@ use one vs other -->
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -7742,7 +7742,7 @@ use one vs other -->
 ]]></content>
       <categories>
         <category>基本功</category>
-        <category>编程语言</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>Java</tag>
