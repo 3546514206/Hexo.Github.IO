@@ -10,5 +10,5 @@ tags:
 
 ---
 
-![Hotspot源码目录结构](/pic/基本功/编程语言/Hotspot源码目录结构/Hotspot源码目录结构.png)
+![Hotspot源码目录结构](/pic/基本功/编程基础/Hotspot源码目录结构/Hotspot源码目录结构.png)
 

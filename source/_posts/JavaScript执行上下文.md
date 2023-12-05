@@ -45,7 +45,7 @@ console.log('Inside Global Execution Context');
 
 &ensp;&ensp;&ensp;&ensp; 当上述代码在浏览器加载时，JavaScript 引擎创建了一个全局执行上下文并把它压入当前执行栈。当遇到 first() 函数调用时，JavaScript 引擎为该函数创建一个新的执行上下文并把它压入当前执行栈的顶部。
 
-![IP报文结构](/pic/基本功/编程语言/JavaScript执行上下文/运行上下文.png)
+![IP报文结构](/pic/基本功/编程基础/JavaScript执行上下文/运行上下文.png)
 
 &ensp;&ensp;&ensp;&ensp; 当从 first() 函数内部调用 second() 函数时，JavaScript 引擎为 second() 函数创建了一个新的执行上下文并把它压入当前执行栈的顶部。当 second() 函数执行完毕，它的执行上下文会从当前栈弹出，并且控制流程到达下一个执行上下文，即 first() 函数的执行上下文。当 first() 执行完毕，它的执行上下文从栈弹出，控制流程到达全局执行上下文。一旦所有代码执行完毕，JavaScript 引擎从当前栈中移除全局执行上下文。
 

@@ -107,15 +107,15 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p>&ensp;&ensp;&ensp;&ensp; 总体而言，JDBC包含以下几大角色 : Driver、DriverManager、Connection、Statement、ResultSet。这几大角色之间的层次关系如下图所示：</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="JDBC层次关系结构"></p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="JDBC层次关系结构"></p>
 <p>&ensp;&ensp;&ensp;&ensp; Connection表示与特定数据库的连接，可以获取到数据库的一些信息，这些信息包括：其表信息，应该支持的SQL语法，数据库内有什么存储过程，此链接功能的信息等等。</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/Connecyion.png" alt="Connection"></p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/Connecyion.png" alt="Connection"></p>
 <p>&ensp;&ensp;&ensp;&ensp; Statement 的功能在于根据传入的sql语句，将传入sql经过整理组合成数据库能够识别的sql语句(对于静态的sql语句，不需要整理组合；而对于预编译sql语句和批量语句，则需要整理)，然后传递sql请求，之后会得到返回的结果。对于查询sql，结果会以ResultSet的形式返回。</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/statement.png" alt="Connection"></p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/statement.png" alt="Connection"></p>
 <p>&ensp;&ensp;&ensp;&ensp; 当Statement查询sql执行后，会得到ResultSet对象，ResultSet对象是sql语句查询的结果，作为数据库结果的映射，其映射关系如下图所示。ResultSet对从数据库返回的结果进行了封装，使用迭代器的模式逐条取出结果集中的记录。</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/ResultSet.png" alt="ResultSet"></p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/ResultSet.png" alt="ResultSet"></p>
 <p>&ensp;&ensp;&ensp;&ensp; 工作时序图：</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt="时序图"></p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt="时序图"></p>
  
       <!-- reward -->
       
