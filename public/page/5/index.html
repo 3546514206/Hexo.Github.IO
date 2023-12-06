@@ -174,7 +174,15 @@
   </div>
    
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <p>&ensp;&ensp;&ensp;&ensp; 世界何其广大，能人异士很多。 搞清楚自己的能力边界很重要。对未知或者模糊不清的事物保持敬畏之心，不鲁莽下结论， 避免盲目自负也很重要。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -220,7 +228,35 @@
   </div>
    
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <p>&ensp;&ensp; MySQL 创建数据库并指定字符集：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop schema if exists `test`;</span><br><span class="line">CREATE DATABASE `test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; Brew 相关的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 先卸载Homebrew</span><br><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)&quot;</span><br><span class="line">// 然后在安装</span><br><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br><span class="line">// 搜索包</span><br><span class="line">brew search mysql</span><br><span class="line">// 安装包</span><br><span class="line">brew install mysql</span><br><span class="line">// 查看包信息，比如目前的版本，依赖，安装后注意事项等</span><br><span class="line">brew info mysql</span><br><span class="line">// 卸载包</span><br><span class="line">brew uninstall wget</span><br><span class="line">// 显示已安装的包</span><br><span class="line">brew list</span><br><span class="line">// 查看brew的帮助</span><br><span class="line">brew –help</span><br><span class="line">// 更新， 这会更新 Homebrew 自己</span><br><span class="line">brew update</span><br><span class="line">// 检查过时（是否有新版本），这会列出所有安装的包里，哪些可以升级</span><br><span class="line">brew outdated</span><br><span class="line">brew outdated mysql</span><br><span class="line">// 升级所有可以升级的软件们</span><br><span class="line">brew upgrade</span><br><span class="line">brew upgrade mysql</span><br><span class="line">// 清理不需要的版本极其安装包缓存</span><br><span class="line">brew cleanup</span><br><span class="line">brew cleanup mysql</span><br></pre></td></tr></table></figure>
+<p>&ensp;&ensp; MySQL 源码构建参数(将目录修改为你自己的)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-DCMAKE_BUILD_TYPE=Debug</span><br><span class="line">-DWITH_BOOST=/Users/setsunayang/Documents/learning/mysql/boost_1_77_0</span><br><span class="line">-DCMAKE_INSTALL_PREFIX=/Users/setsunayang/Documents/learning/mysql/build</span><br><span class="line">-DWITH_SSL=system</span><br><span class="line"></span><br><span class="line">./mysqld --basedir=/Users/setsunayang/Documents/learning/mysql/build \</span><br><span class="line">--datadir=/Users/setsunayang/Documents/learning/mysql/build/data \</span><br><span class="line">--initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; Git重新关联远程仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin </span><br><span class="line">git remote add origin [url]</span><br><span class="line">git config --global user.name &quot;杨海波&quot;</span><br><span class="line">git config --global user.email “3546514206@QQ.COM&quot;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; 设置主机名称</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo scutil --set HostName SetsunaYang</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; Macbook Pro 显示被隐藏的文件或文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.finder AppleShowAllFiles -boolean true;killall Finder </span><br><span class="line">defaults write com.apple.finder AppleShowAllFiles -boolean false;killall Finder</span><br><span class="line"></span><br><span class="line">chflags hidden </span><br><span class="line">chflags nohidden</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; 设置环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;export PATH=&quot;/opt/homebrew/opt/go@1.20/bin:$PATH&quot;&#x27; &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -266,7 +302,37 @@
   </div>
    
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <h4 id="1、C语言中的回调"><a href="#1、C语言中的回调" class="headerlink" title="1、C语言中的回调"></a><strong>1、C语言中的回调</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 函数指针是指向函数的指针变量。通常我们说的指针变量是指向一个整型、字符型或数 组等变量，而函数指针是指向函数。函数指针可以像一般函数一样，用于调用函数、传递参 数。函数指针变量的声明： typedef int (*fun_ptr)(int,int); &#x2F;&#x2F; 声明一个指向同样参数、返回值的函数指针类型 以下实例声明了函数指针变量 p，指向函数 max：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">max</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x &gt; y ? x : y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/* p 是函数指针 */</span></span><br><span class="line">    <span class="built_in">int</span> (*p)(<span class="type">int</span>, <span class="type">int</span>) = &amp;max; <span class="comment">// &amp;可以省略 </span></span><br><span class="line">    <span class="type">int</span> a, b, c, d;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;请输入三个数字:&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">    <span class="comment">/* 与直接调用函数等价，d = max(max(a, b), c) */</span></span><br><span class="line">    d = <span class="built_in">p</span>(<span class="built_in">p</span>(a, b), c);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最大的数字是: %d\n&quot;</span>, d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 输出的结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">请输入三个数字:1 2 3 </span><br><span class="line">最大的数字是: 3</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 函数指针变量可以作为某个函数的参数来使用的，回调函数就是一个通过函数指针调用 的函数。下面的实例中 populate_array 函数定义了三个参数，其中第三个参数是函数的指 针，通过该函数来设置数组的值。实例中我们定义了回调函数 getNextRandomValue，它返 回一个随机值，它作为一个函数指针传递给 populate_array 函数。populate_array 将调 用 10 次回调函数，并将回调函数的返回值赋值给数组。编译执行，输出结果如下： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">16807 282475249 1622650073 984943658 1144108930 470211272 101027544 1457850878 1458777923 2007237709</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、什么是回调"><a href="#2、什么是回调" class="headerlink" title="2、什么是回调"></a><strong>2、什么是回调</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 软件模块之间总是存在着一定的接口，从调用方式上，可以把他们分为三类：同步调 用、回调和异步调用。回调是一种双向调用的模式，也就是说，被调用方在接口被调用时也 会调用对方的接口。 </p>
+<p>&ensp;&ensp;&ensp;&ensp; 同步调用：一种阻塞式调用，调用方要等待对方执行完毕才能返回，它是一种单向调 用。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 回调：一种双向调用模式，也就是说，被调用方在接口被调用时也会调用对方的接口。 </p>
+<p>&ensp;&ensp;&ensp;&ensp; 异步调用：一种类似消息或事件的机制，不过它的调用方向刚好相反，接口的服务在收 到某种讯息或发生某种事件时，会主动通知客户方（即调用客户方的接口）。 回调和异步调用的关系非常紧密：通常可以使用回调来实现异步消息的注册，通过异步 调用来实现消息的通知。</p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6/%E5%9B%9E%E8%B0%83%E6%9C%BA%E5%88%B6.jpg" alt="程序调用的几种方式"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 回调机制的实现通常需要实现一个回调函数，回调函数，顾名思义，用于回调的函数。回调函数只是一个功能片段，由用户按照回调函数调用约定来实现的一个函数。回调函数是一个工作流的一部分，由工作流来决定函数的调用（回调）时机。回调函数包含下面几个特性：</p>
+<ul>
+<li><p>属于工作流的一个部分； </p>
+</li>
+<li><p>必须按照工作流指定的调用约定来申明（定义）； </p>
+</li>
+<li><p>他的调用时机由工作流决定，回调函数的实现者不能直接调用回调 函数来实现工作流的功能。</p>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -312,7 +378,39 @@
   </div>
    
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <p>&ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样<br>的，首先抛出第一个问题，什么样的对象会是 JVM 回收的目标？</p>
+<h4 id="1、可达性分析算法（GC-Roots）"><a href="#1、可达性分析算法（GC-Roots）" class="headerlink" title="1、可达性分析算法（GC Roots）"></a><strong>1、可达性分析算法（GC Roots）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 有一种引用计数法，可以用来判断对象被引用的次数，如果引用次数为0，则代表可以被回收。这种实现<br>方式比较简单，但对于循环引用的情况束手无策，所以 Java 采用了可达性分析算法。即判断某个对象是否与 GC Roots 的这类对象之<br>间的路径可达，若不可达，则有可能成为回收对象，被判定为不可达的对象要成为可回收对象必须至少经历两次标记过程，如果在这两次标<br>记过程中仍然没有逃脱成为可回收对象的可能性，则基本上就真的成为可回收对象了。在 Java 中，可作为 GC Roots 的对象包括以下<br>几种：</p>
+<ul>
+<li>虚拟机栈（本地变量表）中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中引用的对象</li>
+</ul>
+<h4 id="2、JVM中的堆结构"><a href="#2、JVM中的堆结构" class="headerlink" title="2、JVM中的堆结构"></a><strong>2、JVM中的堆结构</strong></h4><p>&ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：</p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%A0%86%E5%8C%BA%E7%9A%84%E5%88%92%E5%88%86%E6%AF%94%E4%BE%8B.png" alt="JVM 分代比例"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to<br>区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：</p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/JVM%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="JVM 内存模型全景"></p>
+<h4 id="2-1、为何新生代要分为三个区"><a href="#2-1、为何新生代要分为三个区" class="headerlink" title="2.1、为何新生代要分为三个区"></a><strong>2.1、为何新生代要分为三个区</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 这里需要介绍新生代的垃圾回收算法——复制算法。该算法的核心是将可用内存按容量划分为大小<br>相等的两块，每次回收周期只用其中一块，当这一块的内存用完，就将还存活的对象复制到另一块上面，然后把已使用过的内存空间清理掉。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 优点：不必考虑内存碎片问题；效率高。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 缺点：可用容量减少为原来的一半，比较浪费。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 最优设置：根据权威数据分析，90%的对象都是朝生夕死的，所以采用10%的空间用作交换区，因为交换区必须要有等量的两个，所以采用复制算法中新生代中三个区默认分配比例为8:1:1。</p>
+<h4 id="2-2、新生代对象的分配和回收"><a href="#2-2、新生代对象的分配和回收" class="headerlink" title="2.2、新生代对象的分配和回收"></a><strong>2.2、新生代对象的分配和回收</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 基本上新的对象优先在 Eden 区分配；</p>
+<p>&ensp;&ensp;&ensp;&ensp; 当 Eden 区没有足够空间时，会发起一次 Minor GC；</p>
+<p>&ensp;&ensp;&ensp;&ensp; Minor GC 回收新生代采用复制回收算法的改进版本。即：<br>from 区和 to 区的两个交换区，这两个区只有一个区有数据。采用8:1:1的默认分配比例（-XX:SurvivorRatio默认为8，代表 Eden 区与 Survivor 区的大小比例）</p>
+<h4 id="2-3、老年代对象的分配和回收"><a href="#2-3、老年代对象的分配和回收" class="headerlink" title="2.3、老年代对象的分配和回收"></a><strong>2.3、老年代对象的分配和回收</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 老年代的对象一般来自于新生代中的长期存活对象。这里有一概念叫做年龄阈值，每个对象定义了年龄计数器，经<br>过一次 Minor GC （在交换区）后年龄加1，对象年龄达到15次后将会晋升到老年代，老年代空间不够时进行 Full GC。当然这个参数仍是可以通过 JVM 参数（-XX:MaxTenuringThreshold，默认15）来调整。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 大对象直接进入老年代。即超过 Eden 区空间，或超过一个参数值（-<br>XX:PretenureSizeThreshold&#x3D;30m，无默认值）。这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 对象提前晋升到老年代（组团）。动态年龄判定：如果在 Survivor 区中相同年龄所有对象大小总和<br>大于 Survivor 区大小的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，而无须等到自己<br>的晋升年龄。</p>
+<h4 id="3、JVM完整的GC流程"><a href="#3、JVM完整的GC流程" class="headerlink" title="3、JVM完整的GC流程"></a><strong>3、JVM完整的GC流程</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 对象的正常流程：Eden 区 -&gt; Survivor 区 -&gt; 老年代。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 新生代GC：Minor GC；老年代GC：Full GC，比 Minor GC 慢10倍，JVM 会“stop the world”，严重<br>影响性能。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 总结：内存区域不够用了，就会引发GC。Minor GC 避免不了，Full GC 尽量避免。<br>处理方式：保存堆栈快照日志、分析内存泄漏、调整内存设置控制垃圾回收频率，选择合适的垃圾<br>回收器等。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
@@ -358,7 +456,15 @@
   </div>
    
     </div>
+      
+    <div class="article-entry" itemprop="articleBody">
        
+  <p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1/%E5%86%85%E6%A0%B8%E9%A1%B5%E8%A1%A8%E8%AE%BE%E8%AE%A1.png" alt="内核页表设计"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
 
     <!-- copyright -->
     
