@@ -146,6 +146,229 @@
     
     
     <article
+  id="post-Go语言包相关概念"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/06/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/"
+    >Go语言包相关概念</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/06/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time datetime="2023-11-06T01:11:24.000Z" itemprop="datePublished">2023-11-06</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="1、包的相关概念"><a href="#1、包的相关概念" class="headerlink" title="1、包的相关概念"></a><strong>1、包的相关概念</strong></h4><p>&ensp;&ensp;&ensp;&ensp; Go 语言是使用包来组织源代码的，并实现命名空间的管理。任何源代码文件必须属于某个包。源码文件的第一行有效代码必须是 package pacakgeName 语句，通过该语句声明自己所在的包。</p>
+<h4 id="2、包的特征"><a href="#2、包的特征" class="headerlink" title="2、包的特征"></a><strong>2、包的特征</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 所有的 .go 文件，除了空行和注释，都应该在第一行声明自己所属的包。即所有代码都必须组织在 package 中。包的结构特点有：</p>
+<ul>
+<li>源文件头部以 package 声明包名称；</li>
+<li>包由同一目录下的多个源码文件组成，即一个目录下的同级文件属于同一个包；</li>
+<li>每个包都在一个单独的目录里；</li>
+<li>包所在的目录名最好不用 main 、 all 、 std 这三个保留名称；</li>
+<li>可执行文件必须包含 package main 和入口函数 main ， main 包是 Go 语言程序的入口包，一个 Go 语言程序必须有且仅有一个 main 包，并且，一个 main 包中也必须有且仅有一个 main 函数。如果一个程序没有 main 包，那么编译时将会出错，无法生成可执行文件；</li>
+<li>不能把多个包放到同一个目录中，也不能把同一个包的文件分拆到多个不同目录中。这意味着，同一个目录下的所有 .go 文件必须声明同一个包名；</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 包中成员以名称首字母大小写决定访问权限。该规则适用于全局变量、全局常量、类型、结构字段、函数、方法等。</p>
+<ul>
+<li>Public : 首字母大写，可被包外访问；</li>
+<li>internal : 首字母小写，仅包内成员可以访问；</li>
+</ul>
+<h4 id="3、包名约束"><a href="#3、包名约束" class="headerlink" title="3、包名约束"></a><strong>3、包名约束</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 给包命名的惯例是使用包所在目录的名字。给包及其目录命名时，应该使用简洁、清晰且全小写的名字，这有利于开发时频繁输入包名。<br>&ensp;&ensp;&ensp;&ensp; 记住，并不需要所有包的名字都与别的包不同，因为导入包时是使用全路径的，所以可以区分同名的不同包。<br>&ensp;&ensp;&ensp;&ensp; 一般情况下，包被导入后会使用你的包名作为默认的名字，不过这个导入后的名字可以修改。这个特性在需要导入不同目录的同名包时很有用。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 关于默认包名一般采用导入路径名的最后一段的约定也有三种例外情况:</p>
+<ul>
+<li>包对应一个可执行程序，也就是 main 包，这时候 main 包本身的导入路径是无关紧要的。名字为 main 的包是给 go build 构建命令一个信息，这个包编译完之后必须调用连接器生成一个可执行程序。</li>
+<li>包所在的目录中可能有一些文件名是以 _test.go 为后缀的 Go 源文件（译注：前面必须有其它的字符，因为以 _ 或 . 开头的源文件会被构建工具忽略），并且这些源文件声明的包名也是以 _test 为后缀名的。这种目录可以包含两种包：一种是普通包，另一种则是测试的外部扩展包。所有以 _test 为后缀包名的测试外部扩展包都由 go test 命令独立编译，普通包和测试的外部扩展包是相互独立的。测试的外部扩展包一般用来避免测试代码中的循环导入依赖。</li>
+<li>一些依赖版本号的管理工具会在导入路径后追加版本号信息，例如“gopkg.in&#x2F;yaml.v2” 这种情况下包的名字并不包含版本号后缀，而是 yaml 。</li>
+</ul>
+<h4 id="4、main-包"><a href="#4、main-包" class="headerlink" title="4、main 包"></a><strong>4、main 包</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 在 Go 语言里，命名为 main 的包具有特殊的含义。 Go 语言的编译程序会试图把这种名字的包编译为二进制可执行文件。所有用 Go 语言编译的可执行程序都必须有一个名叫 main 的包。<br>&ensp;&ensp;&ensp;&ensp; 当编译器发现某个包的名字为 main 时，它一定也会发现名为 main() 的函数，否则不会创建可执行文件。 main() 函数是程序的入口，所以，如果没有这个函数，程序就没有办法开始执行。程序编译时，会使用声明 main 包代码所在目录的目录名作为二进制可执行文件的文件名。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 而且通常来说，main 包应该很简洁。我们在 main 包中会做一些命令行参数解析、资源初始化、日志设施初始化、数据库连接初始化等工作，之后就会将程序的执行权限交给更高级的执行控制对象。</p>
+<h4 id="5、包的声明"><a href="#5、包的声明" class="headerlink" title="5、包的声明"></a><strong>5、包的声明</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 在 Go 语言中，代码包中的源码文件名可以是任意的，这些任意名称的源码文件都必须以包声明语句作为文件中代码的第一行。比如 src 目录下的代码包 common&#x2F;upload 包中的所有源码文件都要先声明自己属于common&#x2F;upload 包：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> upload</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; package 是 Go 语言中用于包声明语句的关键字。 Go 语言规定包声明中的包名为代码包路径的最后一个元素。如上，common&#x2F;upload 包的包路径为 common&#x2F;upload ，而包声明中的包名则为 upload 。而针对源码文件（即包含 main 函数的 .go 文件），无论存放在哪个包中，它都必须声明为属于 main 包。</p>
+<h4 id="6、包的引入"><a href="#6、包的引入" class="headerlink" title="6、包的引入"></a><strong>6、包的引入</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 标准包的源码位于 $GOROOT&#x2F;src&#x2F; 下面，标准包可以直接引用。自定义的包和第三方包的源码必须放到 $GOPATH&#x2F;src&#x2F; 目录下才能被引用。导入包需要使用关键字 import ，它会告诉编译器你想引用该位置的包内的代码。如果需要导入多个包，习惯上是将 import 语句包装在一个导入块中。包的引用路径有两种写法， 一种是绝对路径，另一种是相对路径。要在代码中引用其他包的内容，需要使用 import 关键字导入使用的包。具体语法如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;包的路径&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 注意事项：</p>
+<ul>
+<li>import 导入语句通常放在源码文件开头包声明语句的下面；</li>
+<li>导入的包名需要使用双引号包裹起来；</li>
+<li>包名是从GOPATH&#x2F;src&#x2F; 后开始计算的，使用&#x2F; 进行路径分隔。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 包的导入有两种写法，分别是单行导入和多行导入。</p>
+<ul>
+<li><p>单行导入:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;包 1 的路径&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;包 2 的路径&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多行导入</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;包 1 的路径&quot;</span></span><br><span class="line">    <span class="string">&quot;包 2 的路径&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="6-1、包的绝对路径"><a href="#6-1、包的绝对路径" class="headerlink" title="6.1、包的绝对路径"></a><strong>6.1、包的绝对路径</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 包的绝对路径就是 $GOROOT&#x2F;src 或 $GOPATH&#x2F;src 后面包的源码的全路径，比如下面的包引用：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;common/upload&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;database/sql/driver&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;database/sql&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; upload 包是自定义的包，其源码位于 $GOPATH&#x2F;src&#x2F;common&#x2F;upload 目录下，代码包导入使用的路径就是代码包在工作区的 src 目录下的相对路径，比如 upload 的绝对路径为 &#x2F;home&#x2F;setsunayang&#x2F;gocode&#x2F;src&#x2F;common&#x2F;upload ，而 &#x2F;home&#x2F;setsunayang&#x2F;gocode 是被包含在环境变量 GOPATH 中的工作区目录路径，则其代码包导入路径就是 common&#x2F;upload。</p>
+<p>&ensp;&ensp;&ensp;&ensp; sql 和 driver 包的源码分别位于 $GOROOT&#x2F;src&#x2F;database&#x2F;sql 和 $GOROOT&#x2F;src&#x2F;database&#x2F;sql&#x2F;driver 下。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 编译器会首先查找 Go 的安装目录，然后才会按顺序查找 GOPATH 变量里列出的目录。一旦编译器找到一个满足 import 语句的包，就停止进一步查找。</p>
+<h4 id="6-2、相对路径引用"><a href="#6-2、相对路径引用" class="headerlink" title="6.2、相对路径引用"></a><strong>6.2、相对路径引用</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 相对路径只能用于引用 $GOPATH 下的包，标准包的引用只能使用全路径引用。比如下面两个包：包 a 的路径是 $GOPATH&#x2F;src&#x2F;lab&#x2F;a ，包 b 的源码路径为 $GOPATH&#x2F;src&#x2F;lab&#x2F;b ，假设 b 引用了 a 包，则可以使用相对路径引用方式。示例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 相对路径引用</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;../a&quot;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 绝对路径引用</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;lab/a&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-3、引用格式"><a href="#6-3、引用格式" class="headerlink" title="6.3、引用格式"></a><strong>6.3、引用格式</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 常用的包引用有以下 4 种格式，我们以 fmt 包为例进行说明。</p>
+<ul>
+<li>标准引用方式</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt”</span></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 此时可以用 fmt. </p>
+<ul>
+<li>别名引用方式</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> F <span class="string">&quot;fmt”</span></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 此时相当于给包 fmt 起了个别名 F ，用 F. 代替标准的 fmt.作为前缀引用 fmt 包内可导出元素。</p>
+<ul>
+<li>省略引用方式</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> . <span class="string">&quot;fmt&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 此时相当于把包 fmt 的命名空间直接合并到当前程序的命名空间中，使用 fmt 包内可导出元素可以不用前缀 fmt. ，直接引用。示例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> . <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 不需要加前级fmt.</span></span><br><span class="line">    Println(<span class="string">&quot;hello , world”)</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>仅执行包初始化 init 函数</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 使用标准格式引用包，但是代码中却没有使用包，编译器会报错。如果包中有 init 初始化函数，则通过 import packageName 这种方式引用包，仅执行包的初始化函数，即使包没有 init 初始化函数，也不会引发编译器报错。示例如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  _ <span class="string">&quot;fmt&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 下划线字符 _ 在 Go 语言里称为空白标识符，这个标识符用来抛弃不想继续使用的值，如给导入的包赋予一个空名字，或者忽略函数返回的你不感兴趣的值。</p>
+<ul>
+<li>远程导入</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; Go 工具链会使用导入路径确定需要获取的代码在网络的什么地方。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/net/http&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 用导入路径编译程序时， go build 命令会使用 GOPATH 的设置，在磁盘上搜索这个包。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 事实上，这个导入路径代表一个 URL ，指向 GitHub 上的代码库。如果路径包含 URL ，可以使用 Go 工具链从分布式版本控制系统获取包，并把包的源代码保存在 GOPATH 指向的路径里与 URL 匹配的目录里。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 这个获取过程使用 go get 命令完成。go get 将获取任意指定的 URL 的包，或者一个已经导入的包所依赖的其它包。由于 go get 的这种递归特性，这个命令会扫描某个包的源码树，获取能找到的所有依赖包。</p>
+<h4 id="6-3、综合实践"><a href="#6-3、综合实践" class="headerlink" title="6.3、综合实践"></a><strong>6.3、综合实践</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 当导入多个代码包时，需要用圆括号括起它们，且每个代码包名独占一行。在调用被导入代码包中的函数或使用其中的结构体、变量或常量时，需要使用包路径的最后一个元素加 . 的方式指定代码所在的包。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 例如，如果我们有两个包 logging 和 go_lib&#x2F;logging , 并且有相同的方法 logging_print() ，且有一个源码文件需要导入这两个包（标准引用）：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;logging&quot;</span></span><br><span class="line">    <span class="string">&quot;go_lib/logging&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 则这句代码 logging.logging_print() 就会引起冲突， Go 语言无法知道 logging.Xxx() 代表的是哪一个包。所以，在 Go 语言中，如果在同一个源码文件中使用上述方法导入多个代码包，那么代码包路径的最后一个元素不可以重复。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 如果用这段代码包导入代码，在编译代码时，Go 语言会抛出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">”logging redeclared as imported package name”</span><br></pre></td></tr></table></figure>
+
+<p>的错误。如果确实需要导入，当有这类重复时，我们可以给它们起个别名来区别（别名引用）：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    la <span class="string">&quot;logging&quot;</span></span><br><span class="line">    lb <span class="string">&quot;go_lib/logging&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>调用包中的代码以如下方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> logger la.Logger = la.logging_print()</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 这里不必给每个引起冲突的代码包都起一个别名，只要能够区分它们就可以了。如果我们想直接调用某个依赖包的程序，就可以用 . 来代替别名（省略引用）。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    . <span class="string">&quot;logging&quot;</span></span><br><span class="line">    lb <span class="string">&quot;go_lib/logging&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>在当前源码文件中，可以直接进行代码调用了：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> logger Logger = logging_print()</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; Go 语言把变量、常量、函数、结构体和接口统称为程序实体，而把它们的名字统称为标识符。标识符可以是任何 Unicode 编码可以表示的字母字符、数字以及下划线 ”_”，并且，首字母不能是数字。标识符的首字母的大小写控制着对应程序实体的访问权限。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 如果标识符的首字母是大写的，那么它对应的程序实体就可以被本代码包之外的代码访问到，也可以称其为可导出的。否则对应的程序实体就只能被本包内的代码访问。当然，还需要有以下两个额外条件：</p>
+<ul>
+<li>(1)、程序实体必须是非局部的。局部程序实体是被定义在函数或结构体的内部。</li>
+<li>(2)、代码包所在的目录必须被包含在环境变量 GOPATH 中的工作区目录中。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 如果代码包 logging 中有一个叫做 getSimpleLogger 的函数，那么光从这个函数的名字上我们就可以看出，这个函数是不能被包外代码调用的。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 如果我们只想初始化某个代码包而不需要在当前源码文件中使用那个代码包中的任何代码，即可以用 _ 来代替别名（仅执行包初始化 init 函数的引用方式）。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    _ <span class="string">&quot;logging&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-5、注意事项"><a href="#6-5、注意事项" class="headerlink" title="6.5、注意事项"></a><strong>6.5、注意事项</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 一个包可以有多个 init 函数，包加载会执行全部的 init 函数，但并不能保证执行顺序，所以不建议在一个包中放入多个 init 函数，将需要初始化的逻辑放到一个 init 函数里面。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 包不能出现循环引用。比如包 a 引用了包 b ，包 b 引用了包 c，如果包 c 又引用了包 a，则编译不能通过。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 包的重复引用是允许的。比如包 a 引用了包 b 和包 c ，包 b 和包 c 都引用了包 d 。这种场景相当于重复引用了d，这种情况是允许的， 并且 Go 编译器保证 d 的 init 函数只会执行一次。</p>
+<h4 id="7、包初始化"><a href="#7、包初始化" class="headerlink" title="7、包初始化"></a><strong>7、包初始化</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 在 Go 语言中，可以有专门的函数负责代码包初始化。这个函数需要无参数声明和结果声明，且名称必须为 init ，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="built_in">println</span>(<span class="string">&quot;Initialize&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; Go 语言会在程序真正执行前对整个程序的依赖进行分析，并初始化相关的代码包。也就是说，所有的代码包初始化函数都会在 main 函数（命令源码文件中的入口函数）之前执行完成，而且只会执行一次。并且，当前代码包中的所有全局变量的初始化都会在代码包初始化函数执行前完成。这就避免了在代码包初始化函数对某个变量进行赋值之后又被该变量声明中赋予的值覆盖掉的问题。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 每个包可以包含任意多个 init 函数，这些函数都会在程序执行开始的时候被调用。所有被编译器发现的 init 函数都会安排在 main 函数之前执行。 init 函数用在设置包、初始化变量或者其他要在程序运行前优先完成的引导工作。</p>
+<p>&ensp;&ensp;&ensp;&ensp; Go 里面有两个保留的函数： init 函数（能够应用于所有的 package ）和 main 函数（只能应用于 package main ）。这两个函数在定义时不能有任何的参数和返回值。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 虽然一个 package 里面可以写任意多个 init 函数，但这无论是对于可读性还是以后的可维护性来说，我们都强烈建议用户在一个 package 中每个文件只写一个 init 函数。</p>
+<p>&ensp;&ensp;&ensp;&ensp; Go 程序会自动调用 init() 和 main() ，所以不需要在任何地方调用这两个函数。每个 package 中的 init 函数都是可选的，但 package main 只能包含一个 main 函数。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 程序的初始化和执行都起始于 main 包。如果 main 包还导入了其它的包，那么就会在编译时将它们依次导入。有时一个包会被多个包同时导入，那么它只会被导入一次（例如很多包可能都会用到 fmt 包，但它只会被导入一次，因为没有必要导入多次）。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 当一个包被导入时，如果该包还导入了其它的包，那么会先将其它包导入进来，然后再对这些包中的包级常量和变量进行初始化，接着执行 init 函数（如果有的话），依次类推。等所有被导入的包都加载完毕了，就会开始对 main 包中的包级常量和变量进行初始化，然后执行 main 包中的 init 函数（如果存在的话），最后执行 main 函数。下图详细地解释了整个执行过程：</p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/%E5%8C%85%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B.jpg" alt="包的初始化过程"></p>
+<p>&ensp;&ensp;&ensp;&ensp; init 函数特征总结：</p>
+<ul>
+<li>每个源文件都可以定义一个或多个初始化函数，但强烈建议只定义一个。</li>
+<li>编译器不保证多个初始化函数执行次序。</li>
+<li>初始化函数在单一线程被用，仅执行一次。</li>
+<li>初始化函数在包所有全局变量初始化后执行。</li>
+<li>在所有初始化函数结束后才执行 main.main。</li>
+<li>init() 函数不能被其他函数调用。</li>
+</ul>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/init%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.png" alt="init执行过程"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 所以简而言之，你只需要记住这三点就可以了：</p>
+<ul>
+<li>依赖包按“深度优先”的次序进行初始化；</li>
+<li>每个包内按以“常量 -&gt; 变量 -&gt; init 函数”的顺序进行初始化；</li>
+<li>包内的多个 init 函数按出现次序进行自动调用；</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 重点关注 init 函数具备的几种行为特征：</p>
+<ul>
+<li>执行顺位排在包内其他语法元素常量、变量的后面；</li>
+<li>每个 init 函数在整个 Go 程序生命周期内仅会被执行一次；</li>
+<li>init 函数是顺序执行的，只有当一个 init 函数执行完毕后，才会去执行下一个 init 函数。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 这里举出《Go并发编程实战》中的例子，帮助理解上面的包初始化，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main <span class="comment">// 命令源码文件必须在这里声明自己属于main包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ( <span class="comment">// 引入了代码包fmt和runtime</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;runtime&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123; <span class="comment">// 包初始化函数</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;Map: %v\n&quot;</span>, m) <span class="comment">// 先格式化再打印</span></span><br><span class="line">    <span class="comment">// 通过调用runtime包的代码获取当前机器所运行的操作系统以及计算架构</span></span><br><span class="line">    <span class="comment">// 而后通过fmt包的Sprintf方法进行字符串格式化并赋值给变量info</span></span><br><span class="line">    info = fmt.Sprintf(<span class="string">&quot;OS: %s, Arch: %s&quot;</span>, runtime.GOOS, runtime.GOARCH)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 非局部变量，map类型，且已初始化</span></span><br><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span> = <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span>&#123;<span class="number">1</span>: <span class="string">&quot;A&quot;</span>, <span class="number">2</span>: <span class="string">&quot;B&quot;</span>, <span class="number">3</span>: <span class="string">&quot;C&quot;</span>&#125;</span><br><span class="line"><span class="keyword">var</span> info <span class="type">string</span> <span class="comment">// 非局部变量，string类型，未被初始化</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; <span class="comment">// 命令源码文件必须有的入口函数</span></span><br><span class="line">    fmt.Println(info) <span class="comment">// 打印变量info</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 输出：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map: <span class="keyword">map</span>[<span class="number">1</span>:A <span class="number">2</span>:B <span class="number">3</span>:C]</span><br><span class="line">OS: windows, Arch: amd64</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 在同一个代码包中，可以存在多个代码包初始化函数，甚至代码包内的每一个源码文件都可以定义多个代码包初始化函数。Go 语言编译器不能保证同一个代码包中的多个代码包初始化函数的执行顺序。如果要求按特定顺序执行的话，可以考虑使用 Channel 。</p>
+<h4 id="8、编译速度"><a href="#8、编译速度" class="headerlink" title="8、编译速度"></a><strong>8、编译速度</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 当我们修改了一个源文件，我们必须重新编译该源文件对应的包和所有依赖该包的其他包。即使是从头构建， Go 语言编译器的编译速度也明显快于其它编译语言。 Go 语言的闪电般的编译速度主要得益于三个语言特性。</p>
+<ul>
+<li>所有导入的包必须在每个文件的开头显式声明，这样的话编译器就没有必要读取和分析整个源文件来判断包的依赖关系。</li>
+<li>禁止包的环状依赖，因为没有循环依赖，包的依赖关系形成一个有向无环图，每个包可以被独立编译，而且很可能是被并发编译。</li>
+<li>编译后包的目标文件不仅仅记录包本身的导出信息，目标文件同时还记录了包的依赖关系。因此，在编译一个包的时候，编译器只需要读取每个直接导入包的目标文件，而不需要遍历所有依赖的的文件（译注：很多都是重复的间接依赖）。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-JVM参数概览"
   class="article article-type-post"
   itemscope
@@ -1982,581 +2205,6 @@
 </article>
 
     
-    <article
-  id="post-Golang精编100题"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/04/Golang%E7%B2%BE%E7%BC%96100%E9%A2%98/"
-    >Golang精编100题</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/04/Golang%E7%B2%BE%E7%BC%96100%E9%A2%98/" class="article-date">
-  <time datetime="2023-09-03T16:28:27.000Z" itemprop="datePublished">2023-09-04</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="能力模型"><a href="#能力模型" class="headerlink" title="能力模型"></a>能力模型</h2><table>
-<thead>
-<tr>
-<th>级别</th>
-<th>模型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>初级</td>
-<td></td>
-</tr>
-<tr>
-<td>primary</td>
-<td>熟悉基本语法，能够看懂代码的意图；</td>
-</tr>
-<tr>
-<td>在他人指导下能够完成用户故事的开发，编写的代码符合CleanCode规范；</td>
-<td></td>
-</tr>
-<tr>
-<td>中级</td>
-<td></td>
-</tr>
-<tr>
-<td>intermediate</td>
-<td>能够独立完成用户故事的开发和测试；</td>
-</tr>
-<tr>
-<td>能够嗅出代码的坏味道，并知道如何重构达成目标；</td>
-<td></td>
-</tr>
-<tr>
-<td>高级</td>
-<td></td>
-</tr>
-<tr>
-<td>senior</td>
-<td>能够开发出高质量高性能的代码；</td>
-</tr>
-<tr>
-<td>能够熟练使用高级特性，开发编程框架或测试框架；</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="选择题"><a href="#选择题" class="headerlink" title="选择题"></a>选择题</h2><h3 id="1、-primary-下面属于关键字的是（）"><a href="#1、-primary-下面属于关键字的是（）" class="headerlink" title="1、**[primary]** 下面属于关键字的是（）"></a>1、**[primary]** 下面属于关键字的是（）</h3><p>A. func</p>
-<p>B. def</p>
-<p>C. struct</p>
-<p>D. class</p>
-<p>参考答案：AC</p>
-<h3 id="2、-primary-定义一个包内全局字符串变量，下面语法正确的是-（）"><a href="#2、-primary-定义一个包内全局字符串变量，下面语法正确的是-（）" class="headerlink" title="2、**[primary]** 定义一个包内全局字符串变量，下面语法正确的是 （）"></a>2、**[primary]** 定义一个包内全局字符串变量，下面语法正确的是 （）</h3><p>A. var str string</p>
-<p>B. str :&#x3D; “”</p>
-<p>C. str &#x3D; “”</p>
-<p>D. var str &#x3D; “”</p>
-<p>参考答案：AD</p>
-<h3 id="3、-primary-通过指针变量-p-访问其成员变量-name，下面语法正确的是（）"><a href="#3、-primary-通过指针变量-p-访问其成员变量-name，下面语法正确的是（）" class="headerlink" title="3、**[primary]** 通过指针变量 p 访问其成员变量 name，下面语法正确的是（）"></a>3、**[primary]** 通过指针变量 p 访问其成员变量 name，下面语法正确的是（）</h3><p>A. p.name</p>
-<p>B. (*p).name</p>
-<p>C. (&amp;p).name</p>
-<p>D. p-&gt;name</p>
-<p>参考答案：AB</p>
-<h3 id="4、-primary-关于接口和类的说法，下面说法正确的是（）"><a href="#4、-primary-关于接口和类的说法，下面说法正确的是（）" class="headerlink" title="4、**[primary]** 关于接口和类的说法，下面说法正确的是（）"></a>4、**[primary]** 关于接口和类的说法，下面说法正确的是（）</h3><p>A. 一个类只需要实现了接口要求的所有函数，我们就说这个类实现了该接口</p>
-<p>B. 实现类的时候，只需要关心自己应该提供哪些方法，不用再纠结接口需要拆得多细才合理</p>
-<p>C. 类实现接口时，需要导入接口所在的包</p>
-<p>D. 接口由使用方按自身需求来定义，使用方无需关心是否有其他模块定义过类似的接口</p>
-<p>参考答案：ABD</p>
-<h3 id="5、-primary-关于字符串连接，下面语法正确的是（）"><a href="#5、-primary-关于字符串连接，下面语法正确的是（）" class="headerlink" title="5、**[primary]** 关于字符串连接，下面语法正确的是（）"></a>5、**[primary]** 关于字符串连接，下面语法正确的是（）</h3><p>A. str :&#x3D; ‘abc’ + ‘123’</p>
-<p>B. str :&#x3D; “abc” + “123”</p>
-<p>C. str ：&#x3D; ‘123’ + “abc”</p>
-<p>D. fmt.Sprintf(“abc%d”, 123)</p>
-<p>参考答案：BD</p>
-<h3 id="6、-primary-关于协程，下面说法正确是（）"><a href="#6、-primary-关于协程，下面说法正确是（）" class="headerlink" title="6、**[primary]** 关于协程，下面说法正确是（）"></a>6、**[primary]** 关于协程，下面说法正确是（）</h3><p>A. 协程和线程都可以实现程序的并发执行</p>
-<p>B. 线程比协程更轻量级</p>
-<p>C. 协程不存在死锁问题</p>
-<p>D. 通过channel来进行协程间的通信</p>
-<p>参考答案：AD</p>
-<h3 id="7、-intermediate-关于init函数，下面说法正确的是（）"><a href="#7、-intermediate-关于init函数，下面说法正确的是（）" class="headerlink" title="7、**[intermediate]** 关于init函数，下面说法正确的是（）"></a>7、**[intermediate]** 关于init函数，下面说法正确的是（）</h3><p>A. 一个包中，可以包含多个init函数</p>
-<p>B. 程序编译时，先执行导入包的init函数，再执行本包内的init函数</p>
-<p>C. main包中，不能有init函数</p>
-<p>D. init函数可以被其他函数调用</p>
-<p>参考答案：AB</p>
-<h3 id="8、-primary-关于循环语句，下面说法正确的有（）"><a href="#8、-primary-关于循环语句，下面说法正确的有（）" class="headerlink" title="8、**[primary]** 关于循环语句，下面说法正确的有（）"></a>8、**[primary]** 关于循环语句，下面说法正确的有（）</h3><p>A. 循环语句既支持for关键字，也支持while和do-while</p>
-<p>B. 关键字for的基本使用方法与C&#x2F;C++中没有任何差异</p>
-<p>C. for循环支持continue和break来控制循环，但是它提供了一个更高级的break，可以选择中断哪一个循环</p>
-<p>D. for循环不支持以逗号为间隔的多个赋值语句，必须使用平行赋值的方式来初始化多个变量</p>
-<p>参考答案：CD</p>
-<h3 id="9、-intermediate-对于函数定义："><a href="#9、-intermediate-对于函数定义：" class="headerlink" title="9、**[intermediate]** 对于函数定义："></a>9、**[intermediate]** 对于函数定义：</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(args ...<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">        sum := <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> _, arg := <span class="keyword">range</span> args &#123;</span><br><span class="line">            sum += arg</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">下面对add函数调用正确的是（）</span><br><span class="line">A. add(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">B. add(<span class="number">1</span>, <span class="number">3</span>, <span class="number">7</span>)</span><br><span class="line">C. add([]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125;)</span><br><span class="line">D. add([]<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">7</span>&#125;...)</span><br></pre></td></tr></table></figure>
-
-<p>参考答案：ABD</p>
-<h3 id="10、-primary-关于类型转化，下面语法正确的是（）"><a href="#10、-primary-关于类型转化，下面语法正确的是（）" class="headerlink" title="10、**[primary]** 关于类型转化，下面语法正确的是（）"></a>10、**[primary]** 关于类型转化，下面语法正确的是（）</h3><p>A.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyInt <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> i <span class="type">int</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> j MyInt = i</span><br></pre></td></tr></table></figure>
-
-<p>B.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyInt <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> i <span class="type">int</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> j MyInt = (MyInt)i</span><br></pre></td></tr></table></figure>
-
-<p>C.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyInt <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> i <span class="type">int</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> j MyInt = MyInt(i)</span><br></pre></td></tr></table></figure>
-
-<p>D.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyInt <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> i <span class="type">int</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> j MyInt = i.(MyInt)</span><br></pre></td></tr></table></figure>
-
-<p>参考答案：C</p>
-<h3 id="11、-primary-关于局部变量的初始化，下面正确的使用方式是（）"><a href="#11、-primary-关于局部变量的初始化，下面正确的使用方式是（）" class="headerlink" title="11、**[primary]** 关于局部变量的初始化，下面正确的使用方式是（）"></a>11、**[primary]** 关于局部变量的初始化，下面正确的使用方式是（）</h3><p>A. var i int &#x3D; 10</p>
-<p>B. var i &#x3D; 10</p>
-<p>C. i :&#x3D; 10</p>
-<p>D. i &#x3D; 10</p>
-<p>参考答案：ABC</p>
-<h3 id="12、-primary-关于const常量定义，下面正确的使用方式是（）"><a href="#12、-primary-关于const常量定义，下面正确的使用方式是（）" class="headerlink" title="12、**[primary]** 关于const常量定义，下面正确的使用方式是（）"></a>12、**[primary]** 关于const常量定义，下面正确的使用方式是（）</h3><p>A.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Pi <span class="type">float64</span> = <span class="number">3.14159265358979323846</span></span><br><span class="line"><span class="keyword">const</span> zero = <span class="number">0.0</span></span><br></pre></td></tr></table></figure>
-
-<p>B.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">        size <span class="type">int64</span> = <span class="number">1024</span></span><br><span class="line">        eof = <span class="number">-1</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>C.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">        ERR_ELEM_EXIST <span class="type">error</span> = errors.New(<span class="string">&quot;element already exists&quot;</span>)</span><br><span class="line">        ERR_ELEM_NT_EXIST <span class="type">error</span> = errors.New(<span class="string">&quot;element not exists&quot;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>D.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> u, v <span class="type">float32</span> = <span class="number">0</span>, <span class="number">3</span></span><br><span class="line"><span class="keyword">const</span> a, b, c = <span class="number">3</span>, <span class="number">4</span>, <span class="string">&quot;foo&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>参考答案：ABD</p>
-<h3 id="13、-primary-关于布尔变量b的赋值，下面错误的用法是（）"><a href="#13、-primary-关于布尔变量b的赋值，下面错误的用法是（）" class="headerlink" title="13、**[primary]** 关于布尔变量b的赋值，下面错误的用法是（）"></a>13、**[primary]** 关于布尔变量b的赋值，下面错误的用法是（）</h3><p>A. b &#x3D; true</p>
-<p>B. b &#x3D; 1</p>
-<p>C. b &#x3D; bool(1)</p>
-<p>D. b &#x3D; (1 &#x3D;&#x3D; 2)</p>
-<p>参考答案：BC</p>
-<h3 id="14、-intermediate-下面的程序的运行结果是（）"><a href="#14、-intermediate-下面的程序的运行结果是（）" class="headerlink" title="14、**[intermediate]** 下面的程序的运行结果是（）"></a>14、**[intermediate]** 下面的程序的运行结果是（）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">defer</span> fmt.Printf(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">defer</span> fmt.Printf(<span class="string">&quot;2&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>A. 321</p>
-<p>B. 32</p>
-<p>C. 31</p>
-<p>D. 13</p>
-<p>参考答案：C</p>
-<h3 id="15、-primary-关于switch语句，下面说法正确的有（）"><a href="#15、-primary-关于switch语句，下面说法正确的有（）" class="headerlink" title="15、**[primary]** 关于switch语句，下面说法正确的有（）"></a>15、**[primary]** 关于switch语句，下面说法正确的有（）</h3><p>A. 条件表达式必须为常量或者整数</p>
-<p>B. 单个case中，可以出现多个结果选项</p>
-<p>C. 需要用break来明确退出一个case</p>
-<p>D. 只有在case中明确添加fallthrough关键字，才会继续执行紧跟的下一个case</p>
-<p>参考答案：BD</p>
-<h3 id="16、-intermediate-golang中没有隐藏的this指针，这句话的含义是（）"><a href="#16、-intermediate-golang中没有隐藏的this指针，这句话的含义是（）" class="headerlink" title="16、**[intermediate]** golang中没有隐藏的this指针，这句话的含义是（）"></a>16、**[intermediate]** golang中没有隐藏的this指针，这句话的含义是（）</h3><p>A. 方法施加的对象显式传递，没有被隐藏起来</p>
-<p>B. golang沿袭了传统面向对象编程中的诸多概念，比如继承、虚函数和构造函数</p>
-<p>C. golang的面向对象表达更直观，对于面向过程只是换了一种语法形式来表达</p>
-<p>D. 方法施加的对象不需要非得是指针，也不用非得叫this</p>
-<p>参考答案：ACD</p>
-<h3 id="17、-intermediate-golang中的引用类型包括（）"><a href="#17、-intermediate-golang中的引用类型包括（）" class="headerlink" title="17、**[intermediate]** golang中的引用类型包括（）"></a>17、**[intermediate]** golang中的引用类型包括（）</h3><p>A. 数组切片</p>
-<p>B. map</p>
-<p>C. channel</p>
-<p>D. interface</p>
-<p>参考答案：ABCD</p>
-<h3 id="18、-intermediate-golang中的指针运算包括（）"><a href="#18、-intermediate-golang中的指针运算包括（）" class="headerlink" title="18、**[intermediate]** golang中的指针运算包括（）"></a>18、**[intermediate]** golang中的指针运算包括（）</h3><p>A. 可以对指针进行自增或自减运算</p>
-<p>B. 可以通过“&amp;”取指针的地址</p>
-<p>C. 可以通过“*”取指针指向的数据</p>
-<p>D. 可以对指针进行下标运算</p>
-<p>参考答案：BC</p>
-<h3 id="19、-primary-关于main函数（可执行程序的执行起点），下面说法正确的是（）"><a href="#19、-primary-关于main函数（可执行程序的执行起点），下面说法正确的是（）" class="headerlink" title="19、**[primary]** 关于main函数（可执行程序的执行起点），下面说法正确的是（）"></a>19、**[primary]** 关于main函数（可执行程序的执行起点），下面说法正确的是（）</h3><p>A. main函数不能带参数</p>
-<p>B. main函数不能定义返回值</p>
-<p>C. main函数所在的包必须为main包</p>
-<p>D. main函数中可以使用flag包来获取和解析命令行参数</p>
-<p>参考答案：ABCD</p>
-<h3 id="20、-intermediate-下面赋值正确的是（）"><a href="#20、-intermediate-下面赋值正确的是（）" class="headerlink" title="20、**[intermediate]** 下面赋值正确的是（）"></a>20、**[intermediate]** 下面赋值正确的是（）</h3><p>A. var x &#x3D; nil</p>
-<p>B. var x interface{} &#x3D; nil</p>
-<p>C. var x string &#x3D; nil</p>
-<p>D. var x error &#x3D; nil</p>
-<p>参考答案：BD</p>
-<h3 id="21、-intermediate-关于整型切片的初始化，下面正确的是（）"><a href="#21、-intermediate-关于整型切片的初始化，下面正确的是（）" class="headerlink" title="21、**[intermediate]** 关于整型切片的初始化，下面正确的是（）"></a>21、**[intermediate]** 关于整型切片的初始化，下面正确的是（）</h3><p>A. s :&#x3D; make([]int)</p>
-<p>B. s :&#x3D; make([]int, 0)</p>
-<p>C. s :&#x3D; make([]int, 5, 10)</p>
-<p>D. s :&#x3D; []int{1, 2, 3, 4, 5}</p>
-<p>参考答案：BCD</p>
-<h3 id="22、-intermediate-从切片中删除一个元素，下面的算法实现正确的是（）"><a href="#22、-intermediate-从切片中删除一个元素，下面的算法实现正确的是（）" class="headerlink" title="22、**[intermediate]** 从切片中删除一个元素，下面的算法实现正确的是（）"></a>22、**[intermediate]** 从切片中删除一个元素，下面的算法实现正确的是（）</h3><p>A.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Slice)</span></span>Remove(value <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> i, v := <span class="keyword">range</span> *s &#123;</span><br><span class="line">            <span class="keyword">if</span> isEqual(value, v) &#123;</span><br><span class="line">                <span class="keyword">if</span> i== <span class="built_in">len</span>(*s) - <span class="number">1</span> &#123;</span><br><span class="line">                    *s = (*s)[:i]</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    *s = <span class="built_in">append</span>((*s)[:i],(*s)[i + <span class="number">2</span>:]...)</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ERR_ELEM_NT_EXIST</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>B.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Slice)</span></span>Remove(value <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> i, v := <span class="keyword">range</span> *s &#123;</span><br><span class="line">            <span class="keyword">if</span> isEqual(value, v) &#123;</span><br><span class="line">                *s = <span class="built_in">append</span>((*s)[:i],(*s)[i + <span class="number">1</span>:])</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ERR_ELEM_NT_EXIST</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>C.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Slice)</span></span>Remove(value <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> i, v := <span class="keyword">range</span> *s &#123;</span><br><span class="line">            <span class="keyword">if</span> isEqual(value, v) &#123;</span><br><span class="line">                <span class="built_in">delete</span>(*s, v)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ERR_ELEM_NT_EXIST</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>D.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Slice)</span></span>Remove(value <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> i, v := <span class="keyword">range</span> *s &#123;</span><br><span class="line">            <span class="keyword">if</span> isEqual(value, v) &#123;</span><br><span class="line">                *s = <span class="built_in">append</span>((*s)[:i],(*s)[i + <span class="number">1</span>:]...)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ERR_ELEM_NT_EXIST</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：D</p>
-<h3 id="23、-primary-对于局部变量整型切片x的赋值，下面定义正确的是（）"><a href="#23、-primary-对于局部变量整型切片x的赋值，下面定义正确的是（）" class="headerlink" title="23、**[primary]** 对于局部变量整型切片x的赋值，下面定义正确的是（）"></a>23、**[primary]** 对于局部变量整型切片x的赋值，下面定义正确的是（）</h3><p>A.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x := []<span class="type">int</span>&#123;</span><br><span class="line">        <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">        <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>B.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x := []<span class="type">int</span>&#123;</span><br><span class="line">        <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">        <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>C.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x := []<span class="type">int</span>&#123;</span><br><span class="line">        <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">        <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>D.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x := []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：ACD</p>
-<h3 id="24、-primary-关于变量的自增和自减操作，下面语句正确的是（）"><a href="#24、-primary-关于变量的自增和自减操作，下面语句正确的是（）" class="headerlink" title="24、**[primary]** 关于变量的自增和自减操作，下面语句正确的是（）"></a>24、**[primary]** 关于变量的自增和自减操作，下面语句正确的是（）</h3><p>A.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">i := <span class="number">1</span></span><br><span class="line">i++</span><br></pre></td></tr></table></figure>
-
-
-
-<p>B.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">i := <span class="number">1</span></span><br><span class="line">j = i++</span><br></pre></td></tr></table></figure>
-
-
-
-<p>C.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">i := <span class="number">1</span></span><br><span class="line">++i</span><br></pre></td></tr></table></figure>
-
-
-
-<p>D.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">i := <span class="number">1</span></span><br><span class="line">i--</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：AD</p>
-<h3 id="25、-intermediate-关于函数声明，下面语法错误的是（）"><a href="#25、-intermediate-关于函数声明，下面语法错误的是（）" class="headerlink" title="25、**[intermediate]** 关于函数声明，下面语法错误的是（）"></a>25、**[intermediate]** 关于函数声明，下面语法错误的是（）</h3><p>A. func f(a, b int) (value int, err error)</p>
-<p>B. func f(a int, b int) (value int, err error)</p>
-<p>C. func f(a, b int) (value int, error)</p>
-<p>D. func f(a int, b int) (int, int, error)</p>
-<p>参考答案：C</p>
-<h3 id="26、-intermediate-如果Add函数的调用代码为："><a href="#26、-intermediate-如果Add函数的调用代码为：" class="headerlink" title="26、**[intermediate]** 如果Add函数的调用代码为："></a>26、**[intermediate]** 如果Add函数的调用代码为：</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> a Integer = <span class="number">1</span></span><br><span class="line">        <span class="keyword">var</span> b Integer = <span class="number">2</span></span><br><span class="line">        <span class="keyword">var</span> i <span class="keyword">interface</span>&#123;&#125; = &amp;a</span><br><span class="line">        sum := i.(*Integer).Add(b)</span><br><span class="line">        fmt.Println(sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="27、则Add函数定义正确的是（）"><a href="#27、则Add函数定义正确的是（）" class="headerlink" title="27、则Add函数定义正确的是（）"></a>27、则Add函数定义正确的是（）</h3><p>A.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Integer <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a Integer)</span></span> Add(b Integer) Integer &#123;</span><br><span class="line">        <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>B.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Integer <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a Integer)</span></span> Add(b *Integer) Integer &#123;</span><br><span class="line">        <span class="keyword">return</span> a + *b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>C.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Integer <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *Integer)</span></span> Add(b Integer) Integer &#123;</span><br><span class="line">        <span class="keyword">return</span> *a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>D.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Integer <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *Integer)</span></span> Add(b *Integer) Integer &#123;</span><br><span class="line">        <span class="keyword">return</span> *a + *b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：AC</p>
-<h3 id="28、-intermediate-如果Add函数的调用代码为："><a href="#28、-intermediate-如果Add函数的调用代码为：" class="headerlink" title="28、**[intermediate]** 如果Add函数的调用代码为："></a>28、**[intermediate]** 如果Add函数的调用代码为：</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> a Integer = <span class="number">1</span></span><br><span class="line">        <span class="keyword">var</span> b Integer = <span class="number">2</span></span><br><span class="line">        <span class="keyword">var</span> i <span class="keyword">interface</span>&#123;&#125; = a</span><br><span class="line">        sum := i.(Integer).Add(b)</span><br><span class="line">        fmt.Println(sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="29、则Add函数定义正确的是（）"><a href="#29、则Add函数定义正确的是（）" class="headerlink" title="29、则Add函数定义正确的是（）"></a>29、则Add函数定义正确的是（）</h3><p>A.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Integer <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a Integer)</span></span> Add(b Integer) Integer &#123;</span><br><span class="line">        <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>B.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Integer <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a Integer)</span></span> Add(b *Integer) Integer &#123;</span><br><span class="line">        <span class="keyword">return</span> a + *b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>C.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Integer <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *Integer)</span></span> Add(b Integer) Integer &#123;</span><br><span class="line">        <span class="keyword">return</span> *a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>D.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Integer <span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *Integer)</span></span> Add(b *Integer) Integer &#123;</span><br><span class="line">        <span class="keyword">return</span> *a + *b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：A</p>
-<h3 id="30、-intermediate-关于GetPodAction定义，下面赋值正确的是（）"><a href="#30、-intermediate-关于GetPodAction定义，下面赋值正确的是（）" class="headerlink" title="30、**[intermediate]** 关于GetPodAction定义，下面赋值正确的是（）"></a>30、**[intermediate]** 关于GetPodAction定义，下面赋值正确的是（）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Fragment <span class="keyword">interface</span> &#123;</span><br><span class="line">        Exec(transInfo *TransInfo) <span class="type">error</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> GetPodAction <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g GetPodAction)</span></span> Exec(transInfo *TransInfo) <span class="type">error</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>A. var fragment Fragment &#x3D; new(GetPodAction)</p>
-<p>B. var fragment Fragment &#x3D; GetPodAction</p>
-<p>C. var fragment Fragment &#x3D; &amp;GetPodAction{}</p>
-<p>D. var fragment Fragment &#x3D; GetPodAction{}</p>
-<p>参考答案：ACD</p>
-<h3 id="31、-intermediate-关于GoMock，下面说法正确的是（）"><a href="#31、-intermediate-关于GoMock，下面说法正确的是（）" class="headerlink" title="31、**[intermediate]** 关于GoMock，下面说法正确的是（）"></a>31、**[intermediate]** 关于GoMock，下面说法正确的是（）</h3><p>A. GoMock可以对interface打桩</p>
-<p>B. GoMock可以对类的成员函数打桩</p>
-<p>C. GoMock可以对函数打桩</p>
-<p>D. GoMock打桩后的依赖注入可以通过GoStub完成</p>
-<p>参考答案：AD</p>
-<h3 id="32、-intermediate-关于接口，下面说法正确的是（）"><a href="#32、-intermediate-关于接口，下面说法正确的是（）" class="headerlink" title="32、**[intermediate]** 关于接口，下面说法正确的是（）"></a>32、**[intermediate]** 关于接口，下面说法正确的是（）</h3><p>A. 只要两个接口拥有相同的方法列表（次序不同不要紧），那么它们就是等价的，可以相互赋值</p>
-<p>B. 如果接口A的方法列表是接口B的方法列表的子集，那么接口B可以赋值给接口A</p>
-<p>C. 接口查询是否成功，要在运行期才能够确定</p>
-<p>D. 接口赋值是否可行，要在运行期才能够确定</p>
-<p>参考答案：ABC</p>
-<h3 id="33、-primary-关于channel，下面语法正确的是（）"><a href="#33、-primary-关于channel，下面语法正确的是（）" class="headerlink" title="33、**[primary]** 关于channel，下面语法正确的是（）"></a>33、**[primary]** 关于channel，下面语法正确的是（）</h3><p>A. var ch chan int</p>
-<p>B. ch :&#x3D; make(chan int)</p>
-<p>C. &lt;- ch</p>
-<p>D. ch &lt;-</p>
-<p>参考答案：ABC</p>
-<h3 id="34、-primary-关于同步锁，下面说法正确的是（）"><a href="#34、-primary-关于同步锁，下面说法正确的是（）" class="headerlink" title="34、**[primary]** 关于同步锁，下面说法正确的是（）"></a>34、**[primary]** 关于同步锁，下面说法正确的是（）</h3><p>A. 当一个goroutine获得了Mutex后，其他goroutine就只能乖乖的等待，除非该goroutine释放这个Mutex</p>
-<p>B. RWMutex在读锁占用的情况下，会阻止写，但不阻止读</p>
-<p>C. RWMutex在写锁占用情况下，会阻止任何其他goroutine（无论读和写）进来，整个锁相当于由该goroutine独占</p>
-<p>D. Lock()操作需要保证有Unlock()或RUnlock()调用与之对应</p>
-<p>参考答案：ABC</p>
-<h3 id="35、-intermediate-golang中大多数数据类型都可以转化为有效的JSON文本，下面几种类型除外（）"><a href="#35、-intermediate-golang中大多数数据类型都可以转化为有效的JSON文本，下面几种类型除外（）" class="headerlink" title="35、**[intermediate]** golang中大多数数据类型都可以转化为有效的JSON文本，下面几种类型除外（）"></a>35、**[intermediate]** golang中大多数数据类型都可以转化为有效的JSON文本，下面几种类型除外（）</h3><p>A. 指针</p>
-<p>B. channel</p>
-<p>C. complex</p>
-<p>D. 函数</p>
-<p>参考答案：BCD</p>
-<h3 id="36、-intermediate-关于go-vendor，下面说法正确的是（）"><a href="#36、-intermediate-关于go-vendor，下面说法正确的是（）" class="headerlink" title="36、**[intermediate]** 关于go vendor，下面说法正确的是（）"></a>36、**[intermediate]** 关于go vendor，下面说法正确的是（）</h3><p>A. 基本思路是将引用的外部包的源代码放在当前工程的vendor目录下面</p>
-<p>B. 编译go代码会优先从vendor目录先寻找依赖包</p>
-<p>C. 可以指定引用某个特定版本的外部包</p>
-<p>D. 有了vendor目录后，打包当前的工程代码到其他机器的$GOPATH&#x2F;src下都可以通过编译</p>
-<p>参考答案：ABD</p>
-<h3 id="37、-primary-flag是bool型变量，下面if表达式符合编码规范的是（）"><a href="#37、-primary-flag是bool型变量，下面if表达式符合编码规范的是（）" class="headerlink" title="37、**[primary]** flag是bool型变量，下面if表达式符合编码规范的是（）"></a>37、**[primary]** flag是bool型变量，下面if表达式符合编码规范的是（）</h3><p>A. if flag &#x3D;&#x3D; 1</p>
-<p>B. if flag</p>
-<p>C. if flag &#x3D;&#x3D; false</p>
-<p>D. if !flag</p>
-<p>参考答案：BD</p>
-<h3 id="38、-primary-value是整型变量，下面if表达式符合编码规范的是（）"><a href="#38、-primary-value是整型变量，下面if表达式符合编码规范的是（）" class="headerlink" title="38、**[primary]** value是整型变量，下面if表达式符合编码规范的是（）"></a>38、**[primary]** value是整型变量，下面if表达式符合编码规范的是（）</h3><p>A. if value &#x3D;&#x3D; 0</p>
-<p>B. if value</p>
-<p>C. if value !&#x3D; 0</p>
-<p>D. if !value</p>
-<p>参考答案：AC</p>
-<h3 id="39、-intermediate-关于函数返回值的错误设计，下面说法正确的是（）"><a href="#39、-intermediate-关于函数返回值的错误设计，下面说法正确的是（）" class="headerlink" title="39、**[intermediate]** 关于函数返回值的错误设计，下面说法正确的是（）"></a>39、**[intermediate]** 关于函数返回值的错误设计，下面说法正确的是（）</h3><p>A. 如果失败原因只有一个，则返回bool</p>
-<p>B. 如果失败原因超过一个，则返回error</p>
-<p>C. 如果没有失败原因，则不返回bool或error</p>
-<p>D. 如果重试几次可以避免失败，则不要立即返回bool或error</p>
-<p>参考答案：ABCD</p>
-<h3 id="40、-intermediate-关于异常设计，下面说法正确的是（）"><a href="#40、-intermediate-关于异常设计，下面说法正确的是（）" class="headerlink" title="40、**[intermediate]** 关于异常设计，下面说法正确的是（）"></a>40、**[intermediate]** 关于异常设计，下面说法正确的是（）</h3><p>A. 在程序开发阶段，坚持速错，让程序异常崩溃</p>
-<p>B. 在程序部署后，应恢复异常避免程序终止</p>
-<p>C. 一切皆错误，不用进行异常设计</p>
-<p>D. 对于不应该出现的分支，使用异常处理</p>
-<p>参考答案：ABD</p>
-<h3 id="41、-intermediate-关于slice或map操作，下面正确的是（）"><a href="#41、-intermediate-关于slice或map操作，下面正确的是（）" class="headerlink" title="41、**[intermediate]** 关于slice或map操作，下面正确的是（）"></a>41、**[intermediate]** 关于slice或map操作，下面正确的是（）</h3><p>A.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s []<span class="type">int</span></span><br><span class="line">s = <span class="built_in">append</span>(s,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>B.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span></span><br><span class="line">m[<span class="string">&quot;one&quot;</span>] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>C.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s []<span class="type">int</span></span><br><span class="line">s = <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>)</span><br><span class="line">s = <span class="built_in">append</span>(s,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>D.</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span></span><br><span class="line">m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">m[<span class="string">&quot;one&quot;</span>] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：ACD</p>
-<h3 id="42、-intermediate-关于channel的特性，下面说法正确的是（）"><a href="#42、-intermediate-关于channel的特性，下面说法正确的是（）" class="headerlink" title="42、**[intermediate]** 关于channel的特性，下面说法正确的是（）"></a>42、**[intermediate]** 关于channel的特性，下面说法正确的是（）</h3><p>A. 给一个 nil channel 发送数据，造成永远阻塞</p>
-<p>B. 从一个 nil channel 接收数据，造成永远阻塞</p>
-<p>C. 给一个已经关闭的 channel 发送数据，引起 panic</p>
-<p>D. 从一个已经关闭的 channel 接收数据，如果缓冲区中为空，则返回一个零值</p>
-<p>参考答案：ABCD</p>
-<h3 id="43、-intermediate-关于无缓冲和有冲突的channel，下面说法正确的是（）"><a href="#43、-intermediate-关于无缓冲和有冲突的channel，下面说法正确的是（）" class="headerlink" title="43、**[intermediate]** 关于无缓冲和有冲突的channel，下面说法正确的是（）"></a>43、**[intermediate]** 关于无缓冲和有冲突的channel，下面说法正确的是（）</h3><p>A. 无缓冲的channel是默认的缓冲为1的channel</p>
-<p>B. 无缓冲的channel和有缓冲的channel都是同步的</p>
-<p>C. 无缓冲的channel和有缓冲的channel都是非同步的</p>
-<p>D. 无缓冲的channel是同步的，而有缓冲的channel是非同步的</p>
-<p>参考答案：D</p>
-<h3 id="44、-intermediate-关于异常的触发，下面说法正确的是（）"><a href="#44、-intermediate-关于异常的触发，下面说法正确的是（）" class="headerlink" title="44、**[intermediate]** 关于异常的触发，下面说法正确的是（）"></a>44、**[intermediate]** 关于异常的触发，下面说法正确的是（）</h3><p>A. 空指针解析</p>
-<p>B. 下标越界</p>
-<p>C. 除数为0</p>
-<p>D. 调用panic函数</p>
-<p>参考答案：ABCD</p>
-<h3 id="45、-intermediate-关于cap函数的适用类型，下面说法正确的是（）"><a href="#45、-intermediate-关于cap函数的适用类型，下面说法正确的是（）" class="headerlink" title="45、**[intermediate]** 关于cap函数的适用类型，下面说法正确的是（）"></a>45、**[intermediate]** 关于cap函数的适用类型，下面说法正确的是（）</h3><p>A. array</p>
-<p>B. slice</p>
-<p>C. map</p>
-<p>D. channel</p>
-<p>参考答案：ABD</p>
-<h3 id="46、-intermediate-关于beego框架，下面说法正确的是（）"><a href="#46、-intermediate-关于beego框架，下面说法正确的是（）" class="headerlink" title="46、**[intermediate]** 关于beego框架，下面说法正确的是（）"></a>46、**[intermediate]** 关于beego框架，下面说法正确的是（）</h3><p>A. beego是一个golang实现的轻量级HTTP框架</p>
-<p>B. beego可以通过注释路由、正则路由等多种方式完成url路由注入</p>
-<p>C. 可以使用bee new工具生成空工程，然后使用bee run命令自动热编译</p>
-<p>D. beego框架只提供了对url路由的处理， 而对于MVC架构中的数据库部分未提供框架支持</p>
-<p>参考答案：ABC</p>
-<h3 id="47、-intermediate-关于goconvey，下面说法正确的是（）"><a href="#47、-intermediate-关于goconvey，下面说法正确的是（）" class="headerlink" title="47、**[intermediate]** 关于goconvey，下面说法正确的是（）"></a>47、**[intermediate]** 关于goconvey，下面说法正确的是（）</h3><p>A. goconvey是一个支持golang的单元测试框架</p>
-<p>B. goconvey能够自动监控文件修改并启动测试，并可以将测试结果实时输出到web界面</p>
-<p>C. goconvey提供了丰富的断言简化测试用例的编写</p>
-<p>D. goconvey无法与go test集成</p>
-<p>参考答案：ABC</p>
-<h3 id="48、-intermediate-关于go-vet，下面说法正确的是（）"><a href="#48、-intermediate-关于go-vet，下面说法正确的是（）" class="headerlink" title="48、**[intermediate]** 关于go vet，下面说法正确的是（）"></a>48、**[intermediate]** 关于go vet，下面说法正确的是（）</h3><p>A. go vet是golang自带工具go tool vet的封装</p>
-<p>B. 当执行go vet database时，可以对database所在目录下的所有子文件夹进行递归检测</p>
-<p>C. go vet可以使用绝对路径、相对路径或相对GOPATH的路径指定待检测的包</p>
-<p>D. go vet可以检测出死代码</p>
-<p>参考答案：ACD</p>
-<h3 id="49、-intermediate-关于map，下面说法正确的是（）"><a href="#49、-intermediate-关于map，下面说法正确的是（）" class="headerlink" title="49、**[intermediate]** 关于map，下面说法正确的是（）"></a>49、**[intermediate]** 关于map，下面说法正确的是（）</h3><p>A. map反序列化时json.unmarshal的入参必须为map的地址</p>
-<p>B. 在函数调用中传递map，则子函数中对map元素的增加不会导致父函数中map的修改</p>
-<p>C. 在函数调用中传递map，则子函数中对map元素的修改不会导致父函数中map的修改</p>
-<p>D. 不能使用内置函数delete删除map的元素</p>
-<p>参考答案：A</p>
-<h3 id="50、-intermediate-关于GoStub，下面说法正确的是（）"><a href="#50、-intermediate-关于GoStub，下面说法正确的是（）" class="headerlink" title="50、**[intermediate]** 关于GoStub，下面说法正确的是（）"></a>50、**[intermediate]** 关于GoStub，下面说法正确的是（）</h3><p>A. GoStub可以对全局变量打桩</p>
-<p>B. GoStub可以对函数打桩</p>
-<p>C. GoStub可以对类的成员方法打桩</p>
-<p>D. GoStub可以打动态桩，比如对一个函数打桩后，多次调用该函数会有不同的行为</p>
-<p>参考答案：ABD</p>
-<h3 id="51、-primary-关于select机制，下面说法正确的是（）"><a href="#51、-primary-关于select机制，下面说法正确的是（）" class="headerlink" title="51、**[primary]** 关于select机制，下面说法正确的是（）"></a>51、**[primary]** 关于select机制，下面说法正确的是（）</h3><p>A. select机制用来处理异步IO问题</p>
-<p>B. select机制最大的一条限制就是每个case语句里必须是一个IO操作</p>
-<p>C. golang在语言级别支持select关键字</p>
-<p>D. select关键字的用法与switch语句非常类似，后面要带判断条件</p>
-<p>参考答案：ABC</p>
-<h3 id="52、-primary-关于内存泄露，下面说法正确的是（）"><a href="#52、-primary-关于内存泄露，下面说法正确的是（）" class="headerlink" title="52、**[primary]** 关于内存泄露，下面说法正确的是（）"></a>52、**[primary]** 关于内存泄露，下面说法正确的是（）</h3><p>A. golang有自动垃圾回收，不存在内存泄露</p>
-<p>B. golang中检测内存泄露主要依靠的是pprof包</p>
-<p>C. 内存泄露可以在编译阶段发现</p>
-<p>D. 应定期使用浏览器来查看系统的实时内存信息，及时发现内存泄露问题</p>
-<p>参考答案：BD</p>
-<h2 id="填空题"><a href="#填空题" class="headerlink" title="填空题"></a>填空题</h2><h3 id="1、-primary-声明一个整型变量i"><a href="#1、-primary-声明一个整型变量i" class="headerlink" title="1、**[primary]** 声明一个整型变量i__________"></a>1、**[primary]** 声明一个整型变量i__________</h3><p>参考答案：var i int</p>
-<h3 id="2、-primary-声明一个含有10个元素的整型数组a"><a href="#2、-primary-声明一个含有10个元素的整型数组a" class="headerlink" title="2、**[primary]** 声明一个含有10个元素的整型数组a__________"></a>2、**[primary]** 声明一个含有10个元素的整型数组a__________</h3><p>参考答案：var a [10]int</p>
-<h3 id="3、-primary-声明一个整型数组切片s"><a href="#3、-primary-声明一个整型数组切片s" class="headerlink" title="3、**[primary]** 声明一个整型数组切片s__________"></a>3、**[primary]** 声明一个整型数组切片s__________</h3><p>参考答案：var s []int</p>
-<h3 id="4、-primary-声明一个整型指针变量p"><a href="#4、-primary-声明一个整型指针变量p" class="headerlink" title="4、**[primary]** 声明一个整型指针变量p__________"></a>4、**[primary]** 声明一个整型指针变量p__________</h3><p>参考答案：var p *int</p>
-<h3 id="5、-primary-声明一个key为字符串型value为整型的map变量m"><a href="#5、-primary-声明一个key为字符串型value为整型的map变量m" class="headerlink" title="5、**[primary]** 声明一个key为字符串型value为整型的map变量m__________"></a>5、**[primary]** 声明一个key为字符串型value为整型的map变量m__________</h3><p>参考答案：var m map[string]int</p>
-<h3 id="6、-primary-声明一个入参和返回值均为整型的函数变量f"><a href="#6、-primary-声明一个入参和返回值均为整型的函数变量f" class="headerlink" title="6、**[primary]** 声明一个入参和返回值均为整型的函数变量f__________"></a>6、**[primary]** 声明一个入参和返回值均为整型的函数变量f__________</h3><p>参考答案：var f func(a int) int</p>
-<h3 id="7、-primary-声明一个只用于读取int数据的单向channel变量ch"><a href="#7、-primary-声明一个只用于读取int数据的单向channel变量ch" class="headerlink" title="7、**[primary]** 声明一个只用于读取int数据的单向channel变量ch__________"></a>7、**[primary]** 声明一个只用于读取int数据的单向channel变量ch__________</h3><p>参考答案：var ch &lt;-chan int</p>
-<h3 id="8、-primary-假设源文件的命名为slice-go，则测试文件的命名为"><a href="#8、-primary-假设源文件的命名为slice-go，则测试文件的命名为" class="headerlink" title="8、**[primary]** 假设源文件的命名为slice.go，则测试文件的命名为__________"></a>8、**[primary]** 假设源文件的命名为slice.go，则测试文件的命名为__________</h3><p>参考答案：slice_test.go</p>
-<h3 id="9、-primary-go-test要求测试函数的前缀必须命名为"><a href="#9、-primary-go-test要求测试函数的前缀必须命名为" class="headerlink" title="9、**[primary]** go test要求测试函数的前缀必须命名为__________"></a>9、**[primary]** go test要求测试函数的前缀必须命名为__________</h3><p>参考答案：Test</p>
-<h3 id="10、-intermediate-下面的程序的运行结果是"><a href="#10、-intermediate-下面的程序的运行结果是" class="headerlink" title="10、**[intermediate]** 下面的程序的运行结果是__________"></a>10、**[intermediate]** 下面的程序的运行结果是__________</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">defer</span> fmt.Printf(<span class="string">&quot;%d &quot;</span>, i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：4 3 2 1 0</p>
-<h3 id="11、-intermediate-下面的程序的运行结果是"><a href="#11、-intermediate-下面的程序的运行结果是" class="headerlink" title="11、**[intermediate]** 下面的程序的运行结果是__________"></a>11、**[intermediate]** 下面的程序的运行结果是__________</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x := <span class="number">1</span></span><br><span class="line">        &#123;</span><br><span class="line">            x := <span class="number">2</span></span><br><span class="line">            fmt.Print(x)</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Println(x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：21</p>
-<h3 id="12、-intermediate-下面的程序的运行结果是"><a href="#12、-intermediate-下面的程序的运行结果是" class="headerlink" title="12、**[intermediate]** 下面的程序的运行结果是__________"></a>12、**[intermediate]** 下面的程序的运行结果是__________</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        strs := []<span class="type">string</span>&#123;<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> _, s := <span class="keyword">range</span> strs &#123;</span><br><span class="line">            <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">                time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">                fmt.Printf(<span class="string">&quot;%s &quot;</span>, s)</span><br><span class="line">            &#125;()</span><br><span class="line">        &#125;</span><br><span class="line">        time.Sleep(<span class="number">3</span> * time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：three three three</p>
-<h3 id="13、-intermediate-下面的程序的运行结果是"><a href="#13、-intermediate-下面的程序的运行结果是" class="headerlink" title="13、**[intermediate]** 下面的程序的运行结果是__________"></a>13、**[intermediate]** 下面的程序的运行结果是__________</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x := []<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>&#125;</span><br><span class="line">        <span class="keyword">for</span> v := <span class="keyword">range</span> x &#123;</span><br><span class="line">            fmt.Print(v)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：012</p>
-<h3 id="14、-intermediate-下面的程序的运行结果是"><a href="#14、-intermediate-下面的程序的运行结果是" class="headerlink" title="14、**[intermediate]** 下面的程序的运行结果是__________"></a>14、**[intermediate]** 下面的程序的运行结果是__________</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        x := []<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>&#125;</span><br><span class="line">        <span class="keyword">for</span> _, v := <span class="keyword">range</span> x &#123;</span><br><span class="line">            fmt.Print(v)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：abc</p>
-<h3 id="15、-primary-下面的程序的运行结果是"><a href="#15、-primary-下面的程序的运行结果是" class="headerlink" title="15、**[primary]** 下面的程序的运行结果是__________"></a>15、**[primary]** 下面的程序的运行结果是__________</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">       i := <span class="number">1</span></span><br><span class="line">       j := <span class="number">2</span></span><br><span class="line">       i, j = j, i</span><br><span class="line">       fmt.Printf(<span class="string">&quot;%d%d\n&quot;</span>, i, j)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：21</p>
-<h3 id="16、-primary-下面的程序的运行结果是"><a href="#16、-primary-下面的程序的运行结果是" class="headerlink" title="16、**[primary]** 下面的程序的运行结果是__________"></a>16、**[primary]** 下面的程序的运行结果是__________</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">incr</span><span class="params">(p *<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">        *p++</span><br><span class="line">        <span class="keyword">return</span> *p</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        v := <span class="number">1</span></span><br><span class="line">        incr(&amp;v)</span><br><span class="line">        fmt.Println(v)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：2</p>
-<h3 id="17、-primary-启动一个goroutine的关键字是"><a href="#17、-primary-启动一个goroutine的关键字是" class="headerlink" title="17、**[primary]** 启动一个goroutine的关键字是__________"></a>17、**[primary]** 启动一个goroutine的关键字是__________</h3><p>参考答案：go</p>
-<h3 id="18、-intermediate-下面的程序的运行结果是"><a href="#18、-intermediate-下面的程序的运行结果是" class="headerlink" title="18、**[intermediate]** 下面的程序的运行结果是__________"></a>18、**[intermediate]** 下面的程序的运行结果是__________</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Slice []<span class="type">int</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewSlice</span><span class="params">()</span></span> Slice &#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="built_in">make</span>(Slice, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s* Slice)</span></span> Add(elem <span class="type">int</span>) *Slice &#123;</span><br><span class="line">         *s = <span class="built_in">append</span>(*s, elem)</span><br><span class="line">         fmt.Print(elem)</span><br><span class="line">         <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">         s := NewSlice()</span><br><span class="line">         <span class="keyword">defer</span> s.Add(<span class="number">1</span>).Add(<span class="number">2</span>)</span><br><span class="line">         s.Add(<span class="number">3</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：132</p>
-<h2 id="判断题"><a href="#判断题" class="headerlink" title="判断题"></a>判断题</h2><h3 id="1、-primary-数组是一个值类型（）"><a href="#1、-primary-数组是一个值类型（）" class="headerlink" title="1、**[primary]** 数组是一个值类型（）"></a>1、**[primary]** 数组是一个值类型（）</h3><p>参考答案：T</p>
-<h3 id="2、-primary-使用map不需要引入任何库（）"><a href="#2、-primary-使用map不需要引入任何库（）" class="headerlink" title="2、**[primary]** 使用map不需要引入任何库（）"></a>2、**[primary]** 使用map不需要引入任何库（）</h3><p>参考答案：T</p>
-<h3 id="3、-intermediate-内置函数delete可以删除数组切片内的元素（）"><a href="#3、-intermediate-内置函数delete可以删除数组切片内的元素（）" class="headerlink" title="3、**[intermediate]** 内置函数delete可以删除数组切片内的元素（）"></a>3、**[intermediate]** 内置函数delete可以删除数组切片内的元素（）</h3><p>参考答案：F</p>
-<h3 id="4、-primary-指针是基础类型（）"><a href="#4、-primary-指针是基础类型（）" class="headerlink" title="4、**[primary]** 指针是基础类型（）"></a>4、**[primary]** 指针是基础类型（）</h3><p>参考答案：F</p>
-<h3 id="5、-primary-interface-是可以指向任意对象的Any类型（）"><a href="#5、-primary-interface-是可以指向任意对象的Any类型（）" class="headerlink" title="5、**[primary]** interface{}是可以指向任意对象的Any类型（）"></a>5、**[primary]** interface{}是可以指向任意对象的Any类型（）</h3><p>参考答案：T</p>
-<h3 id="6、-intermediate-下面关于文件操作的代码可能触发异常（）"><a href="#6、-intermediate-下面关于文件操作的代码可能触发异常（）" class="headerlink" title="6、**[intermediate]** 下面关于文件操作的代码可能触发异常（）"></a>6、**[intermediate]** 下面关于文件操作的代码可能触发异常（）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">file, err := os.Open(<span class="string">&quot;test.go&quot;</span>)</span><br><span class="line"><span class="keyword">defer</span> file.Close()</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;open file failed:&quot;</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：T</p>
-<h3 id="7、-primary-Golang不支持自动垃圾回收（）"><a href="#7、-primary-Golang不支持自动垃圾回收（）" class="headerlink" title="7、**[primary]** Golang不支持自动垃圾回收（）"></a>7、**[primary]** Golang不支持自动垃圾回收（）</h3><p>参考答案：F</p>
-<h3 id="8、-primary-Golang支持反射，反射最常见的使用场景是做对象的序列化（）"><a href="#8、-primary-Golang支持反射，反射最常见的使用场景是做对象的序列化（）" class="headerlink" title="8、**[primary]** Golang支持反射，反射最常见的使用场景是做对象的序列化（）"></a>8、**[primary]** Golang支持反射，反射最常见的使用场景是做对象的序列化（）</h3><p>参考答案：T</p>
-<h3 id="9、-primary-Golang可以复用C-C-的模块，这个功能叫Cgo（）"><a href="#9、-primary-Golang可以复用C-C-的模块，这个功能叫Cgo（）" class="headerlink" title="9、**[primary]** Golang可以复用C&#x2F;C++的模块，这个功能叫Cgo（）"></a>9、**[primary]** Golang可以复用C&#x2F;C++的模块，这个功能叫Cgo（）</h3><p>参考答案：F</p>
-<h3 id="10、-primary-下面代码中两个斜点之间的代码，比如json-x-，作用是X字段在从结构体实例编码到JSON数据格式的时候，使用x作为名字，这可以看作是一种重命名的方式（）"><a href="#10、-primary-下面代码中两个斜点之间的代码，比如json-x-，作用是X字段在从结构体实例编码到JSON数据格式的时候，使用x作为名字，这可以看作是一种重命名的方式（）" class="headerlink" title="10、**[primary]** 下面代码中两个斜点之间的代码，比如json:&quot;x&quot;，作用是X字段在从结构体实例编码到JSON数据格式的时候，使用x作为名字，这可以看作是一种重命名的方式（）"></a>10、**[primary]** 下面代码中两个斜点之间的代码，比如<code>json:&quot;x&quot;</code>，作用是X字段在从结构体实例编码到JSON数据格式的时候，使用x作为名字，这可以看作是一种重命名的方式（）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Position <span class="keyword">struct</span> &#123;</span><br><span class="line">        X <span class="type">int</span> <span class="string">`json:&quot;x&quot;`</span></span><br><span class="line">        Y <span class="type">int</span> <span class="string">`json:&quot;y&quot;`</span></span><br><span class="line">        Z <span class="type">int</span> <span class="string">`json:&quot;z&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：T</p>
-<h3 id="11、-primary-通过成员变量或函数首字母的大小写来决定其作用域（）"><a href="#11、-primary-通过成员变量或函数首字母的大小写来决定其作用域（）" class="headerlink" title="11、**[primary]** 通过成员变量或函数首字母的大小写来决定其作用域（）"></a>11、**[primary]** 通过成员变量或函数首字母的大小写来决定其作用域（）</h3><p>参考答案：T</p>
-<h3 id="12、-primary-对于常量定义zero-const-zero-0-0-，zero是浮点型常量（）"><a href="#12、-primary-对于常量定义zero-const-zero-0-0-，zero是浮点型常量（）" class="headerlink" title="12、**[primary]** 对于常量定义zero(const zero &#x3D; 0.0)，zero是浮点型常量（）"></a>12、**[primary]** 对于常量定义zero(const zero &#x3D; 0.0)，zero是浮点型常量（）</h3><p>参考答案：F</p>
-<h3 id="13、-primary-对变量x的取反操作是-x（）"><a href="#13、-primary-对变量x的取反操作是-x（）" class="headerlink" title="13、**[primary]** 对变量x的取反操作是~x（）"></a>13、**[primary]** 对变量x的取反操作是~x（）</h3><p>参考答案：F</p>
-<h3 id="14、-primary-下面的程序的运行结果是xello（）"><a href="#14、-primary-下面的程序的运行结果是xello（）" class="headerlink" title="14、**[primary]** 下面的程序的运行结果是xello（）"></a>14、**[primary]** 下面的程序的运行结果是xello（）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        str := <span class="string">&quot;hello&quot;</span></span><br><span class="line">        str[<span class="number">0</span>] = <span class="string">&#x27;x&#x27;</span></span><br><span class="line">        fmt.Println(str)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：F</p>
-<h3 id="15、-primary-golang支持goto语句（）"><a href="#15、-primary-golang支持goto语句（）" class="headerlink" title="15、**[primary]** golang支持goto语句（）"></a>15、**[primary]** golang支持goto语句（）</h3><p>参考答案：T</p>
-<h3 id="16、-primary-下面代码中的指针p为野指针，因为返回的栈内存在函数结束时会被释放（）"><a href="#16、-primary-下面代码中的指针p为野指针，因为返回的栈内存在函数结束时会被释放（）" class="headerlink" title="16、**[primary]** 下面代码中的指针p为野指针，因为返回的栈内存在函数结束时会被释放（）"></a>16、**[primary]** 下面代码中的指针p为野指针，因为返回的栈内存在函数结束时会被释放（）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> TimesMatcher <span class="keyword">struct</span> &#123;</span><br><span class="line">        base <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewTimesMatcher</span><span class="params">(base <span class="type">int</span>)</span></span> *TimesMatcher&#123;</span><br><span class="line">        <span class="keyword">return</span> &amp;TimesMatcher&#123;base:base&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        p := NewTimesMatcher(<span class="number">3</span>)</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：F</p>
-<h3 id="17、-primary-匿名函数可以直接赋值给一个变量或者直接执行（）"><a href="#17、-primary-匿名函数可以直接赋值给一个变量或者直接执行（）" class="headerlink" title="17、**[primary]** 匿名函数可以直接赋值给一个变量或者直接执行（）"></a>17、**[primary]** 匿名函数可以直接赋值给一个变量或者直接执行（）</h3><p>参考答案：T</p>
-<h3 id="18、-primary-如果调用方调用了一个具有多返回值的方法，但是却不想关心其中的某个返回值，可以简单地用一个下划线“-”来跳过这个返回值，该下划线对应的变量叫匿名变量（）"><a href="#18、-primary-如果调用方调用了一个具有多返回值的方法，但是却不想关心其中的某个返回值，可以简单地用一个下划线“-”来跳过这个返回值，该下划线对应的变量叫匿名变量（）" class="headerlink" title="18、**[primary]** 如果调用方调用了一个具有多返回值的方法，但是却不想关心其中的某个返回值，可以简单地用一个下划线“_”来跳过这个返回值，该下划线对应的变量叫匿名变量（）"></a>18、**[primary]** 如果调用方调用了一个具有多返回值的方法，但是却不想关心其中的某个返回值，可以简单地用一个下划线“_”来跳过这个返回值，该下划线对应的变量叫匿名变量（）</h3><p>参考答案：T</p>
-<h3 id="19、-primary-在函数的多返回值中，如果有error或bool类型，则一般放在最后一个（）"><a href="#19、-primary-在函数的多返回值中，如果有error或bool类型，则一般放在最后一个（）" class="headerlink" title="19、**[primary]** 在函数的多返回值中，如果有error或bool类型，则一般放在最后一个（）"></a>19、**[primary]** 在函数的多返回值中，如果有error或bool类型，则一般放在最后一个（）</h3><p>参考答案：T</p>
-<h3 id="20、-primary-错误是业务过程的一部分，而异常不是（）"><a href="#20、-primary-错误是业务过程的一部分，而异常不是（）" class="headerlink" title="20、**[primary]** 错误是业务过程的一部分，而异常不是（）"></a>20、**[primary]** 错误是业务过程的一部分，而异常不是（）</h3><p>参考答案：T</p>
-<h3 id="21、-primary-函数执行时，如果由于panic导致了异常，则延迟函数不会执行（）"><a href="#21、-primary-函数执行时，如果由于panic导致了异常，则延迟函数不会执行（）" class="headerlink" title="21、**[primary]** 函数执行时，如果由于panic导致了异常，则延迟函数不会执行（）"></a>21、**[primary]** 函数执行时，如果由于panic导致了异常，则延迟函数不会执行（）</h3><p>参考答案：F</p>
-<h3 id="22、-intermediate-当程序运行时，如果遇到引用空指针、下标越界或显式调用panic函数等情况，则先触发panic函数的执行，然后调用延迟函数。调用者继续传递panic，因此该过程一直在调用栈中重复发生：函数停止执行，调用延迟执行函数。如果一路在延迟函数中没有recover函数的调用，则会到达该携程的起点，该携程结束，然后终止其他所有携程，其他携程的终止过程也是重复发生：函数停止执行，调用延迟执行函数（）"><a href="#22、-intermediate-当程序运行时，如果遇到引用空指针、下标越界或显式调用panic函数等情况，则先触发panic函数的执行，然后调用延迟函数。调用者继续传递panic，因此该过程一直在调用栈中重复发生：函数停止执行，调用延迟执行函数。如果一路在延迟函数中没有recover函数的调用，则会到达该携程的起点，该携程结束，然后终止其他所有携程，其他携程的终止过程也是重复发生：函数停止执行，调用延迟执行函数（）" class="headerlink" title="22、**[intermediate]** 当程序运行时，如果遇到引用空指针、下标越界或显式调用panic函数等情况，则先触发panic函数的执行，然后调用延迟函数。调用者继续传递panic，因此该过程一直在调用栈中重复发生：函数停止执行，调用延迟执行函数。如果一路在延迟函数中没有recover函数的调用，则会到达该携程的起点，该携程结束，然后终止其他所有携程，其他携程的终止过程也是重复发生：函数停止执行，调用延迟执行函数（）"></a>22、**[intermediate]** 当程序运行时，如果遇到引用空指针、下标越界或显式调用panic函数等情况，则先触发panic函数的执行，然后调用延迟函数。调用者继续传递panic，因此该过程一直在调用栈中重复发生：函数停止执行，调用延迟执行函数。如果一路在延迟函数中没有recover函数的调用，则会到达该携程的起点，该携程结束，然后终止其他所有携程，其他携程的终止过程也是重复发生：函数停止执行，调用延迟执行函数（）</h3><p>参考答案：F</p>
-<h3 id="23、-primary-同级文件的包名不允许有多个（）"><a href="#23、-primary-同级文件的包名不允许有多个（）" class="headerlink" title="23、**[primary]** 同级文件的包名不允许有多个（）"></a>23、**[primary]** 同级文件的包名不允许有多个（）</h3><p>参考答案：T</p>
-<h3 id="24、-intermediate-可以给任意类型添加相应的方法（）"><a href="#24、-intermediate-可以给任意类型添加相应的方法（）" class="headerlink" title="24、**[intermediate]** 可以给任意类型添加相应的方法（）"></a>24、**[intermediate]** 可以给任意类型添加相应的方法（）</h3><p>参考答案：F</p>
-<h3 id="25、-primary-golang虽然没有显式的提供继承语法，但是通过匿名组合实现了继承（）"><a href="#25、-primary-golang虽然没有显式的提供继承语法，但是通过匿名组合实现了继承（）" class="headerlink" title="25、**[primary]** golang虽然没有显式的提供继承语法，但是通过匿名组合实现了继承（）"></a>25、**[primary]** golang虽然没有显式的提供继承语法，但是通过匿名组合实现了继承（）</h3><p>参考答案：T</p>
-<h3 id="26、-primary-使用for-range迭代map时每次迭代的顺序可能不一样，因为map的迭代是随机的（）"><a href="#26、-primary-使用for-range迭代map时每次迭代的顺序可能不一样，因为map的迭代是随机的（）" class="headerlink" title="26、**[primary]** 使用for range迭代map时每次迭代的顺序可能不一样，因为map的迭代是随机的（）"></a>26、**[primary]** 使用for range迭代map时每次迭代的顺序可能不一样，因为map的迭代是随机的（）</h3><p>参考答案：T</p>
-<h3 id="27、-primary-switch后面可以不跟表达式（）"><a href="#27、-primary-switch后面可以不跟表达式（）" class="headerlink" title="27、**[primary]** switch后面可以不跟表达式（）"></a>27、**[primary]** switch后面可以不跟表达式（）</h3><p>参考答案：T</p>
-<h3 id="28、-intermediate-结构体在序列化时非导出变量（以小写字母开头的变量名）不会被encode，因此在decode时这些非导出变量的值为其类型的零值（）"><a href="#28、-intermediate-结构体在序列化时非导出变量（以小写字母开头的变量名）不会被encode，因此在decode时这些非导出变量的值为其类型的零值（）" class="headerlink" title="28、**[intermediate]** 结构体在序列化时非导出变量（以小写字母开头的变量名）不会被encode，因此在decode时这些非导出变量的值为其类型的零值（）"></a>28、**[intermediate]** 结构体在序列化时非导出变量（以小写字母开头的变量名）不会被encode，因此在decode时这些非导出变量的值为其类型的零值（）</h3><p>参考答案：T</p>
-<h3 id="29、-primary-golang中没有构造函数的概念，对象的创建通常交由一个全局的创建函数来完成，以NewXXX来命名（）"><a href="#29、-primary-golang中没有构造函数的概念，对象的创建通常交由一个全局的创建函数来完成，以NewXXX来命名（）" class="headerlink" title="29、**[primary]** golang中没有构造函数的概念，对象的创建通常交由一个全局的创建函数来完成，以NewXXX来命名（）"></a>29、**[primary]** golang中没有构造函数的概念，对象的创建通常交由一个全局的创建函数来完成，以NewXXX来命名（）</h3><p>参考答案：T</p>
-<h3 id="30、-intermediate-当函数deferDemo返回失败时，并不能destroy已create成功的资源（）"><a href="#30、-intermediate-当函数deferDemo返回失败时，并不能destroy已create成功的资源（）" class="headerlink" title="30、**[intermediate]** 当函数deferDemo返回失败时，并不能destroy已create成功的资源（）"></a>30、**[intermediate]** 当函数deferDemo返回失败时，并不能destroy已create成功的资源（）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">deferDemo</span><span class="params">()</span></span> <span class="type">error</span> &#123;</span><br><span class="line">        err := createResource1()</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> ERR_CREATE_RESOURCE1_FAILED</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                destroyResource1()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;()</span><br><span class="line"></span><br><span class="line">        err = createResource2()</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> ERR_CREATE_RESOURCE2_FAILED</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                destroyResource2()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;()</span><br><span class="line"></span><br><span class="line">        err = createResource3()</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> ERR_CREATE_RESOURCE3_FAILED</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参考答案：F</p>
-<h3 id="31、-intermediate-channel本身必然是同时支持读写的，所以不存在单向channel（）"><a href="#31、-intermediate-channel本身必然是同时支持读写的，所以不存在单向channel（）" class="headerlink" title="31、**[intermediate]** channel本身必然是同时支持读写的，所以不存在单向channel（）"></a>31、**[intermediate]** channel本身必然是同时支持读写的，所以不存在单向channel（）</h3><p>参考答案：F</p>
-<h3 id="32、-primary-import后面的最后一个元素是包名（）"><a href="#32、-primary-import后面的最后一个元素是包名（）" class="headerlink" title="32、**[primary]** import后面的最后一个元素是包名（）"></a>32、**[primary]** import后面的最后一个元素是包名（）</h3><p>参考答案：F</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
   </article>
   
 
@@ -2574,7 +2222,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2023
+        2023-2024
         <i class="ri-heart-fill heart_icon"></i> 杨海波
       </li>
     </ul>
