@@ -146,6 +146,79 @@
     
     
     <article
+  id="post-HTTPS是如何工作的"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/02/04/HTTPS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"
+    >HTTPS是如何工作的</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/02/04/HTTPS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/" class="article-date">
+  <time datetime="2024-02-04T06:03:43.000Z" itemprop="datePublished">2024-02-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>&ensp;&ensp;&ensp;&ensp; 超文本传输协议安全（HTTPS）是超文本传输协议（HTTP）的扩展。</p>
+<p>&ensp;&ensp;&ensp;&ensp; HTTPS使用传输层安全协议（TLS）来传输加密数据。如果数据在网上被劫持，劫持者得到的只是二进制代码。那么数据是如何加密和解密的呢？</p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTPS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/HTTPS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84.jpeg" alt="HTTPS是如何工作的"></p>
+<ul>
+<li><p>步骤1 - 客户端（浏览器）和服务器建立TCP连接。</p>
+</li>
+<li><p>步骤2 - 客户端向服务器发送“客户端hello”。该消息包含一组必要的加密算法（密码套件）以及它可以支持的最新TLS版本。服务器通过发送“服务器hello”来响应，以便浏览器知道它是否支持算法和TLS版本。服务器然后向客户端发送SSL证书。证书包含公钥、主机名、过期日期等。客户端验证证书。</p>
+</li>
+<li><p>步骤3 - 在验证SSL证书后，客户端生成会话密钥并使用公钥对其进行加密。服务器接收加密的会话密钥并使用私钥进行解密。</p>
+</li>
+<li><p>步骤4 - 现在客户端和服务器都持有相同的会话密钥（对称加密），加密数据通过安全的双向通道进行传输。</p>
+</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 为什么HTTPS在数据传输期间会切换到对称加密？主要有两个原因：</p>
+<ul>
+<li><p>1、安全：非对称加密只适用于单向。这意味着如果服务器尝试将加密数据发送回客户端，任何人都可以使用公钥解密数据。</p>
+</li>
+<li><p>2、服务器资源：非对称加密增加了大量的数学开销。它不适合长会话中的数据传输。</p>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-理解JavaScript中的对象与new命令"
   class="article article-type-post"
   itemscope
@@ -746,107 +819,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-JavaScript执行上下文"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/11/30/JavaScript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/"
-    >JavaScript执行上下文</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/30/JavaScript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" class="article-date">
-  <time datetime="2023-11-30T07:36:22.000Z" itemprop="datePublished">2023-11-30</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p><strong>1、什么是执行上下文？</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 简而言之，执行上下文是计算和执行 JavaScript 代码环境的抽象概念。每当 Javascript 代码在运行的时候，它都是在执行上下文中运行。一个执行上下文包含：scope(作用域)、variable object(变量对象)、this value(this 值)。</p>
-<p><strong>2、执行上下文的类型</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; JavaScript 中有三种执行上下文类型：</p>
-<ul>
-<li>全局执行上下文：这是默认或者说基础的上下文，任何不在函数内部的代码都在全局上下文中。它会执行两件事：创建一个全局的 window 对象（浏览器的情况下），并且设置 this 的值等于这个全局对象。一个程序中只会有一个全局执行上下文。</li>
-<li>函数执行上下文：每当一个函数被调用时, 都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。函数上下文可以有任意多个。每当一个新的执行上下文被创建，它会按定义的顺序（将在后文讨论）执行一系列步骤。</li>
-<li>Eval 函数执行上下文：执行在 eval 函数内部的代码也会有它属于自己的执行上下文，但由于 JavaScript 开发者并不经常使用 eval，所以在这里我不会讨论它。</li>
-</ul>
-<p><strong>3、执行栈</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 执行栈，也就是在其它编程语言中所说的“调用栈”，是一种拥有 LIFO（后进先出）的数据结构，被用来存储代码运行时创建的所有执行上下文。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 当 JavaScript 引擎第一次遇到你的脚本时，它会创建一个全局的执行上下文并且压入当前执行栈。每当引擎遇到一个函数调用，它会为该函数创建一个新的执行上下文并压入栈的顶部。引擎会执行处于栈顶的执行上下文的函数。当该函数执行结束时，执行上下文从栈中弹出，控制流程到达当前栈中的下一个上下文。让我们通过下面的代码示例来理解：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let a = &#x27;Hello World!&#x27;;</span><br><span class="line"></span><br><span class="line">function first() &#123;</span><br><span class="line">  console.log(&#x27;Inside first function&#x27;);</span><br><span class="line">  second();</span><br><span class="line">  console.log(&#x27;Again inside first function&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function second() &#123;</span><br><span class="line">  console.log(&#x27;Inside second function&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">first();</span><br><span class="line">console.log(&#x27;Inside Global Execution Context&#x27;);</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 当上述代码在浏览器加载时，JavaScript 引擎创建了一个全局执行上下文并把它压入当前执行栈。当遇到 first() 函数调用时，JavaScript 引擎为该函数创建一个新的执行上下文并把它压入当前执行栈的顶部。</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JavaScript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/%E8%BF%90%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87.png" alt="IP报文结构"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 当从 first() 函数内部调用 second() 函数时，JavaScript 引擎为 second() 函数创建了一个新的执行上下文并把它压入当前执行栈的顶部。当 second() 函数执行完毕，它的执行上下文会从当前栈弹出，并且控制流程到达下一个执行上下文，即 first() 函数的执行上下文。当 first() 执行完毕，它的执行上下文从栈弹出，控制流程到达全局执行上下文。一旦所有代码执行完毕，JavaScript 引擎从当前栈中移除全局执行上下文。</p>
-<p><strong>4、怎么创建执行上下文</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 到现在，我们已经看过 JavaScript 怎样管理执行上下文了，现在让我们了解 JavaScript 引擎是怎样创建执行上下文的。创建执行上下文有两个阶段：1） 创建阶段 和 2） 执行阶段。</p>
-<p><strong>4.2、执行上下文的创建阶段（ES5及其以后规范）</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 创建阶段做三件事：1）this 值的决定，即我们所熟知的 this 绑定。2）创建词法环境组件。3）创建变量环境组件。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 所以执行上下文的伪代码表示可以为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ExecutionContext = &#123;</span><br><span class="line">  ThisBinding = &lt;this value&gt;,</span><br><span class="line">  LexicalEnvironment = &#123; ... &#125;,</span><br><span class="line">  VariableEnvironment = &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>4.2.1、this 绑定</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 在全局执行上下文中，this 的值指向全局对象。(在浏览器中，this引用 Window 对象)。在函数执行上下文中，this 的值取决于该函数是如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined（在严格模式下）。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let foo = &#123;           // PS:对象的花括号理解为作用域可能不太妥，理解为&quot;属于&quot;也许更为准确</span><br><span class="line">  baz: function() &#123;</span><br><span class="line">      console.log(this);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo.baz();   // &#x27;this&#x27; 引用 &#x27;foo&#x27;, 因为 &#x27;baz&#x27; 被</span><br><span class="line">             // 对象 &#x27;foo&#x27; 调用</span><br><span class="line">let bar = foo.baz;</span><br><span class="line"></span><br><span class="line">bar();       // &#x27;this&#x27; 指向全局 window 对象，因为</span><br><span class="line">             // 没有指定引用对象</span><br></pre></td></tr></table></figure>
-
-<p><strong>4.2.2、词法环境</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 官方的 ES6 文档把词法环境定义为：</p>
-<p>&ensp;&ensp;&ensp;&ensp; <strong>词法环境是一种规范类型，基于 ECMAScript 代码的词法嵌套结构来定义标识符和具体变量和函数的关联。一个词法环境由环境记录器和一个可能的引用outer词法环境的空值组成。</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 简单来说词法环境是一种持有标识符—变量映射的结构。（这里的标识符指的是变量&#x2F;函数的名字，而变量是对实际对象[包含函数类型对象]或原始数据的引用）。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 现在，在词法环境的内部有两个组件：(1) 环境记录器：环境记录器是存储变量和函数声明的实际位置。 (2) 一个外部环境的引用：外部环境的引用意味着它可以访问其父级词法环境（作用域）。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 词法环境有两种类型：1）全局词法环境（在全局执行上下文中）是没有外部环境引用的词法环境。全局环境的外部环境引用是 null。它拥有内建的 Object&#x2F;Array&#x2F;等、在环境记录器内的原型函数（关联全局对象，比如 window 对象）还有任何用户定义的全局变量，并且 this的值指向全局对象。2）函数词法环境，函数内部用户定义的变量存储在函数环境记录器中。并且引用的外部环境可能是全局环境，或者任何包含此内部函数的外部函数。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 环境记录器也有两种类型：1）声明式环境记录器存储变量、函数和参数；2）对象环境记录器用来定义出现在全局上下文中的变量和函数的关系。简而言之，在全局环境中，环境记录器是对象环境记录器。在函数环境中，环境记录器是声明式环境记录器。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 对于函数环境，声明式环境记录器还包含了一个传递给函数的 arguments 对象（此对象存储索引和参数的映射）和传递给函数的参数的 length。抽象地讲，词法环境在伪代码中看起来像这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">GlobalExectionContext = &#123;</span><br><span class="line">  LexicalEnvironment: &#123;</span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Object&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">    &#125;</span><br><span class="line">    outer: &lt;null&gt;    // 全局词法环境的外部环境引用为null</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FunctionExectionContext = &#123;</span><br><span class="line">  LexicalEnvironment: &#123;</span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Declarative&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">    &#125;</span><br><span class="line">    outer: &lt;Global or outer function environment reference&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>4.2.3、变量环境</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 变量环境同样是一个词法环境，所以它有着上面定义的词法环境的所有属性，其环境记录器持有变量声明语句在执行上下文中创建的绑定关系。在 ES6 中，词法环境组件和变量环境组件的一个不同点就是前者被用来存储函数声明和变量（let 和 const）绑定，而后者只用来存储 var 变量绑定。我们看点样例代码来理解上面的概念：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let a = 20;</span><br><span class="line">const b = 30;</span><br><span class="line">var c;</span><br><span class="line"></span><br><span class="line">function multiply(e, f) &#123;</span><br><span class="line"> var g = 20;</span><br><span class="line"> return e * f * g * a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">c = multiply(20, 30);</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 运行上述JS代码所创建的执行上下文的伪代码看起来像这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 全局执行上下文</span><br><span class="line">GlobalExectionContext = &#123;</span><br><span class="line">  // this 绑定  </span><br><span class="line">  ThisBinding: &lt;Global Object&gt;,</span><br><span class="line">  // 词法环境</span><br><span class="line">  LexicalEnvironment: &#123;</span><br><span class="line">    // 环境记录器(对象环境记录器)  </span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Object&quot;,</span><br><span class="line">      // 标识符绑定，词法环境对应的是let,const还有函数声明</span><br><span class="line">      a: &lt; uninitialized &gt;,</span><br><span class="line">      b: &lt; uninitialized &gt;,</span><br><span class="line">      multiply: &lt; func &gt;</span><br><span class="line">    &#125;</span><br><span class="line">    // 外部环境引用(全局执行上下文的外部环境引用都是null)</span><br><span class="line">    outer: &lt;null&gt;</span><br><span class="line">  &#125;,</span><br><span class="line">  // 变量环境</span><br><span class="line">  VariableEnvironment: &#123;</span><br><span class="line">    // 环境记录器(全局执行上下文的词法环境和变量环境的环境记录器都是对象环境记录器)  </span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Object&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">      c: undefined,</span><br><span class="line">    &#125;</span><br><span class="line">    outer: &lt;null&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 函数执行上下文</span><br><span class="line">FunctionExectionContext = &#123;</span><br><span class="line">    </span><br><span class="line">  ThisBinding: &lt;Global Object&gt;,</span><br><span class="line"></span><br><span class="line">  LexicalEnvironment: &#123;</span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Declarative&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">      Arguments: &#123;0: 20, 1: 30, length: 2&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    outer: &lt;GlobalLexicalEnvironment&gt;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  VariableEnvironment: &#123;</span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Declarative&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">      g: undefined</span><br><span class="line">    &#125;,</span><br><span class="line">    outer: &lt;GlobalLexicalEnvironment&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 只有遇到调用函数 multiply 时，函数执行上下文才会被创建。可能你已经注意到 let 和 const 定义的变量并没有关联任何值，但 var 定义的变量被设成了 undefined。这是因为在创建阶段时，引擎检查代码找出变量和函数声明，虽然函数声明完全存储在环境中，但是变量最初设置为 undefined（var 情况下），或者未初始化（let 和 const 情况下）。这就是为什么你可以在声明之前访问 var 定义的变量（虽然是 undefined），但是在声明之前访问 let 和 const 的变量会得到一个引用错误。这就是我们说的变量声明提升。</p>
-<p><strong>4.3、执行上下文的执行阶段</strong></p>
-<p>&ensp;&ensp;&ensp;&ensp; 这是整篇文章中最简单的部分。在此阶段，完成对所有这些变量的分配，最后执行代码。需要注意的是：在执行阶段，如果 JavaScript 引擎不能在源码中声明的实际位置找到 let 变量的值，它会被赋值为 undefined。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
 
     </footer>
   </div>
