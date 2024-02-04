@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>进程间通信的5种方式</title>
+    <url>/2024/02/04/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%845%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>以下是类UNIX操作系统（如Linux）中常见的5种通讯机制。</p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%845%E7%A7%8D%E6%96%B9%E5%BC%8F/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%845%E7%A7%8D%E6%96%B9%E5%BC%8F.jpeg" alt="HTTPS是如何工作的"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 管道（Pipes）:管道是指连接两个或多个进程的输入和输出，常用于流式传输数据。例如，shell脚本通常使用管道运算符“|” 将命令链接在一起：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /var/log/syslog | grep &#x27;error&#x27; | less</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 消息队列（Message Queues）：消息队列通过允许进程以消息的形式交换数据来提供异步通信。写入队列的消息按先进先出的顺序处理。</p>
+<p>例如，服务器可能将作业分派到队列中，消费守护进程从中拉取并独立处理。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 信号（Signals）：信号提供了一种通知系统，能够让进程立即收到重要事件，如被强制终止。例如，SIGKILL提供了一种可靠的方法来结束无响应的应用程序。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 信号量（Semaphores）：信号量是是一种在多线程环境中使用的同步机制，旨在确保多个线程不会同时访问同一块共享内存区域或其他临界资源。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 共享内存（Shared Memory）：共享内存是允许直接访问共享内存区域，以便多个进程可以高效地读取和修改数据，而无需复制。一个示例用例是处理大型图像帧的程序，其中多个进程可以同时访问和处理图像的不同部分。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 这些IPC机制有时被组合在一起以实现高效的进程通信。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>HTTPS是如何工作的</title>
     <url>/2024/02/04/HTTPS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 超文本传输协议安全（HTTPS）是超文本传输协议（HTTP）的扩展。</p>
@@ -31,6 +47,21 @@
       <tags>
         <tag>计算机网络</tag>
         <tag>HTTPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MQ组件的封装</title>
+    <url>/2024/01/31/MQ%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B0%81%E8%A3%85/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 之前给人封装的一套消息发送工具。类层次设计得挺有感觉的。</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E6%9C%8D%E5%8A%A1%E7%AB%AF/MQ%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B0%81%E8%A3%85/MQ%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B0%81%E8%A3%85.png" alt="MQ组件的封装"></p>
+]]></content>
+      <categories>
+        <category>工程</category>
+        <category>服务端</category>
+      </categories>
+      <tags>
+        <tag>消息队列</tag>
+        <tag>架构设计</tag>
       </tags>
   </entry>
   <entry>
@@ -371,8 +402,8 @@
         <category>编程基础</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>技术体系</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>

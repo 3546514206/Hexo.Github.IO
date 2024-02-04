@@ -146,6 +146,158 @@
     
     
     <article
+  id="post-数学地图"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/02/%E6%95%B0%E5%AD%A6%E5%9C%B0%E5%9B%BE/"
+    >数学地图</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/02/%E6%95%B0%E5%AD%A6%E5%9C%B0%E5%9B%BE/" class="article-date">
+  <time datetime="2023-12-02T12:58:22.000Z" itemprop="datePublished">2023-12-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="/pic/%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6/%E6%95%B0%E5%AD%A6%E5%9C%B0%E5%9B%BE/TheMapofMathematics.png" alt="git 分支模型"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
+  id="post-对修饰符final和static的浅析"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/01/%E5%AF%B9%E4%BF%AE%E9%A5%B0%E7%AC%A6final%E5%92%8Cstatic%E7%9A%84%E6%B5%85%E6%9E%90/"
+    >对修饰符final和static的浅析</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/01/%E5%AF%B9%E4%BF%AE%E9%A5%B0%E7%AC%A6final%E5%92%8Cstatic%E7%9A%84%E6%B5%85%E6%9E%90/" class="article-date">
+  <time datetime="2023-12-01T07:23:34.000Z" itemprop="datePublished">2023-12-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><strong>1、static修饰符</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 被static修饰的变量和方法，被类的所有实例所共享。加载类时只分配一次内存。</p>
+<ul>
+<li>静态变量：可以直接通过类名来访问 Person.a;</li>
+<li>态方法：可以直接通过类名来访问 Person.say();静态方法内，可以访问静态变量，但是不能使用this关键字且不能访问实例变量，因为被所有实例所共有,无法判断属于哪个实例对象；</li>
+<li>静态代码块：java虚拟机在加载类时就执行静态代码块。</li>
+</ul>
+<p><strong>2、final修饰符</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 有final修饰表示最终（不可再修改）的意思：</p>
+<ul>
+<li>final类：不能被继承（即没有子类）；</li>
+<li>final方法：不能被子类的方法覆盖（final不用来修饰构造方法，父类与子类之间的构造方法不存在覆盖关系，final修饰是没有意义的）；</li>
+<li>final修饰的变量：即常量，常量只能被赋值一次，之后不能改变。</li>
+</ul>
+<p><strong>3、静态常量</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 静态常量属于编译时常量（final static int a&#x3D;2*3;）在编译的时就能计算出具体的值)，在编译的时候将这个值就放入到常量池中，a被访问时类是不会被初始化的（这是类的被动使用）。访问类的静态变量或静态方法的时候类会被初始化（这是类的主动使用）。而静态变量只会在类初始化的时候才会被赋值。具体细节请参考“类的生命周期”：加载（堆区、方法区）——连接（验证、准备（静态变量分配内存、设置默认初始值为0）、解析（符号引用替换为直接引用，即指针指向方法区的内存位置））——初始化（程序对类或接口主动使用的时候才会被初始化）。</p>
+<p><strong>4、类的初始化化时机</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 类的初始化阶段java虚拟机会为类的static静态变量赋予初始值(这和准备阶段设置默认初始值为0是不一样的)。只有类的主动使用才会初始化类。</p>
+<p><strong>4.1、类的主动使用</strong></p>
+<ul>
+<li><p>创建类的实例：用new语句创建实例 Person ps&#x3D;new Person()。</p>
+</li>
+<li><p>调用类的静态变量或对静态变量赋值：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Person&#123; </span><br><span class="line">    //这和final static int a=2*3;是有区别的</span><br><span class="line">    static int a=2*3;  </span><br><span class="line">    </span><br><span class="line">    static&#123;  </span><br><span class="line">        //Java在定义一个类的时候里面只能放方法和属性，这是规定死了的。System.out.println()是在调用一个叫println的函数，这里是函数的调用而不是类里面定义一个函数。所以需要用static代码块</span><br><span class="line">        System.out.println(&quot;init Person&quot;); //static声明的静态代码块，使得类在初始化的时候会被调用而不需要创建实例对象。它这时候就不在任何一个方法中。</span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 调用的时候写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//这样就可以在不new一个Person实例的情况下，来初始化Person类了。调用类的静态方法</span><br><span class="line">System.out.println(&quot;a=&quot;+Person.a);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用java API中的反射方法：Class.forName(“Person”);</li>
+<li>初始化子类的时候会先初始化父类(但”父类”是接口的时候，不会先初始化它所实现的接口的，只有在程序在使用接口的静态变量时才会使静态接口初始化)。</li>
+<li>Java 虚拟机启动时被标明为启动类的类。</li>
+</ul>
+<p><strong>4.2、类的被动使用</strong></p>
+<ul>
+<li>final 类型的静态变量在编译的时候能计算出值（即编译时常量，在编译的时候将这个值就放入到常量池中了）：注： final类型的静态变量在编译的时候不能计算出变量的值(即运行时常量)的时候是会被初始化的</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//变量a是编译时常量</span><br><span class="line">final static int a=2*3;                 </span><br><span class="line">//变量a不是是编译时常量（即运行时常量）</span><br><span class="line">final static int a=(int)Math.random();  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>“父类”是接口的时候，不会先初始化它所实现的接口的，只有在程序在使用接口的静态变量时才会使静态接口初始化。</li>
+<li>ClassLoader类的loadClass(“Person”)方法的时候，只是对类的加载，不是初始Class.forName(“Person”);才会初始化。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-JavaScript执行上下文"
   class="article article-type-post"
   itemscope
@@ -1426,120 +1578,13 @@
 </article>
 
     
-    <article
-  id="post-Go语言学历路线"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/11/13/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E5%8E%86%E8%B7%AF%E7%BA%BF/"
-    >go 语言学习路线</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/13/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E5%8E%86%E8%B7%AF%E7%BA%BF/" class="article-date">
-  <time datetime="2023-11-13T10:46:19.000Z" itemprop="datePublished">2023-11-13</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E5%8E%86%E8%B7%AF%E7%BA%BF/Go%E8%AF%AD%E8%A8%80%E5%AD%A6%E5%8E%86%E8%B7%AF%E7%BA%BF.drawio.png" alt="Go语言学习路线"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-给未来的妻子的一封信"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/11/12/%E7%BB%99%E6%9C%AA%E6%9D%A5%E7%9A%84%E5%A6%BB%E5%AD%90%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/"
-    >给 的一封信</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/12/%E7%BB%99%E6%9C%AA%E6%9D%A5%E7%9A%84%E5%A6%BB%E5%AD%90%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" class="article-date">
-  <time datetime="2023-11-11T20:08:47.000Z" itemprop="datePublished">2023-11-12</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/%E9%9A%8F%E7%AC%94/">随笔</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
   </nav>
   
 </section>
