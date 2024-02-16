@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>做自己尊重的人</title>
+    <url>/2024/02/16/%E5%81%9A%E8%87%AA%E5%B7%B1%E5%B0%8A%E9%87%8D%E7%9A%84%E4%BA%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 从物理学来说，无机的原子逆热力学第二定律出现生物是奇迹；从生物学来说，按进化规律产生遗传信息指导组装人类是奇迹。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 超越化学反应结果的每个个体都是值得珍惜的奇迹；超越动物欲望总和的每个个体都应做自己尊重的人。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 过去、现在、将来，能够完全知道个人行为和思想的只有自己；世界上很多文化借助宗教信仰来指导人们生活的信念和世俗行为；而对于无神论者——也就是大多数中国人——来说，自我尊重是重要的正道。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 在你们加入社会后看到各种离奇现象，知道自己更多弱点和缺陷，可能还遇到小难大灾后，如何在诱惑和艰难中保持人性的尊严、赢得自己的尊重并非易事，却很值得。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 这不是：自恋、自大、自负、自夸、自欺、自闭、自怜，而是：自信、自豪、自量、自知、自省、自赎、自勉、自强。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 自尊支撑自由的精神、自主的工作、自在的生活。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 我祝愿：退休之日，你觉得职业中的自己值得尊重；迟暮之年，你感到生活中的自己值得尊重。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 在你所含全部原子再度按热力学第二定律回归自然之前，它们既经历过物性的神奇，也产生过人性的可爱。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>读书笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>进程间通信的5种方式</title>
     <url>/2024/02/04/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%845%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>以下是类UNIX操作系统（如Linux）中常见的5种通讯机制。</p>
@@ -1288,18 +1308,6 @@
       </tags>
   </entry>
   <entry>
-    <title>给 的一封信</title>
-    <url>/2023/11/12/%E7%BB%99%E6%9C%AA%E6%9D%A5%E7%9A%84%E5%A6%BB%E5%AD%90%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
-      <categories>
-        <category>笔记</category>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Kubernetes的网络模型：Overlay和Underlay</title>
     <url>/2023/11/08/Kubernetes%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%EF%BC%9AOverlay%E5%92%8CUnderlay/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; 本文分别介绍 Overlay 网络模型和 Underlay 网络模型。</p>
@@ -1351,8 +1359,8 @@
         <category>云计算</category>
       </categories>
       <tags>
-        <tag>K8S</tag>
         <tag>工程</tag>
+        <tag>K8S</tag>
         <tag>网络</tag>
       </tags>
   </entry>
@@ -7747,8 +7755,8 @@ use one vs other -->
         <category>云计算</category>
       </categories>
       <tags>
-        <tag>云计算领域</tag>
         <tag>K8S</tag>
+        <tag>云计算领域</tag>
       </tags>
   </entry>
   <entry>
