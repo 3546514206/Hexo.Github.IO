@@ -146,6 +146,100 @@
     
     
     <article
+  id="post-一次Mybatis升级引发的线上事故"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/08/31/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/"
+    >深入 OGNL 与  Mybatis 源代码分析一次 Mybatis 升级引发的线上事故</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/08/31/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/" class="article-date">
+  <time datetime="2023-08-31T02:16:04.000Z" itemprop="datePublished">2023-08-31</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a> / <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/%E6%9C%8D%E5%8A%A1%E7%AB%AF/">服务端</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>&ensp;&ensp;&ensp;&ensp; 项目中对 Mybatis 做了一次升级。前后版本如下，3.2.5 -&gt; 3.4.4：</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/mybatis%E5%89%8D%E5%90%8E%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7.png" alt="mybatis前后版本升级"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 结果第二天巡检发现如下报错，过了两个小时业务高峰期，前台业务人员不断反馈某最核心的业务无法进行：</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF.png" alt="报错信息"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 我们当时定位到错误的地方，根据经验修改之后验证通过，重新上线之后得以解决。可能涉及敏感数据，所以不展示实际的报错与弥补方案。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 以下是我在本地的问题复现。在本地的一个标准的 SSM 工程中分别引入以下两个版本的 Mybatis 依赖:</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E5%88%86%E5%88%AB%E5%BC%95%E5%85%A5%E4%B8%A4%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84%E4%BE%9D%E8%B5%96.png" alt="分别引入两个版本的依赖"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 编写如下数据库脚本:</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%84%9A%E6%9C%AC.png" alt="数据库脚本"></p>
+<p>&ensp;&ensp;&ensp;&ensp; dao 层调用方法如下：</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/dao%E5%B1%82%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png" alt="dao层方法调用"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 当 Mybatis 依赖为 3.2.5 的较低版本时，不会报错；当 Mybatis 依赖版本为 3.4.4 的较高版本时，则会报出上面的错误:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">invalid comparision:  java.util.HashMap and java.lang.String</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 在本地问题得到复现。问题的关键在于数据库脚本中的 if 条件编译语句的这一个子句 _parameter!&#x3D;’’ 将_parameter 与 ‘’ 做比较，_parameter 是 Mybatis 的一个内置对象，你不需要知道它的作用，只需要知道他是 Map 类型的就行了，显然 ‘’ 是 String 类型的。到这里我们其实已经猜出来了，正是因为这种不规范的比较导致数据库脚本执行失败（实际上是 Mybatis 编译 SQL 失败）。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 但是问题又来了，<strong>为什么 Mybatis 较低版本的时候没有问题，而较高版本则暴露出这个问题了？</strong> 我们深入源码分析一下。因为我对 Mybatis 源码比较熟悉，加上实际生产中报错的堆栈信息也很全，所以直接定位到了 Mybatis 的这个类型：</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/ifnode.png" alt="ifnode"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 上述代码的作用：在我们上述 SQL 脚本中，根据 if 子句的测试语句（就是 … &amp;&amp; _parameter!&#x3D;’’ 那一坨）判断，当前 if 子句所包裹的 sql 是否需要动态编译进最终的执行sql中。当我们进一步追踪，就进入到了 OGNL 的源码中，OGNL 是一套表达式解析引擎，一直定位下去就到了具体报错的方法。到这里我们补充一下版本依赖关系：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mybatis-3.2.5  -&gt;  ognl-2.6.9</span><br><span class="line">mybatis-3.4.4  -&gt;  ognl-3.1.14</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 高版本 OGNL 源码如下：</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E9%AB%98%E7%89%88%E6%9C%ACOGNL%E4%BB%A3%E7%A0%81.png" alt="高版本 OGNL 代码"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 低版本 OGNL 源码如下：</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E4%BD%8E%E7%89%88%E6%9C%ACOGNL%E4%BB%A3%E7%A0%81.png" alt="低版本 OGNL 代码"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 类型标识相关的源码如下：</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E7%B1%BB%E5%9E%8B%E6%A0%87%E8%AE%B0.png" alt="类型标记"></p>
+<p>&ensp;&ensp;&ensp;&ensp; case 为 NONUMBERIC 的含义是当比较的值是非数值类型，所以 _parameter!&#x3D;’’ 子句的判断自然是走该分支语句的代码。t1、t2，v1、v2 的含义是两个待比值（ _parameter 和 ‘’）的类型和 value，在这个场景中分别是如下调试面板所示的（不明白的请观察为了复现问题所编写的 SQL 脚本和 dao 层语句）：</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/%E8%B0%83%E8%AF%95%E4%BF%A1%E6%81%AF%E5%A6%82%E4%B8%8B.png" alt="调试信息如下"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 解释一下：t1 &#x3D; t2 &#x3D; 10，表示 _parameter 与 ‘’ 都是非数值类型。v1 表明了 _parameter 是个 HashMap 类型的变量，有一个 (blurname,cat) 的键值对，v2 &#x3D; ‘’。另外，类的 Class 实例中有一个 isAssignableFrom 方法，这个方法是用来判断两个类的之间的关联关系，也可以说是一个类是否可以被强制转换为另外一个实例对象。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 至此所需信息全部已经准备完毕，我们可以来分析高低版本 OGNL 的源码了。高版本 OGNL 中，我们直接看 case:NONUMBERIC 的分支子句。代码含义为：</p>
+<p>&ensp;&ensp;&ensp;&ensp; <strong>如果 V1 是 Comparable 类型的并且 V1 可以强转为 V2 的类型，则进入 if 分支，否则进入 else 分支，而 else 分支直接报错，而且报错信息是我们实际生产环境中遇到的。显然，V1 既不是 Comparable 类型，也无法转换为 V2 的类型（HashMap -&gt; String），所以进入了 else 分支，mybatis 升级之后携带 OGNL 的升级，数据库不规范的写法导致 mybatis 编译 sql 语句报错，阻塞了业务</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 低版本的 OGNL 的 case:NONUMBERIC 的分支子句的代码逻辑说实话非常拧巴，含义是：</p>
+<p>&ensp;&ensp;&ensp;&ensp; <strong>如果 v1、v2 任一变量为 null，则进入 if 分支，显然不会进入。else 先判断v1、v2 是否能互转，显然不能，直接跳过。接下来是重中之重：如果 equals 为 true ,跳出 case，否则报错。我们根据结果看，equals 必定为 true，因为我们那种不规范的 mybatis 在这个地方，它每没报错——事实上是应该将该问题抛出来的，从而引导开发者更正 mybatis 脚本。接下来我们看方法外面这个 equals 的来源：</strong></p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E4%BA%8B%E6%95%85%E5%A4%8D%E7%9B%98/%E4%B8%80%E6%AC%A1Mybatis%E5%8D%87%E7%BA%A7%E5%BC%95%E5%8F%91%E7%9A%84%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/equals.png" alt="equals"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 我惊呆了，直接写死传经来的，至于这个 equals 意欲何为，当初作者为什么这么写，也许只有作者自己知道。反正高版本的 OGNL 已经将这部分的代码逻辑全部重构了。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 我们可以得到如下结论： _<em>低版本的 mybatis 依赖了低版本的 OGNL ，低版本的 OGNL 在上述分析的函数中存在一定缺陷，这个缺陷会导致我们在编写 Mybatis 脚本的时候类似于 <em>parameter!&#x3D;’’ 的不规范写法不被发现。当我们升级了 Mybatis 之后，这种不规范的写法反而兜不住暴露出来了，加上组件升级测试不充分，直接上到了生产环境。</em></em></p>
+<p>&ensp;&ensp;&ensp;&ensp; <strong>反思：</strong></p>
+<ul>
+<li><strong>日常开发要严格要求自己，追求正规、大气的编程素养，每一行代码，每一个字符，都要过大脑，不要太随便，不要随便复制粘贴能跑就行。</strong></li>
+<li><strong>组件升级要慎之又慎，测试要充分。</strong></li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C/" rel="tag">工作</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E4%B8%8A%E4%BA%8B%E6%95%85/" rel="tag">线上事故</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" rel="tag">问题记录</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-GC—全过程"
   class="article article-type-post"
   itemscope
@@ -730,84 +824,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9E%E8%B0%83/" rel="tag">回调</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-GC—基础知识"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/08/28/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"
-    >GC——基础知识</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/08/28/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="article-date">
-  <time datetime="2023-08-28T15:31:37.000Z" itemprop="datePublished">2023-08-28</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>&ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样<br>的，首先抛出第一个问题，什么样的对象会是 JVM 回收的目标？</p>
-<h4 id="1、可达性分析算法（GC-Roots）"><a href="#1、可达性分析算法（GC-Roots）" class="headerlink" title="1、可达性分析算法（GC Roots）"></a><strong>1、可达性分析算法（GC Roots）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 有一种引用计数法，可以用来判断对象被引用的次数，如果引用次数为0，则代表可以被回收。这种实现<br>方式比较简单，但对于循环引用的情况束手无策，所以 Java 采用了可达性分析算法。即判断某个对象是否与 GC Roots 的这类对象之<br>间的路径可达，若不可达，则有可能成为回收对象，被判定为不可达的对象要成为可回收对象必须至少经历两次标记过程，如果在这两次标<br>记过程中仍然没有逃脱成为可回收对象的可能性，则基本上就真的成为可回收对象了。在 Java 中，可作为 GC Roots 的对象包括以下<br>几种：</p>
-<ul>
-<li>虚拟机栈（本地变量表）中引用的对象</li>
-<li>方法区中类静态属性引用的对象</li>
-<li>方法区中常量引用的对象</li>
-<li>本地方法栈中引用的对象</li>
-</ul>
-<h4 id="2、JVM中的堆结构"><a href="#2、JVM中的堆结构" class="headerlink" title="2、JVM中的堆结构"></a><strong>2、JVM中的堆结构</strong></h4><p>&ensp;&ensp;&ensp;&ensp; JVM 中的堆可划分为两大部分，新生代和老年代，大小比例为1:2，如下：</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%A0%86%E5%8C%BA%E7%9A%84%E5%88%92%E5%88%86%E6%AF%94%E4%BE%8B.png" alt="JVM 分代比例"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 其中，新生代分为 Eden 区和 Survivor 区， Survivor 幸存者区又分为大小相等的两块 from 和 to<br>区。这便是 JVM 中堆的结构和各部分默认的比例，当然这些比例都可通过对应 JVM 参数来调整。完整的 JMM 如下：</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/GC%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/JVM%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt="JVM 内存模型全景"></p>
-<h4 id="2-1、为何新生代要分为三个区"><a href="#2-1、为何新生代要分为三个区" class="headerlink" title="2.1、为何新生代要分为三个区"></a><strong>2.1、为何新生代要分为三个区</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 这里需要介绍新生代的垃圾回收算法——复制算法。该算法的核心是将可用内存按容量划分为大小<br>相等的两块，每次回收周期只用其中一块，当这一块的内存用完，就将还存活的对象复制到另一块上面，然后把已使用过的内存空间清理掉。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 优点：不必考虑内存碎片问题；效率高。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 缺点：可用容量减少为原来的一半，比较浪费。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 最优设置：根据权威数据分析，90%的对象都是朝生夕死的，所以采用10%的空间用作交换区，因为交换区必须要有等量的两个，所以采用复制算法中新生代中三个区默认分配比例为8:1:1。</p>
-<h4 id="2-2、新生代对象的分配和回收"><a href="#2-2、新生代对象的分配和回收" class="headerlink" title="2.2、新生代对象的分配和回收"></a><strong>2.2、新生代对象的分配和回收</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 基本上新的对象优先在 Eden 区分配；</p>
-<p>&ensp;&ensp;&ensp;&ensp; 当 Eden 区没有足够空间时，会发起一次 Minor GC；</p>
-<p>&ensp;&ensp;&ensp;&ensp; Minor GC 回收新生代采用复制回收算法的改进版本。即：<br>from 区和 to 区的两个交换区，这两个区只有一个区有数据。采用8:1:1的默认分配比例（-XX:SurvivorRatio默认为8，代表 Eden 区与 Survivor 区的大小比例）</p>
-<h4 id="2-3、老年代对象的分配和回收"><a href="#2-3、老年代对象的分配和回收" class="headerlink" title="2.3、老年代对象的分配和回收"></a><strong>2.3、老年代对象的分配和回收</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 老年代的对象一般来自于新生代中的长期存活对象。这里有一概念叫做年龄阈值，每个对象定义了年龄计数器，经<br>过一次 Minor GC （在交换区）后年龄加1，对象年龄达到15次后将会晋升到老年代，老年代空间不够时进行 Full GC。当然这个参数仍是可以通过 JVM 参数（-XX:MaxTenuringThreshold，默认15）来调整。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 大对象直接进入老年代。即超过 Eden 区空间，或超过一个参数值（-<br>XX:PretenureSizeThreshold&#x3D;30m，无默认值）。这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 对象提前晋升到老年代（组团）。动态年龄判定：如果在 Survivor 区中相同年龄所有对象大小总和<br>大于 Survivor 区大小的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，而无须等到自己<br>的晋升年龄。</p>
-<h4 id="3、JVM完整的GC流程"><a href="#3、JVM完整的GC流程" class="headerlink" title="3、JVM完整的GC流程"></a><strong>3、JVM完整的GC流程</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 对象的正常流程：Eden 区 -&gt; Survivor 区 -&gt; 老年代。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 新生代GC：Minor GC；老年代GC：Full GC，比 Minor GC 慢10倍，JVM 会“stop the world”，严重<br>影响性能。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 总结：内存区域不够用了，就会引发GC。Minor GC 避免不了，Full GC 尽量避免。<br>处理方式：保存堆栈快照日志、分析内存泄漏、调整内存设置控制垃圾回收频率，选择合适的垃圾<br>回收器等。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a></li></ul>
 
     </footer>
   </div>
