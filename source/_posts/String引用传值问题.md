@@ -5,7 +5,7 @@ categories:
 - 基本功
 - 编程基础
 tags:
-- Go
+- Java
 - 基础知识
 ---
 
