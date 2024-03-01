@@ -61,7 +61,7 @@
     
   <div class="cover-frame">
     <div class="bg-box">
-      <img src="/images/cover5.jpg" alt="image frame" />
+      <img src="/images/cover1.jpg" alt="image frame" />
     </div>
     <div class="cover-inner text-center text-white">
       <h1><a href="/">杨海波</a></h1>
@@ -144,6 +144,77 @@
     
     
     
+    
+    <article
+  id="post-谈谈云原生"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/09/13/%E8%B0%88%E8%B0%88%E4%BA%91%E5%8E%9F%E7%94%9F/"
+    >谈谈云原生</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/09/13/%E8%B0%88%E8%B0%88%E4%BA%91%E5%8E%9F%E7%94%9F/" class="article-date">
+  <time datetime="2023-09-13T00:52:00.000Z" itemprop="datePublished">2023-09-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a> / <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/">云计算</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>&ensp;&ensp;&ensp;&ensp; 之前关于云计算技术底座的部门会谈，我本着程序员实事求是的态度，表示自己其实并不懂云原生。前段时间云技术底座的模型验证，遇到一个测试案例叫做“白屏纳管”，意思是指 CAAS 平台能够对包括云下硬件负载 F5、A10，云上 SLB 等设备进行管理。云原生技术有着太多的这种花里胡哨的名词，将本来很简单的一件事情包装出个能吓住人的词，来提高理解的门槛。作为一个一线开发，我有一种很深切的感受：很多优秀的设计，都是有着简洁优雅的设计原理或者说思想蕴含其中。这种没什么太多内涵的毫无意义的造词运动，对于工程实践，没有任何好处。我们不应该人云亦云盲目从众，也不应该以偏概全一叶障目。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 以下是阿里云公众号某产品经理关于云原生的解释，我截了图如下：</p>
+<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/%E4%BA%91%E5%8E%9F%E7%94%9F/%E8%B0%88%E8%B0%88%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%91%E5%8E%9F%E7%94%9F/%E9%98%BF%E9%87%8C%E4%BA%91%E4%BA%91%E5%8E%9F%E7%94%9F%E5%85%AC%E4%BC%97%E5%8F%B7%E6%9F%90%E6%96%87%E7%AB%A0.jpg" alt="阿里云云原生公众号某文章"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 这段话讲得没有问题，但是似乎又什么都没讲，对于云原生的定义，这种似是而非的说法显然不是一线开发人员想要的答案。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 我们在说云原生的时候，其实是在说“云原生计算”，云原生这个词其实可以拆为“云”和”原生“两个词，这其中其实隐藏了一个词——“云计算”。<strong>云原生一定是云计算，</strong> 这就要求我们事先已经对云计算的发展历史有所了解。云原生与云计算的区别便在“原生”二字上，那么理解云原生，重点就在理解其为何为“原生”。我这里用一句话来总结云原生：云原生是为了发挥出云计算所有优势的最短路径（这句精辟的提炼摘自《阿里云云原生架构实践》一书）。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 这些想法和做法归纳为三个方面：应用架构、计算模型、代表技术。</p>
+<ul>
+<li><p><strong>代表技术</strong> 是最容易理解的。代表技术可以是一些狭义上的云原生基础设施，包含了相关的软件或硬件技术，例如裸金属、docker、K8S；也可以是泛化的一些工程技术体系，比如 Spring Cloud，DevOps，DDD ——它们与云基础设施不一样，很多并非为了云原生而生的，但是在云上环境表现活跃，也可以归纳到云原生代表技术中来。有些人说，使用了容器技术，就是云原生，这肯定是不准确的。容器其实只是改变了我们应用的部署方式，应用运行时的形态，以此来定义云原生是非常片面的。</p>
+</li>
+<li><p><strong>计算模型，</strong> 既然这个行业这么喜欢遣词造句，那我也造几个词（切，谁还不会啊！！！）。计算模型可以从两个方面来看：</p>
+</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; <strong>计算的服务模型：</strong> 计算的服务模型是从商业的角度看的。我们从传统的购买硬件送软件，到购买软件和维护再到如今购买云服务，云计算平台将计算、存储、网络像煤电一样卖给我们。需要指出，计算资源的这种服务模型并不是在云原生中才强调的，而是从云计算提出的时候，就已经强调了的。</p>
+<p>&ensp;&ensp;&ensp;&ensp; <strong>服务的计算模型：</strong> 这个语境中，“服务”不再是商业上的“服务”，而是指“应用服务”。应用服务的计算模型，强调了应用程序的可伸缩性、弹性、自动化和可维护性，以适应现代云环境中的需求。当然，应用的可伸缩、弹性自动化运维这些并不是应用自身具备的能力，而是在云上环境被赋予的，但是需要从应用侧做一定的改造工作，“以适应现代云环境中的需求”，比如下面要说的——应用架构。</p>
+<ul>
+<li><strong>应用架构</strong> 为了最大化发挥云原生的计算优势，应用侧应该也要做架构升级——例如微服务化，在弹性扩缩的时候以更细的粒度进行算力分配，更精确的分配云计算底座资源（计算、存储、网络）——当然，这只是我简单作示意的一种说法。这种说法换个侧面来看，单体应用就不能上云计算么？当然可以，但是那就不叫云原生了，因为单体无法发挥出云计算的最大优势。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 所以从我自己目前的工作经历总结如下： <strong>云原生一定是云计算，特别的，云原生是有效发挥出云计算所有优势的最短路径。理解云原生，可以从代表技术、云原生计算模型、云原生应用架构三方面着手理解。</strong></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97%E9%A2%86%E5%9F%9F/" rel="tag">云计算领域</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
     
     <article
   id="post-一种git分支模型"
@@ -6394,61 +6465,6 @@ use one vs other -->
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-OSI-ISO七层网络"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/08/31/OSI-ISO%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C/"
-    >OSI/ISO七层网络</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/08/31/OSI-ISO%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C/" class="article-date">
-  <time datetime="2023-08-31T06:42:29.000Z" itemprop="datePublished">2023-08-31</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>&ensp;&ensp; 七层网络的常见设备，如下图所示：<br><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E7%9A%84%E5%B8%B8%E8%A7%81%E8%AE%BE%E5%A4%87.png" alt="七层网络的常见设备"></p>
-<p>&ensp;&ensp; 七层网络的常见协议与功能，如下图所示：<br><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C/%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E5%B8%B8%E8%A7%81%E5%8D%8F%E8%AE%AE%E4%B8%8E%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E.gif" alt="七层网络的常见协议与功能"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/" rel="tag">IP数据报</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
 
     </footer>
   </div>

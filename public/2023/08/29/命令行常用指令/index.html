@@ -84,7 +84,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">387</span>
+            <span class="post-count">385</span>
         </span>
     </span>
 
@@ -114,8 +114,8 @@
 <p>&ensp;&ensp; MySQL 源码构建参数(将目录修改为你自己的)</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-DCMAKE_BUILD_TYPE=Debug</span><br><span class="line">-DWITH_BOOST=/Users/setsunayang/Documents/learning/mysql/boost_1_77_0</span><br><span class="line">-DCMAKE_INSTALL_PREFIX=/Users/setsunayang/Documents/learning/mysql/build</span><br><span class="line">-DWITH_SSL=system</span><br><span class="line"></span><br><span class="line">./mysqld --basedir=/Users/setsunayang/Documents/learning/mysql/build \</span><br><span class="line">--datadir=/Users/setsunayang/Documents/learning/mysql/build/data \</span><br><span class="line">--initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure>
 
-<p>&ensp;&ensp; Git重新关联远程仓库</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin </span><br><span class="line">git remote add origin [url]</span><br><span class="line">git config --global user.name &quot;杨海波&quot;</span><br><span class="line">git config --global user.email “3546514206@QQ.COM&quot;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&ensp; Git 相关</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin </span><br><span class="line">git remote add origin [url]</span><br><span class="line">git config --global user.name &quot;杨海波&quot;</span><br><span class="line">git config --global user.email “3546514206@QQ.COM&quot;</span><br><span class="line"></span><br><span class="line">git rm -r --cached</span><br></pre></td></tr></table></figure>
 
 <p>&ensp;&ensp; 设置主机名称</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo scutil --set HostName SetsunaYang</span><br></pre></td></tr></table></figure>
