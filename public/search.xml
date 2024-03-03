@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>互联网发展的历程</title>
+    <url>/2024/03/03/%E4%BA%92%E8%81%94%E7%BD%91%E5%8F%91%E5%B1%95%E7%9A%84%E5%8E%86%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E4%BA%92%E8%81%94%E7%BD%91%E5%8F%91%E5%B1%95%E7%9A%84%E5%8E%86%E7%A8%8B/%E4%BA%92%E8%81%94%E7%BD%91%E5%8E%86%E5%8F%B2.jpeg" alt="粒子物理学"></p>
+]]></content>
+      <categories>
+        <category>基本功</category>
+        <category>编程基础</category>
+      </categories>
+      <tags>
+        <tag>互联网</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>String引用传值问题</title>
     <url>/2024/03/01/String%E5%BC%95%E7%94%A8%E4%BC%A0%E5%80%BC%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>&ensp;&ensp;&ensp;&ensp; Java 中是没有引用传递的，Java 中只有值传递。Java 中所谓的引用传递，也只是传递了”引用变量保存的地址值”。 Java 中判断”引用传递”有没有达到你预期的效果，前提要基于内存模型，并结合你的上下文，根据有没有利用引用变量”传递”的这个地址值去修改实际内存对象的数据来判断。</p>
@@ -456,8 +469,8 @@
         <category>编程基础</category>
       </categories>
       <tags>
-        <tag>技术体系</tag>
         <tag>JavaScript</tag>
+        <tag>技术体系</tag>
       </tags>
   </entry>
   <entry>

@@ -146,6 +146,83 @@
     
     
     <article
+  id="post-命令行常用指令"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/08/29/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"
+    >命令行常用指令</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/08/29/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" class="article-date">
+  <time datetime="2023-08-28T17:17:53.000Z" itemprop="datePublished">2023-08-29</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>&ensp;&ensp; MySQL 创建数据库并指定字符集：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drop schema if exists `test`;</span><br><span class="line">CREATE DATABASE `test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; Brew 相关的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 先卸载Homebrew</span><br><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)&quot;</span><br><span class="line">// 然后在安装</span><br><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br><span class="line">// 搜索包</span><br><span class="line">brew search mysql</span><br><span class="line">// 安装包</span><br><span class="line">brew install mysql</span><br><span class="line">// 查看包信息，比如目前的版本，依赖，安装后注意事项等</span><br><span class="line">brew info mysql</span><br><span class="line">// 卸载包</span><br><span class="line">brew uninstall wget</span><br><span class="line">// 显示已安装的包</span><br><span class="line">brew list</span><br><span class="line">// 查看brew的帮助</span><br><span class="line">brew –help</span><br><span class="line">// 更新， 这会更新 Homebrew 自己</span><br><span class="line">brew update</span><br><span class="line">// 检查过时（是否有新版本），这会列出所有安装的包里，哪些可以升级</span><br><span class="line">brew outdated</span><br><span class="line">brew outdated mysql</span><br><span class="line">// 升级所有可以升级的软件们</span><br><span class="line">brew upgrade</span><br><span class="line">brew upgrade mysql</span><br><span class="line">// 清理不需要的版本极其安装包缓存</span><br><span class="line">brew cleanup</span><br><span class="line">brew cleanup mysql</span><br></pre></td></tr></table></figure>
+<p>&ensp;&ensp; MySQL 源码构建参数(将目录修改为你自己的)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-DCMAKE_BUILD_TYPE=Debug</span><br><span class="line">-DWITH_BOOST=/Users/setsunayang/Documents/learning/mysql/boost_1_77_0</span><br><span class="line">-DCMAKE_INSTALL_PREFIX=/Users/setsunayang/Documents/learning/mysql/build</span><br><span class="line">-DWITH_SSL=system</span><br><span class="line"></span><br><span class="line">./mysqld --basedir=/Users/setsunayang/Documents/learning/mysql/build \</span><br><span class="line">--datadir=/Users/setsunayang/Documents/learning/mysql/build/data \</span><br><span class="line">--initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; Git 相关</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin </span><br><span class="line">git remote add origin [url]</span><br><span class="line">git config --global user.name &quot;杨海波&quot;</span><br><span class="line">git config --global user.email “3546514206@QQ.COM&quot;</span><br><span class="line"></span><br><span class="line">git rm -r --cached</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; 设置主机名称</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo scutil --set HostName SetsunaYang</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; Macbook Pro 显示被隐藏的文件或文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.finder AppleShowAllFiles -boolean true;killall Finder </span><br><span class="line">defaults write com.apple.finder AppleShowAllFiles -boolean false;killall Finder</span><br><span class="line"></span><br><span class="line">chflags hidden</span><br><span class="line">chflags nohidden</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; 设置环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;export PATH=&quot;/opt/homebrew/opt/go@1.20/bin:$PATH&quot;&#x27; &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; 修改环境变量相关</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看当前 shell 是 zsh 还是 bash</span></span><br><span class="line">dscl . -read /Users/$USER UserShell</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果是 bash</span></span><br><span class="line">open ~/.bash_profile</span><br><span class="line">source ~/.bash_profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> 如果是 zsh</span></span><br><span class="line">open ~/.zshrc </span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="tag">工具类</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-回调机制"
   class="article article-type-post"
   itemscope
