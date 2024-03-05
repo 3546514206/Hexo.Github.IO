@@ -146,6 +146,60 @@
     
     
     <article
+  id="post-前端量子特效"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/29/%E5%89%8D%E7%AB%AF%E9%87%8F%E5%AD%90%E7%89%B9%E6%95%88/"
+    >前端量子特效</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/29/%E5%89%8D%E7%AB%AF%E9%87%8F%E5%AD%90%E7%89%B9%E6%95%88/" class="article-date">
+  <time datetime="2023-11-29T09:19:07.000Z" itemprop="datePublished">2023-11-29</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a> / <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/%E5%A4%A7%E5%89%8D%E7%AB%AF/">大前端</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="/pic/%E7%AC%94%E8%AE%B0/%E9%9A%8F%E7%AC%94/%E5%89%8D%E7%AB%AF%E9%87%8F%E5%AD%90%E7%89%B9%E6%95%88/%E9%87%8F%E5%AD%90%E7%BA%A0%E7%BC%A0%E7%89%B9%E6%95%88.gif" alt="前端量子特效"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag">前端开发</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-Java技术全栈图"
   class="article article-type-post"
   itemscope
@@ -1625,103 +1679,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-TCP报文结构和功能简析"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/09/15/TCP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD%E7%AE%80%E6%9E%90/"
-    >TCP报文结构和功能简析</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/09/15/TCP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD%E7%AE%80%E6%9E%90/" class="article-date">
-  <time datetime="2023-09-15T02:38:09.000Z" itemprop="datePublished">2023-09-15</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a><strong>1、简介</strong></h2><p>&ensp;&ensp;&ensp;&ensp; TCP：传输、控制、协议。</p>
-<p>&ensp;&ensp;&ensp;&ensp; TCP 与UDP 最大却别就在那个C上面，它充分实现了数据传输时各种控制功能。可以进行丢包重发控制，还可以对次序乱掉的数据包进行顺序控制，还能控制传输流量，这些是UDP中没有的。即 TCP 提供一种面向连接的、可靠的字节流服务。TCP 是一中面向有链接的协议，只有在确认对端存在的时候，才会发送分数据，从而也可以控制通信流量的浪费。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 什么是可靠的传输：不丢包、不损坏、不乱序、不重复。TCP 通过校验和、序列号、确认应答、重发控制、连接管理以及窗口控制等机制来实现可靠传输。接收端查询就收数据 TCP 首部中的序号和数据长度。将自己下一步应该接受的序列号作为确认应答返送回去。就这样，通过序列号和确认应答，TCP 实现可靠传输。一般使用 TCP 首部用于控制的字段来管理连接。一个连接的建立和断开，正常过程中，至少需要来回共 7 个包才能完成。</p>
-<h2 id="2、TCP首部"><a href="#2、TCP首部" class="headerlink" title="2、TCP首部"></a><strong>2、TCP首部</strong></h2><p>&ensp;&ensp;&ensp;&ensp; TCP首部的数据结构如图所示：</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD%E7%AE%80%E6%9E%90/TCP%E9%A6%96%E9%83%A8.webp" alt="TCP首部"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 为了便于理解，忽略选项部分，固定首部通常为20个字节，将按作用分类分析。</p>
-<h4 id="2-1、端口号-port"><a href="#2-1、端口号-port" class="headerlink" title="2.1、端口号(port)"></a><strong>2.1、端口号(port)</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 前 4 个字节来标识了发送方的端口号和接收方的端口号，即该数据包由谁发送，由谁接收。前 2 个字节标识源端口号，紧接着 2 个字节标识目的端口号。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 即发送方：(11111111,1111111)2 &#x3D; (65535)10，除去0~1023。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 即接收方：(11111111,1111111)2 &#x3D; (65535)10，除去0~1023。</p>
-<h4 id="2-2、序号-seq"><a href="#2-2、序号-seq" class="headerlink" title="2.2、序号(seq)"></a><strong>2.2、序号(seq)</strong></h4><p>&ensp;&ensp;&ensp;&ensp; TCP 是面向字节流的。在一个 TCP 连接中传送的字节流中的每一个字节都按顺序编号。整个要传送的字节流的起始序号必须在连接建立时设置。首部中的序号字段值则是指的是本报文段所发送的数据的第一个字节的序号。长度为 4 字节，序号是 32bit 的无符号数,序号到达 2(32次方) - 1 后又从 0 开始。</p>
-<h4 id="2-3、确认号-ack"><a href="#2-3、确认号-ack" class="headerlink" title="2.3、确认号(ack)"></a><strong>2.3、确认号(ack)</strong></h4><p>&ensp;&ensp;&ensp;&ensp; ack：确认序号，即确认字节的序号，更确切地说，是发送确认的一端所期望收到的下一个序号。所谓的发送确认的一端就是将确认信息发出的一端。比如第二次握手的S端就是发送确认的一端。确认序号为上次接收的最后一个字节序号加1.只有确认标志位(ACK)为1的时候，确认序号才有效。</p>
-<h4 id="2-4、数据偏移"><a href="#2-4、数据偏移" class="headerlink" title="2.4、数据偏移"></a><strong>2.4、数据偏移</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 也叫首部长度，占4个bit,它指出TCP报文段的数据起始处距离TCP报文段的起始处有多远。</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD%E7%AE%80%E6%9E%90/%E6%95%B0%E6%8D%AE%E5%81%8F%E7%A7%BB.webp" alt="TCP首部"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 由于首部中还有长度不确定的选项字段，因此数据偏移字段是必要的。“首部长度”是 4 位二进制数，单位是32位字，能表示的最大十进制数字是 15。(1111)2&#x3D;(15)10,即是 15 个 32 位，一个 32 位是 4 个字节，因此数据偏移的最大值是 15x4&#x3D;60 个字节，这也是 TCP 首部的最大字节。因为固定首部的存在，数据偏移的值最小为20个字节，因此选项长度不能超过40字节*（减去20个字节的固定首部）。</p>
-<h4 id="2-5、保留-reserve"><a href="#2-5、保留-reserve" class="headerlink" title="2.5、保留(reserve)"></a><strong>2.5、保留(reserve)</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 占 6 位，保留为今后使用，但目前应置为 0。</p>
-<h4 id="2-6、紧急URG（urgent）"><a href="#2-6、紧急URG（urgent）" class="headerlink" title="2.6、紧急URG（urgent）"></a><strong>2.6、紧急URG（urgent）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 当 URG&#x3D;1 时，表明紧急指针字段有效。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 它告诉系统此报文段中有紧急数据，应尽快发送（相当于高优先级的数据），而不要按原来的排队顺序来传送。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 例如，已经发送了很长的一个程序要在远地的主机上运行。但后来发现了一些问题，需要取消该程序的运行，因此用户从键盘发出中断命令。如果不使用紧急数据，那么这两个字符将存储在接收TCP的缓存末尾。只有在所有的数据被处理完毕后这两个字符才被交付接收方的应用进程。这样做就浪费了很多时间。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 当 URG 置为 1 时，应用进程就告诉 TCP 有紧急数据要传送。于是 TCP 就把紧急数据插入到本报文段数据的最前面，而在紧急数据后面的数据仍然是普通数据。这时要与首部中紧急指针（Urgent Pointer）字段配合使用。</p>
-<h4 id="2-7、确认ACK（acknowledgment）"><a href="#2-7、确认ACK（acknowledgment）" class="headerlink" title="2.7、确认ACK（acknowledgment）"></a><strong>2.7、确认ACK（acknowledgment）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 仅当ACK &#x3D; 1时确认号字段才有效，当ACK &#x3D; 0时确认号无效。TCP规定，在连接建立后所有的传送的报文段都必须把ACK置为1。</p>
-<h4 id="2-8、推送-PSH（push）"><a href="#2-8、推送-PSH（push）" class="headerlink" title="2.8、推送 PSH（push）"></a><strong>2.8、推送 PSH（push）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 当两个应用进程进行交互式的通信时，有时在一端的应用进程希望在键入一个命令后立即就能收到对方的响应。在这种情况下，TCP就可以使用推送（push）操作。发送方TCP把PSH置为1，并立即创建一个报文段发送出去。接收方TCP收到PSH&#x3D;1的报文段，就尽快地（即“推送”向前）交付接收应用进程。而不用再等到整个缓存都填满了后再向上交付。</p>
-<h4 id="2-9、复位RST（reset）"><a href="#2-9、复位RST（reset）" class="headerlink" title="2.9、复位RST（reset）"></a><strong>2.9、复位RST（reset）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 当RST&#x3D;1时，表明TCP连接中出现了严重错误（如由于主机崩溃或其他原因），必须释放连接，然后再重新建立传输连接。RST置为1还用来拒绝一个非法的报文段或拒绝打开一个连接。</p>
-<h4 id="2-10、同步SYN（synchronization）"><a href="#2-10、同步SYN（synchronization）" class="headerlink" title="2.10、同步SYN（synchronization）"></a><strong>2.10、同步SYN（synchronization）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 在连接建立时用来同步序号。当SYN&#x3D;1而ACK&#x3D;0时，表明这是一个连接请求报文段。对方若同意建立连接，则应在响应的报文段中使SYN&#x3D;1和ACK&#x3D;1。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 因此SYN&#x3D;1就表示这是一个连接请求或连接接受报文。</p>
-<h4 id="2-11、终止FIN（finis，意思是“完”“终”）"><a href="#2-11、终止FIN（finis，意思是“完”“终”）" class="headerlink" title="2.11、终止FIN（finis，意思是“完”“终”）"></a><strong>2.11、终止FIN（finis，意思是“完”“终”）</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 用来释放一个连接。当FIN&#x3D;1时，表明此报文段的发送发的数据已发送完毕，并要求释放运输连接。</p>
-<h4 id="2-12、窗口"><a href="#2-12、窗口" class="headerlink" title="2.12、窗口"></a><strong>2.12、窗口</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 占2字节。窗口值是(0，216 -1)之间的整数。窗口指的是发送本报文段的一方的接受窗口（而不是自己的发送窗口）,窗口大小是给对方用的。窗口值告诉对方：从本报文段首部中的确认号算起，接收方目前允许对方一次发送的数据量（以字节为单位）。之所以要有这个限制，是因为接收方的数据缓存空间是有限的。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 总之，窗口值作为接收方让发送方设置其发送窗口的依据。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 例如，A发送了一个报文段，其确认号是3000，窗口字段是1000.这就是告诉对方B：“从3000算起，A接收缓存空间还可接受1000个字节数据，字节序号是3000-3999”，可以想象到河道的阀门。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 总之：窗口字段明确指出了现在允许对方发送的数据量。窗口值经常在动态变化。</p>
-<h4 id="2-13、检验和"><a href="#2-13、检验和" class="headerlink" title="2.13、检验和"></a><strong>2.13、检验和</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 占2字节。检验和字段检验的范围包括首部和数据这两部分。和UDP用户数据报一样，在计算检验和时，要在TCP报文段的前面加上12字节的伪首部。伪首部的格式和UDP用户数据报的伪首部一样。但应把伪首部第4个字段中的17改为6（TCP的协议号是6）；把第5字段中的UDP中的长度改为TCP长度。接收方收到此报文段后，仍要加上这个伪首部来计算检验和。若使用TPv6,则相应的伪首部也要改变。</p>
-<h4 id="2-14、紧急指针"><a href="#2-14、紧急指针" class="headerlink" title="2.14、紧急指针"></a><strong>2.14、紧急指针</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 占2字节。紧急指针仅在URG&#x3D;1时才有意义，它指出本报文段中的紧急数据的字节数（紧急数据结束后就是普通数据） 。因此，在紧急指针指出了紧急数据的末尾在报文段中的位置。当所有紧急数据都处理完时，TCP就告诉应用程序恢复到正常操作。值得注意的是，即使窗口为0时也可以发送紧急数据。</p>
-<h4 id="2-15、选项"><a href="#2-15、选项" class="headerlink" title="2.15、选项"></a><strong>2.15、选项</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 长度可变，最长可达40个字节。当没有使用“选项”时，TCP的首部长度是20字节。</p>
-<h4 id="2-16、最大报文段长度"><a href="#2-16、最大报文段长度" class="headerlink" title="2.16、最大报文段长度"></a><strong>2.16、最大报文段长度</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 最大报文段长度(MSS:Maximum Segment Size)表示TCP传往另一端的最大块数据的长度。当一个连接建立时，连接的双方都要通告各自的MSS。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 当建立一个连接时，每一方都有用于通告它期望接收的MSS选项(MSS选项只能出现在SYN报文段中),如果一方不接收来自另一方的MSS值，则MSS就定为默认值536字节(这个默认值允许20字节的IP首部和20字节的TCP首部以适合576字节IP数据报) 。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 为什么要规定一个最大报文长度MSS呢？这并不是考虑接受方的接收缓存可能存放不下TCP报文段中的数据。实际上，MSS与接收窗口值没有关系。我们知道，TCP报文段的数据部分，至少要加上40字节的首部（TCP首部20字节和IP首部20字节，这里还没有考虑首部中的可选部分）才能组装成一个IP数据报。若选择较小的MSS长度，网络的利用率就降低。设想在极端情况下，当TCP报文段只含有1字节的数据时，在IP层传输的数据报的开销至少有40字节（包括TCP报文段的首部和IP数据报的首部）。这样，对网络的利用率就不会超过1&#x2F;41。到了数据链路层还要加上一些开销。但反过来，若TCP报文段非常长，那么在IP层传输时就有可能要分解成多个短数据报片。在终点要把收到的各个短数据报片组成成原来的TCP报文段，当传输出错时还要进行重传，这些也都会使开销增大。<br>&ensp;&ensp;&ensp;&ensp; 因此，MSS应尽可能大些，只要在IP层传输时不需要分片就行。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 由于IP数据报所经历的路径是动态变化的，因此在这条路径上确定的不需要的分片的MSS，如果改走另一条路径就可能需要进行分片。因此最佳的MSS是很难确定的。在连接过程中，双方都把自己能够支持的MSS写入这一字段，以后就按照这个数值传输数据，两个传送方向可以有不同的MSS值。若主机未填写这一项，则MSS的默认值是536字节长。因此，所有在互联网上的主机都应该接受的报文段长度是536+20（固定首部长度）&#x3D;556字节。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 后来又增加了几个选项如窗口扩大选项、时间戳选项等。</p>
-<h4 id="2-17、窗口扩大选项"><a href="#2-17、窗口扩大选项" class="headerlink" title="2.17、窗口扩大选项"></a><strong>2.17、窗口扩大选项</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 窗口扩大选项是为了扩大窗口。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 我们知道，TCP首部中窗口字段长度是16位，因此最大的窗口大小为64K字节。虽然这对早期的网络是足够用的，但对于包含卫星信道的网络，传播时延和宽带都很大，要获得高吞吐量需要更大的窗口大小。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 窗口扩大选项占3字节，其中有一个字节表示移位值S。新的窗口值等于TCP首部中的窗口位数从16增大到（16+S）。移位值允许使用的最大值是14，相当于窗口最大值增大到2（16+14）-1&#x3D;230-1。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 窗口扩大选项可以在双方初始建立TCP连接时进行协商。如果连接的某一端实现了窗口扩大，当它不再需要扩大其窗口时，可发送S&#x3D;0选项，使窗口大小回到16。</p>
-<h4 id="2-18、时间戳选项"><a href="#2-18、时间戳选项" class="headerlink" title="2.18、时间戳选项"></a><strong>2.18、时间戳选项</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 时间戳选项占10字节，其中最主要的字段是时间戳字段（4字节）和时间戳回送回答字段（4字节）。时间戳选项有以下两个概念：</p>
-<p>&ensp;&ensp;&ensp;&ensp; 第一、 用来计算往返时间RTT。发送方在发送报文段时把当前时钟的时间值放入时间戳字段，接收方在确认该报文段时把时间戳字段复制到时间戳回送回答字段。因此，发送方在收到确认报文后，可以准确地计算出RTT来。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 第二、 用于处理TCP序号超过232 的情况，这又称为防止序号绕回PAWS。我们知道，TCP报文段的序号只有32位，而每增加232 个序号就会重复使用原来用过的序号。当使用高速网络时，在一次TCP连接的数据传送中序号很可能被重复使用。例如，当使用1.5Mbit&#x2F;s的速度发送报文段时，序号重复要6小时以上。但若用2.5Gbit&#x2F;s的速率发送报文段，则不到14秒钟序号就会重复。为了使接收方能够把新的报文段和迟到很久的报文段区分开，则可以在报文段中加上这种时间戳。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IP%E6%95%B0%E6%8D%AE%E6%8A%A5/" rel="tag">IP数据报</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
 
     </footer>
   </div>
