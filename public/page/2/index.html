@@ -146,6 +146,113 @@
     
     
     <article
+  id="post-理解JavaScript中的对象与new命令"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/13/%E7%90%86%E8%A7%A3JavaScript%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8Enew%E5%91%BD%E4%BB%A4/"
+    >理解JavaScript中的对象与new命令</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/13/%E7%90%86%E8%A7%A3JavaScript%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8Enew%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2023-12-13T08:02:59.000Z" itemprop="datePublished">2023-12-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="1、对象是什么"><a href="#1、对象是什么" class="headerlink" title="1、对象是什么"></a><strong>1、对象是什么</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 面向对象编程（Object Oriented Programming，缩写为 OOP）是目前主流的编程范式。它将真实世界各种复杂的关系，抽象为一个个对象，然后由对象之间的分工与合作，完成对真实世界的模拟。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 每一个对象都是功能中心，具有明确分工，可以完成接受信息、处理数据、发出信息等任务。对象可以复用，通过继承机制还可以定制。因此，面向对象编程具有灵活、代码可复用、高度模块化等特点，容易维护和开发，比起由一系列函数或指令组成的传统的过程式编程（procedural programming），更适合多人合作的大型软件项目。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 那么，“对象”（object）到底是什么？我们从两个层次来理解。</p>
+<ul>
+<li>对象是单个实物的抽象。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 一本书、一辆汽车、一个人都可以是对象，一个数据库、一张网页、一个远程服务器连接也可以是对象。当实物被抽象成对象，实物之间的关系就变成了对象之间的关系，从而就可以模拟现实情况，针对对象进行编程。</p>
+<ul>
+<li>对象是一个容器，封装了属性（property）和方法（method）。</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 属性是对象的状态，方法是对象的行为（完成某种任务）。比如，我们可以把动物抽象为animal对象，使用“属性”记录具体是哪一种动物，使用“方法”表示动物的某种行为（奔跑、捕猎、休息等等）。</p>
+<h4 id="2、构造函数"><a href="#2、构造函数" class="headerlink" title="2、构造函数"></a><strong>2、构造函数</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 面向对象编程的第一步，就是要生成对象。前面说过，对象是单个实物的抽象。通常需要一个模板，表示某一类实物的共同特征，然后对象根据这个模板生成。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 典型的面向对象编程语言（比如 C++ 和 Java），都有“类”（class）这个概念。所谓“类”就是对象的模板，对象就是“类”的实例。但是，JavaScript 语言的对象体系，不是基于“类”的，而是基于构造函数（constructor）和原型链（prototype）。</p>
+<p>&ensp;&ensp;&ensp;&ensp; JavaScript 语言使用构造函数（constructor）作为对象的模板。所谓”构造函数”，就是专门用来生成实例对象的函数。它就是对象的模板，描述实例对象的基本结构。一个构造函数，可以生成多个实例对象，这些实例对象都有相同的结构。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 构造函数就是一个普通的函数，但具有自己的特征和用法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">Vehicle</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">price</span> = <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 上面代码中，Vehicle就是构造函数。为了与普通函数区别，构造函数名字的第一个字母通常大写。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 构造函数的特点有两个。</p>
+<ul>
+<li><p>函数体内部使用了this关键字，代表了所要生成的对象实例。</p>
+</li>
+<li><p>生成对象的时候，必须使用new命令。</p>
+</li>
+</ul>
+<p>&ensp;&ensp;&ensp;&ensp; 下面先介绍new命令。</p>
+<h4 id="3、New命令"><a href="#3、New命令" class="headerlink" title="3、New命令"></a><strong>3、New命令</strong></h4><h4 id="3-1、基本用法"><a href="#3-1、基本用法" class="headerlink" title="3.1、基本用法"></a><strong>3.1、基本用法</strong></h4><p>&ensp;&ensp;&ensp;&ensp; new命令的作用，就是执行构造函数，返回一个实例对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">Vehicle</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">price</span> = <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> vobj = <span class="keyword">new</span> <span class="title class_">Vehicle</span>();</span><br><span class="line">vobj.<span class="property">price</span> <span class="comment">// 1000</span></span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 上面代码通过new命令，让构造函数Vehicle生成一个实例对象，保存在变量v中。这个新生成的实例对象，从构造函数Vehicle得到了price属性。new命令执行时，构造函数内部的this，就代表了新生成的实例对象，this.price表示实例对象有一个price属性，值是1000。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 使用new命令时，根据需要，构造函数也可以接受参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">Vehicle</span> = <span class="keyword">function</span> (<span class="params">p</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">price</span> = p;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> <span class="title class_">Vehicle</span>(<span class="number">500</span>);</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; new命令本身就可以执行构造函数，所以后面的构造函数可以带括号，也可以不带括号。下面两行代码是等价的，但是为了表示这里是函数调用，推荐使用括号。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推荐的写法</span></span><br><span class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> <span class="title class_">Vehicle</span>();</span><br><span class="line"><span class="comment">// 不推荐的写法</span></span><br><span class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> <span class="title class_">Vehicle</span>;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 一个很自然的问题是，如果忘了使用new命令，直接调用构造函数会发生什么事？</p>
+<p>&ensp;&ensp;&ensp;&ensp; 这种情况下，构造函数就变成了普通函数，并不会生成实例对象。而且由于后面会说到的原因，this这时代表全局对象，将造成一些意想不到的结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">Vehicle</span> = <span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">price</span> = <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v = <span class="title class_">Vehicle</span>();</span><br><span class="line">v <span class="comment">// undefined</span></span><br><span class="line">price <span class="comment">// 1000</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/" rel="tag">OOP</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-常见的算法时间复杂度由小到大依次为"
   class="article article-type-post"
   itemscope
@@ -740,69 +847,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-JDBC层次关系图"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/11/30/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/"
-    >JDBC层次关系图</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/30/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/" class="article-date">
-  <time datetime="2023-11-30T01:11:25.000Z" itemprop="datePublished">2023-11-30</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>&ensp;&ensp;&ensp;&ensp; 总体而言，JDBC包含以下几大角色 : Driver、DriverManager、Connection、Statement、ResultSet。这几大角色之间的层次关系如下图所示：</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="JDBC层次关系结构"></p>
-<p>&ensp;&ensp;&ensp;&ensp; Connection表示与特定数据库的连接，可以获取到数据库的一些信息，这些信息包括：其表信息，应该支持的SQL语法，数据库内有什么存储过程，此链接功能的信息等等。</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/Connecyion.png" alt="Connection"></p>
-<p>&ensp;&ensp;&ensp;&ensp; Statement 的功能在于根据传入的sql语句，将传入sql经过整理组合成数据库能够识别的sql语句(对于静态的sql语句，不需要整理组合；而对于预编译sql语句和批量语句，则需要整理)，然后传递sql请求，之后会得到返回的结果。对于查询sql，结果会以ResultSet的形式返回。</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/statement.png" alt="Connection"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 当Statement查询sql执行后，会得到ResultSet对象，ResultSet对象是sql语句查询的结果，作为数据库结果的映射，其映射关系如下图所示。ResultSet对从数据库返回的结果进行了封装，使用迭代器的模式逐条取出结果集中的记录。</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/ResultSet.png" alt="ResultSet"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 工作时序图：</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JDBC%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB%E5%9B%BE/%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt="时序图"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
 
     </footer>
   </div>
