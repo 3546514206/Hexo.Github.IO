@@ -146,6 +146,107 @@
     
     
     <article
+  id="post-JavaScript执行上下文"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/11/30/JavaScript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/"
+    >JavaScript执行上下文</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/30/JavaScript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" class="article-date">
+  <time datetime="2023-11-30T07:36:22.000Z" itemprop="datePublished">2023-11-30</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><strong>1、什么是执行上下文？</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 简而言之，执行上下文是计算和执行 JavaScript 代码环境的抽象概念。每当 Javascript 代码在运行的时候，它都是在执行上下文中运行。一个执行上下文包含：scope(作用域)、variable object(变量对象)、this value(this 值)。</p>
+<p><strong>2、执行上下文的类型</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; JavaScript 中有三种执行上下文类型：</p>
+<ul>
+<li>全局执行上下文：这是默认或者说基础的上下文，任何不在函数内部的代码都在全局上下文中。它会执行两件事：创建一个全局的 window 对象（浏览器的情况下），并且设置 this 的值等于这个全局对象。一个程序中只会有一个全局执行上下文。</li>
+<li>函数执行上下文：每当一个函数被调用时, 都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。函数上下文可以有任意多个。每当一个新的执行上下文被创建，它会按定义的顺序（将在后文讨论）执行一系列步骤。</li>
+<li>Eval 函数执行上下文：执行在 eval 函数内部的代码也会有它属于自己的执行上下文，但由于 JavaScript 开发者并不经常使用 eval，所以在这里我不会讨论它。</li>
+</ul>
+<p><strong>3、执行栈</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 执行栈，也就是在其它编程语言中所说的“调用栈”，是一种拥有 LIFO（后进先出）的数据结构，被用来存储代码运行时创建的所有执行上下文。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 当 JavaScript 引擎第一次遇到你的脚本时，它会创建一个全局的执行上下文并且压入当前执行栈。每当引擎遇到一个函数调用，它会为该函数创建一个新的执行上下文并压入栈的顶部。引擎会执行处于栈顶的执行上下文的函数。当该函数执行结束时，执行上下文从栈中弹出，控制流程到达当前栈中的下一个上下文。让我们通过下面的代码示例来理解：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let a = &#x27;Hello World!&#x27;;</span><br><span class="line"></span><br><span class="line">function first() &#123;</span><br><span class="line">  console.log(&#x27;Inside first function&#x27;);</span><br><span class="line">  second();</span><br><span class="line">  console.log(&#x27;Again inside first function&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function second() &#123;</span><br><span class="line">  console.log(&#x27;Inside second function&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">first();</span><br><span class="line">console.log(&#x27;Inside Global Execution Context&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 当上述代码在浏览器加载时，JavaScript 引擎创建了一个全局执行上下文并把它压入当前执行栈。当遇到 first() 函数调用时，JavaScript 引擎为该函数创建一个新的执行上下文并把它压入当前执行栈的顶部。</p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/JavaScript%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/%E8%BF%90%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87.png" alt="IP报文结构"></p>
+<p>&ensp;&ensp;&ensp;&ensp; 当从 first() 函数内部调用 second() 函数时，JavaScript 引擎为 second() 函数创建了一个新的执行上下文并把它压入当前执行栈的顶部。当 second() 函数执行完毕，它的执行上下文会从当前栈弹出，并且控制流程到达下一个执行上下文，即 first() 函数的执行上下文。当 first() 执行完毕，它的执行上下文从栈弹出，控制流程到达全局执行上下文。一旦所有代码执行完毕，JavaScript 引擎从当前栈中移除全局执行上下文。</p>
+<p><strong>4、怎么创建执行上下文</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 到现在，我们已经看过 JavaScript 怎样管理执行上下文了，现在让我们了解 JavaScript 引擎是怎样创建执行上下文的。创建执行上下文有两个阶段：1） 创建阶段 和 2） 执行阶段。</p>
+<p><strong>4.2、执行上下文的创建阶段（ES5及其以后规范）</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 创建阶段做三件事：1）this 值的决定，即我们所熟知的 this 绑定。2）创建词法环境组件。3）创建变量环境组件。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 所以执行上下文的伪代码表示可以为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ExecutionContext = &#123;</span><br><span class="line">  ThisBinding = &lt;this value&gt;,</span><br><span class="line">  LexicalEnvironment = &#123; ... &#125;,</span><br><span class="line">  VariableEnvironment = &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.2.1、this 绑定</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 在全局执行上下文中，this 的值指向全局对象。(在浏览器中，this引用 Window 对象)。在函数执行上下文中，this 的值取决于该函数是如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined（在严格模式下）。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let foo = &#123;           // PS:对象的花括号理解为作用域可能不太妥，理解为&quot;属于&quot;也许更为准确</span><br><span class="line">  baz: function() &#123;</span><br><span class="line">      console.log(this);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo.baz();   // &#x27;this&#x27; 引用 &#x27;foo&#x27;, 因为 &#x27;baz&#x27; 被</span><br><span class="line">             // 对象 &#x27;foo&#x27; 调用</span><br><span class="line">let bar = foo.baz;</span><br><span class="line"></span><br><span class="line">bar();       // &#x27;this&#x27; 指向全局 window 对象，因为</span><br><span class="line">             // 没有指定引用对象</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.2.2、词法环境</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 官方的 ES6 文档把词法环境定义为：</p>
+<p>&ensp;&ensp;&ensp;&ensp; <strong>词法环境是一种规范类型，基于 ECMAScript 代码的词法嵌套结构来定义标识符和具体变量和函数的关联。一个词法环境由环境记录器和一个可能的引用outer词法环境的空值组成。</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 简单来说词法环境是一种持有标识符—变量映射的结构。（这里的标识符指的是变量&#x2F;函数的名字，而变量是对实际对象[包含函数类型对象]或原始数据的引用）。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 现在，在词法环境的内部有两个组件：(1) 环境记录器：环境记录器是存储变量和函数声明的实际位置。 (2) 一个外部环境的引用：外部环境的引用意味着它可以访问其父级词法环境（作用域）。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 词法环境有两种类型：1）全局词法环境（在全局执行上下文中）是没有外部环境引用的词法环境。全局环境的外部环境引用是 null。它拥有内建的 Object&#x2F;Array&#x2F;等、在环境记录器内的原型函数（关联全局对象，比如 window 对象）还有任何用户定义的全局变量，并且 this的值指向全局对象。2）函数词法环境，函数内部用户定义的变量存储在函数环境记录器中。并且引用的外部环境可能是全局环境，或者任何包含此内部函数的外部函数。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 环境记录器也有两种类型：1）声明式环境记录器存储变量、函数和参数；2）对象环境记录器用来定义出现在全局上下文中的变量和函数的关系。简而言之，在全局环境中，环境记录器是对象环境记录器。在函数环境中，环境记录器是声明式环境记录器。</p>
+<p>&ensp;&ensp;&ensp;&ensp; 对于函数环境，声明式环境记录器还包含了一个传递给函数的 arguments 对象（此对象存储索引和参数的映射）和传递给函数的参数的 length。抽象地讲，词法环境在伪代码中看起来像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">GlobalExectionContext = &#123;</span><br><span class="line">  LexicalEnvironment: &#123;</span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Object&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">    &#125;</span><br><span class="line">    outer: &lt;null&gt;    // 全局词法环境的外部环境引用为null</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FunctionExectionContext = &#123;</span><br><span class="line">  LexicalEnvironment: &#123;</span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Declarative&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">    &#125;</span><br><span class="line">    outer: &lt;Global or outer function environment reference&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.2.3、变量环境</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 变量环境同样是一个词法环境，所以它有着上面定义的词法环境的所有属性，其环境记录器持有变量声明语句在执行上下文中创建的绑定关系。在 ES6 中，词法环境组件和变量环境组件的一个不同点就是前者被用来存储函数声明和变量（let 和 const）绑定，而后者只用来存储 var 变量绑定。我们看点样例代码来理解上面的概念：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let a = 20;</span><br><span class="line">const b = 30;</span><br><span class="line">var c;</span><br><span class="line"></span><br><span class="line">function multiply(e, f) &#123;</span><br><span class="line"> var g = 20;</span><br><span class="line"> return e * f * g * a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">c = multiply(20, 30);</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 运行上述JS代码所创建的执行上下文的伪代码看起来像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 全局执行上下文</span><br><span class="line">GlobalExectionContext = &#123;</span><br><span class="line">  // this 绑定  </span><br><span class="line">  ThisBinding: &lt;Global Object&gt;,</span><br><span class="line">  // 词法环境</span><br><span class="line">  LexicalEnvironment: &#123;</span><br><span class="line">    // 环境记录器(对象环境记录器)  </span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Object&quot;,</span><br><span class="line">      // 标识符绑定，词法环境对应的是let,const还有函数声明</span><br><span class="line">      a: &lt; uninitialized &gt;,</span><br><span class="line">      b: &lt; uninitialized &gt;,</span><br><span class="line">      multiply: &lt; func &gt;</span><br><span class="line">    &#125;</span><br><span class="line">    // 外部环境引用(全局执行上下文的外部环境引用都是null)</span><br><span class="line">    outer: &lt;null&gt;</span><br><span class="line">  &#125;,</span><br><span class="line">  // 变量环境</span><br><span class="line">  VariableEnvironment: &#123;</span><br><span class="line">    // 环境记录器(全局执行上下文的词法环境和变量环境的环境记录器都是对象环境记录器)  </span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Object&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">      c: undefined,</span><br><span class="line">    &#125;</span><br><span class="line">    outer: &lt;null&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 函数执行上下文</span><br><span class="line">FunctionExectionContext = &#123;</span><br><span class="line">    </span><br><span class="line">  ThisBinding: &lt;Global Object&gt;,</span><br><span class="line"></span><br><span class="line">  LexicalEnvironment: &#123;</span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Declarative&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">      Arguments: &#123;0: 20, 1: 30, length: 2&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    outer: &lt;GlobalLexicalEnvironment&gt;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  VariableEnvironment: &#123;</span><br><span class="line">    EnvironmentRecord: &#123;</span><br><span class="line">      Type: &quot;Declarative&quot;,</span><br><span class="line">      // 在这里绑定标识符</span><br><span class="line">      g: undefined</span><br><span class="line">    &#125;,</span><br><span class="line">    outer: &lt;GlobalLexicalEnvironment&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 只有遇到调用函数 multiply 时，函数执行上下文才会被创建。可能你已经注意到 let 和 const 定义的变量并没有关联任何值，但 var 定义的变量被设成了 undefined。这是因为在创建阶段时，引擎检查代码找出变量和函数声明，虽然函数声明完全存储在环境中，但是变量最初设置为 undefined（var 情况下），或者未初始化（let 和 const 情况下）。这就是为什么你可以在声明之前访问 var 定义的变量（虽然是 undefined），但是在声明之前访问 let 和 const 的变量会得到一个引用错误。这就是我们说的变量声明提升。</p>
+<p><strong>4.3、执行上下文的执行阶段</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 这是整篇文章中最简单的部分。在此阶段，完成对所有这些变量的分配，最后执行代码。需要注意的是：在执行阶段，如果 JavaScript 引擎不能在源码中声明的实际位置找到 let 变量的值，它会被赋值为 undefined。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+    <article
   id="post-JDBC层次关系图"
   class="article article-type-post"
   itemscope
@@ -1465,229 +1566,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/K8S/" rel="tag">K8S</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B/" rel="tag">工程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-Go语言包相关概念"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/11/06/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/"
-    >Go语言包相关概念</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/06/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="article-date">
-  <time datetime="2023-11-06T01:11:24.000Z" itemprop="datePublished">2023-11-06</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h4 id="1、包的相关概念"><a href="#1、包的相关概念" class="headerlink" title="1、包的相关概念"></a><strong>1、包的相关概念</strong></h4><p>&ensp;&ensp;&ensp;&ensp; Go 语言是使用包来组织源代码的，并实现命名空间的管理。任何源代码文件必须属于某个包。源码文件的第一行有效代码必须是 package pacakgeName 语句，通过该语句声明自己所在的包。</p>
-<h4 id="2、包的特征"><a href="#2、包的特征" class="headerlink" title="2、包的特征"></a><strong>2、包的特征</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 所有的 .go 文件，除了空行和注释，都应该在第一行声明自己所属的包。即所有代码都必须组织在 package 中。包的结构特点有：</p>
-<ul>
-<li>源文件头部以 package 声明包名称；</li>
-<li>包由同一目录下的多个源码文件组成，即一个目录下的同级文件属于同一个包；</li>
-<li>每个包都在一个单独的目录里；</li>
-<li>包所在的目录名最好不用 main 、 all 、 std 这三个保留名称；</li>
-<li>可执行文件必须包含 package main 和入口函数 main ， main 包是 Go 语言程序的入口包，一个 Go 语言程序必须有且仅有一个 main 包，并且，一个 main 包中也必须有且仅有一个 main 函数。如果一个程序没有 main 包，那么编译时将会出错，无法生成可执行文件；</li>
-<li>不能把多个包放到同一个目录中，也不能把同一个包的文件分拆到多个不同目录中。这意味着，同一个目录下的所有 .go 文件必须声明同一个包名；</li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp; 包中成员以名称首字母大小写决定访问权限。该规则适用于全局变量、全局常量、类型、结构字段、函数、方法等。</p>
-<ul>
-<li>Public : 首字母大写，可被包外访问；</li>
-<li>internal : 首字母小写，仅包内成员可以访问；</li>
-</ul>
-<h4 id="3、包名约束"><a href="#3、包名约束" class="headerlink" title="3、包名约束"></a><strong>3、包名约束</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 给包命名的惯例是使用包所在目录的名字。给包及其目录命名时，应该使用简洁、清晰且全小写的名字，这有利于开发时频繁输入包名。<br>&ensp;&ensp;&ensp;&ensp; 记住，并不需要所有包的名字都与别的包不同，因为导入包时是使用全路径的，所以可以区分同名的不同包。<br>&ensp;&ensp;&ensp;&ensp; 一般情况下，包被导入后会使用你的包名作为默认的名字，不过这个导入后的名字可以修改。这个特性在需要导入不同目录的同名包时很有用。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 关于默认包名一般采用导入路径名的最后一段的约定也有三种例外情况:</p>
-<ul>
-<li>包对应一个可执行程序，也就是 main 包，这时候 main 包本身的导入路径是无关紧要的。名字为 main 的包是给 go build 构建命令一个信息，这个包编译完之后必须调用连接器生成一个可执行程序。</li>
-<li>包所在的目录中可能有一些文件名是以 _test.go 为后缀的 Go 源文件（译注：前面必须有其它的字符，因为以 _ 或 . 开头的源文件会被构建工具忽略），并且这些源文件声明的包名也是以 _test 为后缀名的。这种目录可以包含两种包：一种是普通包，另一种则是测试的外部扩展包。所有以 _test 为后缀包名的测试外部扩展包都由 go test 命令独立编译，普通包和测试的外部扩展包是相互独立的。测试的外部扩展包一般用来避免测试代码中的循环导入依赖。</li>
-<li>一些依赖版本号的管理工具会在导入路径后追加版本号信息，例如“gopkg.in&#x2F;yaml.v2” 这种情况下包的名字并不包含版本号后缀，而是 yaml 。</li>
-</ul>
-<h4 id="4、main-包"><a href="#4、main-包" class="headerlink" title="4、main 包"></a><strong>4、main 包</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 在 Go 语言里，命名为 main 的包具有特殊的含义。 Go 语言的编译程序会试图把这种名字的包编译为二进制可执行文件。所有用 Go 语言编译的可执行程序都必须有一个名叫 main 的包。<br>&ensp;&ensp;&ensp;&ensp; 当编译器发现某个包的名字为 main 时，它一定也会发现名为 main() 的函数，否则不会创建可执行文件。 main() 函数是程序的入口，所以，如果没有这个函数，程序就没有办法开始执行。程序编译时，会使用声明 main 包代码所在目录的目录名作为二进制可执行文件的文件名。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 而且通常来说，main 包应该很简洁。我们在 main 包中会做一些命令行参数解析、资源初始化、日志设施初始化、数据库连接初始化等工作，之后就会将程序的执行权限交给更高级的执行控制对象。</p>
-<h4 id="5、包的声明"><a href="#5、包的声明" class="headerlink" title="5、包的声明"></a><strong>5、包的声明</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 在 Go 语言中，代码包中的源码文件名可以是任意的，这些任意名称的源码文件都必须以包声明语句作为文件中代码的第一行。比如 src 目录下的代码包 common&#x2F;upload 包中的所有源码文件都要先声明自己属于common&#x2F;upload 包：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> upload</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; package 是 Go 语言中用于包声明语句的关键字。 Go 语言规定包声明中的包名为代码包路径的最后一个元素。如上，common&#x2F;upload 包的包路径为 common&#x2F;upload ，而包声明中的包名则为 upload 。而针对源码文件（即包含 main 函数的 .go 文件），无论存放在哪个包中，它都必须声明为属于 main 包。</p>
-<h4 id="6、包的引入"><a href="#6、包的引入" class="headerlink" title="6、包的引入"></a><strong>6、包的引入</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 标准包的源码位于 $GOROOT&#x2F;src&#x2F; 下面，标准包可以直接引用。自定义的包和第三方包的源码必须放到 $GOPATH&#x2F;src&#x2F; 目录下才能被引用。导入包需要使用关键字 import ，它会告诉编译器你想引用该位置的包内的代码。如果需要导入多个包，习惯上是将 import 语句包装在一个导入块中。包的引用路径有两种写法， 一种是绝对路径，另一种是相对路径。要在代码中引用其他包的内容，需要使用 import 关键字导入使用的包。具体语法如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;包的路径&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 注意事项：</p>
-<ul>
-<li>import 导入语句通常放在源码文件开头包声明语句的下面；</li>
-<li>导入的包名需要使用双引号包裹起来；</li>
-<li>包名是从GOPATH&#x2F;src&#x2F; 后开始计算的，使用&#x2F; 进行路径分隔。</li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp; 包的导入有两种写法，分别是单行导入和多行导入。</p>
-<ul>
-<li><p>单行导入:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;包 1 的路径&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;包 2 的路径&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>多行导入</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;包 1 的路径&quot;</span></span><br><span class="line">    <span class="string">&quot;包 2 的路径&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="6-1、包的绝对路径"><a href="#6-1、包的绝对路径" class="headerlink" title="6.1、包的绝对路径"></a><strong>6.1、包的绝对路径</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 包的绝对路径就是 $GOROOT&#x2F;src 或 $GOPATH&#x2F;src 后面包的源码的全路径，比如下面的包引用：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;common/upload&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;database/sql/driver&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;database/sql&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; upload 包是自定义的包，其源码位于 $GOPATH&#x2F;src&#x2F;common&#x2F;upload 目录下，代码包导入使用的路径就是代码包在工作区的 src 目录下的相对路径，比如 upload 的绝对路径为 &#x2F;home&#x2F;setsunayang&#x2F;gocode&#x2F;src&#x2F;common&#x2F;upload ，而 &#x2F;home&#x2F;setsunayang&#x2F;gocode 是被包含在环境变量 GOPATH 中的工作区目录路径，则其代码包导入路径就是 common&#x2F;upload。</p>
-<p>&ensp;&ensp;&ensp;&ensp; sql 和 driver 包的源码分别位于 $GOROOT&#x2F;src&#x2F;database&#x2F;sql 和 $GOROOT&#x2F;src&#x2F;database&#x2F;sql&#x2F;driver 下。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 编译器会首先查找 Go 的安装目录，然后才会按顺序查找 GOPATH 变量里列出的目录。一旦编译器找到一个满足 import 语句的包，就停止进一步查找。</p>
-<h4 id="6-2、相对路径引用"><a href="#6-2、相对路径引用" class="headerlink" title="6.2、相对路径引用"></a><strong>6.2、相对路径引用</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 相对路径只能用于引用 $GOPATH 下的包，标准包的引用只能使用全路径引用。比如下面两个包：包 a 的路径是 $GOPATH&#x2F;src&#x2F;lab&#x2F;a ，包 b 的源码路径为 $GOPATH&#x2F;src&#x2F;lab&#x2F;b ，假设 b 引用了 a 包，则可以使用相对路径引用方式。示例如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 相对路径引用</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;../a&quot;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 绝对路径引用</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;lab/a&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="6-3、引用格式"><a href="#6-3、引用格式" class="headerlink" title="6.3、引用格式"></a><strong>6.3、引用格式</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 常用的包引用有以下 4 种格式，我们以 fmt 包为例进行说明。</p>
-<ul>
-<li>标准引用方式</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt”</span></span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 此时可以用 fmt. </p>
-<ul>
-<li>别名引用方式</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> F <span class="string">&quot;fmt”</span></span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 此时相当于给包 fmt 起了个别名 F ，用 F. 代替标准的 fmt.作为前缀引用 fmt 包内可导出元素。</p>
-<ul>
-<li>省略引用方式</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> . <span class="string">&quot;fmt&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 此时相当于把包 fmt 的命名空间直接合并到当前程序的命名空间中，使用 fmt 包内可导出元素可以不用前缀 fmt. ，直接引用。示例如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> . <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 不需要加前级fmt.</span></span><br><span class="line">    Println(<span class="string">&quot;hello , world”)</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>仅执行包初始化 init 函数</li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp; 使用标准格式引用包，但是代码中却没有使用包，编译器会报错。如果包中有 init 初始化函数，则通过 import packageName 这种方式引用包，仅执行包的初始化函数，即使包没有 init 初始化函数，也不会引发编译器报错。示例如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  _ <span class="string">&quot;fmt&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 下划线字符 _ 在 Go 语言里称为空白标识符，这个标识符用来抛弃不想继续使用的值，如给导入的包赋予一个空名字，或者忽略函数返回的你不感兴趣的值。</p>
-<ul>
-<li>远程导入</li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp; Go 工具链会使用导入路径确定需要获取的代码在网络的什么地方。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/net/http&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 用导入路径编译程序时， go build 命令会使用 GOPATH 的设置，在磁盘上搜索这个包。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 事实上，这个导入路径代表一个 URL ，指向 GitHub 上的代码库。如果路径包含 URL ，可以使用 Go 工具链从分布式版本控制系统获取包，并把包的源代码保存在 GOPATH 指向的路径里与 URL 匹配的目录里。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 这个获取过程使用 go get 命令完成。go get 将获取任意指定的 URL 的包，或者一个已经导入的包所依赖的其它包。由于 go get 的这种递归特性，这个命令会扫描某个包的源码树，获取能找到的所有依赖包。</p>
-<h4 id="6-3、综合实践"><a href="#6-3、综合实践" class="headerlink" title="6.3、综合实践"></a><strong>6.3、综合实践</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 当导入多个代码包时，需要用圆括号括起它们，且每个代码包名独占一行。在调用被导入代码包中的函数或使用其中的结构体、变量或常量时，需要使用包路径的最后一个元素加 . 的方式指定代码所在的包。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 例如，如果我们有两个包 logging 和 go_lib&#x2F;logging , 并且有相同的方法 logging_print() ，且有一个源码文件需要导入这两个包（标准引用）：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;logging&quot;</span></span><br><span class="line">    <span class="string">&quot;go_lib/logging&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 则这句代码 logging.logging_print() 就会引起冲突， Go 语言无法知道 logging.Xxx() 代表的是哪一个包。所以，在 Go 语言中，如果在同一个源码文件中使用上述方法导入多个代码包，那么代码包路径的最后一个元素不可以重复。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 如果用这段代码包导入代码，在编译代码时，Go 语言会抛出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">”logging redeclared as imported package name”</span><br></pre></td></tr></table></figure>
-
-<p>的错误。如果确实需要导入，当有这类重复时，我们可以给它们起个别名来区别（别名引用）：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    la <span class="string">&quot;logging&quot;</span></span><br><span class="line">    lb <span class="string">&quot;go_lib/logging&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>调用包中的代码以如下方式：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> logger la.Logger = la.logging_print()</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 这里不必给每个引起冲突的代码包都起一个别名，只要能够区分它们就可以了。如果我们想直接调用某个依赖包的程序，就可以用 . 来代替别名（省略引用）。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    . <span class="string">&quot;logging&quot;</span></span><br><span class="line">    lb <span class="string">&quot;go_lib/logging&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>在当前源码文件中，可以直接进行代码调用了：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> logger Logger = logging_print()</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; Go 语言把变量、常量、函数、结构体和接口统称为程序实体，而把它们的名字统称为标识符。标识符可以是任何 Unicode 编码可以表示的字母字符、数字以及下划线 ”_”，并且，首字母不能是数字。标识符的首字母的大小写控制着对应程序实体的访问权限。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 如果标识符的首字母是大写的，那么它对应的程序实体就可以被本代码包之外的代码访问到，也可以称其为可导出的。否则对应的程序实体就只能被本包内的代码访问。当然，还需要有以下两个额外条件：</p>
-<ul>
-<li>(1)、程序实体必须是非局部的。局部程序实体是被定义在函数或结构体的内部。</li>
-<li>(2)、代码包所在的目录必须被包含在环境变量 GOPATH 中的工作区目录中。</li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp; 如果代码包 logging 中有一个叫做 getSimpleLogger 的函数，那么光从这个函数的名字上我们就可以看出，这个函数是不能被包外代码调用的。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 如果我们只想初始化某个代码包而不需要在当前源码文件中使用那个代码包中的任何代码，即可以用 _ 来代替别名（仅执行包初始化 init 函数的引用方式）。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    _ <span class="string">&quot;logging&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h4 id="6-5、注意事项"><a href="#6-5、注意事项" class="headerlink" title="6.5、注意事项"></a><strong>6.5、注意事项</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 一个包可以有多个 init 函数，包加载会执行全部的 init 函数，但并不能保证执行顺序，所以不建议在一个包中放入多个 init 函数，将需要初始化的逻辑放到一个 init 函数里面。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 包不能出现循环引用。比如包 a 引用了包 b ，包 b 引用了包 c，如果包 c 又引用了包 a，则编译不能通过。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 包的重复引用是允许的。比如包 a 引用了包 b 和包 c ，包 b 和包 c 都引用了包 d 。这种场景相当于重复引用了d，这种情况是允许的， 并且 Go 编译器保证 d 的 init 函数只会执行一次。</p>
-<h4 id="7、包初始化"><a href="#7、包初始化" class="headerlink" title="7、包初始化"></a><strong>7、包初始化</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 在 Go 语言中，可以有专门的函数负责代码包初始化。这个函数需要无参数声明和结果声明，且名称必须为 init ，如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="built_in">println</span>(<span class="string">&quot;Initialize&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; Go 语言会在程序真正执行前对整个程序的依赖进行分析，并初始化相关的代码包。也就是说，所有的代码包初始化函数都会在 main 函数（命令源码文件中的入口函数）之前执行完成，而且只会执行一次。并且，当前代码包中的所有全局变量的初始化都会在代码包初始化函数执行前完成。这就避免了在代码包初始化函数对某个变量进行赋值之后又被该变量声明中赋予的值覆盖掉的问题。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 每个包可以包含任意多个 init 函数，这些函数都会在程序执行开始的时候被调用。所有被编译器发现的 init 函数都会安排在 main 函数之前执行。 init 函数用在设置包、初始化变量或者其他要在程序运行前优先完成的引导工作。</p>
-<p>&ensp;&ensp;&ensp;&ensp; Go 里面有两个保留的函数： init 函数（能够应用于所有的 package ）和 main 函数（只能应用于 package main ）。这两个函数在定义时不能有任何的参数和返回值。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 虽然一个 package 里面可以写任意多个 init 函数，但这无论是对于可读性还是以后的可维护性来说，我们都强烈建议用户在一个 package 中每个文件只写一个 init 函数。</p>
-<p>&ensp;&ensp;&ensp;&ensp; Go 程序会自动调用 init() 和 main() ，所以不需要在任何地方调用这两个函数。每个 package 中的 init 函数都是可选的，但 package main 只能包含一个 main 函数。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 程序的初始化和执行都起始于 main 包。如果 main 包还导入了其它的包，那么就会在编译时将它们依次导入。有时一个包会被多个包同时导入，那么它只会被导入一次（例如很多包可能都会用到 fmt 包，但它只会被导入一次，因为没有必要导入多次）。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 当一个包被导入时，如果该包还导入了其它的包，那么会先将其它包导入进来，然后再对这些包中的包级常量和变量进行初始化，接着执行 init 函数（如果有的话），依次类推。等所有被导入的包都加载完毕了，就会开始对 main 包中的包级常量和变量进行初始化，然后执行 main 包中的 init 函数（如果存在的话），最后执行 main 函数。下图详细地解释了整个执行过程：</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/%E5%8C%85%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B.jpg" alt="包的初始化过程"></p>
-<p>&ensp;&ensp;&ensp;&ensp; init 函数特征总结：</p>
-<ul>
-<li>每个源文件都可以定义一个或多个初始化函数，但强烈建议只定义一个。</li>
-<li>编译器不保证多个初始化函数执行次序。</li>
-<li>初始化函数在单一线程被用，仅执行一次。</li>
-<li>初始化函数在包所有全局变量初始化后执行。</li>
-<li>在所有初始化函数结束后才执行 main.main。</li>
-<li>init() 函数不能被其他函数调用。</li>
-</ul>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E8%A8%80%E5%8C%85%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/init%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.png" alt="init执行过程"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 所以简而言之，你只需要记住这三点就可以了：</p>
-<ul>
-<li>依赖包按“深度优先”的次序进行初始化；</li>
-<li>每个包内按以“常量 -&gt; 变量 -&gt; init 函数”的顺序进行初始化；</li>
-<li>包内的多个 init 函数按出现次序进行自动调用；</li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp; 重点关注 init 函数具备的几种行为特征：</p>
-<ul>
-<li>执行顺位排在包内其他语法元素常量、变量的后面；</li>
-<li>每个 init 函数在整个 Go 程序生命周期内仅会被执行一次；</li>
-<li>init 函数是顺序执行的，只有当一个 init 函数执行完毕后，才会去执行下一个 init 函数。</li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp; 这里举出《Go并发编程实战》中的例子，帮助理解上面的包初始化，如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main <span class="comment">// 命令源码文件必须在这里声明自己属于main包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ( <span class="comment">// 引入了代码包fmt和runtime</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;runtime&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123; <span class="comment">// 包初始化函数</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;Map: %v\n&quot;</span>, m) <span class="comment">// 先格式化再打印</span></span><br><span class="line">    <span class="comment">// 通过调用runtime包的代码获取当前机器所运行的操作系统以及计算架构</span></span><br><span class="line">    <span class="comment">// 而后通过fmt包的Sprintf方法进行字符串格式化并赋值给变量info</span></span><br><span class="line">    info = fmt.Sprintf(<span class="string">&quot;OS: %s, Arch: %s&quot;</span>, runtime.GOOS, runtime.GOARCH)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 非局部变量，map类型，且已初始化</span></span><br><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span> = <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span>&#123;<span class="number">1</span>: <span class="string">&quot;A&quot;</span>, <span class="number">2</span>: <span class="string">&quot;B&quot;</span>, <span class="number">3</span>: <span class="string">&quot;C&quot;</span>&#125;</span><br><span class="line"><span class="keyword">var</span> info <span class="type">string</span> <span class="comment">// 非局部变量，string类型，未被初始化</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; <span class="comment">// 命令源码文件必须有的入口函数</span></span><br><span class="line">    fmt.Println(info) <span class="comment">// 打印变量info</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 输出：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map: <span class="keyword">map</span>[<span class="number">1</span>:A <span class="number">2</span>:B <span class="number">3</span>:C]</span><br><span class="line">OS: windows, Arch: amd64</span><br></pre></td></tr></table></figure>
-
-<p>&ensp;&ensp;&ensp;&ensp; 在同一个代码包中，可以存在多个代码包初始化函数，甚至代码包内的每一个源码文件都可以定义多个代码包初始化函数。Go 语言编译器不能保证同一个代码包中的多个代码包初始化函数的执行顺序。如果要求按特定顺序执行的话，可以考虑使用 Channel 。</p>
-<h4 id="8、编译速度"><a href="#8、编译速度" class="headerlink" title="8、编译速度"></a><strong>8、编译速度</strong></h4><p>&ensp;&ensp;&ensp;&ensp; 当我们修改了一个源文件，我们必须重新编译该源文件对应的包和所有依赖该包的其他包。即使是从头构建， Go 语言编译器的编译速度也明显快于其它编译语言。 Go 语言的闪电般的编译速度主要得益于三个语言特性。</p>
-<ul>
-<li>所有导入的包必须在每个文件的开头显式声明，这样的话编译器就没有必要读取和分析整个源文件来判断包的依赖关系。</li>
-<li>禁止包的环状依赖，因为没有循环依赖，包的依赖关系形成一个有向无环图，每个包可以被独立编译，而且很可能是被并发编译。</li>
-<li>编译后包的目标文件不仅仅记录包本身的导出信息，目标文件同时还记录了包的依赖关系。因此，在编译一个包的时候，编译器只需要读取每个直接导入包的目标文件，而不需要遍历所有依赖的的文件（译注：很多都是重复的间接依赖）。</li>
-</ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a></li></ul>
 
     </footer>
   </div>
