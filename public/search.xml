@@ -7969,10 +7969,14 @@ use one vs other -->
 <p>&ensp;&ensp; 修改环境变量相关</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看当前 shell 是 zsh 还是 bash</span></span><br><span class="line">dscl . -read /Users/$USER UserShell</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果是 bash</span></span><br><span class="line">open ~/.bash_profile</span><br><span class="line">source ~/.bash_profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> 如果是 zsh</span></span><br><span class="line">open ~/.zshrc </span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
 
+<p>&ensp;&ensp; IDEA 相关</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解决 Goland 无法调试的问题。在 bin/goland.vmoptions 增加如下虚拟机参数</span></span><br><span class="line">-Djava.net.preferIPv4Stack=true</span><br><span class="line">-Djava.net.preferIPv6Addresses=true</span><br></pre></td></tr></table></figure>
+
 
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>基本功</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>工具类</tag>

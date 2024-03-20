@@ -76,7 +76,7 @@
   <time datetime="2023-08-28T17:17:53.000Z" itemprop="datePublished">2023-08-29</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
   </div>
   
 <div class="word_count">
@@ -84,7 +84,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">422</span>
+            <span class="post-count">459</span>
         </span>
     </span>
 
@@ -128,6 +128,9 @@
 
 <p>&ensp;&ensp; 修改环境变量相关</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看当前 shell 是 zsh 还是 bash</span></span><br><span class="line">dscl . -read /Users/$USER UserShell</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果是 bash</span></span><br><span class="line">open ~/.bash_profile</span><br><span class="line">source ~/.bash_profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> 如果是 zsh</span></span><br><span class="line">open ~/.zshrc </span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp; IDEA 相关</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解决 Goland 无法调试的问题。在 bin/goland.vmoptions 增加如下虚拟机参数</span></span><br><span class="line">-Djava.net.preferIPv4Stack=true</span><br><span class="line">-Djava.net.preferIPv6Addresses=true</span><br></pre></td></tr></table></figure>
 
 
  
