@@ -90,7 +90,7 @@
   <script>
     try {
       var typed = new Typed("#subtitle", {
-        strings: ['大丈夫身居天地之间，岂能郁郁久居人下？', '即使处于逆境，也当屈身守分，以待天时。', '夫英雄者，胸怀大志，富有良策，有包藏宇宙之机，吞吐天地之志也！'],
+        strings: ['To be the greatest engineer.', '', ''],
         startDelay: 2,
         typeSpeed: 100,
         loop: true,
@@ -144,6 +144,104 @@
     
     
     
+    
+    <article
+  id="post-对修饰符final和static的浅析"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/12/01/%E5%AF%B9%E4%BF%AE%E9%A5%B0%E7%AC%A6final%E5%92%8Cstatic%E7%9A%84%E6%B5%85%E6%9E%90/"
+    >对修饰符final和static的浅析</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/01/%E5%AF%B9%E4%BF%AE%E9%A5%B0%E7%AC%A6final%E5%92%8Cstatic%E7%9A%84%E6%B5%85%E6%9E%90/" class="article-date">
+  <time datetime="2023-12-01T07:23:34.000Z" itemprop="datePublished">2023-12-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><strong>1、static修饰符</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 被static修饰的变量和方法，被类的所有实例所共享。加载类时只分配一次内存。</p>
+<ul>
+<li>静态变量：可以直接通过类名来访问 Person.a;</li>
+<li>态方法：可以直接通过类名来访问 Person.say();静态方法内，可以访问静态变量，但是不能使用this关键字且不能访问实例变量，因为被所有实例所共有,无法判断属于哪个实例对象；</li>
+<li>静态代码块：java虚拟机在加载类时就执行静态代码块。</li>
+</ul>
+<p><strong>2、final修饰符</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 有final修饰表示最终（不可再修改）的意思：</p>
+<ul>
+<li>final类：不能被继承（即没有子类）；</li>
+<li>final方法：不能被子类的方法覆盖（final不用来修饰构造方法，父类与子类之间的构造方法不存在覆盖关系，final修饰是没有意义的）；</li>
+<li>final修饰的变量：即常量，常量只能被赋值一次，之后不能改变。</li>
+</ul>
+<p><strong>3、静态常量</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 静态常量属于编译时常量（final static int a&#x3D;2*3;）在编译的时就能计算出具体的值)，在编译的时候将这个值就放入到常量池中，a被访问时类是不会被初始化的（这是类的被动使用）。访问类的静态变量或静态方法的时候类会被初始化（这是类的主动使用）。而静态变量只会在类初始化的时候才会被赋值。具体细节请参考“类的生命周期”：加载（堆区、方法区）——连接（验证、准备（静态变量分配内存、设置默认初始值为0）、解析（符号引用替换为直接引用，即指针指向方法区的内存位置））——初始化（程序对类或接口主动使用的时候才会被初始化）。</p>
+<p><strong>4、类的初始化化时机</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 类的初始化阶段java虚拟机会为类的static静态变量赋予初始值(这和准备阶段设置默认初始值为0是不一样的)。只有类的主动使用才会初始化类。</p>
+<p><strong>4.1、类的主动使用</strong></p>
+<ul>
+<li><p>创建类的实例：用new语句创建实例 Person ps&#x3D;new Person()。</p>
+</li>
+<li><p>调用类的静态变量或对静态变量赋值：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Person&#123; </span><br><span class="line">    //这和final static int a=2*3;是有区别的</span><br><span class="line">    static int a=2*3;  </span><br><span class="line">    </span><br><span class="line">    static&#123;  </span><br><span class="line">        //Java在定义一个类的时候里面只能放方法和属性，这是规定死了的。System.out.println()是在调用一个叫println的函数，这里是函数的调用而不是类里面定义一个函数。所以需要用static代码块</span><br><span class="line">        System.out.println(&quot;init Person&quot;); //static声明的静态代码块，使得类在初始化的时候会被调用而不需要创建实例对象。它这时候就不在任何一个方法中。</span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>&ensp;&ensp;&ensp;&ensp; 调用的时候写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//这样就可以在不new一个Person实例的情况下，来初始化Person类了。调用类的静态方法</span><br><span class="line">System.out.println(&quot;a=&quot;+Person.a);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用java API中的反射方法：Class.forName(“Person”);</li>
+<li>初始化子类的时候会先初始化父类(但”父类”是接口的时候，不会先初始化它所实现的接口的，只有在程序在使用接口的静态变量时才会使静态接口初始化)。</li>
+<li>Java 虚拟机启动时被标明为启动类的类。</li>
+</ul>
+<p><strong>4.2、类的被动使用</strong></p>
+<ul>
+<li>final 类型的静态变量在编译的时候能计算出值（即编译时常量，在编译的时候将这个值就放入到常量池中了）：注： final类型的静态变量在编译的时候不能计算出变量的值(即运行时常量)的时候是会被初始化的</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//变量a是编译时常量</span><br><span class="line">final static int a=2*3;                 </span><br><span class="line">//变量a不是是编译时常量（即运行时常量）</span><br><span class="line">final static int a=(int)Math.random();  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>“父类”是接口的时候，不会先初始化它所实现的接口的，只有在程序在使用接口的静态变量时才会使静态接口初始化。</li>
+<li>ClassLoader类的loadClass(“Person”)方法的时候，只是对类的加载，不是初始Class.forName(“Person”);才会初始化。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
     
     <article
   id="post-JavaScript执行上下文"
@@ -1470,102 +1568,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-Kubernetes的网络模型：Overlay和Underlay"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/11/08/Kubernetes%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%EF%BC%9AOverlay%E5%92%8CUnderlay/"
-    >Kubernetes的网络模型：Overlay和Underlay</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/11/08/Kubernetes%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%EF%BC%9AOverlay%E5%92%8CUnderlay/" class="article-date">
-  <time datetime="2023-11-08T01:23:33.000Z" itemprop="datePublished">2023-11-08</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a> / <a class="article-category-link" href="/categories/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/">云计算</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>&ensp;&ensp;&ensp;&ensp; 本文分别介绍 Overlay 网络模型和 Underlay 网络模型。</p>
-<p>&ensp;&ensp;&ensp;&ensp; Overlay 网络模型物理网络模型中，连通多个物理网桥上的主机的一个简单办法是通过媒介直接连接这些网桥设备，各个主机处于同一个局域网（LAN）之中，管理员只需要确保各个网桥上每个主机的 IP 地址不相互冲突即可。类似地，若能够直接连接宿主机上的虚拟网桥形成一个大的局域网，就能在数据链路层打通各宿主机上的内部网络，让容器可通过自有IP地址直接通信。为避免各容器间的 IP 地址冲突，一个常见的解决方案是将每个宿主机分配到同一网络中的不同子网，各主机基于自有子网向其容器分配 IP 地址。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 显然，主机间的网络通信只能经由主机上可对外通信的网络接口进行，跨主机在数据链路层直接连接虚拟网桥的需求必然难以实现，除非借助宿主机间的通信网络构建的通信“隧道”进行数据帧转发。这种于某个通信网络之上构建出的另一个逻辑通信网络通常即 10.1.2 节提及的 Overlay 网络或Underlay 网络。图 10-7 为 Overlay 网络功能示意图。</p>
-<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/Kubernetes%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%EF%BC%9AOverlay%E5%92%8CUnderlay/overlay%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.png" alt="图 10-7 Overlay网络功能示意图"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 隧道转发的本质是将容器双方的通信报文分别封装成各自宿主机之间的报文，借助宿主机的网络“隧道”完成数据交换。这种虚拟网络的基本要求是各宿主机只需支持隧道协议即可，对于底层网络没有特殊要求。VXLAN 协议是目前最流行的 Overlay 网络隧道协议之一，它也是由 IETF 定义的 NVO3（Network Virtualization over Layer 3）标准技术之一，采用 L2 over L4（MAC-in-UDP）的报文封装模式，将二层报文用三层协议进行封装，可实现二层网络在三层范围内进行扩展，将“二层域”突破规模限制形成“大二层域”。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 那么，同一大二层域就类似于传统网络中 VLAN（虚拟局域网）的概念，只不过在 VXLAN 网络中，它被称作 Bridge-Domain，以下简称为 BD。类似于不同的 VLAN 需要通过 VLAN ID 进行区分，各 BD 要通过 VNI 加以标识。但是，为了确保 VXLAN 机制通信过程的正确性，涉及 VXLAN 通信的 IP 报文一律不能分片，这就要求物理网络的链路层实现中必须提供足够大的 MTU 值，或修改其 MTU 值以保证 VXLAN 报文的顺利传输。不过，降低默认MTU 值，以及额外的头部开销，必然会影响到报文传输性能。VXLAN 的显著的优势之一是对底层网络没有侵入性，管理员只需要在原有网络之上添加一些额外设备即可构建出虚拟的逻辑网络来。这个额外添加的设备称为 VTEP（VXLAN Tunnel Endpoints），它工作于 VXLAN 网络的边缘，负责相关协议报文的封包和解包等操作，从作用来说相当于 VXLAN 隧道的出入口设备。VTEP 代表着一类支持 VXLAN 协议的交换机，而支持 VXLAN 协议的操作系统也可将一台主机模拟为 VTEP，Linux 内核自 3.7 版本开始通过 vxlan 内核模块原生支持此协议。于是，各主机上由虚拟网桥构建的 LAN 便可借助 vxlan 内核模块模拟的 VTEP 设备与其他主机上的 VTEP 设备进行对接，形成隧道网络。同一个二层域内的各 VTEP 之间都需要建立 VXLAN 隧道，因此跨主机的容器间直接进行二层通信的 VXLAN 隧道是各 VTEP 之间的点对点隧道，如图 10-8 所示。</p>
-<p>![图10-8 Linux VTEP](&#x2F;pic&#x2F;工程&#x2F;云计算&#x2F;K8S&#x2F;Kubernetes的网络模型：Overlay和Underlay&#x2F;Linux VTEP.png)</p>
-<p>&ensp;&ensp;&ensp;&ensp; 对于 Flannel 来说，这个 VTEP 设备就是各节点上生成 flannel.1 网络接口，其中的“1”是 VXLAN 中的 BD 标识 VNI，因而同一 Kubernetes 集群上所有节点的 VTEP 设备属于 VNI 为 1 的同一个 BD。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 类似 VLAN 的工作机制，相同 VXLAN VNI 在不同 VTEP 之间的通信要借助二层网关来完成，而不同 VXLAN 之间，或者 VXLAN同非 VXLAN 之间的通信则需经由三层网关实现。VXLAN 支持使用集中式和分布式两种形式的网关：前者支持流量的集中管理，配置和维护较为简单，但转发效率不高，且容易出现瓶颈和网关可用性问题；后者以各节点为二层或三层网关，消除了瓶颈。然而，VXLAN 网络中的容器在首次通信之前，源 VTEP 又如何得知目标服务器在哪一个VTEP，并选择正确的路径传输通信报文呢？</p>
-<p>&ensp;&ensp;&ensp;&ensp; 常见的解决思路一般有两种：多播和控制中心。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 多播是指同一个 BD 内的各 VTEP 加入同一个多播域中，通过多播报文查询目标容器所在的目标 VTEP。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 而控制中心则在某个共享的存储服务上保存所有容器子网及相关VTEP的映射信息，各主机上运行着相关的守护进程，并通过与控制中心的通信获取相关的映射信息。Flannel 默认的 VXLAN 后端采用的是后一种方式，它把网络配置信息存储在 etcd 系统上。Linux 内核自 3.7 版本开始支持vxlan 模块，此前的内核版本可以使用 UDP、IPIP 或 GRE 隧道技术。事实上，考虑到当今公有云底层网络的功能限制，Overlay 网络反倒是一种最为可行的容器网络解决方案，仅那些更注重网络性能的场景才会选择 Underlay 网络。</p>
-<p>&ensp;&ensp;&ensp;&ensp; Underlay 网络模型：Underlay 网络就是传统 IT 基础设施网络，由交换机和路由器等设备组成，借助以太网协议、路由协议和VLAN 协议等驱动，它还是 Overlay 网络的底层网络，为 Overlay 网络提供数据通信服务。容器网络中的 Underlay 网络是指借助驱动程序将宿主机的底层网络接口直接暴露给容器使用的一种网络构建技术，较为常见的解决方案有 MAC VLAN、IP VLAN 和直接路由等。</p>
-<p> &ensp;&ensp;&ensp;&ensp; <strong>MAC VLAN：</strong> MAC VLAN 支持在同一个以太网接口上虚拟出多个网络接口，每个虚拟接口都拥有唯一的 MAC 地址，并可按需配置 IP 地址。通常这类虚拟接口被网络工程师称作子接口，但在 MAC VLAN 中更常用上层或下层接口来表述。与 Bridge 模式相比，MAC VLAN 不再依赖虚拟网桥、NAT 和端口映射，它允许容器以虚拟接口方式直接连接物理接口。图 10-9 给出了 Bridge 与 MAC VLAN 网络对比示意图。</p>
-<p> <img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/Kubernetes%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%EF%BC%9AOverlay%E5%92%8CUnderlay/Bridge%E4%B8%8EMAC.webp" alt="图10-9 Bridge与MAC"></p>
-<p> &ensp;&ensp;&ensp;&ensp; MAC VLAN 有 Private、VEPA、Bridge 和Passthru 几种工作模式，它们各自的工作特性如下。</p>
-<ul>
-<li>Private：禁止构建在同一物理接口上的多个 MAC VLAN 实例（容器接口）彼此间的通信，即便外部的物理交换机支持“发夹模式”也不行。</li>
-<li>VPEA：允许构建在同一物理接口上的多个 MAC VLAN 实例（容器接口）彼此间的通信，但需要外部交换机启用发夹模式，或者存在报文转发功能的路由器设备。</li>
-<li>Bridge：将物理接口配置为网桥，从而允许同一物理接口上的多个 MAC VLAN 实例基于此网桥直接通信，而无须依赖外部的物理交换机来交换报文；此为最常用的模式，甚至还是 Docker 容器唯一支持的模式。</li>
-<li>Passthru：允许其中一个 MAC VLAN 实例直接连接物理接口。</li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp; 由上述工作模式可知，除了 Passthru 模式外的容器流量将被 MAC VLAN 过滤而无法与底层主机通信，从而将主机与其运行的容器完全隔离，其隔离级别甚至高于网桥式网络模型，这对于有多租户需求的场景尤为有用。由于各实例都有专用的 MAC 地址，因此 MAC VLAN 允许传输广播和多播流量，但它要求物理接口工作于混杂模式，考虑到很多公有云环境中并不允许使用混杂模式，这意味着 MAC VLAN 更适用于本地网络环境。需要注意的是，MAC VLAN 为每个容器使用一个唯一的 MAC 地址，这可能会导致具有安全策略以防止 MAC 欺骗的交换机出现问题，因为这类交换机的每个接口只允许连接一个 MAC 地址。另外，有些物理网卡存在可支撑的 MAC 地址数量上限。</p>
-<p> &ensp;&ensp;&ensp;&ensp; <strong>IP VLAN</strong> IP VLAN 类似于 MAC VLAN，它同样创建新的虚拟网络接口并为每个接口分配唯一的 IP 地址，不同之处在于，每个虚拟接口将共享使用物理接口的 MAC 地址，从而不再违反防止 MAC 欺骗的交换机的安全策略，且不要求在物理接口上启用混杂模式，如图 10-10 所示。</p>
-<p>![图10-10 MAC VLAN对比IP VLAN](&#x2F;pic&#x2F;工程&#x2F;云计算&#x2F;K8S&#x2F;Kubernetes的网络模型：Overlay和Underlay&#x2F;MAC VLAN对比IP VLAN.png)</p>
-<p>&ensp;&ensp;&ensp;&ensp; IP VLAN 有 L2 和 L3 两种模型，其中 IP VLAN L2 的工作模式类似于 MAC VLAN Bridge 模式，上层接口（物理接口）被用作网桥或交换机，负责为下层接口交换报文。</p>
-<p>&ensp;&ensp;&ensp;&ensp; 而 IP VLAN L3 模式中，上层接口扮演路由器的角色，负责为各下层接口路由报文，如图 10-11 所示。IP VLAN L2 模型与MAC VLAN Bridge 模型都支持 ARP 协议和广播流量，它们拥有直接接入网桥设备的网络接口，能够通过 802.1d 数据包进行泛洪和 MAC 地址学习。但 IP VLAN L3 模式下，网络栈在容器内处理，不支持多播或广播流量，从这个意义上讲，它的运行模式与路由器的报文处理机制相同。虽然支持多种网络模型，但 MAC VLAN 和 IP VLAN 不能同时在同一物理接口上使用。Linux 内核文档中强调，MAC VLAN 和 IP VLAN 具有较高的相似度，因此，通常仅在必须使用 IP VLAN 的场景中才不使用 MAC VLAN。一般说来，强依赖于 IP VLAN 的场景有如下几个：</p>
-<ul>
-<li>Linux 主机连接到的外部交换机或路由器启用了防止 MAC 地址欺骗的安全策略；</li>
-<li>虚拟接口的需求数量超出物理接口能够支撑的容量上限，并且将接口置于混杂模式会给性能带来较大的负面影响；</li>
-<li>将虚拟接口放入不受信任的网络名称空间中可能会导致恶意的滥用。</li>
-</ul>
-<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/Kubernetes%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%EF%BC%9AOverlay%E5%92%8CUnderlay/VLAN%E7%9A%84L2%E5%92%8CL3%E6%A8%A1%E5%9E%8B.png" alt="图10-11 IP VLAN的L2和L3模型"></p>
-<p>&ensp;&ensp;&ensp;&ensp; 需要注意的是，Linux 内核自 4.2 版本后才支持 IP VLAN 网络驱动，且在 Linux 主机上使用 ip link 命令创建的 802.1q配置接口不具有持久性，因此需依赖管理员通过网络启动脚本保持配置。</p>
-<p>&ensp;&ensp;&ensp;&ensp; <strong>直接路由</strong> “直接路由”模型放弃了跨主机容器在 L2 的连通性，而专注于通过路由协议提供容器在 L3 的通信方案。这种解决方案因为更易于集成到现在的数据中心的基础设施之上，便捷地连接容器和主机，并在报文过滤和隔离方面有着更好的扩展能力及更精细的控制模型，因而成为容器化网络较为流行的解决方案之一。</p>
-<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/Kubernetes%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%EF%BC%9AOverlay%E5%92%8CUnderlay/%E7%9B%B4%E6%8E%A5%E8%B7%AF%E7%94%B1%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="图10-12 直接路由虚拟网络示意图"></p>
-<p>一个常用的直接路由解决方案如图 10-12 所示，每个主机上的各容器在二层通过网桥连通，网关指向当前主机上的网桥接口地址。跨主机的容器间通信，需要依据主机上的路由表指示完成报文路由，因此每个主机的物理接口地址都有可能成为另一个主机路由报文中的“下一跳”，这就要求各主机的物理接口必须位于同一个 L2 网络中。于是，在较大规模的主机集群中，问题的关键便转向如何更好地为每个主机维护路由表信息。常见的解决方案有：</p>
-<ul>
-<li>Flannel host-gw 使用存储总线 etcd 和工作在每个节点上的 flanneld 进程动态维护路由；</li>
-<li>Calico 使用 BGP（Border Gateway Protocol）协议在主机集群中自动分发和学习路由信息。与 Flannel 不同的是，Calico 并不会为容器在主机上使用网桥，而是仅为每个容器生成一对 veth 设备，留在主机上的那一端会在主机上生成目标地址，作为当前容器的路由条目，如图 10-13 所示。</li>
-</ul>
-<p><img src="/pic/%E5%B7%A5%E7%A8%8B/%E4%BA%91%E8%AE%A1%E7%AE%97/K8S/Kubernetes%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%EF%BC%9AOverlay%E5%92%8CUnderlay/Calico%E7%9A%84%E7%9B%B4%E6%8E%A5%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%9E%8B%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="图10-13 Calico的直接路由模型示意图"></p>
-<p>&ensp;&ensp;&ensp;&ensp; Calico 的直接路由模型示意图显然，较 Overlay 来说，无论是 MAC VLAN、IP VLAN 还是直接路由机制的 Underlay 网络模型的实现，它们因无须额外的报文开销而通常有着更好的性能表现，但对底层网络有着更多的限制条件。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/K8S/" rel="tag">K8S</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B/" rel="tag">工程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
 
     </footer>
   </div>

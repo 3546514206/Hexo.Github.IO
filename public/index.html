@@ -90,7 +90,7 @@
   <script>
     try {
       var typed = new Typed("#subtitle", {
-        strings: ['大丈夫身居天地之间，岂能郁郁久居人下？', '即使处于逆境，也当屈身守分，以待天时。', '夫英雄者，胸怀大志，富有良策，有包藏宇宙之机，吞吐天地之志也！'],
+        strings: ['To be the greatest engineer.', '', ''],
         startDelay: 2,
         typeSpeed: 100,
         loop: true,
@@ -144,6 +144,66 @@
     
     
     
+    
+    <article
+  id="post-这些年背过的面试题——JVM篇"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/03/23/%E8%BF%99%E4%BA%9B%E5%B9%B4%E8%83%8C%E8%BF%87%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98%E2%80%94%E2%80%94JVM%E7%AF%87/"
+    >这些年背过的面试题——JVM篇</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/03/23/%E8%BF%99%E4%BA%9B%E5%B9%B4%E8%83%8C%E8%BF%87%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98%E2%80%94%E2%80%94JVM%E7%AF%87/" class="article-date">
+  <time datetime="2024-03-23T06:47:06.000Z" itemprop="datePublished">2024-03-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>&ensp;&ensp;&ensp;&ensp; <strong>1、JVM运行时数据区域</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 堆、方法区（元空间）、虚拟机栈、本地方法栈、程序计数器。</p>
+<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%BF%99%E4%BA%9B%E5%B9%B4%E8%83%8C%E8%BF%87%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98%E2%80%94%E2%80%94JVM%E7%AF%87/%E5%86%85%E5%AD%98%E5%88%92%E5%88%86.webp" alt="内存划分"></p>
+<p>&ensp;&ensp;&ensp;&ensp; <strong>Heap(堆)：</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 对象的实例以及数组的内存都是要在堆上进行分配的，堆是线程共享的一块区域，用来存放对象实例，也是垃圾回收（GC）的主要区域；开启逃逸分析后，某些未逃逸的对象可以通过标量替换的方式在栈中分配。堆细分：新生代、老年代，对于新生代又分为：Eden 区和 Surviver1 和 Surviver2 区。</p>
+<p>&ensp;&ensp;&ensp;&ensp; <strong>方法区：</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp; 对于 JVM 的方法区也可以称之为永久区，它储存的是已经被 java 虚拟机加载的类信息、常量、静态变量；Jdk1.8以后取消了方法区这个概念，称之为元空间（MetaSpace）；当应用中的 Java 类过多时，比如 Spring 等一些使用动态代理的框架生成了很多类，如果占用空间超出了我们的设定值，就会发生元空间溢出。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
     
     <article
   id="post-一些值得反复回味的话"
@@ -640,79 +700,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" rel="tag">进程间通信</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-  
-</article>
-
-    
-    <article
-  id="post-HTTPS是如何工作的"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/02/04/HTTPS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/"
-    >HTTPS是如何工作的</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/02/04/HTTPS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/" class="article-date">
-  <time datetime="2024-02-04T06:03:43.000Z" itemprop="datePublished">2024-02-04</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">基本功</a> / <a class="article-category-link" href="/categories/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>&ensp;&ensp;&ensp;&ensp; 超文本传输协议安全（HTTPS）是超文本传输协议（HTTP）的扩展。</p>
-<p>&ensp;&ensp;&ensp;&ensp; HTTPS使用传输层安全协议（TLS）来传输加密数据。如果数据在网上被劫持，劫持者得到的只是二进制代码。那么数据是如何加密和解密的呢？</p>
-<p><img src="/pic/%E5%9F%BA%E6%9C%AC%E5%8A%9F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTPS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/HTTPS%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84.jpeg" alt="HTTPS是如何工作的"></p>
-<ul>
-<li><p>步骤1 - 客户端（浏览器）和服务器建立TCP连接。</p>
-</li>
-<li><p>步骤2 - 客户端向服务器发送“客户端hello”。该消息包含一组必要的加密算法（密码套件）以及它可以支持的最新TLS版本。服务器通过发送“服务器hello”来响应，以便浏览器知道它是否支持算法和TLS版本。服务器然后向客户端发送SSL证书。证书包含公钥、主机名、过期日期等。客户端验证证书。</p>
-</li>
-<li><p>步骤3 - 在验证SSL证书后，客户端生成会话密钥并使用公钥对其进行加密。服务器接收加密的会话密钥并使用私钥进行解密。</p>
-</li>
-<li><p>步骤4 - 现在客户端和服务器都持有相同的会话密钥（对称加密），加密数据通过安全的双向通道进行传输。</p>
-</li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp; 为什么HTTPS在数据传输期间会切换到对称加密？主要有两个原因：</p>
-<ul>
-<li><p>1、安全：非对称加密只适用于单向。这意味着如果服务器尝试将加密数据发送回客户端，任何人都可以使用公钥解密数据。</p>
-</li>
-<li><p>2、服务器资源：非对称加密增加了大量的数学开销。它不适合长会话中的数据传输。</p>
-</li>
-</ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTPS/" rel="tag">HTTPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
 
     </footer>
   </div>
