@@ -1,9 +1,6 @@
 ---
 title: 深入 OGNL 与  Mybatis 源代码分析一次 Mybatis 升级引发的线上事故
 date: 2023-08-31 10:16:04
-categories:
-- 工程
-- 服务端
 tags:
 - 工作
 - 问题记录

@@ -1,9 +1,6 @@
 ---
 title: 浅述Java对象的内存布局
 date: 2023-12-05 16:37:21
-categories:
-- 基本功
-- 编程基础
 tags:
 - Java
 ---

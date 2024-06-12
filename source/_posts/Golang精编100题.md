@@ -1,9 +1,6 @@
 ---
 title: Golang精编100题
 date: 2023-09-04 00:28:27
-categories: 
-- 基本功
-- 编程基础
 tags:
 - Go
 - 基础知识

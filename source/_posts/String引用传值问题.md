@@ -1,9 +1,6 @@
 ---
 title: String引用传值问题
 date: 2024-03-01 09:05:27
-categories:
-- 基本功
-- 编程基础
 tags:
 - Java
 - 基础知识

@@ -1,9 +1,6 @@
 ---
 title: Kubernetes的网络模型：Overlay和Underlay
 date: 2023-11-08 09:23:33
-categories: 
-- 工程
-- 云计算
 tags:
 - 工程
 - K8S

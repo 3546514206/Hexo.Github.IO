@@ -1,9 +1,6 @@
 ---
 title: HTTPS是如何工作的
 date: 2024-02-04 14:03:43
-categories: 
-- 基本功
-- 计算机网络
 tags:
 - 计算机网络
 - HTTPS

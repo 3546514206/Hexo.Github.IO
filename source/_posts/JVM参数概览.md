@@ -1,9 +1,6 @@
 ---
 title: JVM参数概览(JDK8)
 date: 2023-11-03 10:44:38
-categories: 
-- 基本功
-- 编程基础
 tags:
 - Java
 - JVM

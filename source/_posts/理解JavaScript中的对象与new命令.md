@@ -1,9 +1,6 @@
 ---
 title: 理解JavaScript中的对象与new命令
 date: 2023-12-13 16:02:59
-categories:
-- 基本功
-- 编程基础
 tags:
 - JavaScript
 - OOP

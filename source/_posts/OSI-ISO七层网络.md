@@ -1,9 +1,6 @@
 ---
 title: OSI/ISO七层网络
 date: 2023-08-31 14:42:29
-categories: 
-- 基本功
-- 计算机网络
 tags:
 - 计算机网络
 - IP数据报

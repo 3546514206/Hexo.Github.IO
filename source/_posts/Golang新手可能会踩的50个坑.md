@@ -1,9 +1,6 @@
 ---
 title: Golang新手可能会踩的50个坑
 date: 2023-09-04 00:33:10
-categories: 
-- 基本功
-- 编程基础
 tags:
 - Go
 - 基础知识

@@ -1,9 +1,6 @@
 ---
 title: GC——全流程
 date: 2023-08-29 15:46:59
-categories:
-- 基本功
-- 编程基础
 tags:
 - Java
 - JVM

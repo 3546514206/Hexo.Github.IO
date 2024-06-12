@@ -1,9 +1,6 @@
 ---
 title: 对修饰符final和static的浅析
 date: 2023-12-01 15:23:34
-categories:
-- 基本功
-- 编程基础
 tags:
 - Java
 ---
