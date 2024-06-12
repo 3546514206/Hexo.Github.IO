@@ -2,7 +2,7 @@
 menu:
   主页: /
   归档: /archives
-  分类: /categories
+  # 分类: /categories
   标签: /tags
   关于我: https://github.com/3546514206
 
