@@ -3,7 +3,6 @@ title: JDBC层次关系图
 date: 2023-11-30 09:11:25
 tags:
 - Java
-- JDBC
 ---
 
 &ensp;&ensp;&ensp;&ensp; 总体而言，JDBC包含以下几大角色 : Driver、DriverManager、Connection、Statement、ResultSet。这几大角色之间的层次关系如下图所示：

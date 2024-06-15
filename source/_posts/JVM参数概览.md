@@ -2,9 +2,7 @@
 title: JVM参数概览(JDK8)
 date: 2023-11-03 10:44:38
 tags:
-- Java
 - JVM
-- 虚拟机参数
 ---
 
 

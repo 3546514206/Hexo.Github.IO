@@ -2,7 +2,7 @@
 title: JavaScript执行上下文
 date: 2023-11-30 15:36:22
 tags:
-- JavaScript
+- 大前端
 ---
 
 __1、什么是执行上下文？__

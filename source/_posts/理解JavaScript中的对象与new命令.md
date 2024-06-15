@@ -2,8 +2,7 @@
 title: 理解JavaScript中的对象与new命令
 date: 2023-12-13 16:02:59
 tags:
-- JavaScript
-- OOP
+- 大前端
 ---
 
 #### __1、对象是什么__

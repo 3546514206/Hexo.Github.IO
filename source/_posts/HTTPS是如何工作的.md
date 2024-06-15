@@ -3,7 +3,6 @@ title: HTTPS是如何工作的
 date: 2024-02-04 14:03:43
 tags:
 - 计算机网络
-- HTTPS
 ---
 
 &ensp;&ensp;&ensp;&ensp; 超文本传输协议安全（HTTPS）是超文本传输协议（HTTP）的扩展。

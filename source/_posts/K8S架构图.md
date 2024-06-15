@@ -2,8 +2,7 @@
 title: K8S架构图
 date: 2023-08-29 10:33:27
 tags:
-- 云计算领域
-- K8S
+- 云计算
 ---
 
 &ensp;&ensp;&ensp;&ensp; 谷歌早期内部 Brog 系统架构图：

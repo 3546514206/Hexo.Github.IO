@@ -2,9 +2,7 @@
 title: Kubernetes的网络模型：Overlay和Underlay
 date: 2023-11-08 09:23:33
 tags:
-- 工程
-- K8S
-- 网络
+- 云计算
 ---
 
 &ensp;&ensp;&ensp;&ensp; 本文分别介绍 Overlay 网络模型和 Underlay 网络模型。

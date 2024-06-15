@@ -2,7 +2,7 @@
 title: 浅述Java对象的内存布局
 date: 2023-12-05 16:37:21
 tags:
-- Java
+- JVM
 ---
 
 &ensp;&ensp;&ensp;&ensp; Java的实例对象、数组对象在内存中的组成包括如下三部分：对象头Hearder、实例数据、内存填充。示意图如下所示： 

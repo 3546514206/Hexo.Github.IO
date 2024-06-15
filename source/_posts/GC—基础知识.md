@@ -2,9 +2,7 @@
 title: GC——基础知识
 date: 2023-08-28 23:31:37
 tags:
-- Java
 - JVM
-- 基础知识
 ---
 
 &ensp;&ensp;&ensp;&ensp; JVM 的 GC 是指垃圾回收，主要是对堆内存的回收。本文将介绍 JVM 中一次完整的 GC 流程是怎样
