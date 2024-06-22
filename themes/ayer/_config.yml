@@ -37,7 +37,7 @@ progressBar: true
 # 告示板模块
 broadcast:
   enable: true # true开启，false关闭
-  type: 1 # 1：自定义输入，2：一言api(https://hitokoto.cn/)
+  type: 2 # 1：自定义输入，2：一言api(https://hitokoto.cn/)
   text: 第一性原理、长期主义者 # type为1时有效
 
 # 文章配置
