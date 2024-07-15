@@ -155,10 +155,22 @@
   if (sessionStorage.getItem("darkmode") == 1) {
     $("body").addClass("darkmode");
     $("#todark i").removeClass("ri-moon-line").addClass("ri-sun-line");
+    // 默认打开暗夜模式
+    if (sessionStorage.getItem("darkmode") == 1) {
+      $("body").removeClass("darkmode");
+      $("#todark i").removeClass("ri-sun-line").addClass("ri-moon-line");
+      sessionStorage.removeItem("darkmode");
+    } else {
+      $("body").addClass("darkmode");
+      $("#todark i").removeClass("ri-moon-line").addClass("ri-sun-line");
+      sessionStorage.setItem("darkmode", 1);
+    }
   } else {
     $("body").removeClass("darkmode");
     $("#todark i").removeClass("ri-sun-line").addClass("ri-moon-line");
   }
+
+  // DarkMode Click
   $("#todark").on("click", () => {
     if (sessionStorage.getItem("darkmode") == 1) {
       $("body").removeClass("darkmode");
