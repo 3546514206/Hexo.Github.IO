@@ -1088,7 +1088,7 @@ kind create cluster --name=sidecar-demo-cluster-2 \
 kubectl delete -f 6-prestop-hook.yaml --force
 ```
 
-#### __10、容器资源的 Request 和 Limit
+#### __10、容器资源的 Request 和 Limit__
 
 &ensp;&ensp;&ensp;&ensp; 在 Kubernetes 中，我们可以为容器设置资源请求（request）和资源限制（limit）。当你为 Pod 中的容器指定了资源 request（请求）时，kube-scheduler 就根据该信息决定将 Pod 调度到哪个节点上。 当你为容器指定了资源 limit（限制） 时，kubelet 就可以确保运行的容器不会使用超出所设限制的资源。
 
