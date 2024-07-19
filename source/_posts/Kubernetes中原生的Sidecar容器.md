@@ -756,6 +756,577 @@ myapp   4/4     Running           2 (1s ago)    43s
 kubectl delete -f 4-sidecar-containers-restart.yaml --force
 ```
 
+#### __8、容器探针__
+
+&ensp;&ensp;&ensp;&ensp; 在上面的实验中，我们知道了主容器要等到 sidecar 容器运行以后才会开始启动。那么 sidecar 容器的探针是否会影响到主容器的启动呢？也就是说，主容器是否需要等到 sidecar 容器 Ready 后才能启动呢？让我们通过以下实验来寻找答案。
+
+&ensp;&ensp;&ensp;&ensp; sidecar 容器允许我们像主容器一样设置探针（startupProbe, readinessProbe, livenessProbe）来检查容器的健康状态。在下面的例子中，我们为两个 sidecar 容器分别添加了 readiness 探针，每个探针都会在容器启动后等待 30 秒才会通过。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  initContainers:
+    - name: init-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "init container 1 is starting..."
+          echo "init container 1 is doing some tasks..."
+          sleep 10
+          echo "init container 1 completed tasks and exited"
+    - name: sidecar-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "sidecar container 1 is starting..."
+          while true; do
+            echo "sidecar container 1 is doing some tasks..."
+            sleep 3
+          done
+      restartPolicy: Always
+      readinessProbe: # sidecar 容器的 readiness 探针等待 30 秒通过
+        exec:
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "readiness probe of sidecar container 1 is starting..." >> /proc/1/fd/1
+              sleep 30
+              echo "readiness probe of sidecar container 1 passed successfully" >> /proc/1/fd/1
+        timeoutSeconds: 999
+    - name: sidecar-container-2
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "sidecar container 2 is starting..."
+          while true; do
+            echo "sidecar container 2 is doing some tasks..."
+            sleep 3
+          done
+      restartPolicy: Always
+      readinessProbe: # sidecar 容器的 readiness 探针等待 30 秒通过
+        exec:
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "readiness probe of sidecar container 2 is starting..." >> /proc/1/fd/1
+              sleep 30
+              echo "readiness probe of sidecar container 2 passed successfully" >> /proc/1/fd/1
+        timeoutSeconds: 999
+  containers:
+    - name: main-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "main container 1 is starting..."
+          while true; do
+            echo "main container 1 is doing some tasks..."
+            sleep 3
+          done
+    - name: main-container-2
+      image: busybox:1.35
+      command: [ "sh", "-c" ]
+      args:
+        - |
+          echo "main container 2 is starting..."
+          while true; do
+            echo "main container 2 is doing some tasks..."
+            sleep 3
+          done
+```
+
+&ensp;&ensp;&ensp;&ensp; 通过观察容器日志可以发现，两个主容器在 sidecar 容器的 readiness 探针通过之前就已经启动并开始执行任务了。 这表明主容器的启动并不需要等待 sidecar 容器达到 Ready 状态，只要 sidecar 容器处于 Running 状态即可。
+
+![Pod日志5](/pic/Kubernetes中原生的Sidecar容器/Pod日志5.webp)
+
+&ensp;&ensp;&ensp;&ensp; 如果我们提前在另一个窗口执行 kubectl get pod -w 命令，可以观察到 Pod 的状态变化。
+
+```shell
+NAME    READY   STATUS    RESTARTS   AGE
+myapp   0/4     Pending   0          0s
+myapp   0/4     Pending   0          0s
+myapp   0/4     Init:0/3   0          0s
+myapp   0/4     Init:0/3   0          1s
+myapp   0/4     Init:1/3   0          11s
+myapp   0/4     Init:2/3   0          12s
+myapp   0/4     PodInitializing   0          13s
+myapp   2/4     Running           0          14s
+myapp   3/4     Running           0          42s
+myapp   4/4     Running           0          43s
+```
+
+&ensp;&ensp;&ensp;&ensp; 每行状态的解释如下，完整的 Pod 资源内容请查看 logs/5-readiness-probe-status.yaml 文件：
+
+&ensp;&ensp;&ensp;&ensp; Pod 创建后还未被调度。
+
+&ensp;&ensp;&ensp;&ensp; Pod 已经被调度到 Node 上，但是容器还未创建。
+
+&ensp;&ensp;&ensp;&ensp; 等待创建第 1 个 init 容器。
+
+&ensp;&ensp;&ensp;&ensp; 第 1 个 init 容器正在运行。
+
+&ensp;&ensp;&ensp;&ensp; 第 1 个 init 容器正常退出，等待创建第 1 个 sidecar 容器。
+
+&ensp;&ensp;&ensp;&ensp; 第 1 个 sidecar 容器正在运行，等待创建第 2 个 sidecar 容器。注意，此时 sidecar-container-1 并未处于 ready 状态，因为就绪探针还在执行中，也就是说一旦容器处于 Running 状态，下一个容器就会开始启动。
+
+&ensp;&ensp;&ensp;&ensp; 第 2 个 sidecar 容器正在运行但并未处于 Ready 状态，等待创建 main-container-1 和 main-container-2 两个主容器。
+
+&ensp;&ensp;&ensp;&ensp; 两个主容器都正在运行，并且处于 Ready 状态。
+
+&ensp;&ensp;&ensp;&ensp; sidecar-container-1 通过就绪探针检查，进入 Ready 状态。
+
+&ensp;&ensp;&ensp;&ensp; sidecar-container-2 通过就绪探针检查，进入 Ready 状态。
+
+&ensp;&ensp;&ensp;&ensp; 下面这张图展示了上面描述的 Pod 状态变化过程：
+
+![Pod状态变化过程5](/pic/Kubernetes中原生的Sidecar容器/Pod状态变化过程5.webp)
+
+测试完毕后，执行以下命令删除这个 Pod。
+
+```shell
+kubectl delete -f 5-readiness-probe.yaml --force
+```
+
+#### __9、容器的停止顺序__
+
+&ensp;&ensp;&ensp;&ensp; 我们当前使用的 Kubernetes 版本是 1.28.0。让我们首先看看在这个版本中删除 Pod 时，sidecar 容器和主容器的停止顺序是怎样的。
+
+&ensp;&ensp;&ensp;&ensp; 在下面的示例中，我们为主容器设置了 preStop hook。在容器停止之前，Kubelet 会先执行 preStop hook 中定义的命令，然后才会发送 SIGTERM 信号给容器。
+
+&ensp;&ensp;&ensp;&ensp; 为了让容器接收到 SIGTERM 信号，我们在容器中使用了 trap 命令来捕获 SIGTERM 信号。另外，通常 hook 和 probe 的输出不会打印在 kubectl logs 中，为了方便我们通过日志来对容器的状态进行观察，这里使用了一种间接的方法：将输出重定向到 /proc/1/fd/1 文件中。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  initContainers:
+    - name: init-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "init container 1 is starting..."
+          echo "init container 1 is doing some tasks..."
+          sleep 10
+          echo "init container 1 completed tasks and exited"
+    - name: sidecar-container-1
+      image: busybox:1.35
+      command: [ "sh", "-c" ]
+      args:
+        - |
+          echo "sidecar container 1 is starting..."
+          sh -c "
+            trap '
+              echo \"sidecar container 1 received SIGTERM\";
+              sleep 3;
+              echo \"sidecar container 1 stopped\";
+              exit 0
+            ' TERM;
+
+            while true; do
+              echo \"sidecar container 1 is doing some tasks...\";
+              sleep 3;
+            done
+          "
+      restartPolicy: Always
+    - name: sidecar-container-2
+      image: busybox:1.35
+      command: [ "sh", "-c" ]
+      args:
+        - |
+          echo "sidecar container 2 is starting..."
+          sh -c "
+            trap '
+              echo \"sidecar container 2 received SIGTERM\";
+              sleep 3;
+              echo \"sidecar container 2 stopped\";
+              exit 0
+            ' TERM;
+
+            while true; do
+              echo \"sidecar container 2 is doing some tasks...\";
+              sleep 3;
+            done
+          "
+      restartPolicy: Always
+  containers:
+    - name: main-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "main container 1 is starting..."
+          exec sh -c "
+            trap '
+              echo \"main container 1 received SIGTERM\";
+              sleep 10;
+              echo \"main container 1 stopped\";
+              exit 0
+            ' TERM;
+
+            while true; do
+              echo \"main container 1 is doing some tasks...\";
+              sleep 3;
+            done
+          "
+      lifecycle:
+        preStop:
+          exec:
+            command: ["sh", "-c", "echo 'main container 1 preStop hook is running...' >> /proc/1/fd/1; sleep 5"]
+    - name: main-container-2
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "main container 2 is starting..."
+          exec sh -c "
+            trap '
+              echo \"main container 2 received SIGTERM\";
+              sleep 10;
+              echo \"main container 2 stopped\";
+              exit 0
+            ' TERM;
+
+            while true; do
+              echo \"main container 2 is doing some tasks...\";
+              sleep 3;
+            done
+          "
+      lifecycle:
+        preStop:
+          exec:
+            command: ["sh", "-c", "echo 'main container 2 preStop hook is running...' >> /proc/1/fd/1; sleep 5"]
+```
+
+&ensp;&ensp;&ensp;&ensp; 执行以下命令应用上面的 Pod 资源。
+
+```shell
+kubectl apply -f 6-prestop-hook.yaml
+```
+
+&ensp;&ensp;&ensp;&ensp; 通过查看日志，可以看到主容器首先执行了 preStop hook，然后接收到了 SIGTERM 信号，最后优雅地退出了。同时，sidecar 容器也接收到了 SIGTERM 信号，但是它在主容器停止之前就已经停止了。
+
+![Pod日志6](/pic/Kubernetes中原生的Sidecar容器/Pod日志6.webp)
+
+```shell
+NAME    READY   STATUS    RESTARTS   AGE
+myapp   0/4     Pending   0          0s
+myapp   0/4     Pending   0          0s
+myapp   0/4     Init:0/3   0          0s
+myapp   0/4     Init:0/3   0          1s
+myapp   0/4     Init:1/3   0          11s
+myapp   1/4     Init:2/3   0          12s
+myapp   2/4     PodInitializing   0          13s
+myapp   4/4     Running           0          14s
+myapp   4/4     Terminating       0          38s
+myapp   0/4     Terminating       0          53s
+myapp   0/4     Terminating       0          54s
+myapp   0/4     Terminating       0          54s
+myapp   0/4     Terminating       0          54s
+```
+
+&ensp;&ensp;&ensp;&ensp; 每行状态的解释如下，完整的 Pod 资源内容请查看 logs/6-prestop-hook-status.yaml 文件：
+
+&ensp;&ensp;&ensp;&ensp; Pod 创建后还未被调度。
+
+&ensp;&ensp;&ensp;&ensp; Pod 已经被调度到 Node 上，但是容器还未创建。
+
+&ensp;&ensp;&ensp;&ensp; 等待创建第 1 个 init 容器。
+
+&ensp;&ensp;&ensp;&ensp; 第 1 个 init 容器正在运行。
+
+&ensp;&ensp;&ensp;&ensp; 第 1 个 init 容器正常退出，等待创建第 1 个 sidecar 容器。
+
+&ensp;&ensp;&ensp;&ensp; 第 1 个 sidecar 容器正在运行，等待创建第 2 个 sidecar 容器。
+
+&ensp;&ensp;&ensp;&ensp; 第 2 个 sidecar 容器正在运行，等待创建 main-container-1 和 main-container-2 两个主容器。
+
+&ensp;&ensp;&ensp;&ensp; 两个主容器都正在运行。
+
+&ensp;&ensp;&ensp;&ensp; 接收到 Pod 删除的请求，开始停止容器。
+
+&ensp;&ensp;&ensp;&ensp; sidecar 容器和主容器都已经停止。
+
+&ensp;&ensp;&ensp;&ensp; 在后面的几行 Terminating 中， 容器的状态并不会发生变化。
+
+&ensp;&ensp;&ensp;&ensp; 以下这张图展示了上面描述的 Pod 状态变化过程：
+
+![Pod状态变化过程6](/pic/Kubernetes中原生的Sidecar容器/Pod状态变化过程6.webp)
+
+&ensp;&ensp;&ensp;&ensp; 然而，由于 sidecar 容器可能会在主容器之前停止，这种情况仍然可能带来一些问题。例如，如果 sidecar 容器负责收集日志，那么可能会造成部分日志内容缺失。又比如，如果 sidecar 容器提供网络代理功能，那么它的提前退出可能会导致主容器的网络连接中断。
+
+&ensp;&ensp;&ensp;&ensp; 为了解决这个问题，从 Kubernetes 1.29 版本开始，如果 Pod 中包含一个或多个 sidecar 容器，kubelet 将延迟向这些 sidecar 容器发送 SIGTERM 信号，直到最后一个主容器完全终止。sidecar 容器将按照它们在 Pod spec 中定义的相反顺序终止。这确保了 sidecar 容器继续为 Pod 中的其他容器提供服务，直到不再需要它们。
+
+&ensp;&ensp;&ensp;&ensp; 下面让我们创建一个 Kubernetes 1.29 版本的集群，然后再次测试 sidecar 容器的停止顺序。由于在 1.29 版本中 SidecarContainers 这个特性已经成为 Beta 版本，因此默认是开启的。
+
+```shell
+kind create cluster --name=sidecar-demo-cluster-2 \
+--image kindest/node:v1.29.0
+```
+
+&ensp;&ensp;&ensp;&ensp; 通过分析以下日志，我们可以清晰地看到容器退出的整个过程。首先两个主容器的 preStop hook 被执行，然后主容器接收到 Kubelet 发送的 SIGTERM 信号并正常退出。等到主容器完全退出后，sidecar-container-1 才会接收到 SIGTERM 信号并正常退出。最后，sidecar-container-2 接收到 SIGTERM 信号并正常退出。
+
+![Pod日志7](/pic/Kubernetes中原生的Sidecar容器/Pod日志7.webp)
+
+&ensp;&ensp;&ensp;&ensp; 下面这张图描述了 1.29 版本的 sidecar 容器的停止顺序：
+
+![Pod状态变化过程7](/pic/Kubernetes中原生的Sidecar容器/Pod状态变化过程7.webp)
+
+&ensp;&ensp;&ensp;&ensp; 测试完毕后，执行以下命令删除这个 Pod。
+
+```shell
+kubectl delete -f 6-prestop-hook.yaml --force
+```
+
+#### __10、容器资源的 Request 和 Limit
+
+&ensp;&ensp;&ensp;&ensp; 在 Kubernetes 中，我们可以为容器设置资源请求（request）和资源限制（limit）。当你为 Pod 中的容器指定了资源 request（请求）时，kube-scheduler 就根据该信息决定将 Pod 调度到哪个节点上。 当你为容器指定了资源 limit（限制） 时，kubelet 就可以确保运行的容器不会使用超出所设限制的资源。
+
+&ensp;&ensp;&ensp;&ensp; 在评估节点是否有足够的资源来运行 Pod 时，kube-scheduler 会根据不同情况来计算 Pod 中容器资源的最大请求量。在没有引入 sidecar 容器的情况下，计算方式比较简单：资源的最大请求量是单个 init 容器的最大请求量与所有主容器请求量总和之间的最大值。
+
+```shell
+Max ( Max(initContainers), Sum(Containers) )
+```
+
+&ensp;&ensp;&ensp;&ensp; 有了 sidecar 容器之后，计算公式会变得复杂一些。可以简单地分为两种情况：
+
+* 1.所有 sidecar 容器都是在 init 容器之后启动的。对于这种情况，我们只需要把所有 sidecar 容器的资源请求量与主容器的资源请求量相加，然后与单个 init 容器的最大请求量进行比较即可。
+
+```shell
+Max ( Max(initContainers), Sum(Containers) + Sum(Sidecar Containers) )
+```
+
+* 2.有一个或者多个 sidecar 容器是在 init 容器之前启动的。在这种情况下，当计算 init 容器的最大请求量时，我们需要把在该 init 容器之前启动的 sidecar 容器也考虑在内。在这里，我们使用 InitContainerUse(i) 来表示当启动 i 个 init 容器时，所需的最大资源请求量（等于该 init 容器的请求量 + 在该 init 容器之前启动的 sidecar 容器的请求量总和）：
+
+```shell
+InitContainerUse(i) = Sum(sidecar containers with index < i) + InitContainer(i)
+```
+
+&ensp;&ensp;&ensp;&ensp; 最后将 InitContainerUse 与所有主容器以及在该 init 容器之后启动的 sidecar 容器的总和进行比较，取最大值。
+
+```shell
+Max ( Max( each InitContainerUse ) , Sum(Sidecar Containers) + Sum(Containers) )
+```
+
+&ensp;&ensp;&ensp;&ensp; 接下来我们用两个例子来验证上面的结论，当前 Kubernetes 集群中只有一个节点，使用 kubectl describe node 命令可以看到该节点总共有 10 个 CPU 可供分配，当前 CPU request 已经使用了 9% 的 CPU 资源，也就是说还有 9 个 完整的 CPU 可供分配。
+
+![节点CPU使用情况](/pic/Kubernetes中原生的Sidecar容器/节点CPU使用情况.webp)
+
+&ensp;&ensp;&ensp;&ensp; 在下面的示例中，我们为 init 容器设置了 9 个 CPU 的 request，为 sidecar 容器和主容器也设置了总共 9 个 CPU 的 request，这样 Pod 刚刚好被允许调度到节点上。如果你尝试将 init 容器的 CPU request 设置为 10，或者将任一 sidecar 容器或主容器的 CPU request 增加 1，那么这个 Pod 都将无法被调度到节点上。
+
+```yaml
+# 7-resource-requests.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  initContainers:
+    - name: init-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "init container 1 is starting..."
+          echo "init container 1 is doing some tasks..."
+          sleep 10
+          echo "init container 1 completed tasks and exited"
+      resources:
+        requests:
+          cpu: "9"
+    - name: sidecar-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "sidecar container 1 is starting..."
+          while true; do
+            echo "sidecar container 1 is doing some tasks..."
+            sleep 3
+          done
+      restartPolicy: Always
+      resources:
+        requests:
+          cpu: "1"
+    - name: sidecar-container-2
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "sidecar container 2 is starting..."
+          while true; do
+            echo "sidecar container 2 is doing some tasks..."
+            sleep 3
+          done
+      restartPolicy: Always
+      resources:
+        requests:
+          cpu: "1"
+  containers:
+    - name: main-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "main container 1 is starting..."
+          while true; do
+            echo "main container 1 is doing some tasks..."
+            sleep 3
+          done
+      resources:
+        requests:
+          cpu: "3"
+    - name: main-container-2
+      image: busybox:1.35
+      command: [ "sh", "-c" ]
+      args:
+        - |
+          echo "main container 2 is starting..."
+          while true; do
+            echo "main container 2 is doing some tasks..."
+            sleep 3
+          done
+      resources:
+        requests:
+          cpu: "4"
+```
+
+&ensp;&ensp;&ensp;&ensp; 在第二个例子中，我们调整了容器的定义顺序，将 sidecar-container-1 移动到了 init-container-1 之前。虽然 Pod 的 CPU 资源请求总量没有改变，但你会发现这次 Pod 无法被调度到节点上了。这是因为在计算单个 init 容器的最大资源请求量时，sidecar-container-1 的资源请求量也被计入了。原本 init-container-1 的资源请求量是 9，现在加上了 sidecar-container-1 的资源请求量 1，最大的资源请求量就变为了 10，超过了节点的可用资源。
+
+```yaml
+# 8-resource-requests-init-container-after-sidecar-container.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  initContainers:
+    - name: sidecar-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "sidecar container 1 is starting..."
+          while true; do
+            echo "sidecar container 1 is doing some tasks..."
+            sleep 3
+          done
+      restartPolicy: Always
+      resources:
+        requests:
+          cpu: "1"
+    - name: init-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "init container 1 is starting..."
+          echo "init container 1 is doing some tasks..."
+          sleep 10
+          echo "init container 1 completed tasks and exited"
+      resources:
+        requests:
+          cpu: "9"
+    - name: sidecar-container-2
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "sidecar container 2 is starting..."
+          while true; do
+            echo "sidecar container 2 is doing some tasks..."
+            sleep 3
+          done
+      restartPolicy: Always
+      resources:
+        requests:
+          cpu: "1"
+  containers:
+    - name: main-container-1
+      image: busybox:1.35
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "main container 1 is starting..."
+          while true; do
+            echo "main container 1 is doing some tasks..."
+            sleep 3
+          done
+      resources:
+        requests:
+          cpu: "3"
+    - name: main-container-2
+      image: busybox:1.35
+      command: [ "sh", "-c" ]
+      args:
+        - |
+          echo "main container 2 is starting..."
+          while true; do
+            echo "main container 2 is doing some tasks..."
+            sleep 3
+          done
+      resources:
+        requests:
+          cpu: "4"
+```
+
+#### __11、在 Istio 中使用 Sidecar 容器__
+
+&ensp;&ensp;&ensp;&ensp; 在没有原生 sidecar 容器的支持之前，Istio 采用了一种变通的方法来保证 sidecar 容器在主容器之前启动：通过为 Istio 的 sidecar 容器添加一个 postStart hook，该 hook 会阻塞其他容器的启动，直到 sidecar 代理完全运行为止。
+
+```shell
+spec:
+  initContainers:
+    - name: istio-init
+      ...
+  containers:
+    - name: istio-proxy
+      ...
+      lifecycle:
+        postStart:
+          exec:
+            command:
+              - pilot-agent
+              - wait
+```
+
+&ensp;&ensp;&ensp;&ensp; 在 Istio 中可以通过将 holdApplicationUntilProxyStarts 设置为 true 来启用这个功能。
+
+```shell
+# 1.7 版本特性 https://github.com/istio/istio/pull/24737
+istioctl install --set values.global.proxy.holdApplicationUntilProxyStarts=true
+```
+
+&ensp;&ensp;&ensp;&ensp; 在 Kubernetes 1.28 发布 SidecarContainers 的功能之后，现在我们直接可以在 Istio 中使用原生的 sidecar 容器了，只需将 pilot 的ENABLE_NATIVE_SIDECARS 环境变量设置为 true 即可。完整的教程请参见 Kubernetes Native Sidecars in Istio。
+
+```shell
+TAG=1.19.0-beta.0
+curl -L https://github.com/istio/istio/releases/download/$TAG/istio-$TAG-linux-amd64.tar.gz | tar xz
+./istioctl install --set values.pilot.env.ENABLE_NATIVE_SIDECARS=true -y
+```
+
+
+#### __12、总结__
+
+&ensp;&ensp;&ensp;&ensp; 本文首先回顾了传统 sidecar 模式存在的问题，包括 Job 无法正常终止、日志和指标收集不完整以及服务网格流量异常等等。随后，我们介绍了 Kubernetes 1.28 版本中引入的原生 sidecar 容器功能，这一功能旨在解决传统 sidecar 模式的局限性。我们还深入探讨了 sidecar 容器的其他特性，包括 sidecar 容器的启动顺序、重启策略、容器探针、停止顺序等。最后，我们简要地介绍了如何在 Istio 中利用原生 sidecar 容器来提升服务网格的可靠性。
+
+
+
+
+
+
+
+
 
 
 
