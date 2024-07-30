@@ -157,7 +157,7 @@ $(function () {
 	})
 	
     $('.m-nav-item>a').on('click',function(){
-            if ($(this).next('ul').css('display') == "none") {
+            if ($(this).next('ul').css('display') === "none") {
                 $('.m-nav-item').children('ul').slideUp(300);
                 $(this).next('ul').slideDown(100);
                 $(this).parent('li').addClass('m-nav-show').siblings('li').removeClass('m-nav-show');
@@ -169,4 +169,6 @@ $(function () {
 
     // 初始化加载 tooltipped.
     $('.tooltipped').tooltip();
+
+    $('.nav-item.nav-show').removeClass('nav-show');
 });
