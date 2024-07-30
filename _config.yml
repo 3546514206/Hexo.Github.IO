@@ -97,7 +97,8 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 # theme: ayer
-theme: matery
+#theme: matery
+theme: fluid
 
   # 其中 xxxxxx 是前面多次用到的你的GitHub用户名
 deploy:
