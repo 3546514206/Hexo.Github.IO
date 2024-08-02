@@ -1,0 +1,43 @@
+.page-footer
+  margin: 4rem 1rem 3rem
+  color: var(--text-p2)
+  a
+    color: var(--text-p2)
+    border-radius: 4px
+    transition: background 0.2s ease-out
+    &:hover
+      color: var(--text)
+      background: var(--block-hover)
+
+.page-footer .sitemap
+  margin: .5rem -4px 2rem
+  display: grid
+  scrollbar-width: none
+  grid-gap: 1rem 1rem
+  grid-auto-flow: column dense
+  // grid-template-columns: repeat(auto-fill, minmax(80px, 1fr))
+  grid-template-columns: repeat(4, 1fr)
+  overflow: scroll
+  scrollbar(0, 0)
+
+
+.page-footer .sitemap .sitemap-group
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  >span,>a
+    text-decoration: none
+    txt-ellipsis()
+    padding: 4px
+  >span
+    font-weight: 500
+    color: var(--text-p1)
+    margin: 4px 0
+
+
+.page-footer .text
+  p
+    margin: 4px 0
+    line-height: 1.5
+  a:not([class])
+    font-weight: 500

@@ -1,0 +1,92 @@
+.l_body
+  display: grid
+  grid-template-columns: 1fr minmax(200px,var(--width-main)) 1fr
+  grid-gap: var(--gap-margin)
+  margin: auto
+  font-size: var(--fsp)
+
+.l_body aside
+  z-index: 8
+  flex-shrink: 0
+  position: sticky
+  position: -webkit-sticky
+  // 侧边栏容器宽度
+  --width-sidebar: calc(var(--gap-margin) * 2 + var(--gap-padding) * 2 + var(--side-content-width))
+  width: var(--width-sidebar)
+
+.l_body .l_left
+  justify-self: right
+  top: 8px
+.l_body .l_right
+  justify-self: left
+  --gap-margin: 0px
+  max-height: calc(100% - 8px * 2)
+  .widgets
+    height: 100%
+    overflow visible
+
+// 平板布局
+@media screen and (max-width: $device-laptop)
+  .l_body .l_right
+    --gap-margin: 16px
+  .laptop-only
+    display: block !important
+  .l_body
+    .l_right
+      top: 8px
+      position: fixed
+      max-height: calc(100% - 8px * 2)
+      transform: translateX(320px)
+      transition: transform .38s ease-out
+      margin: 0
+      right: 8px
+      box-shadow: $boxshadow-card-float
+      z-index: 10
+      background: var(--site-bg)
+      overflow: auto
+      scrollbar(0, 0)
+      --blur-bg: var(--alpha60)
+      --blur-px: 50px
+  .l_body[rightbar]
+    .l_right
+      transform: translateX(0px)
+    .main-mask
+      // opacity 1
+      pointer-events: inherit
+
+// 手机布局
+@media screen and (max-width: $device-mobile-max)
+  .mobile-only
+    display: block !important
+  .l_body
+    padding: 0
+    display: block
+    .l_left
+      position: fixed
+      transform: translateX(-320px)
+      transition: transform .38s ease-out
+      margin: 0
+      left: 8px
+      box-shadow: $boxshadow-card-float
+      z-index: 10
+    .l_main
+      max-width: 100%
+  .l_body[leftbar]
+    .l_left
+      transform: translateX(0px)
+    .main-mask
+      opacity 1
+      pointer-events: inherit
+
+
+.main-mask
+  position: fixed
+  pointer-events: none
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: rgba(black, 0.1)
+  z-index: 9
+  opacity 0
+  trans1 opacity

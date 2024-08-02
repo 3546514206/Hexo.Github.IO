@@ -1,0 +1,21 @@
+<script type="module">
+  const el = document.getElementById('artalk_container');
+  util.viewportLazyload(el, load_artalk, <%= theme.comments.lazyload ?? false %>);
+
+  function load_artalk() {
+    if (!el) return;
+    utils.css('<%- theme.comments.artalk.css %>');
+    utils.js('<%- theme.comments.artalk.js %>', {defer: true}).then(function () {
+      const path = el.getAttribute('comment_id') ?? decodeURI(window.location.pathname);
+      const artalk = Artalk.init({
+        el: '#artalk_container',
+        pageKey: path,
+        pageTitle: '<%= page.title %>',
+        server: '<%= theme.comments.artalk.server %>',
+        placeholder: '<%= theme.comments.artalk.placeholder %>',
+        site: "<%- config.title %>",
+        darkMode: '<%= theme.comments.artalk.darkMode %>'
+      });
+    });
+  }
+</script>

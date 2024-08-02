@@ -1,0 +1,109 @@
+
+.search-wrapper
+  width: 100%
+  >.search-form
+    position: sticky
+    margin-bottom: 8px
+    top: 1rem
+    height: 40px
+    display: flex
+    flex-direction: row
+    align-items: center
+    transition: 0.38s ease-out
+    z-index: 0
+    border-radius: $border-bar
+    color: var(--text)
+    background: var(--alpha50)
+    &:has(input:focus)
+      background: var(--alpha100)
+  .search-input
+    width: 100%
+    box-sizing: border-box
+    font-family: $ff-body
+    font-size: $fs-14
+    padding: 12px 0
+    color: var(--text)
+  .search-button 
+    border-radius: $border-bar
+    display: flex
+    align-items: center
+    height: 40px
+    svg
+      height: 1rem
+      width: 40px
+      margin-left: 4px
+      color: var(--text-p2)
+      fill: currentColor
+      path[p-id="1562"]
+        color: $color-theme
+    
+  &[searching='true']
+    .search-button
+      path[p-id="1562"]
+        color: $c-green
+  &.noresult[searching='true']
+    .search-button
+      path[p-id="1562"]
+        color: $c-red
+
+  .search-no-result
+    display: none
+    color: var(--text-p1)
+    text-align: center
+    font-size: $fs-14
+    padding: 2rem
+    background: var(--alpha20)
+    border-radius: $border-card
+
+
+  #search-result
+    max-height: 60vh
+    overflow: scroll
+    scrollbar-width: none
+    scrollbar(0, 0)
+    border-radius: $border-card
+    &:empty
+      display: none
+    .search-result-list
+      padding: 0
+      margin: 0
+      list-style-type: none
+    li a
+        display: block
+        background: var(--alpha20)
+        line-height: 1.2
+        padding: 0.75rem 1rem
+        border-radius: $border-card
+        trans1 background
+        &:hover
+          background: var(--alpha100)
+    li+li
+        margin-top: 8px
+    .search-result-title
+      color: var(--text-p1)
+      font-weight: 700
+      font-size: $fs-15
+
+    .search-result-content
+      overflow: hidden
+      color: var(--text-p3)
+      margin: 4px 0 0
+      max-height: 13em
+      text-align: justify
+      font-size: $fs-13
+      display: -webkit-box
+      -webkit-box-orient: vertical
+      overflow: hidden
+      -webkit-line-clamp: 2
+
+    .search-keyword
+      color: $c-red
+      border-bottom: 1px dashed $c-red
+      font-weight: bold
+      filter grayscale(25%)
+
+
+.search-wrapper.noresult[searching='true']
+  .search-no-result
+    display: block
+    margin-bottom: 8px

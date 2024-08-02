@@ -1,0 +1,16 @@
+img.lazy
+  &:not(.loaded)
+    opacity: 0
+  &.loaded,&.error
+    opacity: 1
+  if hexo-config('plugins.lazyload.transition') == 'blur'
+    trans1 all 0.75s
+    &:not(.loaded)
+      filter blur(50px)
+      -webkit-filter blur(50px)
+    &.loaded,&.error
+      filter none
+      -webkit-filter none
+  else
+    trans1 all 0.38s
+    

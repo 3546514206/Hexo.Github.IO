@@ -1,0 +1,41 @@
+.l_left
+  margin: 8px
+  height: 'calc(%s - 16px)' % 100vh
+  border-radius: $border-card-l
+  overflow: hidden
+  overflow: clip
+  overflow-clip-margin: .5px
+  .header
+    margin: var(--gap-max) var(--gap-margin) 0
+
+.l_right
+  margin: 8px
+  border-radius: $border-card-l
+@media screen and (min-width: $device-2k)
+  .l_left
+    margin-left: auto
+    margin-right: calc(2 * var(--gap-max))
+  .l_right
+    margin-left: var(--gap-max)
+    margin-right: auto
+
+.l_left
+  background-size: cover
+  if hexo-config('style.leftbar') && hexo-config('style.leftbar.background-image')
+    background-image: convert(hexo-config('style.leftbar.background-image'))
+  else if hexo-config('style.leftbar') && hexo-config('style.leftbar.background')
+    background: convert(hexo-config('style.leftbar.background'))
+  .leftbar-container
+    height: 100%
+    display: flex
+    flex-direction: column
+    word-break: break-all
+    text-align: justify
+    if hexo-config('style.leftbar') && hexo-config('style.leftbar.blur-px')
+      --blur-px: convert(hexo-config('style.leftbar.blur-px'))
+      @supports ((-webkit-backdrop-filter:blur(var(--blur-px))) or (backdrop-filter:blur(var(--blur-px))))
+        background: var(--blur-bg)
+        backdrop-filter: saturate(240%) blur(var(--blur-px))
+        -webkit-backdrop-filter: saturate(240%) blur(var(--blur-px))
+    if hexo-config('style.leftbar') && hexo-config('style.leftbar.blur-bg')
+      --blur-bg: convert(hexo-config('style.leftbar.blur-bg'))

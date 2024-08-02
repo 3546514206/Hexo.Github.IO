@@ -1,0 +1,20 @@
+.widget-wrapper.markdown
+  .widget-body
+    border-radius: $border-card
+    padding: 4px 16px
+    background: var(--alpha50)
+
+    a:not([class])
+      trans1 all
+      border-bottom: 1px solid var(--text)
+      color: var(--text)
+      &:hover
+        color: $color-hover
+        border-bottom: 1px solid $color-hover
+
+.widget-wrapper.markdown .linklist
+  margin: 1em 0
+  .link
+    background: var(--alpha50)
+  .link:hover
+    background: var(--alpha100)
