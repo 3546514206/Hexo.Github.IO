@@ -1,5 +1,5 @@
 ---
-title: GC——基础知识
+title: GC—基础知识
 date: 2024-06-28 23:31:37
 tags:
 - JVM

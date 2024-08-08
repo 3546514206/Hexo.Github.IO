@@ -1,5 +1,5 @@
 ---
-title: GC——全流程
+title: GC—全流程
 date: 2024-06-29 15:46:59
 tags:
 - JVM
