@@ -2,9 +2,11 @@
 menu:
   主页: /
   归档: /archives
-  # 分类: /categories
   标签: /tags
-  工具: https://chatgpt.com/
+  ChatGPT: https://chatgpt.com/
+  通义千问: https://tongyi.aliyun.com/
+  友链一: https://www.mobibrw.com/
+  友链二: https://www.wujunhao1024.com/
 
 # 站点次标题和打字动效
 # https://github.com/mattboldt/typed.js
