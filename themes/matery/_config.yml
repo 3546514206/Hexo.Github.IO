@@ -7,21 +7,21 @@ menu:
   Tags:
     url: /tags
     icon: fas fa-tags
-#  Categories:
-#    url: /categories
-#    icon: fas fa-bookmark
-#  Archives:
-#    url: /archives
-#    icon: fas fa-archive
-#  About:
-#    url: /about
-#    icon: fas fa-user-circle
-#  Contact:
-#    url: /contact
-#    icon: fas fa-comments
-#  Friends:
-#    url: /friends
-#    icon: fas fa-address-book
+  #  Categories:
+  #    url: /categories
+  #    icon: fas fa-bookmark
+  #  Archives:
+  #    url: /archives
+  #    icon: fas fa-archive
+  #  About:
+  #    url: /about
+  #    icon: fas fa-user-circle
+  #  Contact:
+  #    url: /contact
+  #    icon: fas fa-comments
+  #  Friends:
+  #    url: /friends
+  #    icon: fas fa-address-book
   # 二级菜单写法如下
   #Medias:
   #  icon: fas fa-list
@@ -132,7 +132,7 @@ indexbtn:
 # icon/button will not show up if you leave the corresponding socialLink empty
 # 首页 banner 中的第二行个人信息配置，留空即不启用
 socialLink:
-  github:  https://github.com/3546514206
+  github: https://github.com/3546514206
   email: 3546514206@QQ.COM
   facebook: # https://www.facebook.com/xxx
   twitter: # https://twitter.com/xxx
@@ -219,10 +219,10 @@ myProjects:
       url: https://github.com/3546514206/base
       desc: 这个仓库囊括了多种编程语言的丰富案例——这些案例来自于语言特性、数据结构与算法实现、设计模式、应用案例、日常刷题等方面。
     tomdog:
-        icon: fas fa-database
-        iconBackground: 'linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)'
-        url: https://github.com/3546514206/tomdog
-        desc: 基于 Go 语言实现的 TCP 通讯框架。
+      icon: fas fa-database
+      iconBackground: 'linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)'
+      url: https://github.com/3546514206/tomdog
+      desc: 基于 Go 语言实现的 TCP 通讯框架。
 
 
 # config my skills informations in about page.
@@ -460,30 +460,30 @@ libs:
 # The post featured images that needs to be displayed when there is no image.
 # 无文章特色图片时需要显示的文章特色图片.
 featureImages:
-- /medias/featureimages/0.jpg
-- /medias/featureimages/1.jpg
-- /medias/featureimages/2.jpg
-- /medias/featureimages/3.jpg
-- /medias/featureimages/4.jpg
-- /medias/featureimages/5.jpg
-- /medias/featureimages/6.jpg
-- /medias/featureimages/7.jpg
-- /medias/featureimages/8.jpg
-- /medias/featureimages/9.jpg
-- /medias/featureimages/10.jpg
-- /medias/featureimages/11.jpg
-- /medias/featureimages/12.jpg
-- /medias/featureimages/13.jpg
-- /medias/featureimages/14.jpg
-- /medias/featureimages/15.jpg
-- /medias/featureimages/16.jpg
-- /medias/featureimages/17.jpg
-- /medias/featureimages/18.jpg
-- /medias/featureimages/19.jpg
-- /medias/featureimages/20.jpg
-- /medias/featureimages/21.jpg
-- /medias/featureimages/22.jpg
-- /medias/featureimages/23.jpg
+  - /medias/featureimages/0.jpg
+  - /medias/featureimages/1.jpg
+  - /medias/featureimages/2.jpg
+  - /medias/featureimages/3.jpg
+  - /medias/featureimages/4.jpg
+  - /medias/featureimages/5.jpg
+  - /medias/featureimages/6.jpg
+  - /medias/featureimages/7.jpg
+  - /medias/featureimages/8.jpg
+  - /medias/featureimages/9.jpg
+  - /medias/featureimages/10.jpg
+  - /medias/featureimages/11.jpg
+  - /medias/featureimages/12.jpg
+  - /medias/featureimages/13.jpg
+  - /medias/featureimages/14.jpg
+  - /medias/featureimages/15.jpg
+  - /medias/featureimages/16.jpg
+  - /medias/featureimages/17.jpg
+  - /medias/featureimages/18.jpg
+  - /medias/featureimages/19.jpg
+  - /medias/featureimages/20.jpg
+  - /medias/featureimages/21.jpg
+  - /medias/featureimages/22.jpg
+  - /medias/featureimages/23.jpg
 
 # default configs that the default policy for every articles/posts
 # default 配置文章的默认转载规则
@@ -599,7 +599,7 @@ icp:
 # 注：jsdelivr可以自动帮你生成.min版的js和css，所以你在上面设置js及css路径中可以直接写.min.xxx
 jsDelivr:
   url: # https://cdn.jsdelivr.net/gh/skyls03/skyls03.github.io
-  
+
 # 网站背景图
 background:
   enable: false
@@ -626,13 +626,13 @@ artitalk:
 # 关注公众号 "黑石哔哔"，发送: //bindCurrentUser:你的APPID,你的MASTERKEY,你的RESTAPI
 # 可用leancloud国际版，国际版api为 https://appid前八位.api.lncldglobal.com
 bbtime:
- enable: false
- appId: # 你的appId
- appKey: # 你的appKey
- serverURLs: # https://你的api
+  enable: false
+  appId: # 你的appId
+  appKey: # 你的appKey
+  serverURLs: # https://你的api
 
-# 让我们最新提交或者更新的文章在界面的首个位置
- index_generator:
-   path: ''
-   per_page: 18
-   order_by: -updated
+  # 让我们最新提交或者更新的文章在界面的首个位置
+  index_generator:
+    path: ''
+    per_page: 18
+    order_by: -updated

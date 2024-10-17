@@ -10,29 +10,29 @@
 
 'use strict'
 
-module.exports = ctx => function(args) {
-  if (args.length == 0) {
-    return
-  }
-  args = ctx.args.map(args, ['active'], ['links'])
-  if (args.links) {
-    args.links = args.links.split(' ')
-  }
-  var el = `<div class="tag-plugin navbar"><nav>`
-  for (let link of args.links) {
-    const matches = link.match(/\[(.*?)\]\((.*?)\)/i)
-    if (matches?.length > 2) {
-      let text = matches[1]
-      let href = matches[2]
-      if (href == args.active) {
-        el += `<a class="link active" href="${href}">${text}</a>`
-      } else {
-        el += `<a class="link" href="${href}">${text}</a>`
-      }
-    } else {
-      el += `<a class="link" href="#${link}">${link}</a>`
+module.exports = ctx => function (args) {
+    if (args.length == 0) {
+        return
     }
-  }
-  el += `</nav></div>`
-  return el
+    args = ctx.args.map(args, ['active'], ['links'])
+    if (args.links) {
+        args.links = args.links.split(' ')
+    }
+    var el = `<div class="tag-plugin navbar"><nav>`
+    for (let link of args.links) {
+        const matches = link.match(/\[(.*?)\]\((.*?)\)/i)
+        if (matches?.length > 2) {
+            let text = matches[1]
+            let href = matches[2]
+            if (href == args.active) {
+                el += `<a class="link active" href="${href}">${text}</a>`
+            } else {
+                el += `<a class="link" href="${href}">${text}</a>`
+            }
+        } else {
+            el += `<a class="link" href="#${link}">${link}</a>`
+        }
+    }
+    el += `</nav></div>`
+    return el
 }

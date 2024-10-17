@@ -10,6 +10,7 @@
       max-width: 100px
       display: inline
       margin: 0 0.25em
+
     img
       max-width: 400px
       max-height: 400px
@@ -31,54 +32,66 @@
   .el-input__inner, .el-textarea__inner,
   .tk-preview-container
     border-color: var(--block-border)
+
   .el-input__inner:focus,
   .el-textarea__inner:focus
-    border-color: var(--twikoo-theme) !important  
+    border-color: var(--twikoo-theme) !important
+
   .el-button:not(.el-button--primary):not(.el-button--text):active,
   .el-button:not(.el-button--primary):not(.el-button--text):focus,
   .el-button:not(.el-button--primary):not(.el-button--text):hover
     color: var(--twikoo-theme) !important
     border-color: var(--theme-link-opa) !important
     background-color: var(--block) !important
+
   .el-button--primary.is-disabled:active,
   .el-button--primary.is-disabled:focus,
   .el-button--primary.is-disabled:hover
     background-color: var(--theme-link-opa) !important
 
-  .el-button:focus,.el-button:hover
+  .el-button:focus, .el-button:hover
     border-color: var(--theme-link-opa)
+
   .el-button:active
     color: var(--twikoo-theme)
     border-color: var(--twikoo-theme)
-  .el-button.is-active,.el-button.is-plain:active
+
+  .el-button.is-active, .el-button.is-plain:active
     color: var(--twikoo-theme)
     border-color: var(--twikoo-theme)
 
   .el-button--primary
     background-color: var(--twikoo-theme)
     border-color: var(--twikoo-theme) !important
-  .el-button--primary:focus,.el-button--primary:hover
+
+  .el-button--primary:focus, .el-button--primary:hover
     background: $color-hover
     border-color: $color-hover !important
+
   .el-button--primary:active
     background: var(--twikoo-theme)
     border-color: var(--twikoo-theme)
+
   .el-button--primary.is-active
     background: var(--twikoo-theme)
     border-color: var(--twikoo-theme)
+
   .el-button--primary.is-disabled,
   .el-button--primary.is-disabled:active,
   .el-button--primary.is-disabled:focus,
   .el-button--primary.is-disabled:hover
     background-color: var(--theme-link-opa) !important
     border-color: var(--theme-link-opa) !important
+
   .el-button--primary.is-plain
     color: var(--twikoo-theme) !important
     border-color: var(--theme-link-opa)
+
   .el-button--primary.is-plain:focus,
   .el-button--primary.is-plain:hover
     background: var(--twikoo-theme) !important
     border-color: var(--twikoo-theme)
+
   .el-button--primary.is-plain:active
     background: var(--twikoo-theme) !important
     border-color: var(--twikoo-theme)
@@ -88,6 +101,7 @@
 
   .tk-action-link
     color: var(--text-p1)
+
     &:hover
       color: var(--twikoo-theme)
 
@@ -148,7 +162,7 @@
     border: none
     background-color: var(--theme-link-opa)
     color: var(--twikoo-theme)
-    
+
   .tk-comments-title .tk-comments-count
     margin-top: 15px
     color: var(--text-p1)

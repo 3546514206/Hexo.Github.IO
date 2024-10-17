@@ -2,7 +2,9 @@
 
 [![HitCount](http://hits.dwyl.io/blinkfox/hexo-theme-matery.svg)](http://hits.dwyl.io/blinkfox/hexo-theme-matery) [![Gitter](https://img.shields.io/gitter/room/blinkfox/hexo-theme-matery.svg)](https://gitter.im/hexo-theme-matery/Lobby?utm_source=badge) [![GitHub issues](https://img.shields.io/github/issues/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/issues) [![GitHub license](https://img.shields.io/github/license/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/blob/master/LICENSE) [![Download](https://img.shields.io/badge/downloads-master-green.svg)](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) [![Hexo Version](https://img.shields.io/badge/hexo-%3E%3D%205.0.0-blue.svg)](http://hexo.io) [![GitHub forks](https://img.shields.io/github/forks/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/network) [![GitHub stars](https://img.shields.io/github/stars/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/stargazers)
 
-[🇺🇸English Document](README.md) | [国内访问示例 (http://blinkfox.com)](http://blinkfox.com) | [Github 部署演示示例 (https://blinkfox.github.io)](https://blinkfox.github.io) | QQ 交流群1（已满）: [`926552981`](https://jq.qq.com/?_wv=1027&k=5zMDYHT) | QQ 交流群2（推荐）: [`971887688`](https://jq.qq.com/?_wv=1027&k=53q2Ayp)
+[🇺🇸English Document](README.md) | [国内访问示例 (http://blinkfox.com)](http://blinkfox.com) | [Github 部署演示示例 (https://blinkfox.github.io)](https://blinkfox.github.io) |
+QQ 交流群1（已满）: [`926552981`](https://jq.qq.com/?_wv=1027&k=5zMDYHT) | QQ 交流群2（推荐）: [
+`971887688`](https://jq.qq.com/?_wv=1027&k=53q2Ayp)
 
 > 这是一个采用 `Material Design` 和响应式设计的 Hexo 博客主题。
 
@@ -22,7 +24,8 @@
 - `TOC` 目录
 - 可设置复制文章内容时追加版权信息
 - 可设置阅读文章时做密码验证
-- [Gitalk](https://gitalk.github.io/)、[Gitment](https://imsun.github.io/gitment/)、[Valine](https://valine.js.org/) 和 [Disqus](https://disqus.com/) 评论模块（推荐使用 `Gitalk`）
+- [Gitalk](https://gitalk.github.io/)、[Gitment](https://imsun.github.io/gitment/)、[Valine](https://valine.js.org/)
+  和 [Disqus](https://disqus.com/) 评论模块（推荐使用 `Gitalk`）
 - 集成了[不蒜子统计](http://busuanzi.ibruce.info/)、谷歌分析（`Google Analytics`）和文章字数统计等功能
 - 支持在首页的音乐播放和视频播放功能
 - 支持`emoji`表情，用`markdown emoji`语法书写直接生成对应的能**跳跃**的表情。
@@ -39,9 +42,11 @@
 
 ## 下载
 
-本主题**推荐你使用 Hexo 5.0.0 及以上的版本**。如果，你已经有一个自己的 [Hexo](https://hexo.io/zh-cn/) 博客了，建议你将 Hexo 升级到最新稳定的版本。
+本主题**推荐你使用 Hexo 5.0.0 及以上的版本**。如果，你已经有一个自己的 [Hexo](https://hexo.io/zh-cn/) 博客了，建议你将 Hexo
+升级到最新稳定的版本。
 
-点击 [这里](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) 下载 `master` 分支的最新稳定版的代码，解压缩后，将 `hexo-theme-matery` 的文件夹复制到你 Hexo 的 `themes` 文件夹中即可。
+点击 [这里](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) 下载 `master` 分支的最新稳定版的代码，解压缩后，将
+`hexo-theme-matery` 的文件夹复制到你 Hexo 的 `themes` 文件夹中即可。
 
 当然你也可以在你的 `themes` 文件夹下使用 `git clone` 命令来下载:
 
@@ -101,7 +106,8 @@ layout: "tags"
 
 ### 新建关于我 about 页
 
-`about` 页是用来展示**关于我和我的博客**信息的页面，如果在你的博客 `source` 目录下还没有 `about/index.md` 文件，那么你就需要新建一个，命令如下：
+`about` 页是用来展示**关于我和我的博客**信息的页面，如果在你的博客 `source` 目录下还没有 `about/index.md`
+文件，那么你就需要新建一个，命令如下：
 
 ```bash
 hexo new page "about"
@@ -137,7 +143,8 @@ layout: "contact"
 ---
 ```
 
-> **注**：本留言板功能依赖于第三方评论系统，请**激活**你的评论系统才有效果。并且在主题的 `_config.yml` 文件中，第 `19` 至 `21` 行的“**菜单**”配置，取消关于留言板的注释即可。
+> **注**：本留言板功能依赖于第三方评论系统，请**激活**你的评论系统才有效果。并且在主题的 `_config.yml` 文件中，第 `19` 至
+`21` 行的“**菜单**”配置，取消关于留言板的注释即可。
 
 ### 新建友情链接 friends 页（可选的）
 
@@ -181,6 +188,7 @@ layout: "friends"
     "title": "前去学习"
 }]
 ```
+
 ### 新建 404 页
 
 如果在你的博客 `source` 目录下还没有 `404.md` 文件，那么你就需要新建一个
@@ -205,8 +213,8 @@ description: "Oops～，我崩溃了！找不到你想要的页面 :("
 
 #### 配置基本菜单导航的名称、路径url和图标icon.
 
-1.菜单导航名称可以是中文也可以是英文(如：`Index`或`主页`) 
-2.图标icon 可以在[Font Awesome](https://fontawesome.com/icons) 中查找   
+1.菜单导航名称可以是中文也可以是英文(如：`Index`或`主页`)
+2.图标icon 可以在[Font Awesome](https://fontawesome.com/icons) 中查找
 
 ```yaml
 menu:
@@ -233,11 +241,11 @@ menu:
 #### 二级菜单配置方法
 
 如果你需要二级菜单则可以在原基本菜单导航的基础上如下操作
-     
-1. 在需要添加二级菜单的一级菜单下添加`children`关键字(如:`About`菜单下添加`children`)     
-2. 在`children`下创建二级菜单的 名称name,路径url和图标icon.      
-3. 注意每个二级菜单模块前要加 `-`.     
-4. 注意缩进格式  
+
+1. 在需要添加二级菜单的一级菜单下添加`children`关键字(如:`About`菜单下添加`children`)
+2. 在`children`下创建二级菜单的 名称name,路径url和图标icon.
+3. 注意每个二级菜单模块前要加 `-`.
+4. 注意缩进格式
 
 ```yaml
 menu:
@@ -282,9 +290,11 @@ menu:
 
 从 Hexo5.0 版本开始自带了 `prismjs` 代码语法高亮的支持，本主题对此进行了改造支持。
 
-如果你的博客中曾经安装过 `hexo-prism-plugin` 的插件，那么你须要执行 `npm uninstall hexo-prism-plugin` 来卸载掉它，否则生成的代码中会有 `&#123;` 和 `&#125;` 的转义字符。
+如果你的博客中曾经安装过 `hexo-prism-plugin` 的插件，那么你须要执行 `npm uninstall hexo-prism-plugin` 来卸载掉它，否则生成的代码中会有
+`&#123;` 和 `&#125;` 的转义字符。
 
-然后，修改 Hexo 根目录下 `_config.yml` 文件中 `highlight.enable` 的值为 `false`，并将 `prismjs.enable` 的值设置为 `true`，主要配置如下：
+然后，修改 Hexo 根目录下 `_config.yml` 文件中 `highlight.enable` 的值为 `false`，并将 `prismjs.enable` 的值设置为 `true`
+，主要配置如下：
 
 ```yaml
 highlight:
@@ -301,7 +311,10 @@ prismjs:
   tab_replace: ''
 ```
 
-主题中默认的 `prismjs` 主题是 `Tomorrow Night`，如果你想定制自己的主题，可以前往 [prismjs 下载页面](https://prismjs.com/download.html) 定制下载自己喜欢的主题 `css` 文件，然后将此 css 主题文件取名为 `prism.css`，替换掉 `hexo-theme-matery` 主题文件夹中的 `source/libs/prism/prism.css` 文件即可。
+主题中默认的 `prismjs` 主题是 `Tomorrow Night`
+，如果你想定制自己的主题，可以前往 [prismjs 下载页面](https://prismjs.com/download.html) 定制下载自己喜欢的主题 `css`
+文件，然后将此 css 主题文件取名为 `prism.css`，替换掉 `hexo-theme-matery` 主题文件夹中的 `source/libs/prism/prism.css`
+文件即可。
 
 ### 搜索
 
@@ -321,7 +334,9 @@ search:
 
 ### 中文链接转拼音（建议安装）
 
-如果你的文章名称是中文的，那么 Hexo 默认生成的永久链接也会有中文，这样不利于 `SEO`，且 `gitment` 评论对中文链接也不支持。我们可以用 [hexo-permalink-pinyin](https://github.com/viko16/hexo-permalink-pinyin) Hexo 插件使在生成文章时生成中文拼音的永久链接。
+如果你的文章名称是中文的，那么 Hexo 默认生成的永久链接也会有中文，这样不利于 `SEO`，且 `gitment`
+评论对中文链接也不支持。我们可以用 [hexo-permalink-pinyin](https://github.com/viko16/hexo-permalink-pinyin) Hexo
+插件使在生成文章时生成中文拼音的永久链接。
 
 安装命令如下：
 
@@ -363,7 +378,9 @@ postInfo:
 
 ### 添加emoji表情支持（可选的）
 
-本主题新增了对`emoji`表情的支持，使用到了 [hexo-filter-github-emojis](https://npm.taobao.org/package/hexo-filter-github-emojis) 的 Hexo 插件来支持 `emoji`表情的生成，把对应的`markdown emoji`语法（`::`,例如：`:smile:`）转变成会跳跃的`emoji`表情，安装命令如下：
+本主题新增了对`emoji`
+表情的支持，使用到了 [hexo-filter-github-emojis](https://npm.taobao.org/package/hexo-filter-github-emojis) 的 Hexo 插件来支持
+`emoji`表情的生成，把对应的`markdown emoji`语法（`::`,例如：`:smile:`）转变成会跳跃的`emoji`表情，安装命令如下：
 
 ```bash
 npm install hexo-filter-github-emojis --save
@@ -414,11 +431,13 @@ feed:
 
 ### 修改页脚
 
-页脚信息可能需要做定制化修改，而且它不便于做成配置信息，所以可能需要你自己去再修改和加工。修改的地方在主题文件的 `/layout/_partial/footer.ejs` 文件中，包括站点、使用的主题、访问量等。
+页脚信息可能需要做定制化修改，而且它不便于做成配置信息，所以可能需要你自己去再修改和加工。修改的地方在主题文件的
+`/layout/_partial/footer.ejs` 文件中，包括站点、使用的主题、访问量等。
 
 ### 修改社交链接
 
-在主题的 `_config.yml` 文件中，默认支持 `QQ`、`GitHub` 和邮箱等的配置，你可以在主题文件的 `/layout/_partial/social-link.ejs` 文件中，新增、修改你需要的社交链接地址，增加链接可参考如下代码：
+在主题的 `_config.yml` 文件中，默认支持 `QQ`、`GitHub` 和邮箱等的配置，你可以在主题文件的
+`/layout/_partial/social-link.ejs` 文件中，新增、修改你需要的社交链接地址，增加链接可参考如下代码：
 
 ```html
 <% if (theme.socialLink.github) { %>
@@ -482,36 +501,37 @@ music:
 >
 > 即为这串数字。
 
-
-
 ## 文章 Front-matter 介绍
 
 ### Front-matter 选项详解
 
 `Front-matter` 选项中的所有内容均为**非必填**的。但我仍然建议至少填写 `title` 和 `date` 的值。
 
-| 配置选项   | 默认值                      | 描述                                                         |
-| ---------- | --------------------------- | ------------------------------------------------------------ |
-| title      | `Markdown` 的文件标题        | 文章标题，强烈建议填写此选项                                 |
-| date       | 文件创建时的日期时间          | 发布时间，强烈建议填写此选项，且最好保证全局唯一             |
-| author     | 根 `_config.yml` 中的 `author` | 文章作者                                                     |
-| img        | `featureImages` 中的某个值   | 文章特征图，推荐使用图床(腾讯云、七牛云、又拍云等)来做图片的路径.如: `http://xxx.com/xxx.jpg` |
-| top        | `true`                      | 推荐文章（文章是否置顶），如果 `top` 值为 `true`，则会作为首页推荐文章 |
-| cover      | `false`                     | `v1.0.2`版本新增，表示该文章是否需要加入到首页轮播封面中 |
-| coverImg   | 无                          | `v1.0.2`版本新增，表示该文章在首页轮播封面需要显示的图片路径，如果没有，则默认使用文章的特色图片 |
-| password   | 无                          | 文章阅读密码，如果要对文章设置阅读验证密码的话，就可以设置 `password` 的值，该值必须是用 `SHA256` 加密后的密码，防止被他人识破。前提是在主题的 `config.yml` 中激活了 `verifyPassword` 选项 |
-| toc        | `true`                      | 是否开启 TOC，可以针对某篇文章单独关闭 TOC 的功能。前提是在主题的 `config.yml` 中激活了 `toc` 选项 |
-| mathjax    | `false`                     | 是否开启数学公式支持 ，本文章是否开启 `mathjax`，且需要在主题的 `_config.yml` 文件中也需要开启才行 |
-| summary    | 无                          | 文章摘要，自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要 |
-| categories | 无                          | 文章分类，本主题的分类表示宏观上大的分类，只建议一篇文章一个分类 |
-| tags       | 无                          | 文章标签，一篇文章可以多个标签                              |
-| keywords   | 文章标题                     | 文章关键字，SEO 时需要                              |
-| reprintPolicy | cc_by                    | 文章转载规则， 可以是 cc_by, cc_by_nd, cc_by_sa, cc_by_nc, cc_by_nc_nd, cc_by_nc_sa, cc0, noreprint 或 pay 中的一个 |
+| 配置选项          | 默认值                         | 描述                                                                                                                       |
+|---------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| title         | `Markdown` 的文件标题            | 文章标题，强烈建议填写此选项                                                                                                           |
+| date          | 文件创建时的日期时间                  | 发布时间，强烈建议填写此选项，且最好保证全局唯一                                                                                                 |
+| author        | 根 `_config.yml` 中的 `author` | 文章作者                                                                                                                     |
+| img           | `featureImages` 中的某个值       | 文章特征图，推荐使用图床(腾讯云、七牛云、又拍云等)来做图片的路径.如: `http://xxx.com/xxx.jpg`                                                            |
+| top           | `true`                      | 推荐文章（文章是否置顶），如果 `top` 值为 `true`，则会作为首页推荐文章                                                                               |
+| cover         | `false`                     | `v1.0.2`版本新增，表示该文章是否需要加入到首页轮播封面中                                                                                         |
+| coverImg      | 无                           | `v1.0.2`版本新增，表示该文章在首页轮播封面需要显示的图片路径，如果没有，则默认使用文章的特色图片                                                                     |
+| password      | 无                           | 文章阅读密码，如果要对文章设置阅读验证密码的话，就可以设置 `password` 的值，该值必须是用 `SHA256` 加密后的密码，防止被他人识破。前提是在主题的 `config.yml` 中激活了 `verifyPassword` 选项 |
+| toc           | `true`                      | 是否开启 TOC，可以针对某篇文章单独关闭 TOC 的功能。前提是在主题的 `config.yml` 中激活了 `toc` 选项                                                         |
+| mathjax       | `false`                     | 是否开启数学公式支持 ，本文章是否开启 `mathjax`，且需要在主题的 `_config.yml` 文件中也需要开启才行                                                           |
+| summary       | 无                           | 文章摘要，自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要                                                              |
+| categories    | 无                           | 文章分类，本主题的分类表示宏观上大的分类，只建议一篇文章一个分类                                                                                         |
+| tags          | 无                           | 文章标签，一篇文章可以多个标签                                                                                                          |
+| keywords      | 文章标题                        | 文章关键字，SEO 时需要                                                                                                            |
+| reprintPolicy | cc_by                       | 文章转载规则， 可以是 cc_by, cc_by_nd, cc_by_sa, cc_by_nc, cc_by_nc_nd, cc_by_nc_sa, cc0, noreprint 或 pay 中的一个                     |
 
 > **注意**:
-> 1. 如果 `img` 属性不填写的话，文章特色图会根据文章标题的 `hashcode` 的值取余，然后选取主题中对应的特色图片，从而达到让所有文章的特色图**各有特色**。
+> 1. 如果 `img` 属性不填写的话，文章特色图会根据文章标题的 `hashcode` 的值取余，然后选取主题中对应的特色图片，从而达到让所有文章的特色图
+     **各有特色**。
 > 2. `date` 的值尽量保证每篇文章是唯一的，因为本主题中 `Gitalk` 和 `Gitment` 识别 `id` 是通过 `date` 的值来作为唯一标识的。
-> 3. 如果要对文章设置阅读验证密码的功能，不仅要在 Front-matter 中设置采用了 SHA256 加密的 password 的值，还需要在主题的 `_config.yml` 中激活了配置。有些在线的 SHA256 加密的地址，可供你使用：[开源中国在线工具](http://tool.oschina.net/encrypt?type=2)、[chahuo](http://encode.chahuo.com/)、[站长工具](http://tool.chinaz.com/tools/hash.aspx)。
+> 3. 如果要对文章设置阅读验证密码的功能，不仅要在 Front-matter 中设置采用了 SHA256 加密的 password 的值，还需要在主题的
+     `_config.yml` 中激活了配置。有些在线的 SHA256
+     加密的地址，可供你使用：[开源中国在线工具](http://tool.oschina.net/encrypt?type=2)、[chahuo](http://encode.chahuo.com/)、[站长工具](http://tool.chinaz.com/tools/hash.aspx)。
 > 4. 您可以在文章md文件的 front-matter 中指定 reprintPolicy 来给单个文章配置转载规则
 
 以下为文章的 `Front-matter` 示例。
@@ -582,7 +602,8 @@ tags:
 - [不蒜子统计](http://busuanzi.ibruce.info/)和谷歌分析（`Google Analytics`）
 - 默认特色图的集合。当文章没有设置特色图时，本主题会根据文章标题的 `hashcode` 值取余，来选择展示对应的特色图
 
-**我认为个人博客应该都有自己的风格和特色**。如果本主题中的诸多功能和主题色彩你不满意，可以在主题中自定义修改，很多更自由的功能和细节点的修改难以在主题的 `_config.yml` 中完成，需要修改源代码才来完成。以下列出了可能对你有用的地方：
+**我认为个人博客应该都有自己的风格和特色**。如果本主题中的诸多功能和主题色彩你不满意，可以在主题中自定义修改，很多更自由的功能和细节点的修改难以在主题的
+`_config.yml` 中完成，需要修改源代码才来完成。以下列出了可能对你有用的地方：
 
 ### 修改主题颜色
 
@@ -605,7 +626,9 @@ tags:
 
 ### 修改 banner 图和文章特色图
 
-你可以直接在 `/source/medias/banner` 文件夹中更换你喜欢的 `banner` 图片，主题代码中是每天动态切换一张，只需 `7` 张即可。如果你会 `JavaScript` 代码，可以修改成你自己喜欢切换逻辑，如：随机切换等，`banner` 切换的代码位置在 `/layout/_partial/bg-cover-content.ejs` 文件的 `<script></script>` 代码中：
+你可以直接在 `/source/medias/banner` 文件夹中更换你喜欢的 `banner` 图片，主题代码中是每天动态切换一张，只需 `7` 张即可。如果你会
+`JavaScript` 代码，可以修改成你自己喜欢切换逻辑，如：随机切换等，`banner` 切换的代码位置在
+`/layout/_partial/bg-cover-content.ejs` 文件的 `<script></script>` 代码中：
 
 ```javascript
 $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');

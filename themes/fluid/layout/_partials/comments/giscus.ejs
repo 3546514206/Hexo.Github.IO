@@ -1,7 +1,7 @@
 <% if (theme.giscus && theme.giscus['repo'] && theme.giscus['repo-id']) { %>
     <div id="giscus" class="giscus"></div>
     <script type="text/javascript">
-      Fluid.utils.loadComments('#giscus', function() {
+      Fluid.utils.loadComments('#giscus', function () {
         var options = <%- JSON.stringify(theme.giscus || {}) %>;
         var attributes = {};
         for (let option in options) {

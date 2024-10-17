@@ -3,9 +3,9 @@
 "use strict";
 
 hexo.on("generateBefore", () => {
-  require("./lib/merge-configs")(hexo);
+    require("./lib/merge-configs")(hexo);
 });
 
 hexo.on("generateAfter", () => {
-  require("./lib/hello")(hexo);
+    require("./lib/hello")(hexo);
 });

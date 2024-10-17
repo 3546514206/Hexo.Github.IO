@@ -9,10 +9,11 @@ pre
 a
   text-decoration: none
   color: var(--theme-link)
+
   &:hover
     color: $color-hover
 
-.md-text p:not([class]) 
+.md-text p:not([class])
   text-align: convert(hexo-config('style.text-align'))
 
 hr
@@ -28,7 +29,7 @@ li
   font-size: 'calc(%s - 1px)' % var(--fsp)
 
 
-ul,ol
+ul, ol
   padding-left: 1.5rem
 
 
@@ -42,16 +43,20 @@ table:not([class])
   vertical-align: text-top
   --fsp: $fsp2
   font-size: var(--fsp)
+
   th
     background: var(--block)
-  td,th
+
+  td, th
     padding: 0.5em 1em
     border: 1px solid var(--block-hover)
     line-height: 1.5
+
   tr
     word-break: keep-all
-    white-space:nowrap
+    white-space: nowrap
     trans()
+
     &:hover
       background: var(--block)
 

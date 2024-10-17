@@ -63,7 +63,7 @@
 
     let postsOption = {
         title: {
-            text: '<%- __("postPublishChart")  %>',
+            text: '<%- __("postPublishChart") %>',
             top: -5,
             x: 'center'
         },
@@ -79,27 +79,27 @@
         },
         series: [
             {
-                name: '<%- __("postsNumberName")  %>',
+                name: '<%- __("postsNumberName") %>',
                 type: 'line',
                 color: ['#6772e5'],
                 data: <%- monthValueArr %>,
                 markPoint: {
                     symbolSize: 45,
-                    color: ['#fa755a','#3ecf8e','#82d3f4'],
+                    color: ['#fa755a', '#3ecf8e', '#82d3f4'],
                     data: [{
                         type: 'max',
                         itemStyle: {color: ['#3ecf8e']},
-                        name: '<%- __("maximum")  %>'
+                        name: '<%- __("maximum") %>'
                     }, {
                         type: 'min',
                         itemStyle: {color: ['#fa755a']},
-                        name: '<%- __("minimum")  %>'
+                        name: '<%- __("minimum") %>'
                     }]
                 },
                 markLine: {
                     itemStyle: {color: ['#ab47bc']},
                     data: [
-                        {type: 'average', name: '<%- __("average")  %>'}
+                        {type: 'average', name: '<%- __("average") %>'}
                     ]
                 }
             }
@@ -109,7 +109,7 @@
     <%
     /* calculate categoriesOption data. */
     var categoryArr = [];
-    site.categories.map(function(category) {
+    site.categories.map(function (category) {
         categoryArr.push({'name': category.name, 'value': category.length})
     });
 
@@ -118,7 +118,7 @@
 
     let categoriesOption = {
         title: {
-            text: '<%- __("categoriesChart")  %>',
+            text: '<%- __("categoriesChart") %>',
             top: -4,
             x: 'center'
         },
@@ -128,7 +128,7 @@
         },
         series: [
             {
-                name: '<%- __("categories")  %>',
+                name: '<%- __("categories") %>',
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
@@ -148,10 +148,12 @@
     /* calculate tagsOption data. */
     // get all tags name and count,then order by length desc.
     var tagArr = [];
-    site.tags.map(function(tag) {
+    site.tags.map(function (tag) {
         tagArr.push({'name': tag.name, 'value': tag.length});
     });
-    tagArr.sort((a, b) => {return b.value - a.value});
+    tagArr.sort((a, b) => {
+        return b.value - a.value
+    });
 
     // get Top 10 tags name and count.
     var tagNameArr = [];
@@ -167,7 +169,7 @@
 
     let tagsOption = {
         title: {
-            text: '<%- __("top10TagsChart")  %>',
+            text: '<%- __("top10TagsChart") %>',
             top: -5,
             x: 'center'
         },
@@ -187,24 +189,24 @@
             {
                 type: 'bar',
                 color: ['#82d3f4'],
-                barWidth : 18,
+                barWidth: 18,
                 data: <%- tagCountArrJson %>,
                 markPoint: {
                     symbolSize: 45,
                     data: [{
                         type: 'max',
                         itemStyle: {color: ['#3ecf8e']},
-                        name: '<%- __("maximum")  %>'
+                        name: '<%- __("maximum") %>'
                     }, {
                         type: 'min',
                         itemStyle: {color: ['#fa755a']},
-                        name: '<%- __("minimum")  %>'
+                        name: '<%- __("minimum") %>'
                     }],
                 },
                 markLine: {
                     itemStyle: {color: ['#ab47bc']},
                     data: [
-                        {type: 'average', name: '<%- __("average")  %>'}
+                        {type: 'average', name: '<%- __("average") %>'}
                     ]
                 }
             }

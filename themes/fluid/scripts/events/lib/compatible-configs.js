@@ -11,15 +11,15 @@ module.exports = (hexo) => {
       hexo.log.warn('[Fluid] Deprecated config detected: "highlight" has been modified to "code:highlight", please update according to the release.');
     }
     hexo.theme.config.code = {
-      copy_btn : hexo.theme.config.highlight.copy_btn,
+      copy_btn: hexo.theme.config.highlight.copy_btn,
       highlight: {
-        enable     : hexo.theme.config.highlight.enable,
-        lib        : 'highlightjs',
+        enable: hexo.theme.config.highlight.enable,
+        lib: 'highlightjs',
         highlightjs: {
           style: hexo.theme.config.highlight.style
         },
         prismjs: {
-          style     : 'default',
+          style: 'default',
           preprocess: true
         }
       }

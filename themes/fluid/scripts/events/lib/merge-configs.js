@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const objUtil = require('../../utils/object');
-const { isNotEmptyObject } = require('../../utils/object');
+const {isNotEmptyObject} = require('../../utils/object');
 
 module.exports = (hexo) => {
   const isZh = hexo.theme.i18n.languages[0].search(/zh-CN/i) !== -1;
@@ -26,8 +26,8 @@ module.exports = (hexo) => {
       dataStaticConfig = data.fluid_static_prefix;
     }
 
-    const { language } = hexo.config;
-    const { i18n } = hexo.theme;
+    const {language} = hexo.config;
+    const {i18n} = hexo.theme;
     const langConfigMap = {};
     for (const key in data) {
       if (Object.prototype.hasOwnProperty.call(data, key)) {

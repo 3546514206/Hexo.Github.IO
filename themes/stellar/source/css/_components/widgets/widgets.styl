@@ -1,4 +1,4 @@
-.widgets 
+.widgets
   .loading-wrap
     margin: 0.5rem 0
     background: var(--alpha50)
@@ -11,6 +11,7 @@
   z-index: 1
   line-height: 1.2
   margin: 0 var(--gap-margin)
+
   .widget-wrapper
     .widget-header
       padding-left: var(--gap-padding)
@@ -22,13 +23,17 @@
       font-weight: 500
       font-size: $fs-13
       color: var(--text-p1)
-      .item 
+
+      .item
         display: block
-      >span
+
+      > span
         text-align: left
         opacity 0.6
+
       &:empty
         display: none
+
       .cap-action
         line-height: 0
         color: inherit
@@ -37,20 +42,24 @@
         border-radius: 4px
         padding: 6px
         margin-right: -6px
+
         svg
           height: 1em
           width: auto
           transform: scale(1.2)
           fill: var(--text-p2)
+
         &:hover
           color: $color-hover
           background: var(--alpha100)
           opacity 1
+
           svg
             fill: $color-hover
 
     .widget-body
       color: var(--text-p1)
+
       p
         margin-top: .5em
         margin-bottom: .5em
@@ -67,12 +76,14 @@
       margin-top: 32px
 
 .l_right .widgets
-  &:empty 
+  &:empty
     display: none
+
   .widget-wrapper
     .widget-header
       padding-left: var(--gap-padding)
       padding-right: var(--gap-padding)
+
   // 小屏幕
   @media screen and (max-width: $device-laptop)
     .widget-wrapper

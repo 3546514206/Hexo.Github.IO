@@ -4,7 +4,8 @@
   align-items: center
   padding-top: var(--gap-padding)
   padding-bottom: var(--gap-padding)
-  >.content
+
+  > .content
     border-left: 1px dashed var(--text-meta)
     border-right: 1px dashed var(--text-meta)
     border-bottom: 1px dashed var(--text-meta)
@@ -13,42 +14,54 @@
     padding: 1rem
     // max-width: calc(100% - 80px)
     max-width: calc(95%)
-    >.title
+
+    > .title
       font-weight: 500
       text-align: center
-    >.meta
+
+    > .meta
       color: var(--text-p2)
       font-size: $fs-12
-      font-weight: 500  
-    >.body
-      >.paragraph
+      font-weight: 500
+
+    > .body
+      > .paragraph
         text-indent: 2em
-      >.section
-        >.section-title
+
+      > .section
+        > .section-title
           text-align: center
-        >.section-content
+
+        > .section-content
           text-indent: 2em
-      >.line.right
-        >p
+
+      > .line.right
+        > p
           text-align: right
+
       .tag-plugin
         margin: 0
-    >.footer
+
+    > .footer
       color: var(--text-p4)
       font-size: $fs-12
       text-align: right
-      >.author-date
+
+      > .author-date
         text-align: right
-        >span
+
+        > span
           color: var(--text-p2)
           font-size: $fs-12
           font-weight: 500
-        >.author
-          margin-right: calc(0.5*var(--gap-p))
+
+        > .author
+          margin-right: calc(0.5 * var(--gap-p))
 
 // 描边修饰
-.md-text .tag-plugin.paper>.content
+.md-text .tag-plugin.paper > .content
   position: relative
+
   &:before
     content: ''
     position: absolute
@@ -58,8 +71,10 @@
     right: -16px
     border-radius: 4px
     background: var(--block)
-  >.title
+
+  > .title
     position: relative
+
     &:before
       content: ''
       position: absolute
@@ -69,6 +84,7 @@
       right: calc(100% + 1rem - 6px)
       border-radius: 4px
       background: $color-accent
+
     &:after
       content: ''
       position: absolute
@@ -84,8 +100,8 @@
 .md-text .tag-plugin.paper > .content.underline > .meta,
 .md-text .tag-plugin.paper > .content.underline > .author-date,
 .md-text .tag-plugin.paper > .content.underline > .footer,
-.md-text .tag-plugin.paper > .content.underline > .body 
-  background: linear-gradient(transparent 1.5rem,var(--text-meta) 1px)
+.md-text .tag-plugin.paper > .content.underline > .body
+  background: linear-gradient(transparent 1.5rem, var(--text-meta) 1px)
   background-size: 100% calc(1.5rem + 1px)
   line-height: calc(1.5rem + 1px)
   // 若要前后有一定的间隙，可以打开下面的代码;反之，可以注释掉。注意：这里的间隙不是指段落开头的空两个字，而是指每行文字距离下划线开头（末尾）的距离
@@ -94,5 +110,6 @@
 .md-text .tag-plugin.paper > .content.underline
   p
     margin: 0
-  >.title
+
+  > .title
     border-top: 1px solid var(--text-meta)

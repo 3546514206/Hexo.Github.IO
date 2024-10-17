@@ -1,7 +1,8 @@
 
 .search-wrapper
   width: 100%
-  >.search-form
+
+  > .search-form
     position: sticky
     margin-bottom: 8px
     top: 1rem
@@ -14,8 +15,10 @@
     border-radius: $border-bar
     color: var(--text)
     background: var(--alpha50)
+
     &:has(input:focus)
       background: var(--alpha100)
+
   .search-input
     width: 100%
     box-sizing: border-box
@@ -23,24 +26,28 @@
     font-size: $fs-14
     padding: 12px 0
     color: var(--text)
-  .search-button 
+
+  .search-button
     border-radius: $border-bar
     display: flex
     align-items: center
     height: 40px
+
     svg
       height: 1rem
       width: 40px
       margin-left: 4px
       color: var(--text-p2)
       fill: currentColor
+
       path[p-id="1562"]
         color: $color-theme
-    
+
   &[searching='true']
     .search-button
       path[p-id="1562"]
         color: $c-green
+
   &.noresult[searching='true']
     .search-button
       path[p-id="1562"]
@@ -62,23 +69,29 @@
     scrollbar-width: none
     scrollbar(0, 0)
     border-radius: $border-card
+
     &:empty
       display: none
+
     .search-result-list
       padding: 0
       margin: 0
       list-style-type: none
+
     li a
-        display: block
-        background: var(--alpha20)
-        line-height: 1.2
-        padding: 0.75rem 1rem
-        border-radius: $border-card
-        trans1 background
-        &:hover
-          background: var(--alpha100)
-    li+li
-        margin-top: 8px
+      display: block
+      background: var(--alpha20)
+      line-height: 1.2
+      padding: 0.75rem 1rem
+      border-radius: $border-card
+      trans1 background
+
+      &:hover
+        background: var(--alpha100)
+
+    li + li
+      margin-top: 8px
+
     .search-result-title
       color: var(--text-p1)
       font-weight: 700

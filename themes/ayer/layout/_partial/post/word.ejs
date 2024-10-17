@@ -1,5 +1,5 @@
 <% if (!theme.word_count.only_article_visit || (!index && theme.word_count.only_article_visit)){ %>
-<div class="word_count">
+    <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
@@ -8,7 +8,7 @@
         </span>
     </span>
 
-    <span class="post-time">
+        <span class="post-time">
         &nbsp; | &nbsp;
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
@@ -16,5 +16,5 @@
             <span class="post-count"><%= min2read(post.content) %> <%= __('post.minutes') %></span>
         </span>
     </span>
-</div>
+    </div>
 <% } %>

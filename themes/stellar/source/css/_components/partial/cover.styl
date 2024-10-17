@@ -6,6 +6,7 @@
   justify-content: center
   align-items: center
   position: relative
+
   &.post
     height: inherit
 
@@ -17,17 +18,21 @@
   justify-content: center
   align-items: center
   font-size: var(--fsp)
+
   .cover-title
     font-weight: 700
     font-size: 1.5rem
     margin: 1rem 0
     line-height: 1.2
     color: var(--text)
+
   .description
     margin: 1rem 0
+
   .start-wrap
     margin: 2rem 0
     flex-shrink: 0
+
     a.start
       display: inline-block
 
@@ -51,8 +56,10 @@
 
 .l_cover.wiki .cover-wrap
   max-width: $device-mobile
+
   .preview
     margin-bottom: 2rem
+
     img
       object-fit: contain
       min-width: 96px
@@ -61,6 +68,7 @@
       max-width: 100%
       @media screen and (max-width: $device-mobile)
         max-width: 60%
+
   .cover-title
     &:first-child
       font-size: 3rem

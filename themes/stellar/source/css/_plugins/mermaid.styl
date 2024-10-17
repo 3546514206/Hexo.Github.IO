@@ -4,7 +4,7 @@ pre.mermaid
   justify-content: center;
   font-family: $ff-body
 
-.mermaid span,text
+.mermaid span, text
   font-family: $ff-body
 
 .mermaid .edgeLabel
@@ -110,6 +110,7 @@ _dark_mermaid()
 
 :root[data-theme="dark"]
   _dark_mermaid()
+
 :root:not([data-theme])
   @media (prefers-color-scheme: dark)
     _dark_mermaid()

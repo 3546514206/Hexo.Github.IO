@@ -100,7 +100,7 @@ fun_features:
     # 在指定页面开启，不填则在所有页面开启
     # Enable in specified page, all pages by default
     # Options: home | post | tag | category | about | links | page | 404
-    scope: []
+    scope: [ ]
 
   # 为文章内容中的标题添加锚图标
   # Add an anchor icon to the title on the post page
@@ -369,7 +369,7 @@ navbar:
   menu:
     - { key: "home", link: "/", icon: "iconfont icon-home-fill" }
     - { key: "archive", link: "/archives/", icon: "iconfont icon-archive-fill" }
-#    - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
+    #    - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
     - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
 #    - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
 #    - { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
@@ -519,11 +519,11 @@ index:
 
       # 请求头
       # Request headers
-      headers: {}
+      headers: { }
 
       # 从请求结果获取字符串的取值字段，最终必须是一个字符串，例如返回结果为 {"data": {"author": "fluid", "content": "An elegant theme"}}, 则取值字段为 ['data', 'content']；如果返回是列表则自动选择第一项
       # The value field of the string obtained from the response. For example, the response content is {"data": {"author": "fluid", "content": "An elegant theme"}}, the expected `keys: ['data','content']`; if the return is a list, the first item is automatically selected
-      keys: []
+      keys: [ ]
 
   # 自动截取文章摘要
   # Auto extract post
@@ -706,7 +706,7 @@ post:
     enable: true
     # 放大后图片链接替换规则，可用于将压缩图片链接替换为原图片链接，如 ['-slim', ''] 是将链接中 `-slim` 移除；如果想使用正则请使用 `re:` 前缀，如 ['re:\\d{3,4}\\/\\d{3,4}\\/', '']
     # The image url replacement when zooming, the feature can be used to replace the compressed image to the original image, eg: ['-slim', ''] removes `-slim` from the image url when zooming; if you want to use regular, use prefix `re:`, eg: ['re:\\d{3,4}\\/\\d{3,4}\\/','']
-    img_url_replace: ['', '']
+    img_url_replace: [ '', '' ]
 
   # 脚注语法，会在文章底部生成脚注，如果 Markdown 渲染器本身支持，则建议关闭，否则可能会冲突
   # Support footnote syntax, footnotes will be generated at the bottom of the post page. If the Markdown renderer itself supports it, please disable it, otherwise it may conflict
@@ -794,9 +794,9 @@ gitalk:
   clientSecret:
   repo:
   owner:
-  admin: ['name']
+  admin: [ 'name' ]
   language: zh-CN
-  labels: ['Gitalk']
+  labels: [ 'Gitalk' ]
   perPage: 10
   pagerDirection: last
   distractionFreeMode: false
@@ -817,8 +817,8 @@ valine:
   path: window.location.pathname
   placeholder:
   avatar: 'retro'
-  meta: ['nick', 'mail', 'link']
-  requiredFields: []
+  meta: [ 'nick', 'mail', 'link' ]
+  requiredFields: [ ]
   pageSize: 10
   lang: 'zh-CN'
   highlight: false
@@ -835,10 +835,10 @@ valine:
 waline:
   serverURL: ''
   path: window.location.pathname
-  meta: ['nick', 'mail', 'link']
-  requiredMeta: ['nick']
+  meta: [ 'nick', 'mail', 'link' ]
+  requiredMeta: [ 'nick' ]
   lang: 'zh-CN'
-  emoji: ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo']
+  emoji: [ 'https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo' ]
   dark: 'html[data-user-color-scheme="dark"]'
   wordLimit: 0
   pageSize: 10
@@ -867,7 +867,7 @@ remark42:
   site_id:
   max_shown_comments: 10
   locale: zh
-  components: ['embed']
+  components: [ 'embed' ]
 
 # Twikoo
 # 支持腾讯云、Vercel、Railway 等多种平台部署
@@ -985,7 +985,7 @@ about:
   # More icons can be found from https://hexo.fluid-dev.com/docs/en/icon/  `class` is the css class of the icon. If adding `qrcode`, the icon is no longer a link, but a hovering QR code
   icons:
     - { class: "iconfont icon-github-fill", link: "https://github.com/3546514206", tip: "GitHub" }
-#    - { class: "iconfont icon-douban-fill", link: "https://douban.com", tip: "豆瓣" }
+    #    - { class: "iconfont icon-douban-fill", link: "https://douban.com", tip: "豆瓣" }
     - { class: "iconfont icon-wechat-fill", qrcode: "/img/favicon.png" }
 
 

@@ -44,7 +44,7 @@ module.exports = (hexo) => {
     if (backgroundColor === 'white' || backgroundColor === '#ffffff') {
       backgroundColor = '#fff';
     }
-    return { file, backgroundColor };
+    return {file, backgroundColor};
   }
 
   function resolvePrism(name) {
@@ -65,7 +65,7 @@ module.exports = (hexo) => {
       hexo.log.error(`[Fluid] prismjs style '${name}' not found`);
       return {};
     }
-    return { file };
+    return {file};
   }
 
   const config = hexo.theme.config;
@@ -79,16 +79,16 @@ module.exports = (hexo) => {
       enable: false
     });
     hexo.config.highlight = objUtil.merge({}, hexo.config.highlight, {
-      enable     : true,
-      hljs       : true,
-      wrap       : false,
+      enable: true,
+      hljs: true,
+      wrap: false,
       auto_detect: true,
       line_number: config.code.highlight.line_number || false
     });
     hexo.config.syntax_highlighter = 'highlight.js';  // hexo v7.0.0+ config
     hexo.theme.config.code.highlight.highlightjs = objUtil.merge({}, hexo.theme.config.code.highlight.highlightjs, {
       light: resolveHighlight(hexo.theme.config.code.highlight.highlightjs.style),
-      dark : hexo.theme.config.dark_mode.enable && resolveHighlight(hexo.theme.config.code.highlight.highlightjs.style_dark)
+      dark: hexo.theme.config.dark_mode.enable && resolveHighlight(hexo.theme.config.code.highlight.highlightjs.style_dark)
     });
 
     hexo.extend.filter.register('after_post_render', (page) => {
@@ -121,14 +121,14 @@ module.exports = (hexo) => {
       enable: false
     });
     hexo.config.prismjs = objUtil.merge({}, hexo.config.prismjs, {
-      enable     : true,
-      preprocess : config.code.highlight.prismjs.preprocess || false,
+      enable: true,
+      preprocess: config.code.highlight.prismjs.preprocess || false,
       line_number: config.code.highlight.line_number || false
     });
     hexo.config.syntax_highlighter = 'prismjs';  // hexo v7.0.0+ config
     hexo.theme.config.code.highlight.prismjs = objUtil.merge({}, hexo.theme.config.code.highlight.prismjs, {
       light: resolvePrism(hexo.theme.config.code.highlight.prismjs.style),
-      dark : hexo.theme.config.dark_mode.enable && resolvePrism(hexo.theme.config.code.highlight.prismjs.style_dark)
+      dark: hexo.theme.config.dark_mode.enable && resolvePrism(hexo.theme.config.code.highlight.prismjs.style_dark)
     });
 
     hexo.extend.filter.register('after_post_render', (page) => {

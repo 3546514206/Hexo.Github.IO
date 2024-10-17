@@ -35,7 +35,7 @@ class ViewInject {
     if (path.extname(name) === '') {
       name += defaultExtname;
     }
-    this.raws.push({ name, raw, args });
+    this.raws.push({name, raw, args});
   }
 
   file(name, file, ...args) {
@@ -105,10 +105,10 @@ module.exports = (hexo) => {
       const name = `inject/${type}/${injectObj.name}`;
       hexo.theme.setView(name, injectObj.raw);
       configs[name] = {
-        layout : name,
-        locals : injectObj.args[0],
+        layout: name,
+        locals: injectObj.args[0],
         options: injectObj.args[1],
-        order  : injectObj.args[2] || index
+        order: injectObj.args[2] || index
       };
     });
     // Views sort.

@@ -14,5 +14,5 @@ const button = (args) => {
 };
 
 // {% btn url, text, title %}
-hexo.extend.tag.register('button', button, { ends: false });
-hexo.extend.tag.register('btn', button, { ends: false });
+hexo.extend.tag.register('button', button, {ends: false});
+hexo.extend.tag.register('btn', button, {ends: false});

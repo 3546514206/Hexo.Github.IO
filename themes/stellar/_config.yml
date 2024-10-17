@@ -29,31 +29,31 @@ logo:
 menubar:
   columns: 4 # 一行多少个
   items: # 可按照自己需求增加，符合以下格式即可
-    # id: 页面中高亮的 menu_id 
-    # theme: 高亮时的颜色，仅 svg 中 fill="currentColor" 时有效
-    # icon: 支持 svg/img 标签，可以定义在 icons.yml 文件中，也支持外部图片的 URL
-    # title: 标题
-    # url: 点击跳转到哪，支持相对路径和绝对路径
-    # - id: post
-    #   theme: '#1BCDFC'
-    #   icon: solar:documents-bold-duotone
-    #   title: 博客
-    #   url: /
-    # - id: wiki
-    #   theme: '#3DC550'
-    #   icon: solar:notebook-bookmark-bold-duotone
-    #   title: 文档
-    #   url: /wiki/
-    # - id: explore
-    #   theme: '#FA6400'
-    #   icon: solar:planet-bold-duotone
-    #   title: 探索
-    #   url: /explore/
-    # - id: social
-    #   theme: '#F44336'
-    #   icon: solar:chat-square-like-bold-duotone
-    #   title: 社交
-    #   url: /friends/
+  # id: 页面中高亮的 menu_id
+  # theme: 高亮时的颜色，仅 svg 中 fill="currentColor" 时有效
+  # icon: 支持 svg/img 标签，可以定义在 icons.yml 文件中，也支持外部图片的 URL
+  # title: 标题
+  # url: 点击跳转到哪，支持相对路径和绝对路径
+  # - id: post
+  #   theme: '#1BCDFC'
+  #   icon: solar:documents-bold-duotone
+  #   title: 博客
+  #   url: /
+  # - id: wiki
+  #   theme: '#3DC550'
+  #   icon: solar:notebook-bookmark-bold-duotone
+  #   title: 文档
+  #   url: /wiki/
+  # - id: explore
+  #   theme: '#FA6400'
+  #   icon: solar:planet-bold-duotone
+  #   title: 探索
+  #   url: /explore/
+  # - id: social
+  #   theme: '#F44336'
+  #   icon: solar:chat-square-like-bold-duotone
+  #   title: 社交
+  #   url: /friends/
 
 
 ######## Main ########
@@ -63,15 +63,15 @@ site_tree:
   # 主页配置
   home:
     leftbar: welcome, recent
-    rightbar: 
+    rightbar:
   # 博客列表页配置
   index_blog:
     base_dir: blog # 只影响自动生成的页面路径
     menu_id: post # 未在 front-matter 中指定 menu_id 时，layout 为 post 的页面默认使用这里配置的 menu_id
     leftbar: welcome, recent # for categories/tags/archives
-    rightbar: 
+    rightbar:
     nav_tabs:  # 近期发布 分类 标签 专栏 归档 and ...
-      # '朋友文章': /friends/rss/
+    # '朋友文章': /friends/rss/
   # 博客专栏列表页配置
   index_topic:
     base_dir: topic # 只影响自动生成的页面路径
@@ -81,9 +81,9 @@ site_tree:
     base_dir: wiki # 只影响自动生成的页面路径
     menu_id: wiki # 未在 front-matter 中指定 menu_id 时，layout 为 wiki 的页面默认使用这里配置的 menu_id
     leftbar: related, recent # for wiki
-    rightbar: 
+    rightbar:
     nav_tabs:
-      # 'more': https://github.com/xaoxuu
+    # 'more': https://github.com/xaoxuu
   # -- 内容类页面 -- #
   # 博客文章内页配置
   post:
@@ -122,7 +122,7 @@ site_tree:
     leftbar: tagtree, recent # recent of current notebook
     rightbar: toc
   # 作者信息配置
-  author: 
+  author:
     base_dir: author # 只影响自动生成的页面路径
     menu_id: post
     leftbar: recent, timeline
@@ -184,7 +184,7 @@ article:
   # 文章许可协议
   license: # '本文采用 [署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议，转载请注明出处。'
   # 分享
-  share: [wechat, weibo, email, link]
+  share: [ wechat, weibo, email, link ]
   # 相关文章，需要安装插件 (for layout: post)
   # npm i hexo-related-popular-posts
   related_posts:
@@ -198,9 +198,9 @@ search:
     path: /search.json # 搜索文件存放位置
     content: true # 是否搜索内容
   algolia_search: # Docsearch https://docsearch.algolia.com/apply/ 申请
-    appId: 
-    apiKey: 
-    indexName: 
+    appId:
+    apiKey:
+    indexName:
 
 
 ######## Comments ########
@@ -265,17 +265,17 @@ comments:
     commentCount: true
     # Pageviews count, Note: You should not enable both `waline.pageview` and `leancloud_visitors`.
     pageview: false
-    # Custom emoji
-    # emoji:
-    #   - https://unpkg.com/@waline/emojis@1.1.0/weibo
-    #   - https://unpkg.com/@waline/emojis@1.1.0/alus
-    #   - https://unpkg.com/@waline/emojis@1.1.0/bilibili
-    #   - https://unpkg.com/@waline/emojis@1.1.0/qq
-    #   - https://unpkg.com/@waline/emojis@1.1.0/tieba
-    #   - https://unpkg.com/@waline/emojis@1.1.0/tw-emoji
-    #   - https://unpkg.com/@waline/emojis@1.1.0/bmoji
-    # 设置自己的图床服务，替换默认的 Base 64 编码嵌入（有体积大小限制），在评论中上传图片更加方便
-    # imageUploader:
+      # Custom emoji
+      # emoji:
+      #   - https://unpkg.com/@waline/emojis@1.1.0/weibo
+      #   - https://unpkg.com/@waline/emojis@1.1.0/alus
+      #   - https://unpkg.com/@waline/emojis@1.1.0/bilibili
+      #   - https://unpkg.com/@waline/emojis@1.1.0/qq
+      #   - https://unpkg.com/@waline/emojis@1.1.0/tieba
+      #   - https://unpkg.com/@waline/emojis@1.1.0/tw-emoji
+      #   - https://unpkg.com/@waline/emojis@1.1.0/bmoji
+      # 设置自己的图床服务，替换默认的 Base 64 编码嵌入（有体积大小限制），在评论中上传图片更加方便
+      # imageUploader:
       # 适配了兰空图床V1、V2版本
       # 以兰空图床V1为例，下列填写内容为：
       # fileName: file
@@ -288,7 +288,7 @@ comments:
       # tokenName: token
       # api: https://xxxxxx/api/upload
       # token: xxxxxxxxxxxxxx
-      # resp: data.url
+    # resp: data.url
     #   fileName: # 根据版本二选一
     #   tokenName: # 根据版本二选一
     #   api: # 图床 api 地址
@@ -308,9 +308,9 @@ comments:
 ######## Footer ########
 footer:
   social:
-     github:
-       icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/>'
-       url: https://github.com/3546514206
+    github:
+      icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/>'
+      url: https://github.com/3546514206
     # music:
     #   icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/>'
     #   url: /
@@ -324,19 +324,19 @@ footer:
     #   icon: default:theme
     #   onclick: 'switchTheme()'
   sitemap:
-    # '博客':
-    #   - '[近期](/)'
-    #   - '[分类](/)'
-    #   - '[标签](/)'
-    #   - '[归档](/)'
-    # '项目':
-    #   - '[开源库](/)'
-    # '社交':
-    #   - '[友链](/)'
-    #   - '[留言板](/)'
-    # '更多':
-    #   - '[关于本站](/)'
-    #   - '[GitHub](/)'
+  # '博客':
+  #   - '[近期](/)'
+  #   - '[分类](/)'
+  #   - '[标签](/)'
+  #   - '[归档](/)'
+  # '项目':
+  #   - '[开源库](/)'
+  # '社交':
+  #   - '[友链](/)'
+  #   - '[留言板](/)'
+  # '更多':
+  #   - '[关于本站](/)'
+  #   - '[GitHub](/)'
   content: | # 支持 Markdown 格式
     访问我的[GitHub.COM](https://creativecommons.org/licenses/by-nc-sa/4.0/) 仓库，欢迎 Star。
 
@@ -396,7 +396,7 @@ tag_plugins:
       in_track:
         color: blue # red, orange, yellow, green, cyan, blue, purple
         label: 正常
-      at_risk: 
+      at_risk:
         color: yellow
         label: 风险
       off_track:
@@ -432,7 +432,7 @@ data_services:
     js: /js/services/siteinfo.js
     # 设置 api 可以自动提取网页标题、图标，服务部署方法：https://github.com/xaoxuu/site-info-api/
     # 接口测试通过后，把按钮的 href 部分替换成 {href} 之后填写到下方，例如：https://api.vlts.cc/site_info/v1?url={href}
-    api: 
+    api:
   ghinfo:
     js: /js/services/ghinfo.js
   # 网格布局类
@@ -503,7 +503,7 @@ plugins:
   
   # AI 摘要
   # https://github.com/qxchuckle/Post-Summary-AI
-  tianli_gpt: 
+  tianli_gpt:
     enable: true
     js: https://jsd.onmicrosoft.cn/gh/qxchuckle/Post-Summary-AI@6.0/chuckle-post-ai.min.js
     field: post # all, post, wiki
@@ -518,7 +518,7 @@ plugins:
       name: AI摘要
       introduce: '我是文章辅助AI: QX-AI，点击下方的按钮，让我生成本文简介、推荐相关文章等。'
       version: TianliGPT
-      button: ["介绍自己", "推荐文章", "生成摘要", "矩阵穿梭"]
+      button: [ "介绍自己", "推荐文章", "生成摘要", "矩阵穿梭" ]
 
 
   # Katex - The fastest math typesetting library for the web

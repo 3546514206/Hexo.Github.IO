@@ -4,6 +4,7 @@ details.toc
   border-radius: $border-card
   overflow: hidden
   color: var(--text-p2)
+
   summary
     cursor: pointer
     padding: 0 .5rem
@@ -11,25 +12,29 @@ details.toc
     color: var(--text-p2)
     font-size: $fs-13
     font-weight: 500
+
     &:hover
       background: var(--block-hover)
 
-  >div.body
+  > div.body
     margin: var(--gap-p) 1rem 1rem
 
-details.toc[open] >summary
+details.toc[open] > summary
   border-bottom: 1px solid transparent
+
   &:hover
     border-bottom-color: var(--block-border)
 
-details.toc[open] >div.body
-  section+section
+details.toc[open] > div.body
+  section + section
     margin-top: 1rem
+
   section
     .header
       line-height: 2
       font-weight: 500
-    .header+.doc_tree
+
+    .header + .doc_tree
       margin-top: 0
 
 

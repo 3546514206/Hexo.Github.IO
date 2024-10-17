@@ -1,10 +1,12 @@
 .page-footer
   margin: 4rem 1rem 3rem
   color: var(--text-p2)
+
   a
     color: var(--text-p2)
     border-radius: 4px
     transition: background 0.2s ease-out
+
     &:hover
       color: var(--text)
       background: var(--block-hover)
@@ -25,11 +27,13 @@
   display: flex
   flex-direction: column
   align-items: flex-start
-  >span,>a
+
+  > span, > a
     text-decoration: none
     txt-ellipsis()
     padding: 4px
-  >span
+
+  > span
     font-weight: 500
     color: var(--text-p1)
     margin: 4px 0
@@ -39,5 +43,6 @@
   p
     margin: 4px 0
     line-height: 1.5
+
   a:not([class])
     font-weight: 500

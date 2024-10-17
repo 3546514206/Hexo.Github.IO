@@ -2,9 +2,11 @@
 .article
   padding 5rem 0 3rem
   font-size 110%
+
   .sea-center
     text-align center
     color black
+
     &::after
       border-bottom: 2px dashed water;
       content: '';
@@ -12,6 +14,7 @@
       display: block;
       margin: .2em auto 0;
       height: 2px
+
 //.article-inner
 //  overflow hidden
 
@@ -43,11 +46,13 @@
 .article-category
   display inline-block
   margin-left 1.5rem
+
   &:before
     content "\efde"
     font-family remixicon
     margin-right .15rem
     opacity 0.6
+
   .article-category-link
     @extend $block-caption
 
@@ -62,16 +67,20 @@
   clearfix()
   @extend $base-style
   color body-color
+
   .pullquote
     text-align left
     width 45%
     margin 0
+
     &.left
       margin-left 0.5em
       margin-right 1em
+
     &.right
       margin-right 0.5em
       margin-left 1em
+
   .caption
     color froth
     display block
@@ -79,12 +88,15 @@
     margin-top 0.5em
     position relative
     text-align center
+
   // http://webdesignerwall.com/tutorials/css-elastic-videos
+
   .video-container
     position relative
     padding-top (9 / 16 * 100) % // 16:9 ratio
     height 0
     overflow hidden
+
     iframe, object, embed
       position absolute
       top 0
@@ -95,8 +107,10 @@
 
 .article-header
   position relative
+
   h1, h2
     margin 0
+
   .article-title
     display block
     font-size 34px
@@ -105,7 +119,8 @@
     text-decoration none
     color body-color
     padding-left 2rem
-    border-left 4px solid body-color 
+    border-left 4px solid body-color
+
   .article-author
     display block
     font-size 20px
@@ -122,8 +137,10 @@
   padding-bottom 1rem
   color #999
   border-bottom 1px solid #f6f6f6
+
   ul
     list-style none
+
     li
       list-style none
 
@@ -131,14 +148,17 @@
 .article-tag-list
   list-unstyled()
   margin 0
+
   &:before
     color: tag-color
     content "\eec3"
     font-family remixicon
     margin-right .5rem
+
   .article-tag-list-item
     display inline-block
     padding-right 1rem
+
   .article-tag-list-link
     font-size: 11px
     text-decoration: none
@@ -154,6 +174,7 @@
 
 .article-comment-link
   float right
+
   &:before
     content "\ee0d"
     font-family remixicon
@@ -163,6 +184,7 @@
   cursor pointer
   float right
   margin-left 20px
+
   &:before
     content "\ef76"
     font-family remixicon
@@ -179,8 +201,10 @@
 .article-nav-link
   display block
   text-decoration none
+
   &:first-child
     float left
+
   &:last-child
     float right
     text-align right
@@ -202,6 +226,7 @@
   margin-left -145px
   overflow hidden
   z-index 1
+
   &.on
     display block
 
@@ -228,10 +253,12 @@ $article-share-link
   color body-color
   text-align center
   text-decoration none
+
   &:before
     font-size 20px
     font-family remixicon
     absolute-center(font-size-base)
+
   &:hover
     color white
 
@@ -239,6 +266,7 @@ $article-share-link
   @extend $article-share-link
   &:before
     content "\f068"
+
   &:hover
     background twitter-color
     text-shadow 0 1px darken(twitter-color, 20%)
@@ -247,6 +275,7 @@ $article-share-link
   @extend $article-share-link
   &:before
     content "\ec30"
+
   &:hover
     background facebook-color
     text-shadow 0 1px darken(facebook-color, 20%)
@@ -255,6 +284,7 @@ $article-share-link
   @extend $article-share-link
   &:before
     content "\eea8"
+
   &:hover
     background pinterest-color
     text-shadow 0 1px darken(pinterest-color, 20%)
@@ -263,6 +293,7 @@ $article-share-link
   @extend $article-share-link
   &:before
     content "\ed15"
+
   &:hover
     background google-color
     text-shadow 0 1px darken(google-color, 20%)

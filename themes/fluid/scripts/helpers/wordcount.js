@@ -2,7 +2,7 @@
 
 'use strict';
 
-const { stripHTML } = require('hexo-util');
+const {stripHTML} = require('hexo-util');
 
 const getWordCount = (post) => {
   // post.origin is the original post content of hexo-blog-encrypt
@@ -25,7 +25,7 @@ const symbolsCount = (count) => {
   return count;
 };
 
-hexo.extend.helper.register('min2read', (post, { awl, wpm }) => {
+hexo.extend.helper.register('min2read', (post, {awl, wpm}) => {
   return Math.floor(getWordCount(post) / ((awl || 2) * (wpm || 60))) + 1;
 });
 

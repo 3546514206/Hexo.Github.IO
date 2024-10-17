@@ -13,4 +13,4 @@ const label = (args) => {
 };
 
 // {% label class @text %}
-hexo.extend.tag.register('label', label, { ends: false });
+hexo.extend.tag.register('label', label, {ends: false});

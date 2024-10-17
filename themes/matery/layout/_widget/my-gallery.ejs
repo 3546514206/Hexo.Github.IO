@@ -8,13 +8,13 @@ var gallery = theme.myGallery.data;
     </div>
     <div class="row">
         <% if (gallery) { %>
-        <% Object.keys(gallery).forEach(function(photo) { %>
-        <div class="photo col s12 m6 l4" data-aos="fade-up">
-            <div class="img-item" data-src="<%- gallery[photo] %>">
-                <img src="<%- theme.jsDelivr.url %><%- url_for(gallery[photo]) %>" class="responsive-img">
-            </div>
-        </div>
-        <% }); %>
+            <% Object.keys(gallery).forEach(function(photo) { %>
+                <div class="photo col s12 m6 l4" data-aos="fade-up">
+                    <div class="img-item" data-src="<%- gallery[photo] %>">
+                        <img src="<%- theme.jsDelivr.url %><%- url_for(gallery[photo]) %>" class="responsive-img">
+                    </div>
+                </div>
+            <% }); %>
         <% } %>
     </div>
 </div>

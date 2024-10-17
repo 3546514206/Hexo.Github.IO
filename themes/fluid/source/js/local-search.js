@@ -1,6 +1,6 @@
 /* global CONFIG */
 
-(function() {
+(function () {
   // Modified from [hexo-generator-search](https://github.com/wzpan/hexo-generator-search)
   function localSearchFunc(path, searchSelector, resultSelector) {
     'use strict';
@@ -23,15 +23,15 @@
 
     jQuery.ajax({
       // 0x01. load xml file
-      url     : path,
+      url: path,
       dataType: 'xml',
-      success : function(xmlResponse) {
+      success: function (xmlResponse) {
         // 0x02. parse xml file
-        var dataList = jQuery('entry', xmlResponse).map(function() {
+        var dataList = jQuery('entry', xmlResponse).map(function () {
           return {
-            title  : jQuery('title', this).text(),
+            title: jQuery('title', this).text(),
             content: jQuery('content', this).text(),
-            url    : jQuery('url', this).text()
+            url: jQuery('url', this).text()
           };
         }).get();
 
@@ -39,7 +39,7 @@
           $result.html('');
         }
 
-        $input.on('input', function() {
+        $input.on('input', function () {
           // 0x03. parse query to keywords list
           var content = $input.val();
           var resultHTML = '';
@@ -49,7 +49,7 @@
             return $input.removeClass('invalid').removeClass('valid');
           }
           // 0x04. perform local searching
-          dataList.forEach(function(data) {
+          dataList.forEach(function (data) {
             var isMatch = true;
             if (!data.title || data.title.trim() === '') {
               data.title = 'Untitled';
@@ -106,7 +106,7 @@
                 var match_content = content.substring(start, end);
 
                 // highlight all keywords
-                keywords.forEach(function(keyword) {
+                keywords.forEach(function (keyword) {
                   var regS = new RegExp(keyword, 'gi');
                   match_content = match_content.replace(regS, '<span class="search-word">' + keyword + '</span>');
                 });
@@ -146,14 +146,14 @@
   var modal = jQuery('#modalSearch');
   var searchSelector = '#local-search-input';
   var resultSelector = '#local-search-result';
-  modal.on('show.bs.modal', function() {
+  modal.on('show.bs.modal', function () {
     var path = CONFIG.search_path || '/local-search.xml';
     localSearchFunc(path, searchSelector, resultSelector);
   });
-  modal.on('shown.bs.modal', function() {
+  modal.on('shown.bs.modal', function () {
     jQuery('#local-search-input').focus();
   });
-  modal.on('hidden.bs.modal', function() {
+  modal.on('hidden.bs.modal', function () {
     localSearchReset(searchSelector, resultSelector);
   });
 })();

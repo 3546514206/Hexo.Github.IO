@@ -36,7 +36,7 @@
       throw new TypeError('Invalid argument expected string');
     }
     if (!semver.test(version)) {
-      throw new Error('Invalid argument not valid semver (\''+version+'\' received)');
+      throw new Error('Invalid argument not valid semver (\'' + version + '\' received)');
     }
   }
 
@@ -100,7 +100,7 @@
     }
   }
 
-  compareVersions.validate = function(version) {
+  compareVersions.validate = function (version) {
     return typeof version === 'string' && semver.test(version);
   }
 

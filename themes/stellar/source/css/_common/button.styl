@@ -12,11 +12,14 @@ a.button
   border-radius: $border-button
   font-size: $fs-15
   user-select: none
+
   &.theme
     background: $color-theme
     color: var(--card)
+
     &:hover
       background: $color-hover
+
   &.start
     border-radius: 100px
     background: var(--text-p1)
@@ -33,7 +36,7 @@ a.button.start.gradient
     background: convert(hexo-config('style.gradient.start'))
     background-size: 1000%
     color: white
-    text-shadow: 0 0 1px rgba(0,0,0,0.12)
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.12)
     animation: glow 60s linear infinite
     @keyframes glow {
       from {
@@ -62,6 +65,7 @@ a.button.start.gradient
 
   :root[data-theme="dark"] &
     ondark()
+
   :root:not([data-theme]) &
     @media (prefers-color-scheme: dark)
       ondark()

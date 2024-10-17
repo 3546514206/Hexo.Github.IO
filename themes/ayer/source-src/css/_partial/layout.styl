@@ -10,6 +10,7 @@
   padding 0
   margin-bottom 3rem
   text-align center
+
   .forkMe
     position absolute
     z-index 999
@@ -29,6 +30,7 @@
   overflow-y scroll
   overflow-x: hidden
   -webkit-overflow-scrolling touch
+
   &.on
     margin-left 0 !important
 
@@ -39,7 +41,8 @@
   bottom 0
   width aside-width
   height 100%
-  background-color rgba(0,0,0,.8)
+  background-color rgba(0, 0, 0, .8)
+
   &.on
     left 0
 
@@ -55,8 +58,10 @@
   color white
   transition(transition-base)
   opacity .5
+
   &:hover
     opacity 1
+
   &::before
     content '\ee09'
     font-family remixicon
@@ -68,7 +73,7 @@
   padding-right gutter-width
   padding-left gutter-width
   margin auto
-  min-height calc( 100% - 157px )
+  min-height calc(100% - 157px)
   clearfix()
 
 .local-search
@@ -88,9 +93,10 @@
     width wrap-width
     padding-right 0
     padding-left 0
+
   .local-search
     width wrap-width
-  
+
   .content
     &.on
       transform: none
@@ -99,10 +105,13 @@
   .cover
     .forkMe
       display none
+
   .content
     &.on
       margin-left -1px !important
+
   .sidebar
     background-color body-color
+
   .navbar-toggle
     transform: scale(1.1)

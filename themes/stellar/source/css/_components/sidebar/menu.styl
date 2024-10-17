@@ -4,13 +4,16 @@
   margin: 8px 0
   grid-template-columns: repeat(hexo-config('menubar.columns'), 1fr)
   grid-gap: 8px
+
   &::-webkit-scrollbar
     display: none
+
   &::-webkit-scrollbar-track-piece
     background: transparent
+
   &::-webkit-scrollbar-thumb
     display: none
-  
+
   .nav-item
     box-sizing: border-box
     width: 100%
@@ -27,19 +30,24 @@
     flex-direction: column
     align-items: center
     justify-content: center
-    img,svg
+
+    img, svg
       height: 28px
       object-fit: contain
       filter: grayscale(100%) brightness(0.8) opacity(0.8)
       trans1 all
+
     span
       text-overflow: ellipsis
       word-break: keep-all
+
     &.active, &:hover
       color: var(--text-p1)
       background: var(--alpha100)
-      img,svg
+
+      img, svg
         filter: unset
+
     &.active:after
       content: ''
       position absolute

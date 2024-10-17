@@ -2,7 +2,7 @@
 
 const pagination = require('hexo-pagination');
 
-module.exports = function(locals) {
+module.exports = function (locals) {
   const config = this.config;
   const posts = locals.index_posts.sort(config.index_generator.order_by);
 

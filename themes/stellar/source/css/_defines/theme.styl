@@ -1,6 +1,7 @@
 // Deprecated function. Keep for compatibility.
 theme($t)
-  convert(hexo-config('style.prefers_theme')) == $t
+  convert(hexo-config('style.prefers_theme'))
+  == $t
 
 $color-background-h = hue($color-background)
 $color-background-s = saturation($color-background)
@@ -76,8 +77,10 @@ _common_root()
 
 :root[data-theme="light"]
   _light_root()
+
 :root[data-theme="dark"]
   _dark_root()
+
 :root:not([data-theme])
   _light_root()
   @media (prefers-color-scheme: dark)

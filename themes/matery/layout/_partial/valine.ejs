@@ -235,7 +235,8 @@
 </style>
 
 <div class="card valine-card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+    <div class="comment_headling"
+         style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
@@ -255,7 +256,7 @@
         visitor: '<%- theme.valine.visitor %>' === 'true',
         avatar: '<%- theme.valine.avatar %>',
         pageSize: '<%- theme.valine.pageSize %>',
-        lang: '<% if (config.language == "zh-CN") {  %>zh-cn<% } else { %>en<% } %>',
+        lang: '<% if (config.language == "zh-CN") { %>zh-cn<% } else { %>en<% } %>',
         placeholder: '<%= theme.valine.placeholder %>'
     });
 </script>

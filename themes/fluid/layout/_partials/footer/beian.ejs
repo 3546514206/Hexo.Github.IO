@@ -4,30 +4,30 @@
       <%- theme.footer.beian.icp_text %>
     </a>
   </span>
-  <% if(theme.footer.beian.police_text) { %>
-    <% if(theme.footer.beian.police_code) { %>
-      <span>
+    <% if(theme.footer.beian.police_text) { %>
+        <% if(theme.footer.beian.police_code) { %>
+            <span>
         <a
-          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=<%= theme.footer.beian.police_code %>"
-          rel="nofollow noopener"
-          class="beian-police"
-          target="_blank"
+                href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=<%= theme.footer.beian.police_code %>"
+                rel="nofollow noopener"
+                class="beian-police"
+                target="_blank"
         >
-          <% if(theme.footer.beian.police_icon) { %>
-            <span style="visibility: hidden; width: 0">|</span>
-            <img src="<%= url_for(theme.footer.beian.police_icon) %>" alt="police-icon"/>
-          <% } %>
-          <span><%- theme.footer.beian.police_text %></span>
+            <% if(theme.footer.beian.police_icon) { %>
+                <span style="visibility: hidden; width: 0">|</span>
+                <img src="<%= url_for(theme.footer.beian.police_icon) %>" alt="police-icon"/>
+            <% } %>
+            <span><%- theme.footer.beian.police_text %></span>
         </a>
       </span>
-    <% } else { %>
-      <span class="beian-police">
-        <% if(theme.footer.beian.police_icon) { %>
-          <span style="visibility: hidden; width: 0">|</span>
-          <img src="<%= url_for(theme.footer.beian.police_icon) %>" alt="police-icon"/>
-        <% } %>
-        <span class="beian-police"><%- theme.footer.beian.police_text %></span>
+        <% } else { %>
+            <span class="beian-police">
+                <% if(theme.footer.beian.police_icon) { %>
+                    <span style="visibility: hidden; width: 0">|</span>
+                    <img src="<%= url_for(theme.footer.beian.police_icon) %>" alt="police-icon"/>
+                <% } %>
+                <span class="beian-police"><%- theme.footer.beian.police_text %></span>
       </span>
+        <% } %>
     <% } %>
-  <% } %>
 </div>

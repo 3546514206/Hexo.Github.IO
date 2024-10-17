@@ -27,8 +27,10 @@
   trans1: all
   ondark()
     --blur-bg: alpha(#000, .4)
+
   :root[data-theme="dark"] &
     ondark()
+
   :root:not([data-theme]) &
     @media (prefers-color-scheme: dark)
       ondark()
@@ -43,7 +45,8 @@
   font-size: 28px
   margin: 0
   display: flex
-  >*
+
+  > *
     path#sep
       trans1 transform
     width: auto
@@ -59,15 +62,17 @@
 .l_body[leftbar] .float-panel button.leftbar-toggle
   color: $color-theme
   border-color: var(--block-border)
+
   svg g
     fill: currentColor
     fill-opacity: 0.3
+
     path#sep
       transform: translateX(2px)
 
 
 // 侧边栏有内容时才显示弹出按钮
-.l_body .l_right:empty+.float-panel button.rightbar-toggle
+.l_body .l_right:empty + .float-panel button.rightbar-toggle
   display: none !important
 
 .l_body[rightbar] .float-panel button.rightbar-toggle
@@ -76,9 +81,11 @@
 .l_body[rightbar] .float-panel button.rightbar-toggle
   color: $color-theme
   border-color: var(--block-border)
+
   svg g
     fill: currentColor
     fill-opacity: 0.3
+
     path#sep
       transform: translateX(2px)
 

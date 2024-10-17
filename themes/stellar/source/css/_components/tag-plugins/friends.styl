@@ -17,12 +17,14 @@
     overflow: hidden
     position: relative
     padding: 1rem 0.5rem
+
     .name
       max-width: 100%
       display: -webkit-box
       -webkit-box-orient: vertical
       overflow: hidden
       -webkit-line-clamp: 2
+
     img
       object-fit: cover
       display: block
@@ -34,10 +36,12 @@
 
 // transform
 .users-wrap .user-card .card-link
-  >img
+  > img
     floatable-trans()
+
   &:hover
     background: var(--block-hover)
+
     img
       transform: scale(1.2) rotate(8deg)
       box-shadow: $boxshadow-card-float

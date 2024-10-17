@@ -4,10 +4,10 @@
 
 const note = (args, content) => {
   if (!args || !args[0] || args[0].toLowerCase() === "default") {
-    args = [ hexo.theme.config.post.updated.note_class || "info"];
+    args = [hexo.theme.config.post.updated.note_class || "info"];
   }
   return `<div class="note note-${args.join(' ')}">
-            ${hexo.render.renderSync({ text: content, engine: 'markdown' }).split('\n').join('')}
+            ${hexo.render.renderSync({text: content, engine: 'markdown'}).split('\n').join('')}
           </div>`;
 };
 
@@ -16,4 +16,4 @@ const note = (args, content) => {
   text
   {% endnote %}
  */
-hexo.extend.tag.register('note', note, { ends: true });
+hexo.extend.tag.register('note', note, {ends: true});

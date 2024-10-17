@@ -4,6 +4,7 @@ set_text_white()
   --text-p2: hsl(0 0 88%)
   --text-p3: #ddd
   --text-code: white
+
 set_text_black()
   --text: black
   --text-p1: #111
@@ -28,22 +29,31 @@ set_dynamic_color($theme)
 
 .colorful[color='red']
   set_dynamic_color($c-red)
+
 .colorful[color='orange']
   set_dynamic_color($c-orange)
+
 .colorful[color='amber']
   set_dynamic_color($c-amber)
+
 .colorful[color='yellow']
   set_dynamic_color($c-yellow)
+
 .colorful[color='green']
   set_dynamic_color($c-green)
+
 .colorful[color='cyan']
   set_dynamic_color($c-cyan)
+
 .colorful[color='blue']
   set_dynamic_color($c-blue)
+
 .colorful[color='purple']
   set_dynamic_color($c-purple)
+
 .colorful[color='theme']
   set_dynamic_color($color-theme)
+
 .colorful[color='accent']
   set_dynamic_color($color-accent)
 
@@ -105,12 +115,13 @@ _dark_tags()
     --theme-block: #111
     set_text_white()
 
-  .colorful[color='warning'],.colorful[color='light']
+  .colorful[color='warning'], .colorful[color='light']
     set_text_black()
 
 
 :root[data-theme="dark"]
   _dark_tags()
+
 :root:not([data-theme])
   @media (prefers-color-scheme: dark)
     _dark_tags()

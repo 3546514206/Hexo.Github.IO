@@ -6,11 +6,12 @@
   if hexo-config('style.site') && hexo-config('style.site.background-image')
     position inherit
     background: none
-  else 
+  else
     position: sticky
     position: -webkit-sticky
     margin-bottom: 1px
     margin-top: -8px
+
   &:after
     content: ''
     height: 2px
@@ -26,8 +27,10 @@
   overflow: scroll visible
   scrollbar(0, 0)
   font-size: $fs-14
-  >p
+
+  > p
     margin: 0
+
   a
     padding: 2px 0.75rem
     if hexo-config('style.site') && hexo-config('style.site.background-image')
@@ -41,6 +44,7 @@
     white-space: nowrap
     position: relative
     z-index: 1
+
     &:after
       height: 2px
       position: absolute
@@ -50,18 +54,23 @@
       background: $color-theme
       border-radius: 2px
       pointer-events: none
+
     &:hover
       background: var(--block-hover)
+
     &.active, &:hover
       color: var(--text-p1)
+
     &.active
       background: var(--card)
       box-shadow: $boxshadow-button
       cursor default
       pointer-events: none
+
     &.active:after
       content: ''
-  a+a
+
+  a + a
     margin-left: 4px
 
 @media screen and (max-width: $device-mobile-max)
@@ -69,8 +78,10 @@
     margin-top: 0
     padding-left: 0
     padding-right: 0
+
     nav
       a:first-child
         margin-left: 1rem
+
       a:last-child
         margin-right: 1rem

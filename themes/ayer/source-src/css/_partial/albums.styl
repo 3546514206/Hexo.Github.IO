@@ -8,19 +8,23 @@
   flex-wrap wrap
   list-unstyled()
   clearfix()
+
   &::after
     content: ''
     flex-grow 999999999
+
   .article-albums-item
     position relative
     flex-grow 1
     margin .5rem
     overflow hidden
+
     img
       object-fit cover
       max-width 100%
       min-width 100%
       vertical-align: center
+
     .article-albums-caption
       display block
       width 100%
@@ -32,6 +36,7 @@
   .article-albums-item
     img
       height 32rem
+
     .article-albums-caption
       position absolute
       bottom 0
@@ -44,6 +49,7 @@
       opacity 0
       transform translateY(100%)
       transition(transition-base)
+
     &:hover
       .article-albums-caption
         opacity 1

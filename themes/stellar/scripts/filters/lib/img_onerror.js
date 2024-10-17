@@ -7,18 +7,18 @@
 
 const fs = require('hexo-fs');
 
-module.exports.processSite = function(htmlContent) {
-  const default_image = this.theme.config.default.image;
-  return htmlContent.replace(/<img(.*?)src="(.*?)"(.*?)>/gi, function(imgTag) {
-    if (/="data:image(.*?)/gi.test(imgTag)) {
-      return imgTag;
-    }
-    if (/onerror/gi.test(imgTag)) {
-      return imgTag;
-    }
-    if (imgTag.includes(' no-lazy ') == false) {
-      return imgTag;
-    }
-    return imgTag.slice(0,imgTag.length-1) + ' onerror="javascript:this.classList.add(\'error\');this.src=\'' + default_image + '\';"' + imgTag.slice(imgTag.length-1);
-  });
+module.exports.processSite = function (htmlContent) {
+    const default_image = this.theme.config.default.image;
+    return htmlContent.replace(/<img(.*?)src="(.*?)"(.*?)>/gi, function (imgTag) {
+        if (/="data:image(.*?)/gi.test(imgTag)) {
+            return imgTag;
+        }
+        if (/onerror/gi.test(imgTag)) {
+            return imgTag;
+        }
+        if (imgTag.includes(' no-lazy ') == false) {
+            return imgTag;
+        }
+        return imgTag.slice(0, imgTag.length - 1) + ' onerror="javascript:this.classList.add(\'error\');this.src=\'' + default_image + '\';"' + imgTag.slice(imgTag.length - 1);
+    });
 };

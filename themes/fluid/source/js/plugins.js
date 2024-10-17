@@ -1,6 +1,6 @@
 /* global Fluid, CONFIG */
 
-HTMLElement.prototype.wrap = function(wrapper) {
+HTMLElement.prototype.wrap = function (wrapper) {
   this.parentNode.insertBefore(wrapper, this);
   this.parentNode.removeChild(this);
   wrapper.appendChild(this);
@@ -8,8 +8,10 @@ HTMLElement.prototype.wrap = function(wrapper) {
 
 Fluid.plugins = {
 
-  typing: function(text) {
-    if (!('Typed' in window)) { return; }
+  typing: function (text) {
+    if (!('Typed' in window)) {
+      return;
+    }
 
     var typed = new window.Typed('#subtitle', {
       strings: [
@@ -17,23 +19,25 @@ Fluid.plugins = {
         text
       ],
       cursorChar: CONFIG.typing.cursorChar,
-      typeSpeed : CONFIG.typing.typeSpeed,
-      loop      : CONFIG.typing.loop
+      typeSpeed: CONFIG.typing.typeSpeed,
+      loop: CONFIG.typing.loop
     });
     typed.stop();
     var subtitle = document.getElementById('subtitle');
     if (subtitle) {
       subtitle.innerText = '';
     }
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
       typed.start();
     });
   },
 
-  fancyBox: function(selector) {
-    if (!CONFIG.image_zoom.enable || !('fancybox' in jQuery)) { return; }
+  fancyBox: function (selector) {
+    if (!CONFIG.image_zoom.enable || !('fancybox' in jQuery)) {
+      return;
+    }
 
-    jQuery(selector || '.markdown-body :not(a) > img, .markdown-body > img').each(function() {
+    jQuery(selector || '.markdown-body :not(a) > img, .markdown-body > img').each(function () {
       var $image = jQuery(this);
       var imageUrl = $image.attr('data-src') || $image.attr('src') || '';
       if (CONFIG.image_zoom.img_url_replace) {
@@ -70,7 +74,7 @@ Fluid.plugins = {
 
     jQuery.fancybox.defaults.hash = false;
     jQuery('.fancybox').fancybox({
-      loop   : true,
+      loop: true,
       helpers: {
         overlay: {
           locked: false
@@ -79,11 +83,13 @@ Fluid.plugins = {
     });
   },
 
-  imageCaption: function(selector) {
-    if (!CONFIG.image_caption.enable) { return; }
+  imageCaption: function (selector) {
+    if (!CONFIG.image_caption.enable) {
+      return;
+    }
 
     jQuery(selector || `.markdown-body > p > img, .markdown-body > figure > img,
-      .markdown-body > p > a.fancybox, .markdown-body > figure > a.fancybox`).each(function() {
+      .markdown-body > p > a.fancybox, .markdown-body > figure > a.fancybox`).each(function () {
       var $target = jQuery(this);
       var $figcaption = $target.next('figcaption');
       if ($figcaption.length !== 0) {
@@ -112,7 +118,7 @@ Fluid.plugins = {
     copyTmpl += '<div class="code-widget">';
     copyTmpl += 'LANG';
     copyTmpl += '</div>';
-    jQuery('.markdown-body pre').each(function() {
+    jQuery('.markdown-body pre').each(function () {
       var $pre = jQuery(this);
       if ($pre.find('code.mermaid').length > 0) {
         return;
@@ -142,7 +148,7 @@ Fluid.plugins = {
 
       if (enableCopy) {
         var clipboard = new ClipboardJS('.copy-btn', {
-          target: function(trigger) {
+          target: function (trigger) {
             var nodes = trigger.parentNode.childNodes;
             for (var i = 0; i < nodes.length; i++) {
               if (nodes[i].tagName === 'CODE') {
@@ -151,10 +157,10 @@ Fluid.plugins = {
             }
           }
         });
-        clipboard.on('success', function(e) {
+        clipboard.on('success', function (e) {
           e.clearSelection();
           e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
-          setTimeout(function() {
+          setTimeout(function () {
             e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
           }, 2000);
         });

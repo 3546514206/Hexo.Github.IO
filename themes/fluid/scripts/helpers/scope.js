@@ -31,7 +31,7 @@ const pageInScope = (page, scope) => {
   }
 };
 
-hexo.extend.helper.register('in_scope', function(scope) {
+hexo.extend.helper.register('in_scope', function (scope) {
   if (!scope || scope.length === 0) {
     return true;
   }

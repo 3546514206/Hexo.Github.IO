@@ -6,8 +6,10 @@
   display: flex
   flex-direction: column
   align-items: center
-  img,video
+
+  img, video
     border-radius: 0
+
 .md-text .frame-wrap .frame
   z-index: 1
   display: block
@@ -22,34 +24,40 @@
 
 .md-text .frame-wrap
   &#iphone11
-    img,video
+    img, video
       width: 287px
       margin-top: 19px
       margin-bottom: 20px
+
     .frame
       background-image: url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/frame/iphone11.svg);
       width: 329px
       height: 658px
+
   &[focus='top']
-    img,video
+    img, video
       margin-bottom: 0 !important
+
   &:not([focus='bottom'])
     .frame
       top: 0
+
   &[focus='bottom']
-    img,video
+    img, video
       bottom: 0
       margin-top: 0 !important
+
     .frame
       bottom: 0
 
 @media screen and (max-width: $device-mobile)
   .md-text .frame-wrap
     &#iphone11
-      img,video
+      img, video
         width: 208px
         margin-top: 13px
         margin-bottom: 14px
+
       .frame
         width: 238px
         height: 476px

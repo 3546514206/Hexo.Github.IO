@@ -1,8 +1,10 @@
 
 .widget-wrapper.post-card .widget-body
   max-width: 100%
-  .item+.item
+
+  .item + .item
     margin-top: 8px
+
   .item
     line-height: 1.2
     background: var(--alpha20)
@@ -11,6 +13,7 @@
     display: block
     border-left: 0
     box-sizing: border-box
+
   .title
     color: var(--text-p1)
     font-weight: 500
@@ -21,6 +24,7 @@
     -webkit-line-clamp: 1
     font-weight: 700
     font-size: $fs-14
+
   .excerpt
     color: var(--text-p3)
     font-size: $fs-12
@@ -29,10 +33,12 @@
     -webkit-box-orient: vertical
     overflow: hidden
     -webkit-line-clamp: 2
-  
+
   .item
     trans1 background
+
   .item.active
     background: var(--alpha50)
+
   .item:hover
     background: var(--alpha50)

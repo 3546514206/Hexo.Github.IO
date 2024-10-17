@@ -5,6 +5,7 @@ details.folding
   border-radius: $border-card
   background: var(--theme-block)
   border: 1px solid var(--theme-border)
+
   summary
     cursor: pointer
     padding: 1rem
@@ -16,14 +17,18 @@ details.folding
     position: relative
     line-height: 1.2
     outline: none
+
     >
-      span 
-        margin-left: 0.25em
-      p,h1,h2,h3,h4,h5,h6
-        display: inline
-        border-bottom: none !important
+    span
+      margin-left: 0.25em
+
+    p, h1, h2, h3, h4, h5, h6
+      display: inline
+      border-bottom: none !important
+
     &:hover
       color: var(--text)
+
     &:after
       position: absolute
       content: '+'
@@ -35,38 +40,47 @@ details.folding
 
 
 details.folding[open]
-  >summary
+  > summary
     color: var(--text-p1)
     font-weight: 700
     z-index 1
+
     &:after
       content: '-'
-  >div.body
+
+  > div.body
     padding: 0 1rem 1rem
     margin: 0 -1rem -1rem
     color: var(--text-p1)
     --fsp: $fsp1
-    >:first-child
+
+    > :first-child
       margin-top: 1rem
-    >:last-child
+
+    > :last-child
       margin-bottom: 0
 
-details.folding[child=codeblock]>div.body
+details.folding[child=codeblock] > div.body
   padding: 0
   background: transparent
   overflow: hidden
+
   .highlight
     border: none
     border-radius: 0
     background: transparent
     margin: 0
+
     figcaption
       display: none
+
       span
         background: var(--theme-block)
+
     .code:before
       content: none
-  .highlight+.highlight
+
+  .highlight + .highlight
     border-top: 1px dashed var(--theme-border)
     border-top-left-radius: 0
     border-top-right-radius: 0
@@ -74,9 +88,11 @@ details.folding[child=codeblock]>div.body
 details.folding[child=iframe]
   overflow: hidden
   background: none
-  >summary
+
+  > summary
     background: none
-  >div.body
+
+  > div.body
     padding: 0
     background: none
     overflow: hidden

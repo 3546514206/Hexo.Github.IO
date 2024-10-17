@@ -3,7 +3,7 @@
 /**
  * Modified from https://blog.skk.moe/post/hello-darkmode-my-old-friend/
  */
-(function(window, document) {
+(function (window, document) {
   var rootElement = document.documentElement;
   var colorSchemaStorageKey = 'Fluid_Color_Scheme';
   var colorSchemaMediaQueryKey = '--color-mode';
@@ -16,13 +16,15 @@
   function setLS(k, v) {
     try {
       localStorage.setItem(k, v);
-    } catch (e) {}
+    } catch (e) {
+    }
   }
 
   function removeLS(k) {
     try {
       localStorage.removeItem(k);
-    } catch (e) {}
+    } catch (e) {
+    }
   }
 
   function getLS(k) {
@@ -57,7 +59,7 @@
   }
 
   var validColorSchemaKeys = {
-    dark : true,
+    dark: true,
     light: true
   };
 
@@ -110,7 +112,7 @@
   }
 
   var invertColorSchemaObj = {
-    dark : 'light',
+    dark: 'light',
     light: 'dark'
   };
 
@@ -163,7 +165,7 @@
         );
       } else {
         // 如果图标不存在则说明图标还没加载出来，等到页面全部加载再尝试切换
-        Fluid.utils.waitElementLoaded(colorToggleIconSelector, function() {
+        Fluid.utils.waitElementLoaded(colorToggleIconSelector, function () {
           var iconElement = document.querySelector(colorToggleIconSelector);
           if (iconElement) {
             iconElement.setAttribute(
@@ -204,7 +206,7 @@
       }
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
       // 设置代码块组件样式
       document.querySelectorAll('.markdown-body pre').forEach((pre) => {
         var cls = Fluid.utils.getBackgroundLightness(pre) >= 0 ? 'code-widget-light' : 'code-widget-dark';
@@ -233,7 +235,7 @@
     if (utterances) {
       var utterancesTheme = schema === 'dark' ? window.UtterancesThemeDark : window.UtterancesThemeLight;
       const message = {
-        type : 'set-theme',
+        type: 'set-theme',
         theme: utterancesTheme
       };
       utterances.contentWindow.postMessage(message, 'https://utteranc.es');
@@ -249,29 +251,29 @@
         }
       };
       // giscus.style.cssText += 'color-scheme: normal;';
-      giscus.contentWindow.postMessage({ 'giscus': message }, 'https://giscus.app');
+      giscus.contentWindow.postMessage({'giscus': message}, 'https://giscus.app');
     }
   }
 
   // 当页面加载时，将显示模式设置为 localStorage 中自定义的值（如果有的话）
   applyCustomColorSchemaSettings();
 
-  Fluid.utils.waitElementLoaded(colorToggleIconSelector, function() {
+  Fluid.utils.waitElementLoaded(colorToggleIconSelector, function () {
     applyCustomColorSchemaSettings();
     var button = document.querySelector(colorToggleButtonSelector);
     if (button) {
       // 当用户点击切换按钮时，获得新的显示模式、写入 localStorage、并在页面上生效
-      button.addEventListener('click', function() {
+      button.addEventListener('click', function () {
         applyCustomColorSchemaSettings(toggleCustomColorSchema());
       });
       var icon = document.querySelector(colorToggleIconSelector);
       if (icon) {
         // 光标悬停在按钮上时，切换图标
-        button.addEventListener('mouseenter', function() {
+        button.addEventListener('mouseenter', function () {
           var current = icon.getAttribute('data');
           icon.classList.replace(getIconClass(invertColorSchemaObj[current]), getIconClass(current));
         });
-        button.addEventListener('mouseleave', function() {
+        button.addEventListener('mouseleave', function () {
           var current = icon.getAttribute('data');
           icon.classList.replace(getIconClass(current), getIconClass(invertColorSchemaObj[current]));
         });
@@ -279,8 +281,8 @@
     }
   });
 
-  Fluid.utils.waitElementLoaded(iframeSelector, function() {
+  Fluid.utils.waitElementLoaded(iframeSelector, function () {
     applyCustomColorSchemaSettings();
   });
-  
+
 })(window, document);

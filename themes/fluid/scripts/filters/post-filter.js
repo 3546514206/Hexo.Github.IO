@@ -3,7 +3,7 @@
 'use strict';
 
 // 生成前过滤文章
-hexo.extend.filter.register('before_generate', function() {
+hexo.extend.filter.register('before_generate', function () {
   this._bindLocals();
 
   const allPages = this.locals.get('pages');
@@ -36,7 +36,7 @@ hexo.extend.filter.register('before_generate', function() {
 
 const original_post_generator = hexo.extend.generator.get('post');
 
-hexo.extend.generator.register('post', function(locals) {
+hexo.extend.generator.register('post', function (locals) {
   // 发送时需要把过滤的页面也加入
   return original_post_generator.bind(this)({
     posts: new locals.posts.constructor(

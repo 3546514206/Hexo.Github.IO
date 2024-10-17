@@ -33,7 +33,10 @@
 
 ---
 
-:ocean: Ayer is a clean and elegant theme for Hexo, also fast, powerful and responsive. It contains many awesome features, It's perfect for your blog, "Ayer" means "water" in Malaysian and "yesterday" in Spanish. [Create an issue](https://github.com/3546514206/issues/new/choose) if you have any queries or advice during the process of using, 
+:ocean: Ayer is a clean and elegant theme for Hexo, also fast, powerful and responsive. It contains many awesome
+features, It's perfect for your blog, "Ayer" means "water" in Malaysian and "yesterday" in
+Spanish. [Create an issue](https://github.com/3546514206/issues/new/choose) if you have any queries or advice during the
+process of using,
 
 <b>注：收藏本主题请点右上角 Star，谢谢~~ </b>
 <b>如果你想给主题添砖加瓦，可以点右上角 Fork，然后给此仓库提交 PR</b>
@@ -54,8 +57,10 @@
 npm i hexo-theme-ayer -S
 ```
 
-- If this theme is newly installed, a `_config.ayer.yml` file will be generated in the root directory after the installation is complete, and you can directly edit the `_config.ayer.yml` file for configuration.
-- If it is a theme upgrade, you can use the configuration method of hexo < 5.0, or you can move the original configuration file to the root directory and rename it to `_config.ayer.yml`.
+- If this theme is newly installed, a `_config.ayer.yml` file will be generated in the root directory after the
+  installation is complete, and you can directly edit the `_config.ayer.yml` file for configuration.
+- If it is a theme upgrade, you can use the configuration method of hexo < 5.0, or you can move the original
+  configuration file to the root directory and rename it to `_config.ayer.yml`.
 
 ### For hexo < 5.0
 
@@ -80,9 +85,11 @@ git pull
 
 ## Multi Language Support
 
-zh-CN（中文简体） en（English） zh-TW（中文繁体） ja（日本語） es（Español） de（Deutsch） fr（Français） ru（Русский） ko（한국어） vi（Tiếng Việt） nl（Nederlands） no（norsk） pt（Português）
+zh-CN（中文简体） en（English） zh-TW（中文繁体） ja（日本語） es（Español） de（Deutsch） fr（Français） ru（Русский） ko（한국어） vi（Tiếng
+Việt） nl（Nederlands） no（norsk） pt（Português）
 
-English is default languge, if you want to change, modify `language` option in `_config.yml` file in your Hexo blog's root folder.
+English is default languge, if you want to change, modify `language` option in `_config.yml` file in your Hexo blog's
+root folder.
 
 ## Configuration
 
@@ -331,7 +338,8 @@ lock:
   $ npm install hexo-generator-searchdb --save
   ```
 
-  Then add the plugin configuration in hexo's configuration file `_config.yml` (note: not the theme's configuration file):
+  Then add the plugin configuration in hexo's configuration file `_config.yml` (note: not the theme's configuration
+  file):
 
   ```yml
   # Hexo-generator-search
@@ -347,7 +355,8 @@ lock:
   $ npm install hexo-generator-feed --save
   ```
 
-  Then add the plugin configuration in hexo's configuration file `_config.yml` (note: not the theme's configuration file):
+  Then add the plugin configuration in hexo's configuration file `_config.yml` (note: not the theme's configuration
+  file):
 
   ```yml
   feed:m
@@ -408,7 +417,8 @@ Then edit `friends_link` in `_config.yml`
 
 ## Gallery
 
-Need to write in the head of the markdown, this is not a good way to write, I hope to get a better way to write on github.
+Need to write in the head of the markdown, this is not a good way to write, I hope to get a better way to write on
+github.
 
 ```md
 ---
@@ -429,7 +439,8 @@ Use Tocbot to parse the title tags (h1~h6) in the content and insert the directo
   toc: true
   ```
 
-- If Toc is turned on in ayer/\_config.yml, then Tocbot will generate a Toc article directory in the title tag of each blog parsing content, but not all blogs require Toc, so in the Front-matter section of markdown Can be closed:
+- If Toc is turned on in ayer/\_config.yml, then Tocbot will generate a Toc article directory in the title tag of each
+  blog parsing content, but not all blogs require Toc, so in the Front-matter section of markdown Can be closed:
 
   ```md
   ---
@@ -453,12 +464,17 @@ This project exists thanks to all the people who contribute.
 
 ## License
 
-<a src="https://github.com/3546514206">Ayer</a> by <a  href="https://github.com/Shen-Yu">Eric-Shen</a> is licensed under <a rel="license" href="https://github.com/3546514206/blob/master/LICENSE">SATA-License</a>.
+<a src="https://github.com/3546514206">Ayer</a> by <a  href="https://github.com/Shen-Yu">Eric-Shen</a> is licensed
+under <a rel="license" href="https://github.com/3546514206/blob/master/LICENSE">SATA-License</a>.
 
-The basic idea is, whenever using a project using SATA license, people shall star/like/+1 that project and thank the author. Just imagine Google stared your project and send you a thank-you letter because they used your project in github!
+The basic idea is, whenever using a project using SATA license, people shall star/like/+1 that project and thank the
+author. Just imagine Google stared your project and send you a thank-you letter because they used your project in
+github!
 <br>
 
-本项目采用<a rel="license" href="https://github.com/3546514206/blob/master/LICENSE">SATA</a>开源协议，在遵守 MIT 许可证的前提下，你应该马不停蹄的给这个开源项目“点个赞”，比如 github 右上角的 star，然后你应该感谢这个开源项目的作者，作者信息可以在许可证头部的版权声明部分找到。<br>
+本项目采用<a rel="license" href="https://github.com/3546514206/blob/master/LICENSE">SATA</a>开源协议，在遵守 MIT
+许可证的前提下，你应该马不停蹄的给这个开源项目“点个赞”，比如 github 右上角的
+star，然后你应该感谢这个开源项目的作者，作者信息可以在许可证头部的版权声明部分找到。<br>
 
 下面是几条 SATA 作者推荐的感谢途径，也是 SATA 包含的内容：
 

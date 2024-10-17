@@ -1,8 +1,10 @@
 .archives-wrap
   position relative
   clearfix()
+
   &:first-child
     margin-top 3rem
+
   &:last-child
     margin-bottom 3rem
 
@@ -11,6 +13,7 @@
   top 0
   left 0
   width years-width
+
   .archive-year
     position relative
     display inline-block
@@ -39,11 +42,14 @@
 
 .archive-article-header
   display table-row
+
   > a, > h2
     display table-cell
+
   h2
     margin 0
     padding-left 3rem
+
     .archive-article-title
       text-decoration: none
       font-size 1.8rem
@@ -74,24 +80,31 @@
   text-align: center
   overflow: hidden
   font-size: 115%
+
   a, span
     padding: 1rem 1.5rem
     line-height: 1
+
   a
     text-decoration: none
+
   .prev
     float: left
     border-radius: 6px
     border: 1px solid
+
   .next
     float: right
     border-radius: 6px
     border: 1px solid
+
   .page-number
     display: inline-block
     @media mq-mobile
       display: none
+
   .current
     font-weight: bold
+
   .space
     color: border-color

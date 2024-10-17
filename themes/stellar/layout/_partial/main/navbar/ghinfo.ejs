@@ -1,10 +1,10 @@
 <%
 function layoutDiv() {
-  const repo = page.repo || theme.wiki.tree[page.wiki]?.repo
-  if (repo == null) {
-    return ''
-  }
-  return `
+    const repo = page.repo || theme.wiki.tree[page.wiki]?.repo
+    if (repo == null) {
+        return ''
+    }
+    return `
   <div class="right ghrepo ds-ghinfo" api="${theme.api_host.ghapi}/repos/${repo}">
     <a class="repo-link bold" href="https://github.com/${repo}">
       ${icon('github:repo')}

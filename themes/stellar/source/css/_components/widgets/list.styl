@@ -6,18 +6,24 @@
     border-radius: $border-bar
     color: var(--text-p1)
     trans1 background
+
     &.active
       background: var(--alpha50)
+
     &:hover
       background: var(--alpha100)
-  a+a
+
+  a + a
     margin-top: 2px
-  a  
+
+  a
     display: flex
     justify-content: space-between
     align-items: center
+
     .title
       txt-ellipsis()
+
     svg
       flex-shrink: 0
       height: 1em
@@ -25,5 +31,5 @@
       transform: scale(1.2)
 
 .widget-wrapper.post-list
-  .widget-body+.widget-header
+  .widget-body + .widget-header
     margin-top: 28px

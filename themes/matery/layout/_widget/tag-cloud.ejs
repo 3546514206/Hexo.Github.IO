@@ -26,18 +26,18 @@ var isTag = is_tag();
             </div>
             <div class="tag-chips">
                 <% site.tags.map(function(tag) { %>
-                <%
-                    i++;
-                    var color = i >= colorCount ? colorArr[Math.abs(hashCode(tag.name) % colorCount)]
-                            : colorArr[i - 1];
-                %>
-                <a href="<%- url_for(tag.path) %>" title="<%- tag.name %>: <%- tag.length %>">
+                    <%
+                        i++;
+                        var color = i >= colorCount ? colorArr[Math.abs(hashCode(tag.name) % colorCount)]
+                                : colorArr[i - 1];
+                    %>
+                    <a href="<%- url_for(tag.path) %>" title="<%- tag.name %>: <%- tag.length %>">
                     <span class="chip center-align waves-effect waves-light
                             <% if (isTag && tag.name == page.tag) { %> chip-active <% } else { %> chip-default <% } %>"
-                            data-tagname="<%- tag.name %>" style="background-color: <%- color %>;"><%- tag.name %>
+                          data-tagname="<%- tag.name %>" style="background-color: <%- color %>;"><%- tag.name %>
                         <span class="tag-length"><%- tag.length %></span>
                     </span>
-                </a>
+                    </a>
                 <% }); %>
             </div>
         </div>

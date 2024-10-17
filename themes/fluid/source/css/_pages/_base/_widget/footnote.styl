@@ -1,5 +1,6 @@
 sup > a, .footnote-text
   anchor-offset()
+
   &::before
     display inline-block
 
@@ -15,10 +16,10 @@ sup > a, .footnote-text
 
     li:before
       font-family "Helvetica Neue", monospace, "Monaco"
-      content "["counter(sectioncounter)"]"
+      content "[" counter(sectioncounter) "]"
       counter-increment sectioncounter
 
-    li+li
+    li + li
       margin-top .5rem
 
 .footnote-text

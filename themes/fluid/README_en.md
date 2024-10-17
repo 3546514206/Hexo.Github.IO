@@ -50,11 +50,13 @@ If your Hexo version >= 5.0.0, you can install Fluid via Npm:
 npm install --save hexo-theme-fluid
 ```
 
-Then create `_config.fluid.yml` in the blog directory and copy the content of [_config.yml](https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml).
+Then create `_config.fluid.yml` in the blog directory and copy the content
+of [_config.yml](https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml).
 
 **Way B:**
 
-Download the [latest release](https://github.com/fluid-dev/hexo-theme-fluid/releases), then extract it to `themes` directory and renamed to `fluid`.
+Download the [latest release](https://github.com/fluid-dev/hexo-theme-fluid/releases), then extract it to `themes`
+directory and renamed to `fluid`.
 
 #### 3. Set theme
 
@@ -113,13 +115,16 @@ About content
 
 [![contributors](https://opencollective.com/hexo-theme-fluid/contributors.svg?width=890&button=false)](https://github.com/fluid-dev/hexo-theme-fluid/graphs/contributors)
 
-English docs translator: [@EatRice](https://eatrice.top/) [@橙子杀手](https://ruru.eatrice.top) [@Sinetian](https://sinetian.github.io/)
+English docs
+translator: [@EatRice](https://eatrice.top/) [@橙子杀手](https://ruru.eatrice.top) [@Sinetian](https://sinetian.github.io/)
 
-Contributors outside PR: [@zhugaoqi](https://github.com/zhugaoqi) [@julydate](https://github.com/julydate) [@xiyuvi](https://xiyu.pro/)
+Contributors outside
+PR: [@zhugaoqi](https://github.com/zhugaoqi) [@julydate](https://github.com/julydate) [@xiyuvi](https://xiyu.pro/)
 
 ## Support
 
-If you find this project helpful and would like to support its development, please consider making a financial contribution.
+If you find this project helpful and would like to support its development, please consider making a financial
+contribution.
 
 <table>
   <thead>

@@ -12,17 +12,21 @@
   justify-content: center
   align-items: center
   txt-ellipsis()
+
   &.active
     background: var(--alpha50)
-    svg,img
+
+    svg, img
       filter: unset
 
 .linklist .link span
   padding: 0 4px
   txt-ellipsis()
+
 .linklist .link svg, .linklist .link img
   $size = 16px
   padding: 0 2px
+
   &:not([class='active-icon'])
     color: $color-theme
   max-height: 18px
@@ -33,17 +37,21 @@
 
 .widget-body .linklist.left
   grid-gap: 2px
+
 .linklist.left .link
   justify-content: space-between
   padding: 0 16px
-  img,svg 
+
+  img, svg
     width: 1em
     height: 1em
     transform: scale(1.2)
-  span 
+
+  span
     padding: 0 8px
 
 .linklist .link:hover
   background: var(--alpha100)
-  svg  
+
+  svg
     filter: unset

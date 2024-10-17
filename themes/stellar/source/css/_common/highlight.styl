@@ -3,7 +3,7 @@ code
   -moz-osx-font-smoothing: auto
   font-family: $ff-code
 
-p>code:not([class]),li>code:not([class])
+p > code:not([class]), li > code:not([class])
   font-size: $fs-code
   background: var(--block)
   padding: .2em
@@ -25,22 +25,26 @@ p>code:not([class]),li>code:not([class])
   position: relative
   overflow: auto
   display: block
+
   figcaption
     color: var(--text-p2)
     font-size: $fs-codeblock
     font-weight: 500
     margin-left: 0.5rem
     display: inline-block
+
     span
       padding: 4px 0.5rem
       display: block
       border-bottom-left-radius: $border-button
       border-bottom-right-radius: $border-button
       background: var(--block-hover)
-  >table
+
+  > table
     overflow: auto
     display: block
-    td,th
+
+    td, th
       padding: 0
       border: none
       line-height: 1.5
@@ -48,8 +52,10 @@ p>code:not([class]),li>code:not([class])
     background: transparent
     border: none
     scrollbar-codeblock(convert(hexo-config('style.codeblock.scrollbar')))
+
     tr
       background: transparent
+
       &:hover
         background: transparent
 
@@ -65,22 +71,27 @@ p>code:not([class]),li>code:not([class])
     // background: var(--block) // 如果希望行标固定请打开此行；但是如果想在较窄屏幕上拥有较好的阅读体验，建议让行标跟随滚动。
     left: 0
     z-index: 1
+
     pre .line
       color: var(--text-p4)
+
   .code
     pre
       display: block
       padding: .5em 1rem
-  .gutter+.code pre
+
+  .gutter + .code pre
     padding-left: 0.25em
 
-.md-text .gist 
-  .gist-file 
+.md-text .gist
+  .gist-file
     border: 1px solid var(--block-border)
     border-radius: $border-card
     overflow: hidden
+
   .gist-data
     border-bottom: 1px solid var(--block-border)
+
   .highlight
     display: inherit
     border: none
@@ -88,9 +99,11 @@ p>code:not([class]),li>code:not([class])
     background: var(--block)
     margin: 0
     padding: 1em 0
+
   .blob-code-inner
     color: var(--text-p1)
     font-family: $ff-codeblock
+
   .gist-meta
     background: var(--block-border)
 
@@ -100,9 +113,10 @@ table:not([class])
 
 
 .md-text pre
-  >.caption
+  > .caption
     color: var(--text-p3)
-  >.hljs
+
+  > .hljs
     padding: 1rem
     border-radius: $border-card
     line-height: 1.5
@@ -111,6 +125,7 @@ table:not([class])
 .md-text .highlight
   .code
     vertical-align: top
+
     &:before
       position: absolute
       top: 0
@@ -122,6 +137,7 @@ table:not([class])
 
   &.yaml .code:before
     content: "YAML"
+
   &.json .code:before
     content: "JSON"
 
@@ -130,54 +146,72 @@ table:not([class])
 
   &.html .code:before
     content: "HTML"
-  &.js .code:before,&.javascript .code:before
+
+  &.js .code:before, &.javascript .code:before
     content: "JS"
+
   &.css .code:before
     content: "CSS"
+
   &.less .code:before
     content: "Less"
+
   &.stylus .code:before
     content: "Stylus"
 
   &.bash .code:before
     content: "bash"
+
   &.shell .code:before
     content: "shell"
+
   &.sh .code:before
     content: "sh"
+
   &.ini .code:before
     content: "ini"
 
   &.c .code:before
     content: "C"
+
   &.cpp .code:before
     content: "C++"
-  &.objc .code:before,&.objectivec .code:before
+
+  &.objc .code:before, &.objectivec .code:before
     content: "Objective-C"
+
   &.swift .code:before
     content: "Swift"
 
   &.java .code:before
     content: "Java"
+
   &.python .code:before
     content: "Python"
+
   &.php .code:before
     content: "PHP"
-  &.rust .code:before,&.rs .code:before
+
+  &.rust .code:before, &.rs .code:before
     content: "Rust"
+
   &.sql .code:before
     content: "SQL"
+
   &.ruby .code:before
     content: "Ruby"
+
   &.makefile .code:before
     content: "Makefile"
+
   &.go .code:before
     content: "Go"
-  &.typescript .code:before,&.ts .code:before
+
+  &.typescript .code:before, &.ts .code:before
     content: "TS"
+
   &.matlab .code:before
     content: "MATLAB"
-
 
 
 $hl-keyword = #8959a8
@@ -189,15 +223,18 @@ $hl-red = #EE2B29
 $hl-orange = #FB3F1B
 $hl-amber = #FD8607
 $hl-text = var(--text-p1)
-.code>pre
+.code > pre
   .code:before
     display: none
+
   // 行
-  .line,.params
+
+  .line, .params
     color: $hl-text
 
   .line .addition
     color: $hl-green
+
   .line .deletion
     color: $hl-red
 
@@ -211,6 +248,7 @@ $hl-text = var(--text-p1)
     color: $color-md-indigo
 
   // 注释
+
   .comment
     color: var(--text-p4)
     font-style: italic
@@ -243,22 +281,26 @@ $hl-text = var(--text-p1)
     color: #6699cc
 
 
-.highlight.html,.highlight.css,.highlight.less,.highlight.stylus
+.highlight.html, .highlight.css, .highlight.less, .highlight.stylus
   .line
     .tag .name, .selector-tag
       color: $hl-red
+
     .selector-class, .selector-attr
       color: $hl-amber
+
     .attribute
       color: $color-md-indigo
+
     .number
       color: $hl-cyan
 
 
-.highlight.objc,.highlight.objectivec,.highlight.swift,.highlight.c
+.highlight.objc, .highlight.objectivec, .highlight.swift, .highlight.c
   .line
     .meta
       color: $hl-keyword
+
     .class
       color: $hl-text
 
@@ -266,6 +308,7 @@ $hl-text = var(--text-p1)
   .line
     .attr
       color: #E24F5A
+
     .literal
       color: $color-md-indigo
 

@@ -1,4 +1,7 @@
-@require('_defines/const')
+@require
+(
+'_defines/const'
+)
 
 // 通用主题色
 $color-theme = convert(hexo-config('style.color.theme'))
@@ -65,14 +68,14 @@ $border-button = 4px
   --fsh2: 'calc(%s + 11px)' % var(--fsp)
   --fsh3: 'calc(%s + 7px)' % var(--fsp)
   --fsh4: 'calc(%s + 4px)' % var(--fsp)
-  
+
   // 侧边栏文字内容宽度
   --side-content-width: 224px
   // 元素轮廓到容器边缘的间距
   --gap-margin: 16px
   // 元素文本内容到元素自身的轮廓的间距
   --gap-padding: 16px
-  
+
   --gap-p: 'calc(%s + 4px)' % $fs-body // gap for paragraph
   --gap-p-compact: 'calc(%s * 0.75)' % $fs-body
   // desktop 2k or larger
@@ -95,7 +98,8 @@ $border-button = 4px
 // 文章布局风格
 .l_body.story
   --gap-p: 2rem
-  div.tag-plugin,p>img
+
+  div.tag-plugin, p > img
     margin-top: 2.4rem
     margin-bottom: 2.4rem
 

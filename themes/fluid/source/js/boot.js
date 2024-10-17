@@ -2,7 +2,7 @@
 
 Fluid.boot = {};
 
-Fluid.boot.registerEvents = function() {
+Fluid.boot.registerEvents = function () {
   Fluid.events.billboard();
   Fluid.events.registerNavbarEvent();
   Fluid.events.registerParallaxEvent();
@@ -11,12 +11,12 @@ Fluid.boot.registerEvents = function() {
   Fluid.events.registerImageLoadedEvent();
 };
 
-Fluid.boot.refresh = function() {
+Fluid.boot.refresh = function () {
   Fluid.plugins.fancyBox();
   Fluid.plugins.codeWidget();
   Fluid.events.refresh();
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   Fluid.boot.registerEvents();
 });

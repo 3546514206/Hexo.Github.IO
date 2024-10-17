@@ -5,9 +5,9 @@
 const path = require('path');
 
 hexo.extend.filter.register('template_locals', locals => {
-  const { env, config } = hexo;
-  const { __ } = locals;
-  const { i18n } = hexo.theme;
+  const {env, config} = hexo;
+  const {__} = locals;
+  const {i18n} = hexo.theme;
   locals.hexo_version = env.version;
   locals.fluid_version = require(path.normalize(path.join(hexo.theme_dir, 'package.json'))).version;
   locals.title = __('title') !== 'title' ? __('title') : config.title;

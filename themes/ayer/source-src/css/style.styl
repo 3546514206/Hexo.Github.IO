@@ -30,27 +30,33 @@ body
   overflow-x hidden
   text-size-adjust 100%
   //Dark Mode
+
   &.darkmode
     darkmode()
-    
+
 a
   color link-color
+
   &:hover
     color link-hover-color
+
   &:active
     color link-active-color
+
   &.disabled
     color disabled-color
+
 ul, menu, dir
   margin 0
   padding 0
+
 img
   max-width 100%
 
 button
   outline: 0
   cursor pointer
-  
+
 @import "_extend"
 @import "_partial/layout"
 @import "_partial/lists"

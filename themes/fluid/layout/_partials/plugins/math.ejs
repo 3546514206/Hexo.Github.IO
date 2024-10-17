@@ -1,8 +1,8 @@
 <% if(theme.post.math.engine === 'mathjax') { %>
-  <%
-    var lazy = theme.lazyload.enable && require_version(theme.static_prefix.mathjax, '3.2.0')
+    <%
+        var lazy = theme.lazyload.enable && require_version(theme.static_prefix.mathjax, '3.2.0')
 
-    import_script(`
+        import_script(`
       <script>
         if (!window.MathJax) {
           window.MathJax = {
@@ -10,7 +10,7 @@
               inlineMath: { '[+]': [['$', '$']] }
             },
             loader : {
-              ${ lazy ? 'load: \[\'ui/lazy\'\]' : '' }
+              ${lazy ? 'load: \[\'ui/lazy\'\]' : ''}
             },
             options: {
               renderActions: {
@@ -43,9 +43,9 @@
       </script>
     `)
 
-    import_js(theme.static_prefix.mathjax.replace('es5/', ''), 'es5/tex-mml-chtml.js')
-  %>
+        import_js(theme.static_prefix.mathjax.replace('es5/', ''), 'es5/tex-mml-chtml.js')
+    %>
 
 <% } else if (theme.post.math.engine === 'katex') { %>
-  <% import_css(theme.static_prefix.katex, 'katex.min.css') %>
+    <% import_css(theme.static_prefix.katex, 'katex.min.css') %>
 <% } %>

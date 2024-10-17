@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="<%- theme.jsDelivr.url %><%- url_for('/css/gitment.css') %>">
 
 <div class="gitment-card card" data-aos="fade-up">
-    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+    <div class="comment_headling"
+         style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
@@ -11,15 +12,15 @@
 
 <script src="<%- theme.jsDelivr.url %><%- url_for('/libs/gitment/gitment.js') %>"></script>
 <script>
-var gitment = new Gitment({
-    id: '<%= page.date %>',
-    owner: '<%= theme.gitment.owner %>',
-    repo: '<%= theme.gitment.repo %>',
-    oauth: {
-        client_id: '<%= theme.gitment.oauth.clientId %>',
-        client_secret: '<%= theme.gitment.oauth.clientSecret %>'
-    }
-});
+    var gitment = new Gitment({
+        id: '<%= page.date %>',
+        owner: '<%= theme.gitment.owner %>',
+        repo: '<%= theme.gitment.repo %>',
+        oauth: {
+            client_id: '<%= theme.gitment.oauth.clientId %>',
+            client_secret: '<%= theme.gitment.oauth.clientSecret %>'
+        }
+    });
 
-gitment.render('gitment-content');
+    gitment.render('gitment-content');
 </script>

@@ -1,14 +1,16 @@
 <link rel="stylesheet" href="<%- theme.jsDelivr.url %><%- url_for(theme.libs.css.dplayer) %>">
 <div class="video-player">
     <% if (theme.video.showTitle) { %>
-    <div class="title center-align">
-        <i class="fas fa-video-camera"></i>&nbsp;&nbsp;<%= theme.video.title %>
-    </div>
+        <div class="title center-align">
+            <i class="fas fa-video-camera"></i>&nbsp;&nbsp;<%= theme.video.title %>
+        </div>
     <% } %>
     <div class="row">
         <div class="col l8 offset-l2 m10 offset-m1 s12">
             <div id="dplayer" class="dplayer-video"
-                    <% if (theme.video.height) { %> style="height: <%- theme.video.height %>px;"<% } %>></div>
+            <% if (theme.video.height) { %> style="height: <%- theme.video.height %>px;"
+                    <% } %>
+            ></div>
         </div>
     </div>
 </div>

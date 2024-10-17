@@ -4,14 +4,14 @@ window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequ
 
 Fluid.utils = {
 
-  listenScroll: function(callback) {
+  listenScroll: function (callback) {
     var dbc = new Debouncer(callback);
     window.addEventListener('scroll', dbc, false);
     dbc.handleEvent();
     return dbc;
   },
 
-  unlistenScroll: function(callback) {
+  unlistenScroll: function (callback) {
     window.removeEventListener('scroll', callback);
   },
 
@@ -25,17 +25,17 @@ Fluid.utils = {
     }
   },
 
-  scrollToElement: function(target, offset) {
+  scrollToElement: function (target, offset) {
     var of = jQuery(target).offset();
     if (of) {
       jQuery('html,body').animate({
         scrollTop: of.top + (offset || 0),
-        easing   : 'swing'
+        easing: 'swing'
       });
     }
   },
 
-  elementVisible: function(element, offsetFactor) {
+  elementVisible: function (element, offsetFactor) {
     offsetFactor = offsetFactor && offsetFactor >= 0 ? offsetFactor : 0;
     var rect = element.getBoundingClientRect();
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -45,7 +45,7 @@ Fluid.utils = {
     );
   },
 
-  waitElementVisible: function(selectorOrElement, callback, offsetFactor) {
+  waitElementVisible: function (selectorOrElement, callback, offsetFactor) {
     var runningOnBrowser = typeof window !== 'undefined';
     var isBot = (runningOnBrowser && !('onscroll' in window))
       || (typeof navigator !== 'undefined' && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent));
@@ -56,24 +56,24 @@ Fluid.utils = {
     offsetFactor = offsetFactor && offsetFactor >= 0 ? offsetFactor : 0;
 
     function waitInViewport(element) {
-      Fluid.utils.listenDOMLoaded(function() {
+      Fluid.utils.listenDOMLoaded(function () {
         if (Fluid.utils.elementVisible(element, offsetFactor)) {
           callback();
           return;
         }
         if ('IntersectionObserver' in window) {
-          var io = new IntersectionObserver(function(entries, ob) {
+          var io = new IntersectionObserver(function (entries, ob) {
             if (entries[0].isIntersecting) {
               callback();
               ob.disconnect();
             }
           }, {
-            threshold : [0],
+            threshold: [0],
             rootMargin: (window.innerHeight || document.documentElement.clientHeight) * offsetFactor + 'px'
           });
           io.observe(element);
         } else {
-          var wrapper = Fluid.utils.listenScroll(function() {
+          var wrapper = Fluid.utils.listenScroll(function () {
             if (Fluid.utils.elementVisible(element, offsetFactor)) {
               Fluid.utils.unlistenScroll(wrapper);
               callback();
@@ -84,7 +84,7 @@ Fluid.utils = {
     }
 
     if (typeof selectorOrElement === 'string') {
-      this.waitElementLoaded(selectorOrElement, function(element) {
+      this.waitElementLoaded(selectorOrElement, function (element) {
         waitInViewport(element);
       });
     } else {
@@ -92,7 +92,7 @@ Fluid.utils = {
     }
   },
 
-  waitElementLoaded: function(selector, callback) {
+  waitElementLoaded: function (selector, callback) {
     var runningOnBrowser = typeof window !== 'undefined';
     var isBot = (runningOnBrowser && !('onscroll' in window))
       || (typeof navigator !== 'undefined' && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent));
@@ -101,17 +101,17 @@ Fluid.utils = {
     }
 
     if ('MutationObserver' in window) {
-      var mo = new MutationObserver(function(records, ob) {
+      var mo = new MutationObserver(function (records, ob) {
         var ele = document.querySelector(selector);
         if (ele) {
           callback(ele);
           ob.disconnect();
         }
       });
-      mo.observe(document, { childList: true, subtree: true });
+      mo.observe(document, {childList: true, subtree: true});
     } else {
-      Fluid.utils.listenDOMLoaded(function() {
-        var waitLoop = function() {
+      Fluid.utils.listenDOMLoaded(function () {
+        var waitLoop = function () {
           var ele = document.querySelector(selector);
           if (ele) {
             callback(ele);
@@ -124,7 +124,7 @@ Fluid.utils = {
     }
   },
 
-  createScript: function(url, onload) {
+  createScript: function (url, onload) {
     var s = document.createElement('script');
     s.setAttribute('src', url);
     s.setAttribute('type', 'text/javascript');
@@ -132,7 +132,7 @@ Fluid.utils = {
     s.async = false;
     if (typeof onload === 'function') {
       if (window.attachEvent) {
-        s.onreadystatechange = function() {
+        s.onreadystatechange = function () {
           var e = s.readyState;
           if (e === 'loaded' || e === 'complete') {
             s.onreadystatechange = null;
@@ -148,7 +148,7 @@ Fluid.utils = {
     e.parentNode.insertBefore(s, e.nextSibling);
   },
 
-  createCssLink: function(url) {
+  createCssLink: function (url) {
     var l = document.createElement('link');
     l.setAttribute('rel', 'stylesheet');
     l.setAttribute('type', 'text/css');
@@ -159,10 +159,10 @@ Fluid.utils = {
     e.parentNode.insertBefore(l, e);
   },
 
-  loadComments: function(selector, loadFunc) {
+  loadComments: function (selector, loadFunc) {
     var ele = document.querySelector('#comments[lazyload]');
     if (ele) {
-      var callback = function() {
+      var callback = function () {
         loadFunc();
         ele.removeAttribute('lazyload');
       };
@@ -193,7 +193,7 @@ Fluid.utils = {
     if (times <= 0) {
       return;
     }
-    var next = function() {
+    var next = function () {
       if (--times >= 0 && !handler()) {
         setTimeout(next, interval);
       }
@@ -220,7 +220,7 @@ Debouncer.prototype = {
    * dispatches the event to the supplied callback
    * @private
    */
-  update: function() {
+  update: function () {
     this.callback && this.callback();
     this.ticking = false;
   },
@@ -229,7 +229,7 @@ Debouncer.prototype = {
    * ensures events don't get stacked
    * @private
    */
-  requestTick: function() {
+  requestTick: function () {
     if (!this.ticking) {
       requestAnimationFrame(this.rafCallback || (this.rafCallback = this.update.bind(this)));
       this.ticking = true;
@@ -239,7 +239,7 @@ Debouncer.prototype = {
   /**
    * Attach this as the event listeners
    */
-  handleEvent: function() {
+  handleEvent: function () {
     this.requestTick();
   }
 };

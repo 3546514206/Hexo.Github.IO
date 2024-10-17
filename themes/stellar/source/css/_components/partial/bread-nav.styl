@@ -4,29 +4,37 @@
   display: flex
   justify-content: space-between
   color: var(--text-banner)
+
   .flex-row
     display: flex
     align-items: baseline
     flex-direction: row
+
   a
     color: var(--text-banner)
     padding: 4px
     border-radius: 2px
+
     &:hover
       background: var(--button-hover-bg)
-  span 
+
+  span
     color: var(--text-banner)
+
   span.sep
     opacity 0.5
     margin: 0
+
   span.text
     padding: 4px
 
   div#post-meta
     span.sep:before
       content: '|'
+
     span.updated
       visibility: hidden
+
   &:hover
     div#post-meta span.updated
       visibility: visible
@@ -38,16 +46,21 @@
   align-items: flex-start
   border-left: 1px solid var(--text-meta)
   padding-left: 8px
-  a  
+
+  a
     display: flex
     align-items: center
     color: var(--text-banner)
+
     svg
       margin-right: 4px
-    &.bold 
+
+    &.bold
       font-weight: 600
       color: var(--text-banner)
-    span 
+
+    span
       margin-left: 4px
+
     &:hover
       opacity 1

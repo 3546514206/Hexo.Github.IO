@@ -16,30 +16,30 @@
     let radarChart = echarts.init(document.getElementById('category-radar'));
 
     <%
-        var categories = site.categories;
+    var categories = site.categories;
 
-        // Find the maximum and average values of the post categories.
-        var radarValueArr = [];
-        categories.some(function(category) {
-            radarValueArr.push(category.length);
-        });
+    // Find the maximum and average values of the post categories.
+    var radarValueArr = [];
+    categories.some(function (category) {
+        radarValueArr.push(category.length);
+    });
 
-        var max = Math.max.apply(null, radarValueArr) + Math.min.apply(null, radarValueArr);
+    var max = Math.max.apply(null, radarValueArr) + Math.min.apply(null, radarValueArr);
 
-        // Calculate the data needed for the radar chart.
-        var indicatorArr = [];
-        categories.map(function(category) {
-            indicatorArr.push({'name': category.name, 'max': max});
-        });
+    // Calculate the data needed for the radar chart.
+    var indicatorArr = [];
+    categories.map(function (category) {
+        indicatorArr.push({'name': category.name, 'max': max});
+    });
 
-        var indicatorData = JSON.stringify(indicatorArr);
-        var radarValueData = JSON.stringify(radarValueArr);
+    var indicatorData = JSON.stringify(indicatorArr);
+    var radarValueData = JSON.stringify(radarValueArr);
     %>
 
     let option = {
         title: {
             left: 'center',
-            text: '<%= __("categoryRadarTitle")  %>',
+            text: '<%= __("categoryRadarTitle") %>',
             textStyle: {
                 fontWeight: 500,
                 fontSize: 22
@@ -54,17 +54,17 @@
             },
             indicator: <%- indicatorData %>,
             nameGap: 5,
-            center: ['50%','55%'],
+            center: ['50%', '55%'],
             radius: '66%'
         },
         series: [{
             type: 'radar',
             color: ['#3ecf8e'],
             itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data : [
+            data: [
                 {
-                    value : <%- radarValueData %>,
-                    name : '<%= __("categoryNumber") %>'
+                    value: <%- radarValueData %>,
+                    name: '<%= __("categoryNumber") %>'
                 }
             ]
         }]

@@ -9,65 +9,65 @@ var colorSchema = theme.dark_mode && theme.dark_mode.enable && theme.dark_mode.d
 <%- partial('_partials/head.ejs') %>
 
 <body>
-  <%- inject_point('bodyBegin') %>
+<%- inject_point('bodyBegin') %>
 
-  <header>
+<header>
     <%- inject_point('header') %>
-  </header>
+</header>
 
-  <main>
+<main>
     <% if(is_post() || page.layout === '404') { %>
-      <%- body %>
+        <%- body %>
     <% } else { %>
-      <div class="container nopadding-x-md">
-        <div id="board"
-          <%- banner_img_height >= 100 && theme.banner && theme.banner.parallax ? 'style="margin-top: 0"' : '' %>>
-          <% if(page.layout === 'about') { %>
-            <div class="about-avatar">
-              <img src="<%= url_for(theme.about.avatar) %>" class="img-fluid" alt="avatar">
+        <div class="container nopadding-x-md">
+            <div id="board"
+                    <%- banner_img_height >= 100 && theme.banner && theme.banner.parallax ? 'style="margin-top: 0"' : '' %>>
+                <% if(page.layout === 'about') { %>
+                    <div class="about-avatar">
+                        <img src="<%= url_for(theme.about.avatar) %>" class="img-fluid" alt="avatar">
+                    </div>
+                <% } %>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-10 m-auto">
+                            <%- body %>
+                        </div>
+                    </div>
+                </div>
             </div>
-          <% } %>
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                <%- body %>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     <% } %>
 
     <% if (theme.scroll_top_arrow.enable) { %>
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
+        <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+            <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+        </a>
     <% } %>
 
     <% if (theme.search.enable) { %>
-      <%- partial('_partials/search.ejs') %>
+        <%- partial('_partials/search.ejs') %>
     <% } %>
 
     <% if (theme.custom_html) { %>
-      <div class="col-lg-7 mx-auto nopadding-x-md">
-        <div class="container custom mx-auto">
-          <%- theme.custom_html %>
+        <div class="col-lg-7 mx-auto nopadding-x-md">
+            <div class="container custom mx-auto">
+                <%- theme.custom_html %>
+            </div>
         </div>
-      </div>
     <% } %>
-  </main>
+</main>
 
-  <footer>
+<footer>
     <%- inject_point('footer') %>
-  </footer>
+</footer>
 
-  <!-- Scripts -->
-  <%- partial('_partials/scripts.ejs') %>
+<!-- Scripts -->
+<%- partial('_partials/scripts.ejs') %>
 
-  <%- inject_point('bodyEnd') %>
+<%- inject_point('bodyEnd') %>
 
-  <noscript>
+<noscript>
     <div class="noscript-warning"><%- __('noscript_warning') %></div>
-  </noscript>
+</noscript>
 </body>
 </html>

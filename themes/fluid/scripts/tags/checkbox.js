@@ -17,7 +17,10 @@ const checkbox = (args) => {
   const checked = (args[1] || '').length > 0 && args[1].trim() !== 'false';
   const inline = (args[2] || '').length > 0 && args[2].trim() !== 'false';
   const disabled = (args[3] || '').length > 0 && args[3].trim() !== 'false';
-  const content = hexo.render.renderSync({ text: text, engine: 'markdown' }).replace(/(<p>)|(<\/p>)/g, '').replace(/<br>/g, '');
+  const content = hexo.render.renderSync({
+    text: text,
+    engine: 'markdown'
+  }).replace(/(<p>)|(<\/p>)/g, '').replace(/<br>/g, '');
 
   return `${!inline ? '<div>' : ''}
             <input type="checkbox" ${disabled ? 'disabled' : ''} ${checked ? 'checked="checked"' : ''}>${content}
@@ -26,5 +29,5 @@ const checkbox = (args) => {
 };
 
 // {% cb text, checked?, inline?, disabled? %}
-hexo.extend.tag.register('checkbox', checkbox, { ends: false });
-hexo.extend.tag.register('cb', checkbox, { ends: false });
+hexo.extend.tag.register('checkbox', checkbox, {ends: false});
+hexo.extend.tag.register('cb', checkbox, {ends: false});

@@ -1,4 +1,3 @@
-
 // // 可替代 transition 使用
 // transition($op = all, $time = 0.28s, $ease = ease-out)
 //   transition: $op $time $ease
@@ -48,10 +47,12 @@ placeholder(rules)
     rules()
   &:-moz-placeholder
     rules()
-	&::-moz-placeholder
-    rules()
-	&:-ms-input-placeholder
-    rules()
+
+&::-moz-placeholder
+  rules()
+
+&:-ms-input-placeholder
+  rules()
 
 disable-select()
   -moz-user-select: none
@@ -70,6 +71,7 @@ scrollbar($w = 4px, $b = 2px, $c = var(--text-meta), $h = var(--text-p3))
     background: $c
     cursor: pointer
     border-radius: $b
+
     &:hover
       background: $h
 
@@ -87,6 +89,7 @@ scrollbar-codeblock($height = 4px)
   &:hover
     &::-webkit-scrollbar-thumb
       background: var(--text-meta)
+
       &:hover
         background: var(--text-p3)
 
@@ -100,6 +103,7 @@ hover-block($v, $h, $br = 4px)
 
 floatable-trans()
   trans2 transform box-shadow
+
 floatable-float()
   box-shadow: 0 12px 20px -4px rgba(0, 0, 0, 0.15)
   transform: translate3d(0, -2px, 0)

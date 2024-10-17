@@ -1,6 +1,6 @@
 .l_body
   display: grid
-  grid-template-columns: 1fr minmax(200px,var(--width-main)) 1fr
+  grid-template-columns: 1fr minmax(200px, var(--width-main)) 1fr
   grid-gap: var(--gap-margin)
   margin: auto
   font-size: var(--fsp)
@@ -17,10 +17,12 @@
 .l_body .l_left
   justify-self: right
   top: 8px
+
 .l_body .l_right
   justify-self: left
   --gap-margin: 0px
   max-height: calc(100% - 8px * 2)
+
   .widgets
     height: 100%
     overflow visible
@@ -29,8 +31,10 @@
 @media screen and (max-width: $device-laptop)
   .l_body .l_right
     --gap-margin: 16px
+
   .laptop-only
     display: block !important
+
   .l_body
     .l_right
       top: 8px
@@ -47,9 +51,11 @@
       scrollbar(0, 0)
       --blur-bg: var(--alpha60)
       --blur-px: 50px
+
   .l_body[rightbar]
     .l_right
       transform: translateX(0px)
+
     .main-mask
       // opacity 1
       pointer-events: inherit
@@ -58,9 +64,11 @@
 @media screen and (max-width: $device-mobile-max)
   .mobile-only
     display: block !important
+
   .l_body
     padding: 0
     display: block
+
     .l_left
       position: fixed
       transform: translateX(-320px)
@@ -69,11 +77,14 @@
       left: 8px
       box-shadow: $boxshadow-card-float
       z-index: 10
+
     .l_main
       max-width: 100%
+
   .l_body[leftbar]
     .l_left
       transform: translateX(0px)
+
     .main-mask
       opacity 1
       pointer-events: inherit

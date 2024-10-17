@@ -1,6 +1,7 @@
 // list
 .l_main .post-list
   margin: 1rem
+
   .post-title:first-child
     margin-top: .5rem
 
@@ -16,6 +17,7 @@
     @media screen and (max-width: $device-mobile)
       font-size: $fsh5
       margin: 0.5rem 0
+
   .wiki .post-title
     margin-top: 0.5rem
 
@@ -28,19 +30,22 @@
   hoverable-card()
   overflow: hidden
   z-index: 0
-  
+
   position: relative
+
   .excerpt
     margin: 1rem 0
     @media screen and (max-width: $device-mobile)
       margin: 0.5rem 0
-    >p
+
+    > p
       margin: 1rem 0
       @media screen and (max-width: $device-mobile)
         margin: 0.5rem 0
       line-height: 1.5
+
   .meta.cap
-    &,span
+    &, span
       display: flex
       align-items: center
     flex-wrap: wrap
@@ -48,17 +53,21 @@
     line-height: 2
     --fsp: $fsp1
     font-size: var(--fsp)
+
     svg
       height: 1em
       width: auto
       line-height: 0
       transform: scale(1.2)
       margin-right: 8px
-    >span+span
+
+    > span + span
       margin-left: 1.5rem
+
     span.pin
       img
         object-fit: contain
+
       svg
         color: $c-red
 
@@ -71,6 +80,7 @@
   padding: 1rem
   @media screen and (max-width: $device-mobile)
     padding: 0.5rem 1rem
+
   p
     color: var(--text-p2)
     font-size: $fs-14
@@ -85,22 +95,26 @@
   margin-top: -1rem
   margin-right: -1rem
   background: var(--block)
+
   &:not(.lazy)
     trans1: transform 1s
+
   img
     object-fit: cover
     width: 100%
     border-radius: 0
     aspect-ratio: hexo-config('article.cover_ratio')
-    
+
 .post-list .post-card.post.photo
   .cover
     position: relative
     line-height: 0
+
     img
       width: 100%
       object-fit: cover
       aspect-ratio: hexo-config('article.cover_ratio')
+
     .cover-info
       padding: 1.5rem 1rem
       position: absolute
@@ -108,28 +122,36 @@
       width: 'calc(100% - %s * 2)' % 1rem
       --text-banner: white
       color: var(--text-banner)
+
       &[position=top]
         top: 0
-        background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0))
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0))
+
       &[position=bottom]
         bottom: 0
-        background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.2))
-      div+div
+        background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2))
+
+      div + div
         margin-top: 4px
+
       .cap
         font-size: $fs-13
         color: unset
+
       .title
         font-weight: 500
         font-size: $fsh3
       @media screen and (max-width: $device-mobile)
         padding: 1rem
-        div+div
+        div + div
           margin-top: 2px
+
         .title
           font-size: $fsh4
+
         .cap
           font-size: $fs-12
+
   h2
     margin: .25rem 0
     font-size: $fsh4
@@ -148,12 +170,15 @@
   display: flex
   margin: 1rem 3rem
   align-items: center
+
   img
     width: 96px
     max-height: 96px
     object-fit: contain
+
     &:not(.lazy)
       trans1: transform 0.75s
+
 .post-list .post-card.wiki article .excerpt
   margin: 1rem .5rem
   @media screen and (min-width: 950px)
@@ -162,17 +187,21 @@
   flex: 1
   overflow: hidden
   word-wrap: break-word
+
   .caps
     line-height: 1
     margin-bottom: 0.75rem
+
   .cap
     --theme-block: var(--block)
     background: var(--theme-block)
     padding: 2px 4px
     border-radius: 2px
+
   p:last-child
     margin-bottom: 0
-  .cap+.cap
+
+  .cap + .cap
     margin-left: 4px
 
 .post-list.archives

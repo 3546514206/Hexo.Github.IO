@@ -1,11 +1,14 @@
 :root
   --swiper-theme-color: $color-theme !important
+
 .swiper
   width: 100%
   border-radius: 4px
   --gap-p: 2rem
+
 .swiper:not(.swiper-initialized)
   display: none
+
 div.swiper-slide
   text-align: center
   display: -webkit-box
@@ -22,6 +25,7 @@ div.swiper-slide
   -webkit-align-items: center
   align-items: center
   width: 50%
+
   img
     border-radius: 4px
 
@@ -34,17 +38,19 @@ div.swiper-slide
 .swiper[effect='cards'] .swiper-slide
   max-width: 75%
 
-.swiper-button-prev,.swiper-button-next
+.swiper-button-prev, .swiper-button-next
   padding: 1rem 0.25rem
   margin-top: -2rem !important
   border-radius: 40px
   background: alpha(white, 0.25)
   trans1 background
   --swiper-theme-color: var(--text) !important
+
   &:after
     font-size: 1.2rem !important
     font-weight: 700 !important
     color: var(--swiper-theme-color)
+
   &:hover
     background: white !important
     --swiper-theme-color: $color-hover !important

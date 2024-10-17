@@ -1,32 +1,38 @@
 @keyframes footerHeartBeat
-      0%
-        transform: scale(1)
-      50%
-        transform: scale(1.2)
-      100%
-        transform: scale(1)
+  0%
+    transform: scale(1)
+  50%
+    transform: scale(1.2)
+  100%
+    transform: scale(1)
 
 .footer
-  border-top 2px solid #f6f6f6 
+  border-top 2px solid #f6f6f6
   padding 3rem 0
   font-size 115%
+
   .outer
-    &>ul
+    & > ul
       position relative
       display flex
       justify-content center
+
       li
         display inline-block
         padding .3rem 0
+
         a
           text-decoration none
+
         .division
           display inline
           margin 0 5px
-        i 
+
+        i
           margin 0 2px
           font-style normal
           transform translateY(2px)
+
       span
         margin-right 6px
 

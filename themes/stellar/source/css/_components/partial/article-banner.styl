@@ -5,7 +5,7 @@
   height: unset
 
 .article.banner
-  .bg+.content
+  .bg + .content
     min-height: 224px
     --text-banner: white
     --button-hover-bg: rgba(white, 0.25)
@@ -14,9 +14,11 @@
   .top
     align-items: flex-start
     margin: 1rem calc(1rem - 4px)
+
   .title
     font-size: $fsh1
     color: var(--text-banner)
+
   h1
     line-height: 1.2
     margin: 0.25rem 0
@@ -30,7 +32,7 @@
 
 // 动画配置
 .article.banner
-  .bg+.content
+  .bg + .content
     trans1 all
     --blur-bg: rgba(black, 0)
     --blur-px: 0px
@@ -40,8 +42,9 @@
       background: var(--blur-bg)
       backdrop-filter: saturate(var(--blur-sat)) blur(var(--blur-px))
       -webkit-backdrop-filter: saturate(var(--blur-sat)) blur(var(--blur-px))
+
   &:hover
-    .bg+.content
+    .bg + .content
       --blur-bg: rgba(black, 0.1)
       --blur-px: 20px
       --blur-sat: 150%
@@ -50,8 +53,10 @@
   --button-hover-bg: rgba(black, 0.05)
   ondark()
     --button-hover-bg: rgba(white, 0.15)
+
   :root[data-theme="dark"] &
     ondark()
+
   :root:not([data-theme]) &
     @media (prefers-color-scheme: dark)
       ondark()

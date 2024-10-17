@@ -1,13 +1,13 @@
 /* global CONFIG */
 // eslint-disable-next-line no-console
 
-(function(window, document) {
+(function (window, document) {
   // 查询存储的记录
   function getRecord(Counter, target) {
-    return new Promise(function(resolve, reject) {
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ target })))
+    return new Promise(function (resolve, reject) {
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
         .then(resp => resp.json())
-        .then(({ results, code, error }) => {
+        .then(({results, code, error}) => {
           if (code === 401) {
             throw error;
           }
@@ -15,7 +15,7 @@
             var record = results[0];
             resolve(record);
           } else {
-            Counter('post', '/classes/Counter', { target, time: 0 })
+            Counter('post', '/classes/Counter', {target, time: 0})
               .then(resp => resp.json())
               .then((record, error) => {
                 if (error) {
@@ -23,20 +23,20 @@
                 }
                 resolve(record);
               }).catch(error => {
-                console.error('Failed to create: ', error);
-                reject(error);
-              });
+              console.error('Failed to create: ', error);
+              reject(error);
+            });
           }
         }).catch((error) => {
-          console.error('LeanCloud Counter Error: ', error);
-          reject(error);
-        });
+        console.error('LeanCloud Counter Error: ', error);
+        reject(error);
+      });
     });
   }
 
   // 发起自增请求
   function increment(Counter, incrArr) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       Counter('post', '/batch', {
         'requests': incrArr
       }).then((res) => {
@@ -56,10 +56,10 @@
   function buildIncrement(objectId) {
     return {
       'method': 'PUT',
-      'path'  : `/1.1/classes/Counter/${objectId}`,
-      'body'  : {
+      'path': `/1.1/classes/Counter/${objectId}`,
+      'body': {
         'time': {
-          '__op'  : 'Increment',
+          '__op': 'Increment',
           'amount': 1
         }
       }
@@ -165,8 +165,8 @@
       return fetch(`${api_server}/1.1${url}`, {
         method,
         headers: {
-          'X-LC-Id'     : appId,
-          'X-LC-Key'    : appKey,
+          'X-LC-Id': appId,
+          'X-LC-Key': appKey,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)

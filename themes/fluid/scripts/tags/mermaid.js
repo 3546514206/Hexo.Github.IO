@@ -16,4 +16,4 @@ ${content}
   text
   {% endmermaid %}
  */
-hexo.extend.tag.register('mermaid', mermaid, { ends: true });
+hexo.extend.tag.register('mermaid', mermaid, {ends: true});

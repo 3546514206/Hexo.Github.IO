@@ -1,6 +1,6 @@
 name: Any Question【问题反馈】
 description: 主题使用方面任何问题或建议。
-labels: []
+labels: [ ]
 body:
   - type: checkboxes
     id: checks

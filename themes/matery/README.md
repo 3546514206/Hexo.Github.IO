@@ -22,7 +22,9 @@
 - TOC
 - Can be set append the copyright information when copying the content of the post
 - Can be set to do password verification when reading a post
-- Comment module of [Gitalk](https://gitalk.github.io/), [Gitment](https://imsun.github.io/gitment/), [Valine](https://valine.js.org/) and [Disqus](https://disqus.com/).(Gitalk is recommended)
+- Comment module
+  of [Gitalk](https://gitalk.github.io/), [Gitment](https://imsun.github.io/gitment/), [Valine](https://valine.js.org/)
+  and [Disqus](https://disqus.com/).(Gitalk is recommended)
 - Integrated [Busuanzi Statistics](http://busuanzi.ibruce.info/), `Google Analytics` and post word count statistics.
 - Support music playback and video playback on the homepage
 - Support the `emoji` emoticon and use the `markdown emoji` grammar to directly generate the corresponding emoticon.
@@ -39,9 +41,11 @@ Thanks to these contributors, without whom, hexo-theme-matery won't be this perf
 
 ## Download
 
-hexo-theme-matery **recommend you to use Hexo 5.0.0 and above**. If you already have your own [Hexo](https://hexo.io/zh-cn/) blog, I suggest you upgrade Hexo to the latest stable version.
+hexo-theme-matery **recommend you to use Hexo 5.0.0 and above**. If you already have your
+own [Hexo](https://hexo.io/zh-cn/) blog, I suggest you upgrade Hexo to the latest stable version.
 
-Click [here](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) to download master branch of the last stable version of the code.After decompressing, copy the `hexo-theme-matery` folder
+Click [here](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) to download master branch of the last
+stable version of the code.After decompressing, copy the `hexo-theme-matery` folder
 to your `themes` folder of your Hexo blog project.
 
 Of course, you can use `git clone` to download in your `themes` folder.
@@ -59,12 +63,14 @@ Modify the value of `theme` in `_config.yml` of Hexo's root folder: `theme: hexo
 #### Suggestions for other changes to the `_config.yml`:
 
 - Please modify the value of `url` of `_config.yml` to your website's main `URL` (e.g. `http://xxx.github.io`).
-- It's recommended to modify the value of the two `per_page` to be a multiple of `6`, such as: `12`, `18`, etc. so that the posts list can be displayed well under each screen.
+- It's recommended to modify the value of the two `per_page` to be a multiple of `6`, such as: `12`, `18`, etc. so that
+  the posts list can be displayed well under each screen.
 - If you are a Chinese user, it is recommended to change the value of `language` to `zh-CN`.
 
 ### new categories page
 
-`categories` page is to show all of categories. If the `source` directory of your blog doesn't have `categories/index.md` file, you need to create a new one like this:
+`categories` page is to show all of categories. If the `source` directory of your blog doesn't have
+`categories/index.md` file, you need to create a new one like this:
 
 ```bash
 hexo new page "categories"
@@ -83,7 +89,8 @@ layout: "categories"
 
 ### new tags page
 
-`tags` page is to show all of tags. If the `source` directory of your blog doesn't have `tags/index.md` file, you need to create a new one like this:
+`tags` page is to show all of tags. If the `source` directory of your blog doesn't have `tags/index.md` file, you need
+to create a new one like this:
 
 ```bash
 hexo new page "tags"
@@ -102,7 +109,8 @@ layout: "tags"
 
 ### new about page
 
-`about` page is to show my blog and myself information. If the `source` directory of your blog doesn't have `about/index.md` file, create a new one like this:
+`about` page is to show my blog and myself information. If the `source` directory of your blog doesn't have
+`about/index.md` file, create a new one like this:
 
 ```bash
 hexo new page "about"
@@ -121,7 +129,8 @@ layout: "about"
 
 ### new contact page (Optional)
 
-`contact` page is to show contact information. If the `source` directory of your blog doesn't have `contact/index.md` file, you need to new one like this:
+`contact` page is to show contact information. If the `source` directory of your blog doesn't have `contact/index.md`
+file, you need to new one like this:
 
 ```bash
 hexo new page "contact"
@@ -138,11 +147,14 @@ layout: "contact"
 ---
 ```
 
-> **Note**：The message board depends on a third-party comment system, please **activate** your comment system to be effective. And in the theme's `_config.yml` file, the "**menu**" of the `19` to `21` line is configured, and the comment about the message board could be canceled.
+> **Note**：The message board depends on a third-party comment system, please **activate** your comment system to be
+> effective. And in the theme's `_config.yml` file, the "**menu**" of the `19` to `21` line is configured, and the comment
+> about the message board could be canceled.
 
 ### new friends link page (Optional)
 
-The `friends` page is a page for displaying **Friendly Links** information. If you don't have a `friends/index.md` file in your blog's `source` directory, then you need to create a new one. The command is as follows:
+The `friends` page is a page for displaying **Friendly Links** information. If you don't have a `friends/index.md` file
+in your blog's `source` directory, then you need to create a new one. The command is as follows:
 
 ```bash
 hexo new page "friends"
@@ -159,7 +171,8 @@ layout: "friends"
 ---
 ```
 
-Also, create a new `_data` directory in your blog's `source` directory and a new `friends.json` file in the `_data` directory. The contents of the file is as follows:
+Also, create a new `_data` directory in your blog's `source` directory and a new `friends.json` file in the `_data`
+directory. The contents of the file is as follows:
 
 ```json
 [{
@@ -182,6 +195,7 @@ Also, create a new `_data` directory in your blog's `source` directory and a new
     "title": "Read More"
 }]
 ```
+
 ### new 404 page
 
 If the `source` directory of your blog doesn't have `404.md` file, you need create a new one using:
@@ -235,7 +249,8 @@ menu:
 
 If you need a secondary menu, you can do the following on the basis of the original basic menu navigation.
 
-1. Add the `children` keyword to the first level menu that needs to add a secondary menu (e.g.: add `children` under the `About` menu)
+1. Add the `children` keyword to the first level menu that needs to add a secondary menu (e.g.: add `children` under the
+   `About` menu)
 2. Create a secondary menu name, path url and icon icon under `children`.
 3. Note that each secondary menu module must be preceded by `-`.
 4. Note the indentation format.
@@ -279,11 +294,15 @@ menu:
 
 ### Code Highlight
 
-Starting from Hexo 5.0.0 version, it comes with support for `prismjs` code syntax highlighting, and hexo-theme-matery has been modified to support it.
+Starting from Hexo 5.0.0 version, it comes with support for `prismjs` code syntax highlighting, and hexo-theme-matery
+has been modified to support it.
 
-If the plugin of `hexo-prism-plugin` has been installed in your blog, then you need to execute `npm uninstall hexo-prism-plugin` to uninstall it, otherwise there will be `&#123;`, `&#125;` escape characters in the code block of the post.
+If the plugin of `hexo-prism-plugin` has been installed in your blog, then you need to execute
+`npm uninstall hexo-prism-plugin` to uninstall it, otherwise there will be `&#123;`, `&#125;` escape characters in the
+code block of the post.
 
-Then, modify the value of `highlight.enable` to `false` in `_config.yml` at the root your hexo project, and set the value of `prismjs.enable` to `true`, the main configuration is as follows:
+Then, modify the value of `highlight.enable` to `false` in `_config.yml` at the root your hexo project, and set the
+value of `prismjs.enable` to `true`, the main configuration is as follows:
 
 ```yaml
 highlight:
@@ -300,11 +319,15 @@ prismjs:
   tab_replace: ''
 ```
 
-The default `prismjs` theme in the hexo-theme-matery is `Tomorrow Night`, if you want to customize your own theme, you can go to [prismjs download page](https://prismjs.com/download.html) to download yourself favorite theme `css` file, then name this css theme file `prism.css`, replace the `source/libs/prism/prism.css` file in the theme folder of `hexo-theme-matery`.
+The default `prismjs` theme in the hexo-theme-matery is `Tomorrow Night`, if you want to customize your own theme, you
+can go to [prismjs download page](https://prismjs.com/download.html) to download yourself favorite theme `css` file,
+then name this css theme file `prism.css`, replace the `source/libs/prism/prism.css` file in the theme folder of
+`hexo-theme-matery`.
 
 ### Search
 
-The theme uses the Hexo plugin [hexo-generator-search](https://github.com/wzpan/hexo-generator-search) to search the content, and the Installation command is as follows:
+The theme uses the Hexo plugin [hexo-generator-search](https://github.com/wzpan/hexo-generator-search) to search the
+content, and the Installation command is as follows:
 
 ```bash
 npm install hexo-generator-search --save
@@ -320,7 +343,10 @@ search:
 
 ### Translate Chinese Link to Pinyin (Recommended)
 
-Default permalinks of Hexo will include Chinese if your article's title is Chinese. But it's adverse to `SEO`, and `gitment` comments don't support Chinese Link as well. We can use the [hexo-permalink-pinyin](https://github.com/viko16/hexo-permalink-pinyin) Hexo plugin to generate permalinks in Chinese Pinyin when generating posts.
+Default permalinks of Hexo will include Chinese if your article's title is Chinese. But it's adverse to `SEO`, and
+`gitment` comments don't support Chinese Link as well. We can use
+the [hexo-permalink-pinyin](https://github.com/viko16/hexo-permalink-pinyin) Hexo plugin to generate permalinks in
+Chinese Pinyin when generating posts.
 
 Installation command is as follows：
 
@@ -336,11 +362,13 @@ permalink_pinyin:
   separator: '-' # default: '-'
 ```
 
-> **Note**: [hexo-abbrlink](https://github.com/rozbo/hexo-abbrlink) can generate non-Chinese link in addition to this plugin.
+> **Note**: [hexo-abbrlink](https://github.com/rozbo/hexo-abbrlink) can generate non-Chinese link in addition to this
+> plugin.
 
 ### Post word count statistics plugin (Recommended)
 
-If you want to display the post word count and reading time information in the post detail page, you can install the [hexo-wordcount](https://github.com/willin/hexo-wordcount) plugin.
+If you want to display the post word count and reading time information in the post detail page, you can install
+the [hexo-wordcount](https://github.com/willin/hexo-wordcount) plugin.
 
 Installation command is as follows：
 
@@ -362,7 +390,10 @@ postInfo:
 
 ### Add emoji support (Optional)
 
-This theme adds support for the `emoji` emoticon, using the Hexo plugin [hexo-filter-github-emojis](https://npm.taobao.org/package/hexo-filter-github-emojis) to support the generation of the `emoji` expression. The corresponding `markdown emoji` syntax (`::`, for example: `:smile:`) is converted into a `emoji` expression that jumps. The installation command is as follows:
+This theme adds support for the `emoji` emoticon, using the Hexo
+plugin [hexo-filter-github-emojis](https://npm.taobao.org/package/hexo-filter-github-emojis) to support the generation
+of the `emoji` expression. The corresponding `markdown emoji` syntax (`::`, for example: `:smile:`) is converted into a
+`emoji` expression that jumps. The installation command is as follows:
 
 ```bash
 npm install hexo-filter-github-emojis --save
@@ -379,11 +410,13 @@ githubEmojis:
   customEmojis:
 ```
 
-Execute `hexo clean && hexo g` to regenerate the blog file, and then you can see the expression you wrote in the `emoji` grammar in the corresponding position in the article.
+Execute `hexo clean && hexo g` to regenerate the blog file, and then you can see the expression you wrote in the `emoji`
+grammar in the corresponding position in the article.
 
 ### Add RSS feed support (Optional)
 
-The theme uses the Hexo plugin [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) to support `RSS` feed , and the Installation command is as follows:
+The theme uses the Hexo plugin [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) to support `RSS`
+feed , and the Installation command is as follows:
 
 ```bash
 npm install hexo-generator-feed --save
@@ -403,23 +436,30 @@ feed:
   order_by: -date
 ```
 
-Execute `hexo clean && hexo g` to regenerate the blog file, and then you can see the `atom.xml` file in the `public` folder, indicating that you have successfully installed.
+Execute `hexo clean && hexo g` to regenerate the blog file, and then you can see the `atom.xml` file in the `public`
+folder, indicating that you have successfully installed.
 
 ### [DaoVoice](http://www.daovoice.io/) online chat (Optional)
 
-Go to the official website of [DaoVoice](http://www.daovoice.io/), register and get the `app_id`. Fill the `app_id` into the the theme `_config.yml` file.
+Go to the official website of [DaoVoice](http://www.daovoice.io/), register and get the `app_id`. Fill the `app_id` into
+the the theme `_config.yml` file.
 
 ### [Tidio](https://www.tidio.com/) online chat (Optional)
 
-Go to the official website of [Tidio](https://www.tidio.com/), register and get the `Public Key`. Fill the `Public Key` into the the theme `_config.yml` file.
+Go to the official website of [Tidio](https://www.tidio.com/), register and get the `Public Key`. Fill the `Public Key`
+into the the theme `_config.yml` file.
 
 ### Modify website footer
 
-Website footer may need to be customized, and it is not convenient to make it part of the configuration, So you need to modify and process it by yourself. Changes could be made in the theme's `/layout/_partial/footer.ejs` file, including the site information, the theme used, the amount of traffic and so on.
+Website footer may need to be customized, and it is not convenient to make it part of the configuration, So you need to
+modify and process it by yourself. Changes could be made in the theme's `/layout/_partial/footer.ejs` file, including
+the site information, the theme used, the amount of traffic and so on.
 
 ### Modify social links
 
-In the theme `_config.yml` file, the configurations of `QQ`, `GitHub` and mailbox and more are supported by default. In the `/layout/_partial/social-link.ejs` file of the theme, you can add or modify social link addresses as you need. To add a link, please refer to the following code:
+In the theme `_config.yml` file, the configurations of `QQ`, `GitHub` and mailbox and more are supported by default. In
+the `/layout/_partial/social-link.ejs` file of the theme, you can add or modify social link addresses as you need. To
+add a link, please refer to the following code:
 
 ```html
 <% if (theme.socialLink.github) { %>
@@ -429,7 +469,8 @@ In the theme `_config.yml` file, the configurations of `QQ`, `GitHub` and mailbo
 <% } %>
 ```
 
-You can search social icons such as `fab fa-github` in [Font Awesome](https://fontawesome.com/icons). There are common social icons you can reference:
+You can search social icons such as `fab fa-github` in [Font Awesome](https://fontawesome.com/icons). There are common
+social icons you can reference:
 
 - Facebook: `fab fa-facebook`
 - Twitter: `fab fa-twitter`
@@ -469,43 +510,48 @@ music:
   listFolded: true  # indicate whether list should folded at first
 ```
 
->`server` values :  `netease` (NetEase  cloud music) , `tencent` (QQMusic) , `kugou` (KuGouMusic) , `xiami`  
->(XiamMusic) , `baidu` (BaiduMusic)  
->`type` values : `song`  ,   `playlist` , `album` , `search` , `artist`  
->For example to get the `id`:open NetEase cloud music in the browser , click the playlist of my love , there will a string of  
->numbers  in the browser\`s address bar  ,  the `playlist`\`s `id` just is the string of numbers.
-
-
+> `server` values :  `netease` (NetEase cloud music) , `tencent` (QQMusic) , `kugou` (KuGouMusic) , `xiami`  
+> (XiamMusic) , `baidu` (BaiduMusic)  
+> `type` values : `song`  ,   `playlist` , `album` , `search` , `artist`  
+> For example to get the `id`:open NetEase cloud music in the browser , click the playlist of my love , there will a
+> string of  
+> numbers in the browser\`s address bar , the `playlist`\`s `id` just is the string of numbers.
 
 ## Post Front-matter
 
 ### Detailed Front-matter options
 
-Everything in the Front-matter option is **not required**. But I still recommend at least filling in the values of `title` and `date`.
+Everything in the Front-matter option is **not required**. But I still recommend at least filling in the values of
+`title` and `date`.
 
-| Options   | Defaults              | Description                                             |
-| ---------- | --------------------------- | ------------------------------------------------------------ |
-| title      | Markdown's file title | Post title, it is highly recommended to fill in this option |
-| date       | Date and time when the file created | Publish time, it is highly recommended to fill in this option, and it is best to ensure that it is globally unique |
-| author     | `author` in root `_config.yml` | Post author                                    |
-| img        | a value in `featureImages`  | Post feature image，For example: `http://xxx.com/xxx.jpg` |
-| top        | `true`                      | Recommended post (whether the post is topped), if the `top` value is `true`, it will be recommended as a homepage post. |
-| cover      | `false`                     | The `v1.0.2` version is added to indicate whether the post needs to be added to the homepage carousel cover. |
-| coverImg   | null                        | The new version of `v1.0.2` indicates that the post needs to display the image path on the cover of the homepage. If not, the default image of the post is used by default. |
-| password   | null                        | The post read the password. If you want to set the reading verification password for the article, you can set the value of `password`, which must be encrypted with `SHA256` to prevent others from seeing it. The premise is that the `verifyPassword` option is activated in the theme's `config.yml` |
-| toc        | `true`                      | Whether TOC is turned on or not, you can turn off the TOC function for an article. The premise is that the `toc` option is activated in the theme's `config.yml` |
-| mathjax    | `false`                     | Whether to enable math formula support, whether this article starts `mathjax`, and you need to open it in the theme `_config.yml` file. |
-| summary    | null                        | Post summary, custom post summary content, if the attribute has a value, the post card summary will display the text, otherwise the program will automatically intercept part of the article as a summary |
-| categories | null                        | Article classification, the classification of this topic represents a macroscopically large classification, only one article is recommended for one classification. |
-| tags       | null                        | Post label, a post can have multiple labels |
-| keywords   | Post Title                  | Post key Words With SEO                               |
-| reprintPolicy       | cc_by              | Post reprint policy, value could be one of cc_by, cc_by_nd, cc_by_sa, cc_by_nc, cc_by_nc_nd, cc_by_nc_sa, cc0, noreprint and pay |
+| Options       | Defaults                            | Description                                                                                                                                                                                                                                                                                             |
+|---------------|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title         | Markdown's file title               | Post title, it is highly recommended to fill in this option                                                                                                                                                                                                                                             |
+| date          | Date and time when the file created | Publish time, it is highly recommended to fill in this option, and it is best to ensure that it is globally unique                                                                                                                                                                                      |
+| author        | `author` in root `_config.yml`      | Post author                                                                                                                                                                                                                                                                                             |
+| img           | a value in `featureImages`          | Post feature image，For example: `http://xxx.com/xxx.jpg`                                                                                                                                                                                                                                                |
+| top           | `true`                              | Recommended post (whether the post is topped), if the `top` value is `true`, it will be recommended as a homepage post.                                                                                                                                                                                 |
+| cover         | `false`                             | The `v1.0.2` version is added to indicate whether the post needs to be added to the homepage carousel cover.                                                                                                                                                                                            |
+| coverImg      | null                                | The new version of `v1.0.2` indicates that the post needs to display the image path on the cover of the homepage. If not, the default image of the post is used by default.                                                                                                                             |
+| password      | null                                | The post read the password. If you want to set the reading verification password for the article, you can set the value of `password`, which must be encrypted with `SHA256` to prevent others from seeing it. The premise is that the `verifyPassword` option is activated in the theme's `config.yml` |
+| toc           | `true`                              | Whether TOC is turned on or not, you can turn off the TOC function for an article. The premise is that the `toc` option is activated in the theme's `config.yml`                                                                                                                                        |
+| mathjax       | `false`                             | Whether to enable math formula support, whether this article starts `mathjax`, and you need to open it in the theme `_config.yml` file.                                                                                                                                                                 |
+| summary       | null                                | Post summary, custom post summary content, if the attribute has a value, the post card summary will display the text, otherwise the program will automatically intercept part of the article as a summary                                                                                               |
+| categories    | null                                | Article classification, the classification of this topic represents a macroscopically large classification, only one article is recommended for one classification.                                                                                                                                     |
+| tags          | null                                | Post label, a post can have multiple labels                                                                                                                                                                                                                                                             |
+| keywords      | Post Title                          | Post key Words With SEO                                                                                                                                                                                                                                                                                 |
+| reprintPolicy | cc_by                               | Post reprint policy, value could be one of cc_by, cc_by_nd, cc_by_sa, cc_by_nc, cc_by_nc_nd, cc_by_nc_sa, cc0, noreprint and pay                                                                                                                                                                        |
 
-> **Note**: 
-> 1. post's featured picture will take remainder if not writing the `img` property, and choose the featured picture of theme to let all of post's picture **have their own characteristics**.
-> 2. The value of `date` should try to ensure that each article is unique, because `Gitalk` and `Gitment` recognize `id` in this topic are uniquely identified by the value of `date`.
-> 3. If you want to set the ability to read the verification password for the article, you should not only set the value of the password with SHA256 encryption in Front-matter, but also activate the configuration in the theme `_config.yml`.
-> 4. you can define reprint policy for a single article in the front-matter of the specific md file using this key: reprintPolicy
+> **Note**:
+> 1. post's featured picture will take remainder if not writing the `img` property, and choose the featured picture of
+     theme to let all of post's picture **have their own characteristics**.
+> 2. The value of `date` should try to ensure that each article is unique, because `Gitalk` and `Gitment` recognize `id`
+     in this topic are uniquely identified by the value of `date`.
+> 3. If you want to set the ability to read the verification password for the article, you should not only set the value
+     of the password with SHA256 encryption in Front-matter, but also activate the configuration in the theme
+     `_config.yml`.
+> 4. you can define reprint policy for a single article in the front-matter of the specific md file using this key:
+     reprintPolicy
 
 The following are examples of the post's `Front-matter`.
 
@@ -575,10 +621,13 @@ You can modify some custom modification in `_config.yml` as follows:
 - My Gallery
 - Gitalk, Gitment, Valine and Disqus
 - [Busuanzi Statistics](http://busuanzi.ibruce.info/) And Google Analytics
-- The map of default featured pictures. The theme will take remainder according to `hashcode` of the post title if the post does not set featured pictures.
+- The map of default featured pictures. The theme will take remainder according to `hashcode` of the post title if the
+  post does not set featured pictures.
 
-**I think everyone should have their own style and feature for their blogs**. If you are not satisfied with the theme's functions and color, you can modify them by yourself,
-and more free functions and details could be changed by modifying source code when it is hard to achieve by modifying the theme's `_config.yml`.
+**I think everyone should have their own style and feature for their blogs**. If you are not satisfied with the theme's
+functions and color, you can modify them by yourself,
+and more free functions and details could be changed by modifying source code when it is hard to achieve by modifying
+the theme's `_config.yml`.
 
 ### Customizing theme color
 
@@ -601,13 +650,16 @@ Search `.bg-color` to modify background color in `/source/css/matery.css` in the
 
 ### Modify banner picture and post's featured pictures
 
-You can change `banner` pictures in `/source/medias/banner` as you like .Theme code can switch dynamically every day and just need 7 pictures.If you master `JavaScript`, you can change it to your favorite switching logic, such as Random switching. The code for switching `banner`is in `<script></script>` of `/layout/_partial/bg-cover-content.ejs`file.
+You can change `banner` pictures in `/source/medias/banner` as you like .Theme code can switch dynamically every day and
+just need 7 pictures.If you master `JavaScript`, you can change it to your favorite switching logic, such as Random
+switching. The code for switching `banner`is in `<script></script>` of `/layout/_partial/bg-cover-content.ejs`file.
 
 ```javascript
 $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
 ```
 
-There are 24 featured pictures in `/source/medias/featureimages`, you can add or delete some, and modify corresponding settings in the theme's `_config.yml`.
+There are 24 featured pictures in `/source/medias/featureimages`, you can add or delete some, and modify corresponding
+settings in the theme's `_config.yml`.
 
 ## Changelog
 

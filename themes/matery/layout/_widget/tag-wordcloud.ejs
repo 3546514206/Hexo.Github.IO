@@ -16,7 +16,7 @@
 <script type="text/javascript">
     <%
     let tagWordArr = [];
-    site.tags.map(function(tag) {
+    site.tags.map(function (tag) {
         tagWordArr.push({'text': tag.name, 'weight': tag.length, 'link': decodeURI(url_for(tag.path))});
     });
 
