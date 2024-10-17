@@ -123,7 +123,7 @@ layout:
 # GitHub Ribbons-封面右上角的forkme，换样式直接在source/images目录下替换forkme图片
 github:
   # (关闭请设置为false)
-  enable: true
+  enable: false
   url: https://github.com/3546514206
 
 # 网易云音乐插件
@@ -136,11 +136,11 @@ music:
 
 # 访问量统计(不蒜子)
 busuanzi:
-  enable: true
+  enable: false
 
 # 友盟cnzz统计(url填js代码src链接)
 cnzz:
-  enable: true
+  enable: false
   url: #
 
 # Google Analytics
@@ -165,7 +165,7 @@ mermaid:
   theme: forest
 
 # 网站成立年份(默认为 2019，若填入年份小于当前年份，则显示为 2018-2019 类似的格式)
-since: 2023
+since: 2017
 
 ## ICP备案信息尾部显示
 #icp:
