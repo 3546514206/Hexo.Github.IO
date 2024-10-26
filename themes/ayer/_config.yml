@@ -14,7 +14,7 @@ menu:
 # https://github.com/mattboldt/typed.js
 subtitle:
   enable: true # 是否开启动效
-  text: 我是一名软件工程师，主要使用 Java 编程语言，热衷于探索 GitHub。 # 显示的文字
+  text: 我是一名软件工程师，主要使用 Java 和 Python，热衷于探索 GitHub。 # 显示的文字
   text2: 我开发过用户量达千万级的银行业务层系统，编写过平台层开发框架，还参与过云基础设施的架构设计。 # 滚动播放，如果不需要可以留空
   text3: 我专注于修炼正规、大气的编程素养，梦想成为软件工程领域的大师级人物。 # 最多支持三段文字
   startDelay: 3 # 延迟时间
