@@ -1,5 +1,5 @@
 ---
-title: 一些JVM平台上的知识点
+title: 一些JVM平台上的并发知识
 date: 2024-10-29 09:35:20
 tags:
 - JVM
