@@ -14,6 +14,9 @@ update_code() {
     git pull origin main
 
     echo "Code updated successfully."
+
+    # 每次重新拉取之后都需要更新脚本的执行权限
+    chmod 777 ./restart.sh
 }
 
 # 调用更新代码的函数
