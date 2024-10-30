@@ -45,3 +45,5 @@ echo "Server restarted successfully and running in the background."
 # 每次重新拉取之后都需要更新脚本的执行权限
 chmod 777 ./restart.sh
 echo "The execution permission for restart.sh has been changed."
+
+
