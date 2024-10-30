@@ -1,10 +1,26 @@
 #!/bin/bash
 
+# 定义更新代码的函数，确保在调用之前已经定义
+update_code() {
+    echo "Starting to update code..."
+
+    # 丢弃本地的未提交更改
+    echo "Discarding local changes..."
+    git reset --hard          # 重置所有未提交的更改
+    git clean -fd             # 删除未跟踪的文件和文件夹
+
+    # 拉取远程仓库的最新代码
+    echo "Pulling latest changes from remote repository..."
+    git pull origin main
+
+    echo "Code updated successfully."
+}
+
+# 调用更新代码的函数
+update_code
+
 # 定义工作端口
 PORT=4000
-
-# 先调用更新代码的函数
-update_code
 
 # 查找并杀掉之前的进程
 PID=$(lsof -t -i:$PORT)
@@ -25,19 +41,3 @@ nohup npm run server > server.log 2>&1 &
 disown
 
 echo "Server restarted successfully and running in the background."
-
-# 定义更新代码的函数
-update_code() {
-    echo "Starting to update code..."
-
-    # 丢弃本地的未提交更改
-    echo "Discarding local changes..."
-    git reset --hard          # 重置所有未提交的更改
-    git clean -fd             # 删除未跟踪的文件和文件夹
-
-    # 拉取远程仓库的最新代码
-    echo "Pulling latest changes from remote repository..."
-    git pull origin main
-
-    echo "Code updated successfully."
-}
