@@ -73,9 +73,9 @@ disown
 
 # 检查服务是否成功启动
 log "Checking if the service is running on port $PORT..."
-MAX_RETRIES=10
+MAX_RETRIES=99
 RETRY_COUNT=0
-SLEEP_INTERVAL=2
+SLEEP_INTERVAL=5
 
 while (( RETRY_COUNT < MAX_RETRIES )); do
     if lsof -i:$PORT >/dev/null; then
