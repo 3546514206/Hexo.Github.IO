@@ -15,17 +15,17 @@ log_timestamp() {
 
 # 定义日志输出函数
 log() {
-    echo -e "[${BLUE}INFO${NC}] [${CYAN}$(log_timestamp)${NC}] [${YELLOW}$$${NC}] $1"
+    echo -e "[${CYAN}$(log_timestamp)${NC}] [${YELLOW}$$${NC}] [${BLUE}INFO${NC}] $1"
 }
 
 # 定义成功日志输出函数
 log_success() {
-    echo -e "[${BLUE}SUCCESS${NC}] [${CYAN}$(log_timestamp)${NC}] [${YELLOW}$$${NC}] $1"
+    echo -e "[${CYAN}$(log_timestamp)${NC}] [${YELLOW}$$${NC}] [${GREEN}SUCCESS${NC}] $1"
 }
 
 # 定义错误日志输出函数
 log_error() {
-    echo -e "[${BLUE}ERROR${NC}] [${CYAN}$(log_timestamp)${NC}] [${YELLOW}$$${NC}] $1"
+    echo -e "[${CYAN}$(log_timestamp)${NC}] [${YELLOW}$$${NC}] [${RED}ERROR${NC}] $1"
 }
 
 # 定义更新代码的函数
