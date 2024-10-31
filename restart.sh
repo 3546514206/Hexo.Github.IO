@@ -59,7 +59,7 @@ PID=$(lsof -t -i:$PORT)
 if [ -n "$PID" ]; then
     log "Killing process $PID running on port $PORT..."
     kill -9 $PID
-    log_success "Process $PID killed."
+    log_success "Process $PID killed successfully."
 else
     log "No process found running on port $PORT."
 fi
@@ -79,7 +79,7 @@ SLEEP_INTERVAL=5
 
 while (( RETRY_COUNT < MAX_RETRIES )); do
     if lsof -i:$PORT >/dev/null; then
-        log_success "Service started successfully on port $PORT."
+        log_success "Service started on port $PORT successfully."
         break
     else
         log "Service not available yet, retrying in $SLEEP_INTERVAL seconds..."
