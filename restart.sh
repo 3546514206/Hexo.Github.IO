@@ -1,10 +1,12 @@
 #!/bin/bash
 
 # 定义颜色
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-NC='\033[0m' # 无色
+RED='\033[0;31m'       # 错误信息
+GREEN='\033[0;32m'     # 成功信息
+YELLOW='\033[0;33m'    # 一般信息
+BLUE='\033[0;34m'      # 日志级别
+CYAN='\033[0;36m'      # 时间戳
+NC='\033[0m'           # 无色
 
 # 获取当前时间戳
 log_timestamp() {
@@ -13,12 +15,17 @@ log_timestamp() {
 
 # 定义日志输出函数
 log() {
-    echo -e "[INFO] [$(log_timestamp)] [$$] ${YELLOW}$1${NC}"
+    echo -e "[${BLUE}INFO${NC}] [${CYAN}$(log_timestamp)${NC}] [${YELLOW}$$${NC}] $1"
+}
+
+# 定义成功日志输出函数
+log_success() {
+    echo -e "[${BLUE}SUCCESS${NC}] [${CYAN}$(log_timestamp)${NC}] [${YELLOW}$$${NC}] $1"
 }
 
 # 定义错误日志输出函数
 log_error() {
-    echo -e "[ERROR] [$(log_timestamp)] [$$] ${RED}$1${NC}"
+    echo -e "[${BLUE}ERROR${NC}] [${CYAN}$(log_timestamp)${NC}] [${YELLOW}$$${NC}] $1"
 }
 
 # 定义更新代码的函数
@@ -33,7 +40,7 @@ update_code() {
     # 拉取远程仓库的最新代码
     log "Pulling latest changes from remote repository..."
     if git pull origin main; then
-        log "Code updated successfully."
+        log_success "Code updated successfully."
     else
         log_error "Failed to update code from remote repository."
         exit 1
@@ -52,7 +59,7 @@ PID=$(lsof -t -i:$PORT)
 if [ -n "$PID" ]; then
     log "Killing process $PID running on port $PORT..."
     kill -9 $PID
-    log "Process $PID killed."
+    log_success "Process $PID killed."
 else
     log "No process found running on port $PORT."
 fi
@@ -64,8 +71,8 @@ nohup npm run server > server.log 2>&1 &
 # 将后台运行的任务从 shell 中移除
 disown
 
-log "Server restarted successfully and running in the background."
+log_success "Server restarted successfully and running in the background."
 
 # 每次重新拉取之后都需要更新脚本的执行权限
 chmod 777 ./restart.sh
-log "The execution permission for restart.sh has been changed."
+log_success "The execution permission for restart.sh has been changed."
