@@ -96,4 +96,4 @@ fi
 
 # 每次重新拉取之后都需要更新脚本的执行权限
 chmod 777 ./restart.sh
-log_success "The execution permission for restart.sh has been changed."
+# log_success "The execution permission for restart.sh has been changed."
