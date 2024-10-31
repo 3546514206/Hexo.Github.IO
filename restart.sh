@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# 定义颜色
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # 无色
+
 # 获取当前时间戳
 log_timestamp() {
     date +"%Y-%m-%d %H:%M:%S"
@@ -7,7 +13,12 @@ log_timestamp() {
 
 # 定义日志输出函数
 log() {
-    echo "[INFO] [$(log_timestamp)] [$$] $1"
+    echo -e "[INFO] [$(log_timestamp)] [$$] ${YELLOW}$1${NC}"
+}
+
+# 定义错误日志输出函数
+log_error() {
+    echo -e "[ERROR] [$(log_timestamp)] [$$] ${RED}$1${NC}"
 }
 
 # 定义更新代码的函数
@@ -24,7 +35,7 @@ update_code() {
     if git pull origin main; then
         log "Code updated successfully."
     else
-        log "Failed to update code from remote repository."
+        log_error "Failed to update code from remote repository."
         exit 1
     fi
 }
