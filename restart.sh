@@ -71,7 +71,28 @@ nohup npm run server > server.log 2>&1 &
 # 将后台运行的任务从 shell 中移除
 disown
 
-log_success "Server restarted successfully and running in the background."
+# 检查服务是否成功启动
+log "Checking if the service is running on port $PORT..."
+MAX_RETRIES=10
+RETRY_COUNT=0
+SLEEP_INTERVAL=2
+
+while (( RETRY_COUNT < MAX_RETRIES )); do
+    if lsof -i:$PORT >/dev/null; then
+        log_success "Service started successfully on port $PORT."
+        break
+    else
+        log "Service not available yet, retrying in $SLEEP_INTERVAL seconds..."
+        sleep $SLEEP_INTERVAL
+        (( RETRY_COUNT++ ))
+    fi
+done
+
+# 检查重试次数，确定服务状态
+if (( RETRY_COUNT == MAX_RETRIES )); then
+    log_error "Service failed to start on port $PORT after $(( MAX_RETRIES * SLEEP_INTERVAL )) seconds."
+    exit 1
+fi
 
 # 每次重新拉取之后都需要更新脚本的执行权限
 chmod 777 ./restart.sh
