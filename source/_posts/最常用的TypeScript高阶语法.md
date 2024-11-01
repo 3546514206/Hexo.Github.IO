@@ -157,6 +157,7 @@ function subtract(a, b) {
 
 // calculator.d.ts
 declare function add(a: number, b: number): number;
+
 declare function subtract(a: number, b: number): number;
 
 // 这个声明文件告诉 TypeScript 编译器，add 和 subtract 函数都接受两个数字参数，并返回一个数字。
