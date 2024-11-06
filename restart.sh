@@ -51,11 +51,11 @@ kill_process() {
     PID=$(lsof -t -i:$port)
 
     if [ -n "$PID" ]; then
-        log "Killing the process $PID running on port $port..."
+        log "Killing the builder process $PID running on port $port..."
         kill -9 $PID
-        log_success "Process $PID killed successfully."
+        log_success "Builder process $PID killed successfully."
     else
-        log "No process found running on port $port."
+        log "No builder process found running on port $port."
     fi
 }
 
@@ -66,20 +66,20 @@ check_builder() {
     local sleep_interval=$3
     local retry_count=0
 
-    log "Checking if any builder is running on port $port..."
+    log "Checking if any builder process is running on port $port..."
 
     while (( retry_count < max_retries )); do
         if lsof -i:$port >/dev/null; then
-            log_success "Builder started on port $port successfully."
+            log_success "Builder process started on port $port successfully."
             return 0
         else
-            log "Builder not available yet, retrying in $sleep_interval seconds..."
+            log "Builder process not available yet, retrying in $sleep_interval seconds..."
             sleep $sleep_interval
             (( retry_count++ ))
         fi
     done
 
-    log_error "Builder failed to start on port $port after $(( max_retries * sleep_interval )) seconds."
+    log_error "Builder process failed to start on port $port after $(( max_retries * sleep_interval )) seconds."
     return 1
 }
 
@@ -87,10 +87,10 @@ check_builder() {
 start_builder() {
     local log_file=$1
 
-    log "Starting the builder in the background..."
+    log "Starting the builder process in the background..."
     nohup npm run server > "$log_file" 2>&1 &
     disown
-    log_success "Builder started in the background with output redirected to $log_file"
+    log_success "Builder process started in the background with output redirected to $log_file"
 }
 
 # 部署 Nginx 静态文件的函数
