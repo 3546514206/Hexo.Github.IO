@@ -140,39 +140,44 @@ check_nginx() {
     return 1
 }
 
-# 调用更新代码的函数
-update_code
+# 主函数，调用各个步骤
+main() {
+    # 定义工作端口和日志文件
+    local port=4000
+    local log_file="server.log"
+    local max_retries=99
+    local sleep_interval=5
 
-# 定义工作端口
-PORT=4000
+    # 更新代码
+    update_code
 
-# 调用杀进程函数
-kill_process $PORT
+    # 终止现有进程
+    kill_process $port
 
-# 调用启动服务函数
-LOG_FILE="server.log"
-start_builder "$LOG_FILE"
+    # 启动构建服务
+    start_builder "$log_file"
 
-# 调用服务检查函数
-MAX_RETRIES=99
-SLEEP_INTERVAL=5
+    # 检查构建服务是否启动
+    if ! check_builder $port $max_retries $sleep_interval; then
+        exit 1
+    fi
 
-if ! check_builder $PORT $MAX_RETRIES $SLEEP_INTERVAL; then
-    exit 1
-fi
+    # 等待一段时间后再次杀掉构建服务进程
+    sleep $sleep_interval
+    kill_process $port
 
-sleep $SLEEP_INTERVAL
+    # 部署 Nginx 静态文件
+    deploy_nginx
 
-# 再次杀进程
-kill_process $PORT
+    # 检查 Nginx 是否正常工作
+    if ! check_nginx; then
+        exit 1
+    fi
 
-# 部署 Nginx 静态文件
-deploy_nginx
+    # 更新脚本的执行权限
+    chmod 777 ./restart.sh
+    log_success "Execution permission for restart.sh has been set."
+}
 
-# 检查 Nginx 是否正常工作
-if ! check_nginx; then
-    exit 1
-fi
-
-# 更新脚本的执行权限
-chmod 777 ./restart.sh
+# 调用主函数
+main
