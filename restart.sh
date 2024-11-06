@@ -176,7 +176,7 @@ main() {
 
     # 更新脚本的执行权限
     chmod 777 ./restart.sh
-    log_success "Execution permission for restart.sh has been set."
+#    log_success "Execution permission for restart.sh has been set."
 }
 
 # 调用主函数
