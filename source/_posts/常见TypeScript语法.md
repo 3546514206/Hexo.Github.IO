@@ -1,5 +1,5 @@
 ---
-title: TypeScript常见基础语法
+title: 最常用的TypeScript基础语法
 date: 2024-11-06 09:48:12
 tags:
 - TypeScript
