@@ -18,24 +18,22 @@ log() {
     printf "[${CYAN}%-19s${NC}] [${YELLOW}%6d${NC}] [${BLUE}%-7s${NC}] %s\n" "$(log_timestamp)" "$$" "INFO" "$1"
 }
 
-# 定义成功日志输出函数
 log_success() {
     printf "[${CYAN}%-19s${NC}] [${YELLOW}%6d${NC}] [${GREEN}%-7s${NC}] %s\n" "$(log_timestamp)" "$$" "SUCCESS" "$1"
 }
 
-# 定义错误日志输出函数
 log_error() {
     printf "[${CYAN}%-19s${NC}] [${YELLOW}%6d${NC}] [${RED}%-7s${NC}] %s\n" "$(log_timestamp)" "$$" "ERROR" "$1"
 }
 
-# 定义更新代码的函数
+# 更新代码的函数
 update_code() {
     log "Starting to update code..."
 
     # 丢弃本地的未提交更改
     log "Discarding local changes..."
-    git reset --hard          # 重置所有未提交的更改
-    git clean -fd             # 删除未跟踪的文件和文件夹
+    git reset --hard
+    git clean -fd
 
     # 拉取远程仓库的最新代码
     log "Pulling latest changes from remote repository..."
@@ -47,53 +45,134 @@ update_code() {
     fi
 }
 
+# 定义杀进程的函数
+kill_process() {
+    local port=$1
+    PID=$(lsof -t -i:$port)
+
+    if [ -n "$PID" ]; then
+        log "Killing the process $PID running on port $port..."
+        kill -9 $PID
+        log_success "Process $PID killed successfully."
+    else
+        log "No process found running on port $port."
+    fi
+}
+
+# 定义服务检查的函数
+check_builder() {
+    local port=$1
+    local max_retries=$2
+    local sleep_interval=$3
+    local retry_count=0
+
+    log "Checking if any builder is running on port $port..."
+
+    while (( retry_count < max_retries )); do
+        if lsof -i:$port >/dev/null; then
+            log_success "Builder started on port $port successfully."
+            return 0
+        else
+            log "Builder not available yet, retrying in $sleep_interval seconds..."
+            sleep $sleep_interval
+            (( retry_count++ ))
+        fi
+    done
+
+    log_error "Builder failed to start on port $port after $(( max_retries * sleep_interval )) seconds."
+    return 1
+}
+
+# 定义启动服务的函数
+start_builder() {
+    local log_file=$1
+
+    log "Starting the builder in the background..."
+    nohup npm run server > "$log_file" 2>&1 &
+    disown
+    log_success "Builder started in the background with output redirected to $log_file"
+}
+
+# 部署 Nginx 静态文件的函数
+deploy_nginx() {
+    local src_dir="/opt/Hexo.Github.IO/public/*"
+    local dest_dir="/var/www/x.vip.cpolar.top"
+
+    log "Deleting existing files in $dest_dir..."
+    rm -rf "${dest_dir:?}/"*
+    log_success "Old files in $dest_dir deleted successfully."
+
+    log "Moving new static files from $src_dir to $dest_dir..."
+    if mv $src_dir $dest_dir; then
+        log_success "New static files moved to $dest_dir successfully."
+    else
+        log_error "Failed to move files to $dest_dir."
+        exit 1
+    fi
+
+    log "Setting permissions for $dest_dir..."
+    chmod -R 755 "$dest_dir"
+    log_success "Permissions set for $dest_dir."
+}
+
+# 检查 Nginx 是否正常工作
+check_nginx() {
+    local port=8080
+    local max_retries=10
+    local sleep_interval=5
+    local retry_count=0
+
+    log "Checking if Nginx is serving on port $port..."
+
+    while (( retry_count < max_retries )); do
+        response=$(curl -s "http://localhost:$port" | grep "杨海波")
+        if [[ -n "$response" ]]; then
+            log_success "Nginx is successfully serving the content on port $port."
+            return 0
+        else
+            log "Nginx not serving expected content yet, retrying in $sleep_interval seconds..."
+            sleep $sleep_interval
+            (( retry_count++ ))
+        fi
+    done
+
+    log_error "Nginx failed to serve expected content on port $port after $(( max_retries * sleep_interval )) seconds."
+    return 1
+}
+
 # 调用更新代码的函数
 update_code
 
 # 定义工作端口
 PORT=4000
 
-# 查找并杀掉之前的进程
-PID=$(lsof -t -i:$PORT)
+# 调用杀进程函数
+kill_process $PORT
 
-if [ -n "$PID" ]; then
-    log "Killing process $PID running on port $PORT..."
-    kill -9 $PID
-    log_success "Process $PID killed successfully."
-else
-    log "No process found running on port $PORT."
-fi
+# 调用启动服务函数
+LOG_FILE="server.log"
+start_builder "$LOG_FILE"
 
-# 重新启动进程，并将其放到后台
-log "Starting the server in the background..."
-nohup npm run server > server.log 2>&1 &
-
-# 将后台运行的任务从 shell 中移除
-disown
-
-# 检查服务是否成功启动
-log "Checking if the service is running on port $PORT..."
+# 调用服务检查函数
 MAX_RETRIES=99
-RETRY_COUNT=0
 SLEEP_INTERVAL=5
 
-while (( RETRY_COUNT < MAX_RETRIES )); do
-    if lsof -i:$PORT >/dev/null; then
-        log_success "Service started on port $PORT successfully."
-        break
-    else
-        log "Service not available yet, retrying in $SLEEP_INTERVAL seconds..."
-        sleep $SLEEP_INTERVAL
-        (( RETRY_COUNT++ ))
-    fi
-done
-
-# 检查重试次数，确定服务状态
-if (( RETRY_COUNT == MAX_RETRIES )); then
-    log_error "Service failed to start on port $PORT after $(( MAX_RETRIES * SLEEP_INTERVAL )) seconds."
+if ! check_builder $PORT $MAX_RETRIES $SLEEP_INTERVAL; then
     exit 1
 fi
 
-# 每次重新拉取之后都需要更新脚本的执行权限
+sleep $SLEEP_INTERVAL
+
+# 再次杀进程
+kill_process $PORT
+
+# 部署 Nginx 静态文件
+deploy_nginx
+
+# 检查 Nginx 是否正常工作
+if ! check_nginx; then
+    exit 1
+fi
+
+# 更新脚本的执行权限
 chmod 777 ./restart.sh
-# log_success "The execution permission for restart.sh has been changed."
