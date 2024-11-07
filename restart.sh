@@ -91,7 +91,7 @@ check_service() {
 # 更新脚本的执行权限
 update_script_permission() {
     chmod 777 ./restart.sh
-    log_success "The execution permission for restart.sh has been changed."
+#    log_success "The execution permission for restart.sh has been changed."
 }
 
 # 主函数
