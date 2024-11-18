@@ -1,6 +1,6 @@
 ---
 title: TypeScript类型系统
-date: 2024-10-30 15:20:06
+date: 2023-10-30 15:20:06
 tags:
 - TypeScript
 ---
