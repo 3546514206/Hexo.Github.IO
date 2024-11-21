@@ -18,7 +18,7 @@ menu:
 subtitle:
   enable: true # 是否开启动效
   text: 你好，我叫杨海波，我是一名软件工程师。 # 显示的文字
-  text2: 我主要使用 C++ 和 Java，我热衷于探索 GitHub。 # 滚动播放，如果不需要可以留空
+  text2: 我主要使用 Java，我热衷于探索 GitHub。 # 滚动播放，如果不需要可以留空
   text3: 我专注于修炼正规、大气的编程素养，想成为软件工程领域的大佬。 # 最多支持三段文字
   startDelay: 3 # 延迟时间
   typeSpeed: 88 # 打字速度
