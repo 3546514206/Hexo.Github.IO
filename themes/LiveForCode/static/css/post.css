@@ -1,0 +1,250 @@
+﻿/* Container CSS */
+
+.end {
+	margin: 0;
+	color: #DDD;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	text-indent: 0 !important
+}
+
+.suffix-box {
+	padding: 17px;
+	line-height: 1.6;
+	border: 1px solid hsl(220, 16%, 94%) !important;
+	border-radius: 3px;
+	background: hsl(220, 23%, 98%) !important;
+	color: #414857;
+	font-size: 14px;
+	font-family: -apple-system, SF UI Text, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
+	text-indent: 0
+}
+
+.suffix-box-left {
+	float: left;
+	width: 112px;
+	height: 112px
+}
+
+.suffix-box-left img {
+	width: 100px;
+	height: 100px;
+	padding: 5px;
+	border: 1px solid #CCC
+}
+
+.suffix-box-right {
+	float: right;
+	width: 85%
+}
+
+.suffix-box-title {
+	display: inline-block;
+	width: 70px;
+	text-align: center;
+	font-weight: bold;
+	white-space: nowrap
+}
+
+/* 如果需要 y 个字两端对齐，则为 (x - y) / (y - 1)，x 为对齐的最大字数 */
+.word-two {
+	letter-spacing: 2em
+}
+
+.word-three {
+	letter-spacing: 0.5em
+}
+
+.article-footer {
+	font-style: italic;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	overflow: hidden
+}
+
+.article-footer .category {
+	margin: 20px 0 10px
+}
+
+.article-footer .category, 
+.article-footer .tag {
+	color: #666;
+	font-size: 9pt;
+	line-height: 1.6
+}
+
+.article-footer .category a, 
+.article-footer .tag a {
+	height: 20px;
+	line-height: 20px;
+	margin: 2px 5px 0 5px;
+	padding: 3px 14px;
+	border-radius: 12px;
+	background: #E7E7E7;
+	color: #333;
+	text-decoration: none
+}
+
+.article-footer .category a:link, 
+.article-footer .category a:visited, 
+.article-footer .category a:active, 
+.article-footer .tag a:link, 
+.article-footer .tag a:visited, 
+.article-footer .tag a:active {
+	color: #666
+}
+
+.article-footer .category a:hover, 
+.article-footer .tag a:hover {
+	background: var(--primary-color) !important;
+	color: #F5F5F5 !important;
+	transition: all .4s linear 0s
+}
+
+.article-prev-next {
+	margin: 15px 0 10px 0;
+	font-size: 12px;
+	line-height: 1.8
+}
+
+a.prev-prefix:hover, 
+a.next-prefix:hover {
+	text-decoration: underline
+}
+
+.toc {
+	display: none;
+	position: absolute;
+	top: 0;
+	width: 200px;
+    height: auto;
+	z-index: 98;
+	padding-top: 10px;
+	padding-bottom: 10px;
+    background-color: rgba(255,255,255,0);
+	font-size: 15px;
+	font-family: -apple-system, SF UI Text, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
+	line-height: 1.5;
+	transform: translateX(0)
+}
+
+.toc-fixed {
+	position: fixed !important;
+	top: 0 !important
+}
+
+.toc .is-active-link::before {
+	background-color: rgb(119, 182, 255) !important
+}
+
+.toc li {
+	margin-bottom: 0
+}
+
+
+/* Media CSS */
+
+@media only screen and (max-width:1200px) {
+
+}
+
+@media only screen and (max-width:960px) {
+
+	.suffix-box-right {
+		width: 100%
+	}
+
+	.suffix-box-left {
+		display: none !important
+	}
+}
+
+@media only screen and (max-width:720px) {
+
+	.suffix-box {
+		display: none !important
+	}
+}
+
+
+/* Dark Mode CSS */
+
+@media (prefers-color-scheme: dark) {
+
+	:root:not([color-scheme]) .end {
+		color: #666666
+	}
+	
+	:root:not([color-scheme]) .suffix-box {
+		background: #444444 !important;
+		color: #BBBBBB;
+		border: 1px solid #555555 !important
+	}
+	
+	:root:not([color-scheme]) .suffix-box-left img {
+		border: 1px solid #888888
+	}
+	
+	:root:not([color-scheme]) .article-footer .category, 
+	:root:not([color-scheme]) .article-footer .tag {
+		color: #999999
+	}
+	
+	:root:not([color-scheme]) .article-footer .category a, 
+	:root:not([color-scheme]) .article-footer .tag a {
+		background: #444444;
+		color: #999999
+	}
+	
+	:root:not([color-scheme]) .article-footer .category a:link, 
+	:root:not([color-scheme]) .article-footer .category a:visited, 
+	:root:not([color-scheme]) .article-footer .category a:active, 
+	:root:not([color-scheme]) .article-footer .tag a:link, 
+	:root:not([color-scheme]) .article-footer .tag a:visited, 
+	:root:not([color-scheme]) .article-footer .tag a:active {
+		color: #999999
+	}
+	
+	:root:not([color-scheme]) .toc-link::before {
+		background-color: #333333
+	}
+}
+
+[color-scheme=dark] .end {
+	color: #666666
+}
+
+[color-scheme=dark] .suffix-box {
+	background: #444444 !important;
+	color: #BBBBBB;
+	border: 1px solid #555555 !important
+}
+
+[color-scheme=dark] .suffix-box-left img {
+	border: 1px solid #888888
+}
+
+[color-scheme=dark] .article-footer .category, 
+[color-scheme=dark] .article-footer .tag {
+	color: #999999
+}
+
+[color-scheme=dark] .article-footer .category a, 
+[color-scheme=dark] .article-footer .tag a {
+	background: #444444;
+	color: #999999
+}
+
+[color-scheme=dark] .article-footer .category a:link, 
+[color-scheme=dark] .article-footer .category a:visited, 
+[color-scheme=dark] .article-footer .category a:active, 
+[color-scheme=dark] .article-footer .tag a:link, 
+[color-scheme=dark] .article-footer .tag a:visited, 
+[color-scheme=dark] .article-footer .tag a:active {
+	color: #999999
+}
+
+[color-scheme=dark] .toc-link::before {
+	background-color: #333333
+}

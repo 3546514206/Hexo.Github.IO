@@ -1,0 +1,44 @@
+.cursor {
+    border-radius: 50%;
+    background: #333;
+}
+
+.cursor-f {
+    top: 0;
+    left: 0;
+    background-image: url("../image/website/mouse/mouse.svg");
+    background-size: cover;
+    opacity: 0.7;
+}
+
+.cursor, .cursor-f {
+    width: var(--size);
+    height: var(--size);
+    position: absolute;
+    z-index: 1010;
+    pointer-events: none;
+}
+
+
+/* Dark Mode CSS */
+
+@media (prefers-color-scheme: dark) {
+
+    :root:not([color-scheme]) .cursor {
+        border-radius: 50%;
+        background: #FFF;
+    }
+
+    :root:not([color-scheme]) .cursor-f {
+        background-image: url("../image/website/mouse/mouse-dark.svg");
+    }
+}
+
+[color-scheme=dark] .cursor {
+    border-radius: 50%;
+    background: #FFF;
+}
+
+[color-scheme=dark] .cursor-f {
+    background-image: url("../image/website/mouse/mouse-dark.svg");
+}

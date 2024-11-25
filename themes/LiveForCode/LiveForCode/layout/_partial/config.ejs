@@ -1,0 +1,349 @@
+﻿<script>
+    window.config = {
+        GitHubUserName     : "<%- theme.GitHubUserName %>",
+        GitHubRepositories : "<%- theme.GitHubRepositories %>",
+
+        User             : "<%- theme.User %>",
+        UserAvatar       : "<%- theme.UserAvatar %>",
+        WebsiteStartDate : "<%- theme.WebsiteStartDate %>",
+        Home             : "<%- theme.Home %>",
+
+        WebsiteTitleBlur         : "<%- theme.WebsiteTitleBlur %>",
+        WebsiteTitleBlurTimeOut  : <%- theme.WebsiteTitleBlurTimeOut %>,
+        WebsiteTitleFocus        : "<%- theme.WebsiteTitleFocus %>",
+        WebsiteTitleFocusTimeOut : <%- theme.WebsiteTitleFocusTimeOut %>,
+        WebsiteFavicon           : {
+            light : "<%- theme.WebsiteFavicon.light %>",
+            dark  : "<%- theme.WebsiteFavicon.dark %>"
+        },
+
+        ProgressBar : {
+            id       : "<%- theme.ProgressBar.id %>",
+            color    : "<%- theme.ProgressBar.color %>",
+            height   : "<%- theme.ProgressBar.height %>",
+            duration : <%- theme.ProgressBar.duration %>
+        },
+
+        Loading: {
+            rebound : {
+                tension  : <%- theme.Loading.rebound.tension %>,
+                friction : <%- theme.Loading.rebound.friction %>
+            },
+            spinner : {
+                id     : "<%- theme.Loading.spinner.id %>",
+                radius : <%- theme.Loading.spinner.radius %>,
+                sides  : <%- theme.Loading.spinner.sides %>,
+                depth  : <%- theme.Loading.spinner.depth %>,
+                colors : {
+                    background : "<%- theme.Loading.spinner.colors.background %>",
+                    stroke     : "<%- theme.Loading.spinner.colors.stroke %>",
+                    base       : "<%- theme.Loading.spinner.colors.base %>",
+                    child      : "<%- theme.Loading.spinner.colors.child %>"
+                },
+                alwaysForward : <%- theme.Loading.spinner.alwaysForward %>,
+                restAt        : <%- theme.Loading.spinner.restAt %>,
+                renderBase    : <%- theme.Loading.spinner.renderBase %>
+            }
+        },
+
+        HomeHeaderAnimationRendered : <%- theme.HomeHeaderAnimationRendered %>,
+        HomeHeaderAnimation         : {
+            radius      : <%- theme.HomeHeaderAnimation.radius %>,
+            density     : <%- theme.HomeHeaderAnimation.density %>,
+            color       : "<%- theme.HomeHeaderAnimation.color %>",
+            clearOffset : <%- theme.HomeHeaderAnimation.clearOffset %>
+        },
+
+        BackAnimationRendered          : <%- theme.BackAnimationRendered %>,
+        IEBrowserBackAnimationRendered : <%- theme.IEBrowserBackAnimationRendered %>,
+        BackAnimation                  : {
+            colorSaturation  : "<%- theme.BackAnimation.colorSaturation %>",
+            colorBrightness  : "<%- theme.BackAnimation.colorBrightness %>",
+            colorAlpha       : <%- theme.BackAnimation.colorAlpha %>,
+            colorCycleSpeed  : <%- theme.BackAnimation.colorCycleSpeed %>,
+            verticalPosition : "<%- theme.BackAnimation.verticalPosition %>",
+            horizontalSpeed  : <%- theme.BackAnimation.horizontalSpeed %>,
+            ribbonCount      : <%- theme.BackAnimation.ribbonCount %>,
+            strokeSize       : <%- theme.BackAnimation.strokeSize %>,
+            parallaxAmount   : <%- theme.BackAnimation.parallaxAmount %>,
+            animateSections  : <%- theme.BackAnimation.animateSections %>
+        },
+
+        HomeHeaderImage : [
+            <% theme.HomeHeaderImage.forEach(function(homeHeaderImage){ %>
+                "<%- homeHeaderImage %>",
+            <% }) %>
+        ],
+        HomeBannerText  : "<%- theme.HomeBannerText %>",
+
+        ArticleHeaderImage : [
+            <% theme.ArticleHeaderImage.forEach(function(articleHeaderImage){ %>
+                "<%- articleHeaderImage %>",
+            <% }) %>
+        ],
+
+        OtherBannerText : "<%- theme.OtherBannerText %>",
+
+        Error : {
+            icon    : "<%- theme.Error.icon %>",
+            title   : "<%- theme.Error.title %>",
+            content : [
+                <% theme.Error.content.forEach(function(content){ %>
+                    "<%- content %>",
+                <% }) %>
+            ],
+            buttons : [
+                <% theme.Error.buttons.forEach(function(button){ %>
+                    {
+                        icon  : "<%- button.icon %>",
+                        text  : "<%- button.text %>",
+                        href  : "<%- button.href %>",
+                        class : "<%- button.class %>"
+                    },
+                <% }) %>
+            ]
+        },
+
+        MenuNotice : {
+            enable : <%- theme.MenuNotice.enable %>,
+            notice : "<%- theme.MenuNotice.notice %>",
+            speed  : <%- theme.MenuNotice.speed %>
+        },
+        MenuList : [
+            <% theme.MenuList.forEach(function(menuList){ %>
+                {
+                    name   : "<%- menuList.name %>",
+                    icon   : "<%- menuList.icon %>",
+                    href   : "<%- menuList.href %>",
+                    type   : "<%- menuList.type %>",
+                    class  : "<%- menuList.class %>",
+                    target : "<%- menuList.target %>"
+                },
+            <% }) %>
+        ],
+        MenuLink : [
+            <% if (theme.MenuLink) { %>
+                <% theme.MenuLink.forEach(function(menuLink){ %>
+                    {
+                        name   : "<%- menuLink.name %>",
+                        icon   : "<%- menuLink.icon %>",
+                        href   : "<%- menuLink.href %>",
+                        class  : "<%- menuLink.class %>",
+                        target : "<%- menuLink.target %>",
+                        image  : "<%- menuLink.image %>"
+                    },
+                <% }) %>
+            <% } %>
+        ],
+
+        FooterStyle : <%- theme.FooterStyle %>,
+        BottomText  : "<%- theme.BottomText %>",
+
+        ConsoleList : [
+            <% if (theme.ConsoleList) { %>
+                <% theme.ConsoleList.forEach(function(consoleList){ %>
+                    [
+                        <% if (consoleList) { %>
+                            <% consoleList.forEach(function(console){ %>
+                                "<%- console %>",
+                            <% }) %>
+                        <% } %>
+                    ],
+                <% }) %>
+            <% } %>
+        ],
+
+        FontIconExtend : "<%- theme.FontIconExtend %>",
+
+        Donate : {
+            paypal  : "<%- theme.Donate.paypal %>",
+            bitcoin : "<%- theme.Donate.bitcoin %>",
+            alipay  : "<%- theme.Donate.alipay %>",
+            wechat  : "<%- theme.Donate.wechat %>"
+        },
+
+        Search : {
+            applicationID : "<%- theme.Search.applicationID %>",
+            apiKey        : "<%- theme.Search.apiKey %>",
+            indexName     : "<%- theme.Search.indexName %>",
+            hits          : {
+                page : <%- theme.Search.hits.page %>
+            },
+            labels        : {
+                placeholder : "<%- theme.Search.labels.placeholder %>",
+                empty       : "<%- theme.Search.labels.empty %>",
+                stats       : "<%- theme.Search.labels.stats %>",
+            }
+        }, 
+
+        Comment : {
+            switch : <%- theme.Comment.switch %>,
+            type   : "<%- theme.Comment.type %>",
+        },
+
+        Waline : {
+            el              : "<%- theme.Waline.el %>",
+            serverURL       : "<%- theme.Waline.serverURL %>",
+            path            : <%- theme.Waline.path %>,
+            meta            : "<%- theme.Waline.meta %>",
+            requiredMeta    : "<%- theme.Waline.requiredMeta %>",
+            pageSize        : <%- theme.Waline.pageSize %>,
+            lang            : "<%- theme.Waline.lang %>",
+            locale: {
+                admin       : "<%- theme.Waline.locale.admin %>",
+                anonymous   : "<%- theme.Waline.locale.anonymous %>",
+                sofa        : "<%- theme.Waline.locale.sofa %>",
+                placeholder : "<%- theme.Waline.locale.placeholder %>",
+            },
+            dark            : "<%- theme.Waline.dark %>",
+            search          : <%- theme.Waline.search %>,
+            pageview        : <%- theme.Waline.pageview %>,
+            comment         : <%- theme.Waline.comment %>,
+            copyright       : <%- theme.Waline.copyright %>,
+        },
+
+        Valine : {
+            el             : "<%- theme.Valine.el %>",
+            appId          : "<%- theme.Valine.appId %>",
+            appKey         : "<%- theme.Valine.appKey %>",
+            serverURLs     : "<%- theme.Valine.serverURLs %>",
+            placeholder    : "<%- theme.Valine.placeholder %>",
+            avatar         : "<%- theme.Valine.avatar %>",
+            meta           : "<%- theme.Valine.meta %>",
+            requiredFields : "<%- theme.Valine.requiredFields %>",
+            pageSize       : <%- theme.Valine.pageSize %>,
+            lang           : "<%- theme.Valine.lang %>",
+            visitor        : <%- theme.Valine.visitor %>,
+            enableQQ       : <%- theme.Valine.enableQQ %>
+        },
+
+        Tocbot : {
+            switch                : <%- theme.Tocbot.switch %>,
+            tocSelector           : "<%- theme.Tocbot.tocSelector %>",
+            contentSelector       : "<%- theme.Tocbot.contentSelector %>",
+            headingSelector       : "<%- theme.Tocbot.headingSelector %>",
+            headingsOffset        : <%- theme.Tocbot.headingsOffset %>,
+            scrollSmooth          : <%- theme.Tocbot.scrollSmooth %>,
+            scrollSmoothOffset    : <%- theme.Tocbot.scrollSmoothOffset %>,
+            positionFixedSelector : "<%- theme.Tocbot.positionFixedSelector %>",
+            positionFixedClass    : "<%- theme.Tocbot.positionFixedClass %>",
+            fixedSidebarOffset    : "<%- theme.Tocbot.fixedSidebarOffset %>",
+        },
+
+        Require : {
+            baseUrl     : "<%- theme.Require.baseUrl %>",
+            waitSeconds : <%- theme.Require.waitSeconds %>
+        },
+
+        Music : {
+            type : "<%- theme.Music.type %>"
+        },
+        APlayer : {
+            container : "<%- theme.APlayer.container %>",
+            fixed     : <%- theme.APlayer.fixed %>,
+            autoplay  : <%- theme.APlayer.autoplay %>,
+            loop      : "<%- theme.APlayer.loop %>",
+            order     : "<%- theme.APlayer.order %>",
+            preload   : "<%- theme.APlayer.preload %>",
+            volume    : <%- theme.APlayer.volume %>,
+            mutex     : <%- theme.APlayer.mutex %>,
+            lrcType   : <%- theme.APlayer.lrcType %>,
+            audio     : [
+                <% theme.APlayer.audio.forEach(function(audio) { %>
+                    {
+                        name   : "<%- audio.name %>",
+                        artist : "<%- audio.artist %>",
+                        cover  : "<%- audio.cover %>",
+                        url    : "<%- audio.url %>",
+                        lrc    : "<%- audio.lrc %>"
+                    },
+                <% }) %>
+            ]
+        },
+        Meting : {
+            api      : "<%- theme.Meting.api %>",
+            id       : "<%- theme.Meting.id %>", 
+            lrcshow  : <%- theme.Meting.lrcshow %>, 
+            server   : "<%- theme.Meting.server %>", 
+            type     : "<%- theme.Meting.type %>", 
+            fixed    : <%- theme.Meting.fixed %>, 
+            autoplay : <%- theme.Meting.autoplay %>, 
+            loop     : "<%- theme.Meting.loop %>", 
+            order    : "<%- theme.Meting.order %>", 
+            preload  : "<%- theme.Meting.preload %>", 
+            volume   : <%- theme.Meting.volume %>, 
+            mutex    : <%- theme.Meting.mutex %>
+        },
+
+        Mouse : {
+            enable  : <%- theme.Mouse.enable %>,
+            options : {
+                size  : <%- theme.Mouse.options.size %>,
+                sizeF : <%- theme.Mouse.options.sizeF %>
+            }
+        },
+
+        LazyLoad : {
+            default : "<%- theme.LazyLoad.default %>"
+        },
+  
+        Style : {
+            aplayer          : "<%- theme.Style.aplayer %>",
+            archive          : "<%- theme.Style.archive %>",
+            base             : "<%- theme.Style.base %>",
+            clipboard        : "<%- theme.Style.clipboard %>",
+            code             : "<%- theme.Style.code %>",
+            donate           : "<%- theme.Style.donate %>",
+            fancybox         : "<%- theme.Style.fancybox %>",
+            footer           : "<%- theme.Style.footer %>",
+            iconfont         : "<%- theme.Style.iconfont %>",
+            index            : "<%- theme.Style.index %>",
+            menuBubble       : "<%- theme.Style.menuBubble %>",
+            mouse            : "<%- theme.Style.mouse %>",
+            page             : "<%- theme.Style.page %>",
+            post             : "<%- theme.Style.post %>",
+            search           : "<%- theme.Style.search %>",
+            tocbot           : "<%- theme.Style.tocbot %>",
+            valine           : "<%- theme.Style.valine %>",
+            waline           : "<%- theme.Style.waline %>",
+            walineCustom     : "<%- theme.Style.walineCustom %>"
+        },
+
+        Script: {
+            aplayer          : "<%- theme.Script.aplayer %>",
+            config           : "<%- theme.Script.config %>",
+            index            : "<%- theme.Script.index %>",
+            instantSearch    : "<%- theme.Script.instantSearch %>",
+            iscroll          : "<%- theme.Script.iscroll %>",
+            jQuery           : "<%- theme.Script.jQuery %>",
+            loading          : "<%- theme.Script.loading %>",
+            meting           : "<%- theme.Script.meting %>",
+            require          : "<%- theme.Script.require %>",
+            waline           : "<%- theme.Script.waline %>",
+            pageview         : "<%- theme.Script.pageview %>",
+            comment          : "<%- theme.Script.comment %>",
+        },
+
+        Font: {
+            LongCang    : "<%- theme.Font.LongCang %>",
+            Monda       : "<%- theme.Font.Monda %>",
+            NotoSansSC  : "<%- theme.Font.NotoSansSC %>",
+            NotoSerifSC : "<%- theme.Font.NotoSerifSC %>",
+            Playball    : "<%- theme.Font.Playball %>",
+            PTMono      : "<%- theme.Font.PTMono %>",
+            Roboto      : "<%- theme.Font.Roboto %>",
+            RobotoSlab  : "<%- theme.Font.RobotoSlab %>",
+            Rosario     : "<%- theme.Font.Rosario %>",
+            UbuntuMono  : "<%- theme.Font.UbuntuMono %>"
+        },
+
+        Suffix : {
+            about : "<%- theme.Suffix.about %>"
+        },
+            
+        Theme : {
+            url  : "<%- theme.Theme.url %>",
+            name : "<%- theme.Theme.name %>"
+        }  
+    };
+</script>

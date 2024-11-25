@@ -1,0 +1,458 @@
+/* Container CSS */
+
+.friends {
+	margin-bottom: 80px
+}
+
+.friends a {
+	word-break: break-word
+}
+
+.friends p {
+	max-width: 100%;
+	margin-top: 0.6rem;
+	margin-bottom: 0.6rem;
+	text-align: justify;
+	color:#555;
+	line-height: inherit 
+}
+
+.friends .friend-head {
+	margin-bottom: 1rem;
+	padding-bottom: 0.2rem;
+	color: #444;
+	font-size: 20px;
+	font-weight: 400;
+	border-bottom: 1px solid rgba(68, 68, 68, 0.1)
+}
+
+.friends .friend-content {
+	display: -ms-flexbox;
+	display: flex;
+	margin: -8px;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-ms-flex-align: start;
+	align-items: flex-start;
+	line-height: 1.3;
+	border-radius: 8px
+}
+
+.friends .friend-content .friend-card {
+	display: -ms-flexbox;
+	display: flex;
+	width: calc(100% / 4 - 16px);
+	margin: 8px;
+	margin-top: calc(2.25 * 16px + 32px);
+	padding: 8px 0;
+	background: #F6F6F6;
+	color: rgba(68, 68, 68, 0.65);
+	border-radius: 4px;
+	box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.1);
+	-ms-flex-pack: start;
+	-ms-flex-line-pack: start;
+	justify-content: flex-start;
+	align-content: flex-start;
+	-ms-flex-direction: column;
+	flex-direction: column  
+}
+
+.friends .friend-content .friend-card .friend-left {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-item-align: center;
+	align-self: center
+}
+
+.friends .friend-content .friend-card .friend-left .avatar {
+	width: 64px;
+	height: 64px;
+	margin: 16px 8px 4px 8px;
+	margin-top: calc(-1.25 * 16px - 32px);
+	box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.1);
+	border: 2px solid #FFF;
+	border-radius: 100%;
+	background: #FFF;
+	transition: all 0.28s ease;
+	-moz-transition: all 0.28s ease;
+	-webkit-transition: all 0.28s ease;
+	-o-transition: all 0.28s ease
+}
+
+.friends .friend-content .friend-card .friend-right { 
+	display: -ms-flexbox;
+	display: flex;
+	margin: 4px 8px;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	text-align: center
+}
+
+.friends .friend-content .friend-card .friend-right p {
+	margin: 0;
+	text-align: center
+}
+
+.friends .friend-content .friend-card .friend-right .friend-name {
+	padding-top: 4px;
+	font-size: 12px;   
+	font-weight: bold
+}
+
+.friends .friend-content .friend-card .friend-right .friend-about {
+	margin-top: 5px
+}
+
+.friends .friend-content .friend-card .friend-right .friend-about p {
+	font-size: 12px !important
+}
+
+.tags {
+	min-height: 700px;
+	margin: 0;
+	padding: 50px 0 0;
+	text-align: center;
+	font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+	line-height: 2
+}
+
+.tags-title {
+	color: #555;
+	font-size: 16px
+}
+
+.tags-content .tags-light {
+	display: block
+}
+
+.tags-content .tags-dark {
+	display: none
+}
+
+.tags-content a {
+	display: inline-block;
+	position: relative;
+	margin: 10px;
+	line-height: 2
+}
+
+.tags-content a::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	bottom: -1px;
+	left: 0;
+	background-color: #999;
+	visibility: hidden;
+	-webkit-transform: scaleX(0);
+	-moz-transform: scaleX(0);
+	-ms-transform: scaleX(0);
+	-o-transform: scaleX(0);
+	transform: scaleX(0);
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+	transition-delay: 0s
+}
+
+.tags-content a:hover::after {
+	visibility: visible;
+	transform: scaleX(1)
+}
+
+.categories {
+	min-height: 700px;
+	margin: 0;
+	padding: 50px 20px 0;
+	color: #555;
+	font-size: 14px;
+	font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+	line-height: 2
+}
+
+.categories-title {        
+	text-align: center;
+	color: #555;
+	font-size: 16px
+}
+
+.categories-content {
+	margin-top: 20px
+}
+
+.categories-content ul {
+	margin: 0;
+	padding: 0;
+	list-style: none
+}
+
+.categories-content ul li {
+	margin: 5px 20px
+}
+
+.categories-content ul li a {
+	color: #555;
+	font-size: 16px;
+	text-decoration: none;
+	border-bottom: 1px solid #999
+}
+
+.categories-content ul li a:hover {
+	color: #222;
+	border-bottom-color: #222
+}
+
+.categories-content ul li span {
+	color: #BBB
+}
+
+.categories-content ul li span::before {
+	display: inline;
+	content: " ("
+}
+
+.categories-content ul li span::after {
+	display: inline;
+	content: ") "
+}
+
+.categories-content ul li ul {
+	list-style: disc
+}
+
+.categories-content ul li ul li {
+	list-style: disc
+}
+
+.error-404 {
+	text-align: center
+}
+
+.error-404 span {
+	display: block;
+	font-family: "Noto Serif SC", Roboto, -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif, Menlo, Monaco, monospace
+}
+
+.error-404 .title-404 {
+	font-size: 3.55rem;
+	font-family: Roboto, Noto Serif SC, -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif, Helvetica, monospace;
+	line-height: 80px
+}
+
+.error-404 > .iconfont {
+	color: #777777;
+	font-size: 32px
+}
+
+.error-404 hr {
+	height: 32px;
+	margin: 16px 0 16px;
+	background: none;
+	background-image: none;
+	border: none;
+	text-align: center
+}
+
+.error-404 hr::after {
+	content: "...";
+	padding-left: 32px;
+	font-weight: 700;
+	letter-spacing: 32px
+}
+
+.error-404 .buttons-404 .iconfont {
+	display: inline-block;
+	margin-right: 8px;
+	font-size: 18px
+}
+
+.error-404 .buttons-404 .button {
+	display: inline-block;
+	margin: 2px;
+	padding: 12px 36px;
+	line-height: 1.1;
+	color: #FFFFFF;
+	font-size: 14px;
+	background: var(--primary-color);
+	border: none;
+	border-radius: 2px;
+	box-sizing: border-box;
+	white-space: nowrap
+}
+
+.error-404 .buttons-404 .button:hover {
+	background: var(--primary-color-hover)
+}
+
+
+/* Media CSS */
+
+@media only screen and (max-width:1200px) {
+
+	.tags-title {
+		font-size: 14px
+	}
+
+	.categories-title, .categories-content ul li a {
+		font-size: 14px
+	}
+
+	.categories-content ul li span {
+		font-size: 13px
+	}
+
+	.friends .friend-content .friend-card {
+		width: calc(100% / 4 - 16px)
+	}
+}
+
+@media only screen and (max-width:960px) {
+
+	.friends .friend-content .friend-card {
+		width: calc(100% / 3 - 16px)
+	}
+}
+
+@media only screen and (max-width:720px) {
+
+	.friends .friend-content {
+		margin: -5px
+	}
+	
+	.friends .friend-content .friend-card {
+		width: calc(100% / 2 - 10px);
+		margin-left: 5px;
+		margin-right: 5px
+	}
+
+	.tags,
+	.categories {
+		min-height: 0
+	}
+
+	.error-404 .title-404 {
+		font-size: 2.4rem;
+	}
+
+	.error-404 .buttons-404 .iconfont {
+		font-size: 16px
+	}
+	
+	.error-404 .buttons-404 .button {
+		font-size: 12px
+	}
+}
+
+
+/* Dark Mode CSS */
+
+@media (prefers-color-scheme: dark) {
+
+	:root:not([color-scheme]) .friends p {
+		color: #BBBBBB
+	}
+	
+	:root:not([color-scheme]) .friends .friend-head {
+		color: #BBBBBB;
+		border-bottom: 1px solid rgba(68, 68, 68, 0.9)
+	}
+	
+	:root:not([color-scheme]) .friends .friend-content .friend-card {
+		background: #444444
+	}
+	
+	:root:not([color-scheme]) .tags-content .tags-light {
+		display: none
+	}
+	
+	:root:not([color-scheme]) .tags-content .tags-dark {
+		display: block
+	}
+	
+	:root:not([color-scheme]) .tags-title {
+		color: #AAAAAA
+	}
+	
+	:root:not([color-scheme]) .categories {
+		color: #AAAAAA
+	}
+	
+	:root:not([color-scheme]) .categories-title {
+		color: #AAAAAA
+	}
+	
+	:root:not([color-scheme]) .categories-content ul li a {
+		color: #BBBBBB
+	}
+	
+	:root:not([color-scheme]) .categories-content ul li a:hover {
+		color: #EEEEEE;
+		border-bottom: 1px solid #EEEEEE
+	}
+	
+	:root:not([color-scheme]) .categories-content ul li span {
+		color: #777777
+	}
+
+	:root:not([color-scheme]) .error-404 > .iconfont {
+		color: #999999
+	}
+
+	:root:not([color-scheme]) .error-404 .buttons-404 .button {
+		filter: brightness(80%)
+	}
+}
+
+[color-scheme=dark] .friends p {
+	color: #BBBBBB
+}
+
+[color-scheme=dark] .friends .friend-head {
+	color: #BBBBBB;
+	border-bottom: 1px solid rgba(68, 68, 68, 0.9)
+}
+
+[color-scheme=dark] .friends .friend-content .friend-card {
+	background: #444444
+}
+
+[color-scheme=dark] .tags-content .tags-light {
+	display: none
+}
+
+[color-scheme=dark] .tags-content .tags-dark {
+	display: block
+}
+
+[color-scheme=dark] .tags-title {
+	color: #AAAAAA
+}
+
+[color-scheme=dark] .categories {
+	color: #AAAAAA
+}
+
+[color-scheme=dark] .categories-title {
+	color: #AAAAAA
+}
+
+[color-scheme=dark] .categories-content ul li a {
+	color: #BBBBBB
+}
+
+[color-scheme=dark] .categories-content ul li a:hover {
+	color: #EEEEEE;
+	border-bottom: 1px solid #EEEEEE
+}
+
+[color-scheme=dark] .categories-content ul li span {
+	color: #777777
+}
+
+[color-scheme=dark] .error-404 > .iconfont {
+	color: #999999
+}
+
+[color-scheme=dark] .error-404 .buttons-404 .button {
+	filter: brightness(80%)
+}
