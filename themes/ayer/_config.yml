@@ -16,6 +16,7 @@ menu:
   友链 二: https://www.wujunhao1024.com/
   友链 三: https://ddddkw.github.io/
   友链 四: https://blog.wsleepybear.cn/
+  友链 五: https://leoalasiga.github.io/
 
 # 站点次标题和打字动效
 # https://github.com/mattboldt/typed.js
@@ -38,7 +39,8 @@ logo: /images/SETSUNAYANG.JPG
 # enable-是否启用封面；path-封面背景图；logo-封面logo
 cover:
   enable: true
-  path: /images/pintan.jpg # /source/images目录下附送多张精美壁纸，可任意更换
+  # /source/images目录下附送多张精美壁纸，可任意更换
+  path: /images/pintan-compression.jpg
   #  logo: /images/SETSUNAYANG.JPG # 如果不要直接设置成false
   logo: false
 
@@ -47,8 +49,10 @@ progressBar: true
 
 # 告示板模块
 broadcast:
-  enable: true # true开启，false关闭
-  type: 2 # 1：自定义输入，2：一言api(https://hitokoto.cn/)
+  # true开启，false关闭
+  enable: true
+  # 1：自定义输入，2：一言api(https://hitokoto.cn/)
+  type: 2
   text: 第一性原理、长期主义者 # type为1时有效
 
 # 文章配置
