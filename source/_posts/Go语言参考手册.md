@@ -225,10 +225,10 @@ continue     for          import       return       var
 
 ```go
 +    &     +=    &=     &&    ==    !=    (    )
--    |     -=    |=     ||    <     <=    [    ]
-*    ^     *=    ^=     <-    >     >=    {    }
+- |     -=    |=     ||    <     <=    [    ]
+*    ^     *=    ^=     <- >     >=    {    }
 /    <<    /=    <<=    ++    =     :=    ,    ;
-%    >>    %=    >>=    --    !     ...   .    :
+%    >>    %=    >>=    -- !     ...   .    :
      &^          &^=
 ```
 
@@ -3010,7 +3010,7 @@ x == y+1 && <-chanPtr > 0
 
 ```go
 +    sum                    integers, floats, complex values, strings
--    difference             integers, floats, complex values
+- difference             integers, floats, complex values
 *    product                integers, floats, complex values
 /    quotient               integers, floats, complex values
 %    remainder              integers
@@ -3817,7 +3817,7 @@ IncDecStmt = Expression ( "++" | "--" ) .
 ```go
 IncDec statement    Assignment
 x++                 x += 1
-x--                 x -= 1
+x--            x -= 1
 ```
 
 
