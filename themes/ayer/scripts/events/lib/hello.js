@@ -4,35 +4,33 @@ module.exports = (hexo) => {
     const isZh = hexo.theme.i18n.languages[0].search(/zh-CN/i) !== -1;
     if (isZh) {
         hexo.log.info(`
-------------------------------------------------
-|                                              |
-|              __     ________ _____           |
-|            /\\\\ \\   / /  ____|  __ \\          |
-|           /  \\\\ \\_/ /| |__  | |__) |         |
-|          / /\\ \\\\   / |  __| |  _  /          |
-|         / ____ \\| |  | |____| | \\ \\          |
-|        /_/    \\_\\_|  |______|_|  \\_\\         |
-|                                              |
-|             感谢使用 Ayer 主题 !             |
-|   文档: https://shen-yu.gitee.io/2019/ayer/  |
-|                                              |
-------------------------------------------------
+ggcctcgtaagccgcctttgagaattcagctcgcgcaacattttatactctccaccgtcccaaggatatcggacccgctacggcgattacctcggtgttatgctaggtccgaacagaactccgt
+gtgccggttgcacctcaatcgcctgctataatcttcccgaacgaagaaaggtccattcactgcttcggaatggtcttctgtatctcctcaacgcgtctctcgactcctttgacttgtaaagccc
+gccaatagtacatcgcgttacgttcaggctgaccttaacttaaagataatcagactaagttaaacatgccctttaccccaaggagacccagacaccggacggcaatctctgcgaggaatgaatg
+ctgac:'######::'########:'########::'######::'##::::'##:'##:::t##::::'###::::'##:::'##::::'###::::'##:::g##::'######:::aggat
+tagcg'##...t##:c##.....::...g##..::'##...t##:a##::::g##:a###::g##:::'##g##:::.c##:'##::::'##c##:::t###::g##:'##...t##::cctag
+ggtata##:::..::c##::::::::::g##::::t##:::..::c##::::a##:t####:g##::'##:.c##:::.g####::::'##:.g##::c####:c##:a##:::..:::agtcc
+gagaa.a######::t######::::::g##::::.t######::t##::::a##:a##a##g##:'##:::.c##:::.g##::::'##:::.c##:c##t##a##:t##::'####:cgaac
+agtaa:.....g##:a##...:::::::t##:::::.....c##:t##::::a##:c##.a####:c#########::::a##::::c#########:t##.c####:a##:::t##::aacgt
+atctg'##:::a##:a##::::::::::a##::::'##:::c##:g##::::a##:t##:.t###:t##....a##::::t##::::t##....c##:t##:.g###:g##:::t##::ccgac
+gtcaa.g######::t########::::t##::::.a######::.c#######::c##::.g##:g##::::t##::::t##::::a##::::t##:g##::.a##:.c######:::cttag
+aactg:......:::........:::::..::::::......::::.......:::..::::..::..:::::..:::::..:::::..:::::..::..::::..:::......::::agtgt
+gcgatcacttttgcggacagaagcgcgcgagccctggccacagttgctttacacgagatgaccacgccctgagcgtggccgattcgccctactaaaacgccggagacggaagtcgtccaggttg
 `);
     } else {
         hexo.log.info(`
-----------------------------------------------------
-|                                                  |
-|                __     ________ _____             |
-|              /\\\\ \\   / /  ____|  __ \\            |
-|             /  \\\\ \\_/ /| |__  | |__) |           |
-|            / /\\ \\\\   / |  __| |  _  /            |
-|           / ____ \\| |  | |____| | \\ \\            |
-|          /_/    \\_\\_|  |______|_|  \\_\\           |
-|                                                  |
-|        Thank you for using Ayer theme !          |
-| Docs: https://github.com/3546514206 |
-|                                                  |
-----------------------------------------------------
+ggcctcgtaagccgcctttgagaattcagctcgcgcaacattttatactctccaccgtcccaaggatatcggacccgctacggcgattacctcggtgttatgctaggtccgaacagaactccgt
+gtgccggttgcacctcaatcgcctgctataatcttcccgaacgaagaaaggtccattcactgcttcggaatggtcttctgtatctcctcaacgcgtctctcgactcctttgacttgtaaagccc
+gccaatagtacatcgcgttacgttcaggctgaccttaacttaaagataatcagactaagttaaacatgccctttaccccaaggagacccagacaccggacggcaatctctgcgaggaatgaatg
+ctgac:'######::'########:'########::'######::'##::::'##:'##:::t##::::'###::::'##:::'##::::'###::::'##:::g##::'######:::aggat
+tagcg'##...t##:c##.....::...g##..::'##...t##:a##::::g##:a###::g##:::'##g##:::.c##:'##::::'##c##:::t###::g##:'##...t##::cctag
+ggtata##:::..::c##::::::::::g##::::t##:::..::c##::::a##:t####:g##::'##:.c##:::.g####::::'##:.g##::c####:c##:a##:::..:::agtcc
+gagaa.a######::t######::::::g##::::.t######::t##::::a##:a##a##g##:'##:::.c##:::.g##::::'##:::.c##:c##t##a##:t##::'####:cgaac
+agtaa:.....g##:a##...:::::::t##:::::.....c##:t##::::a##:c##.a####:c#########::::a##::::c#########:t##.c####:a##:::t##::aacgt
+atctg'##:::a##:a##::::::::::a##::::'##:::c##:g##::::a##:t##:.t###:t##....a##::::t##::::t##....c##:t##:.g###:g##:::t##::ccgac
+gtcaa.g######::t########::::t##::::.a######::.c#######::c##::.g##:g##::::t##::::t##::::a##::::t##:g##::.a##:.c######:::cttag
+aactg:......:::........:::::..::::::......::::.......:::..::::..::..:::::..:::::..:::::..:::::..::..::::..:::......::::agtgt
+gcgatcacttttgcggacagaagcgcgcgagccctggccacagttgctttacacgagatgaccacgccctgagcgtggccgattcgccctactaaaacgccggagacggaagtcgtccaggttg
 `);
     }
 };

@@ -6,5 +6,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="pace" level="application" />
+    <orderEntry type="library" name="clipboard" level="application" />
   </component>
 </module>
