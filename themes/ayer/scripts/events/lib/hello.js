@@ -18,7 +18,7 @@ aactg:......:::........:::::..::::::......::::.......:::..::::..::..:::::..:::::
 gcgatcacttttgcggacagaagcgcgcgagccctggccacagttgctttacacgagatgaccacgccctgagcgtggccgattcgccctactaaaacgccggagacggaagtcgtccaggttg
 `);
     } else {
-        hexo.log.info(`
+        hexo.log.info(`  
 ggcctcgtaagccgcctttgagaattcagctcgcgcaacattttatactctccaccgtcccaaggatatcggacccgctacggcgattacctcggtgttatgctaggtccgaacagaactccgt
 gtgccggttgcacctcaatcgcctgctataatcttcccgaacgaagaaaggtccattcactgcttcggaatggtcttctgtatctcctcaacgcgtctctcgactcctttgacttgtaaagccc
 gccaatagtacatcgcgttacgttcaggctgaccttaacttaaagataatcagactaagttaaacatgccctttaccccaaggagacccagacaccggacggcaatctctgcgaggaatgaatg
