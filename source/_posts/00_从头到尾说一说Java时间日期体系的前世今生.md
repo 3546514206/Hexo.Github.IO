@@ -259,17 +259,17 @@ ZonedDateTime usZonedDateTime = localDateTime.atZone(ZoneId.of("America/New_York
 &ensp;&ensp;&ensp;&ensp; 『存在不一定合理，但一定有原因』这是曾经我的主管跟我说的，至今我也受益其中。对所有事情怀有一丝怀疑心态，搞懂它的前世今生，或许它不那么合理，但至少当时这样做解决了一定的问题，我们在做新设计的时候可以提前考虑与规避。水多了加面，面多了加水，如果我们只是看到当下的混乱就指着“前人”没有设计思想没有技术匠心，却不了解最初“前人”这样做的意图与背景，骂着“前人”的我们终有一天也会成为后人眼中的“前人”。
 
 &ensp;&ensp;&ensp;&ensp; 参考链接：
-[1]https://en.wikipedia.org/wiki/Unix_time
-[2]https://baike.baidu.com/item/世界时/692237
-[3]https://www.timeanddate.com/time/zones/
-[4]https://www.utctime.net/
-[5]https://baike.baidu.com/item/原子钟/765460
-[6]https://baike.baidu.com/item/闰秒
-[7]https://www.joda.org/joda-time/
-[8]https://jcp.org/en/jsr/detail
-[9]https://baike.baidu.com/item/夏令时/1809579
-[10]https://baike.baidu.com/item/闰秒/696742
-[11]https://zh.wikipedia.org/wiki/世界时
+&ensp;&ensp;&ensp;&ensp; [1]<https://en.wikipedia.org/wiki/Unix_time>
+&ensp;&ensp;&ensp;&ensp; [2]<https://baike.baidu.com/item/世界时/692237>
+&ensp;&ensp;&ensp;&ensp; [3]<https://www.timeanddate.com/time/zones/>
+&ensp;&ensp;&ensp;&ensp; [4]<https://www.utctime.net/>
+&ensp;&ensp;&ensp;&ensp; [5]<https://baike.baidu.com/item/原子钟/765460>
+&ensp;&ensp;&ensp;&ensp; [6]<https://baike.baidu.com/item/闰秒>
+&ensp;&ensp;&ensp;&ensp; [7]<https://www.joda.org/joda-time/>
+&ensp;&ensp;&ensp;&ensp; [8]<https://jcp.org/en/jsr/detail>
+&ensp;&ensp;&ensp;&ensp; [9]<https://baike.baidu.com/item/夏令时/1809579>
+&ensp;&ensp;&ensp;&ensp; [10]<https://baike.baidu.com/item/闰秒/696742>
+&ensp;&ensp;&ensp;&ensp; [11]<https://zh.wikipedia.org/wiki/世界时>
 
 
 
