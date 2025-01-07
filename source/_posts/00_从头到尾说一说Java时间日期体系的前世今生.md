@@ -115,6 +115,135 @@ private final int nanos;
 
 &ensp;&ensp;&ensp;&ensp; Instant这个单词的中文含义是『瞬间』，严格来说Java8之前的Date就应该是现在的Instant。Instant类有维护2个核心字段，当前距离时间纪元的秒数以及秒中的纳秒部分。它指代当前这个时刻，全球任一位置这一时刻都是同一时刻。这一时刻川建国同学在高床软枕打着呼，这一时刻我泡着龙井写着文稿。
 
+##### __5.6、LocalDateTime__
+
+```java
+
+/******************** LocalDate ********************/
+    /**
+     * The year.
+     */
+    private final int year;
+    /**
+     * The month-of-year.
+     */
+    private final short month;
+    /**
+     * The day-of-month.
+     */
+    private final short day;
+
+/******************** LocalTime ********************/
+    /**
+     * The hour.
+     */
+    private final byte hour;
+    /**
+     * The minute.
+     */
+    private final byte minute;
+    /**
+     * The second.
+     */
+    private final byte second;
+    /**
+     * The nanosecond.
+     */
+    private final int nano;
+```
+
+&ensp;&ensp;&ensp;&ensp; LocalDateTime由LocalDate和LocalTime组成，分别日期和时间，以此来解决Date中不能单独表示日期和时间的问题。它们都与时区无关，只客观代表一个无时区的时间，比如2024-12-08 13:46:21，LocalDateTime记录着它的年、月、日、时、分、秒、纳秒。但具体是北京时间的13点还是伦敦时间的13点，由上下文语境自行处理。
+
+##### __5.7、Duration__
+
+&ensp;&ensp;&ensp;&ensp; Duration中文含义译为『期间』，通常用来计算2个时间之前相差的周期，不得不说这一套时间JDK确实定义得语义非常清晰。
+
+```java
+Instant startInstant = xxx;
+Instant endInstant = xxx;
+Duration.between(startInstant, endInstant).toMinutes();
+```
+
+&ensp;&ensp;&ensp;&ensp; 这个很好理解，比较2个时间戳时间的相差分钟数。但如果换成LocalDateTime，会是怎样呢？
+
+```java
+LocalDateTime startTime = xxx;
+LocalDateTime endTime = xxx;
+Duration.between(startTime, endTime).toMinutes();
+```
+
+&ensp;&ensp;&ensp;&ensp; 因为LocalDateTime是不带时区的，所以LocalDateTime是不能直接换成成Instant的。而Duration的比较也是不带时区的，或者你可以理解它是把时间放在同一个时区进行比较，来抹去时区的影响。
+
+```java
+/********************* JDK Duration.between 部分源码 *******************************/
+@Override
+public long until(Temporal endExclusive, TemporalUnit unit) {
+    LocalDateTime end = LocalDateTime.from(endExclusive);
+    if (unit instanceof ChronoUnit) {
+        if (unit.isTimeBased()) {
+            long amount = date.daysUntil(end.date);
+            if (amount == 0) {
+                return time.until(end.time, unit);
+            }
+            long timePart = end.time.toNanoOfDay() - time.toNanoOfDay();
+            if (amount > 0) {
+                amount--;  // safe
+                timePart += NANOS_PER_DAY;  // safe
+            } else {
+                amount++;  // safe
+                timePart -= NANOS_PER_DAY;  // safe
+            }
+// 余下省略
+}
+```
+
+&ensp;&ensp;&ensp;&ensp; 上述是Duration部分源码，它首先计算出2个时间相差多少天，再比较当天的时间里相差多少纳秒，再进行累加。所以你传过来2024-12-08 和 2024-12-04，那就是相差4天，至于是北京时间的12-08还是伦敦时间的12-04，在Duration里都被抹去了时区的概念。看到这里，上面的编程题里做对了吗？
+
+##### __5.8、ZonedDateTime__
+
+&ensp;&ensp;&ensp;&ensp; 真正需要使用时区，我们就需要用到ZonedDateTime。「zoned」这个单词在英汉词典中是zone的过去分时，译为『划为区域的』。
+
+```java 
+// 输出：2024-12-08T14:18:32.554144+08:00[Asia/Shanghai]
+ZonedDateTime defaultZoneTime = ZonedDateTime.now(); // 默认时区
+// 输出：2024-12-08T01:18:32.560931-05:00[America/New_York]
+ZonedDateTime usZoneTime = ZonedDateTime.now(ZoneId.of("America/New_York")); // 用指定时区获取当前时间
+```
+
+&ensp;&ensp;&ensp;&ensp; 因为LocalDateTime是没有时区的，如果我们需要将LocalDateTime转成ZonedDateTime，就需要带上时区信息。
+
+```java 
+LocalDateTime localDateTime = LocalDateTime.of(2024, 12, 8, 14, 21, 17);
+ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
+ZonedDateTime usZonedDateTime = localDateTime.atZone(ZoneId.of("America/New_York"));
+ ```
+
+&ensp;&ensp;&ensp;&ensp; 随着JDK不断地发布演进，Time模块确实得到了质的提升，这里不一一细说Java日期时间相关API。如果你还在苦于对Date做各种Utils的花式包装，请拥抱java.time吧。
+
+#### __6、时间日期引起的惨案__
+
+&ensp;&ensp;&ensp;&ensp; 曾经小A做了一个鉴权系统，用于对请求做加密解密，保证每一次都是真实合法有效的接口请求。其中做了一个判定，如果请求的时间距现在已经超过10分钟，就会拒绝该次请求。从逻辑上来说，这很合理，但问题的雪崩却出现在3月的那个晚上。。。
+
+![夏令时与冬令时](/pic/基本功/编程基础/从头到尾说一说Java时间日期体系的前世今生/夏令时与冬令时.webp)
+
+##### __6.1、什么是夏令时__
+
+&ensp;&ensp;&ensp;&ensp; 夏令时[9]又称夏时制，英文原文为Daylight Saving Time，从名字上可以看出，夏令时诞生的背景是为了更好的利用白天的时间。夏令时概念的提出最早可以追溯到1895年，新西兰昆虫学家乔治·哈德逊向惠灵顿哲学学会提出，提前2小时的日光节约提案，以此在工作结束后，可以获得多出一段的白昼时间。
+
+&ensp;&ensp;&ensp;&ensp; 具体夏令时的实施，以美国为例，美国会在每年3月的第二个星期日的凌晨2:00，时钟会往前调1个小时变为3:00。再在每年11月的第一个星期日的凌晨2:00，将时钟在往后调1个小时变成1:00，此时的回拨也被称为“冬令时”。
+
+##### __6.2、夏令时实施的国家与地区__
+
+![夏令时实施的国家与地区](/pic/基本功/编程基础/从头到尾说一说Java时间日期体系的前世今生/夏令时实施的国家与地区.webp)
+
+> 蓝色为正在实施夏令时的过去和地区
+> 灰色为曾经实施但现在已经取消夏令时的国家和地区
+> 黑色为从未实施夏令时的过去和地区
+
+
+
+
+
 
 
 
