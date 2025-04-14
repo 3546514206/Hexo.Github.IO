@@ -94,12 +94,19 @@ update_script_permission() {
 #    log_success "The execution permission for restart.sh has been changed."
 }
 
+# 进入工作目录
+cd_workspace(){
+  cd '/home/setsunayang/Documents/Github/Hexo.Github.IO/' || exit
+}
+
 # 主函数
 main() {
     # 定义工作端口和重试参数
     local port=4000
     local max_retries=99
     local sleep_interval=5
+
+    cd_workspace
 
     # 更新代码
     update_code
