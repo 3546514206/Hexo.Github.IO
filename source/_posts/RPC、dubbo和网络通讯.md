@@ -2,7 +2,7 @@
 title: RPC、Dubbo 和网络通讯
 date: 2025-03-14 19:41:54
 tags:
-- dubbo
+- Dubbo
 - 服务治理
 ---
 
