@@ -26,7 +26,7 @@ menu:
 # 站点次标题和打字动效
 # https://github.com/mattboldt/typed.js
 subtitle:
-  enable: true # 是否开启动效
+  enable: false # 是否开启动效
   text: 把注意力更多放在自己能掌控的事情上。  # 显示的文字
   text2: 不被外界的喧嚣影响、不被他人的比较绑架。  # 滚动播放，如果不需要可以留空
   text3: 按照自己的价值观和节奏去生活。  # 最多支持三段文字
