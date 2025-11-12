@@ -6,10 +6,10 @@ tags:
 ---
 
 
-![idea-settings.zip](/files/idea/idea-settings.zip)
+[idea-settings.zip](/files/idea/idea-settings.zip)
 
-![idea.vmoptions](/files/idea/idea.vmoptions)
+[idea.vmoptions](/files/idea/idea.vmoptions)
 
-![data-settings.zip](/files/idea/data-settings.zip)
+[data-settings.zip](/files/idea/data-settings.zip)
 
-![datagrip.vmoptions](/files/idea/datagrip.vmoptions)
+[datagrip.vmoptions](/files/idea/datagrip.vmoptions)
