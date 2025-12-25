@@ -5,4 +5,4 @@ tags:
 - Git 
 ---
 
-![Git 常见操作速查表](/pic/工程/工具/git/Git常规操作分类表_Git常规操作速查表.png)
+![Git 常见操作速查表](/pic/工程/工具/git/Git常规操作速查表.png)
