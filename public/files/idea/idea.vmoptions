@@ -1,0 +1,7 @@
+-Xms512m
+-XX:ErrorFile=/Users/setsunayang/Documents/JetBrains/ERROR/java_error_in_idea_%p.log
+-XX:HeapDumpPath=/Users/setsunayang/Documents/JetBrains/ERROR/java_error_in_idea.hprof
+-Xmx8192m
+-Dide.managed.by.toolbox=/Applications/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox
+-Dtoolbox.notification.token=56fe33fa-2eea-429f-9d5b-3f38f381dba6
+-Dtoolbox.notification.portFile=/Users/setsunayang/Library/Caches/JetBrains/Toolbox/ports/f0d5c659-d7dd-4fa9-a6fc-ca0fbf46ec4f.port

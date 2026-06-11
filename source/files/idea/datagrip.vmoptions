@@ -1,0 +1,7 @@
+-Xms512m
+-XX:ErrorFile=/Users/setsunayang/Documents/JetBrains/ERROR/java_error_in_datagrip_%p.log
+-XX:HeapDumpPath=/Users/setsunayang/Documents/JetBrains/ERROR/java_error_in_datagrip.hprof
+-Xmx8192m
+-Dide.managed.by.toolbox=/Applications/JetBrains Toolbox.app/Contents/MacOS/jetbrains-toolbox
+-Dtoolbox.notification.token=83dd137d-22f6-4ba4-b395-a663c1c8ac1b
+-Dtoolbox.notification.portFile=/Users/setsunayang/Library/Caches/JetBrains/Toolbox/ports/8f7ab536-6f84-4838-b001-e47e86ad6baf.port

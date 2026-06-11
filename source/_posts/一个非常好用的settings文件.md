@@ -1,0 +1,152 @@
+---
+title: 一个非常好用的settings文件
+date: 2024-12-17 08:56:03
+tags:
+- Java
+- Maven
+---
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+        <profile>
+            <id>pentaho</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <file.encoding>UTF-8</file.encoding>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>pentaho-public</id>
+                    <name>Pentaho Public</name>
+                    <url>https://repo.orl.eng.hitachivantara.com/artifactory/pnt-mvn/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>pentaho-public</id>
+                    <name>Pentaho Public</name>
+                    <url>https://repo.orl.eng.hitachivantara.com/artifactory/pnt-mvn/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <profile>
+            <id>aliyun</id>
+            <properties>
+                <file.encoding>UTF-8</file.encoding>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>aliyun</id>
+                    <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>aliyun</id>
+                    <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <profile>
+            <id>activiti-repos2</id>
+            <properties>
+                <file.encoding>UTF-8</file.encoding>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>activiti-repos2</id>
+                    <name>Activiti Repository 2</name>
+                    <url>https://app.camunda.com/nexus/content/groups/public</url>
+                </repository>
+            </repositories>
+        </profile>
+        <profile>
+            <id>mvnrepository</id>
+            <properties>
+                <file.encoding>UTF-8</file.encoding>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>mvnrepository</id>
+                    <name>mvnrepository</name>
+                    <url>http://www.mvnrepository.com</url>
+                </repository>
+            </repositories>
+        </profile>
+        <!-- Spring Snapshot Profile -->
+        <profile>
+            <id>spring-snapshot</id>
+            <properties>
+                <file.encoding>UTF-8</file.encoding>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>spring-snapshot</id>
+                    <url>https://repo.spring.io/snapshot</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>spring-snapshot</id>
+                    <url>https://repo.spring.io/snapshot</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <pluginGroups>
+        <pluginGroup>org.pentaho.maven.plugins</pluginGroup>
+        <pluginGroup>com.pentaho.maven.plugins</pluginGroup>
+        <pluginGroup>com.github.spotbugs</pluginGroup>
+    </pluginGroups>
+
+    <activeProfiles>
+        <activeProfile>aliyun</activeProfile>
+        <activeProfile>pentaho</activeProfile>
+        <activeProfile>activiti-repos2</activeProfile>
+        <activeProfile>mvnrepository</activeProfile>
+        <activeProfile>spring-snapshot</activeProfile>
+    </activeProfiles>
+</settings>
+```
